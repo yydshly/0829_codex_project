@@ -1,0 +1,7 @@
+{
+  "api_key": "replace-with-your-minimax-api-key",
+  "api_host": "https://api.minimaxi.com",
+  "model": "speech-2.8-hd",
+  "voice_id": "Chinese (Mandarin)_News_Anchor",
+  "speed": 1.08
+}

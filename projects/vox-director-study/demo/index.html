@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vox Director 端到端 AI 视频 Skill 的能力、样例、边界与采用价值研究。">
+  <title>Vox Director｜从 Prompt 到成片的能力研究</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="#overview" aria-label="返回页面顶部">
+      <span class="brand-mark">VD</span>
+      <span><strong>Vox Director</strong><small>Research Lab / 03</small></span>
+    </a>
+    <nav class="site-nav" aria-label="页面章节">
+      <a href="#contrast">差异</a>
+      <a href="#modes">能力</a>
+      <a href="#samples">样例</a>
+      <a href="#prep">准备台</a>
+      <a href="#roadmap">扩展</a>
+      <a href="#meaning">意义</a>
+    </nav>
+    <button class="theme-button" id="theme-button" type="button" aria-label="切换明暗主题" aria-pressed="false">
+      <span aria-hidden="true">◐</span><span class="theme-label">主题</span>
+    </button>
+  </header>
+
+  <main id="main">
+    <section class="hero paper-section" id="overview">
+      <div class="hero-copy">
+        <p class="eyebrow">FIXED UPSTREAM · 668EC39 · 2026-08-11</p>
+        <h1>从一个主题，<br><em>到一支片。</em></h1>
+        <p class="hero-lede">它不是视频模型，也不只写 Prompt。它让 Agent 担任导演，把生成模型、人工审批和 ffmpeg 串成一条成片流水线。</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#modes">进入能力控制台 <span>↓</span></a>
+          <a class="button button-quiet" href="https://github.com/Alisa0808/vox-director" target="_blank" rel="noreferrer">查看上游 ↗</a>
+        </div>
+        <dl class="hero-metrics" aria-label="仓库摘要">
+          <div><dt id="metric-python">18</dt><dd>Python 脚本</dd></div>
+          <div><dt id="metric-videos">4</dt><dd>随库成片</dd></div>
+          <div><dt id="metric-modes">3</dt><dd>输入模式</dd></div>
+          <div><dt id="metric-tests">0</dt><dd>上游测试</dd></div>
+        </dl>
+      </div>
+      <div class="hero-stage" aria-label="从结构化分镜到成片的视觉示意">
+        <figure class="paper-frame frame-one">
+          <img src="assets/tang.jpg" alt="上游唐代拼贴视频缩略图">
+          <figcaption>01 / KEYFRAME</figcaption>
+        </figure>
+        <figure class="paper-frame frame-two">
+          <img src="assets/money.jpg" alt="上游货币简史视频缩略图">
+          <figcaption>02 / MOTION</figcaption>
+        </figure>
+        <div class="tape tape-top" aria-hidden="true"></div>
+        <div class="stage-stamp">BEATS.JSON<br>→ FINAL.MP4</div>
+        <p class="stage-note">真实上游样例<br>不是本页模拟生成</p>
+      </div>
+    </section>
+
+    <section class="section-shell contrast-section" id="contrast">
+      <header class="section-heading split-heading">
+        <div><p class="eyebrow">THE SIMPLE DIFFERENCE</p><h2>一个交付说明书，<br>一个继续把片做完。</h2></div>
+        <p>这是理解它与 Hand-Drawn Video Prompts 差异的最短路径。</p>
+      </header>
+      <div class="comparison-track">
+        <article class="comparison-card prompt-card">
+          <span class="card-index">01 / PROMPT SKILL</span>
+          <h3 id="hand-name">Hand-Drawn Video Prompts</h3>
+          <p class="role" id="hand-role">Prompt 编译器</p>
+          <p id="hand-output">输出分镜、双 Prompt 与风险提示。</p>
+          <div class="stop-line"><span>交付点</span><strong id="hand-stop">把制作说明交给人或外部工具</strong></div>
+        </article>
+        <div class="comparison-arrow" aria-hidden="true"><span>还差模型调用、声音与剪辑</span><b>→</b></div>
+        <article class="comparison-card director-card">
+          <span class="card-index">02 / PRODUCTION SKILL</span>
+          <h3 id="vox-name">Vox Director</h3>
+          <p class="role" id="vox-role">导演 + 生成编排 + 后期</p>
+          <p id="vox-output">继续生成关键帧、视频、声音和 final.mp4。</p>
+          <div class="stop-line"><span>交付点</span><strong id="vox-stop">主动调用媒体模型并用 ffmpeg 合成</strong></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mode-section" id="modes">
+      <div class="section-shell">
+        <header class="section-heading inverse-heading">
+          <div><p class="eyebrow">CAPABILITY CONSOLE</p><h2>同一条引擎，<br>三种进入方式。</h2></div>
+          <p>切换 B、A、C-roll，观察输入、阶段、产出和证据边界如何变化。</p>
+        </header>
+
+        <div class="mode-tabs" id="mode-tabs" role="tablist" aria-label="输入模式"></div>
+        <div class="mode-console" id="mode-console" aria-live="polite">
+          <aside class="mode-brief">
+            <p class="console-label">INPUT</p>
+            <h3 id="mode-name">主题成片</h3>
+            <p class="input-line" id="mode-input"></p>
+            <dl>
+              <div><dt>承诺</dt><dd id="mode-promise"></dd></div>
+              <div><dt>最终产出</dt><dd id="mode-output"></dd></div>
+            </dl>
+            <div class="evidence-note"><span>证据</span><p id="mode-evidence"></p></div>
+            <div class="boundary-note"><span>边界</span><p id="mode-boundary"></p></div>
+          </aside>
+          <div class="pipeline-panel">
+            <div class="pipeline-head"><span>PIPELINE / 选择阶段查看职责</span><strong id="stage-count">01 / 06</strong></div>
+            <ol class="stage-list" id="stage-list"></ol>
+            <article class="stage-detail" id="stage-detail">
+              <div><span id="stage-kind">CREATIVE</span><code id="stage-script"></code></div>
+              <h3 id="stage-label"></h3>
+              <p id="stage-copy"></p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell samples-section" id="samples">
+      <header class="section-heading split-heading">
+        <div><p class="eyebrow">BUNDLED EVIDENCE</p><h2>先看仓库真的<br>带来了什么。</h2></div>
+        <p>四支 MP4 随固定提交保存；墨西哥美食只保留缩略图，因此明确标为“不能计作仓库内视频”。</p>
+      </header>
+
+      <div class="sample-viewer">
+        <div class="screen-shell" id="screen-shell">
+          <video id="sample-video" controls playsinline preload="none" poster="assets/tang.jpg">
+            <p>浏览器不支持视频。请使用下方固定提交链接查看。</p>
+          </video>
+          <div class="poster-only" id="poster-only" hidden>
+            <img id="poster-only-image" src="assets/mexican.jpg" alt="">
+            <strong>仓库只有缩略图</strong>
+            <span>本研究不把它冒充为可复现成片</span>
+          </div>
+          <span class="screen-badge">UPSTREAM / REAL ASSET</span>
+        </div>
+        <article class="sample-copy">
+          <p class="eyebrow" id="sample-proof">仓库随附视频</p>
+          <h3 id="sample-title">中国文明演进 / 唐代</h3>
+          <p class="sample-subtitle" id="sample-subtitle"></p>
+          <dl>
+            <div><dt>媒体</dt><dd id="sample-source"></dd></div>
+            <div><dt>结构数据</dt><dd id="sample-example"></dd></div>
+          </dl>
+          <a id="sample-link" href="#" target="_blank" rel="noreferrer">打开固定提交中的原始资产 ↗</a>
+        </article>
+      </div>
+      <div class="sample-rail" id="sample-rail" aria-label="上游样例列表"></div>
+    </section>
+
+    <section class="prep-section" id="prep">
+      <div class="section-shell">
+        <header class="section-heading split-heading">
+          <div><p class="eyebrow">MODEL-NEUTRAL PREPRODUCTION</p><h2>不调用它的模型，<br>也能借它把前期做齐。</h2></div>
+          <p>从 4 份上游 beats 样例中选一个结构，或直接载入完整的“敦煌”示范；逐镜头修改旁白、画面和运动提示，再交给你已有的图片或视频模型。</p>
+        </header>
+
+        <div class="prep-workspace">
+          <form class="prep-controls" id="prep-form">
+            <div class="prep-control-head">
+              <span>DIRECTOR INPUT / 01</span>
+              <strong>前期参数</strong>
+            </div>
+            <label class="field-label" for="prep-sample">结构样例</label>
+            <select id="prep-sample" name="sample"></select>
+
+            <label class="field-label" for="prep-topic">你的主题</label>
+            <textarea id="prep-topic" name="topic" rows="3"></textarea>
+            <p class="field-help">修改主题不会伪装成自动改稿；镜头内容需要在右侧人工重写。</p>
+
+            <div class="field-pair">
+              <div>
+                <label class="field-label" for="prep-route">生成路线</label>
+                <select id="prep-route" name="route"></select>
+              </div>
+              <div>
+                <label class="field-label" for="prep-aspect">目标画幅</label>
+                <select id="prep-aspect" name="aspect">
+                  <option value="9:16">9:16 竖屏</option>
+                  <option value="16:9">16:9 横屏</option>
+                  <option value="1:1">1:1 方形</option>
+                  <option value="3:4">3:4 竖幅</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-pair">
+              <div>
+                <label class="field-label" for="prep-duration">目标总时长（秒）</label>
+                <input id="prep-duration" name="duration" type="number" min="5" max="180" step="1">
+              </div>
+              <div>
+                <label class="field-label" for="prep-model">你的执行模型</label>
+                <input id="prep-model" name="model" type="text" value="待选择的视频模型">
+              </div>
+            </div>
+
+            <div class="route-note" id="route-note"></div>
+            <div class="prep-control-actions">
+              <button class="button button-primary" type="submit">应用并刷新准备包 <span>→</span></button>
+              <button class="text-button" id="prep-reset" type="button">恢复样例原稿</button>
+            </div>
+            <p class="no-api-note"><strong>0 API CALLS</strong> 本工具只在浏览器内整理数据，不上传素材、不调用任何模型。</p>
+          </form>
+
+          <div class="prep-output" aria-live="polite">
+            <header class="prep-output-head">
+              <div><span>HANDOFF PACK / 02</span><h3 id="prep-pack-title">15 秒三段式</h3></div>
+              <div class="prep-badges" id="prep-badges"></div>
+            </header>
+
+            <div class="prep-tabs" role="tablist" aria-label="前期包视图">
+              <button id="prep-tab-shots" type="button" role="tab" aria-selected="true" aria-controls="prep-panel-shots">镜头编辑</button>
+              <button id="prep-tab-assets" type="button" role="tab" aria-selected="false" aria-controls="prep-panel-assets" tabindex="-1">资产清单</button>
+              <button id="prep-tab-json" type="button" role="tab" aria-selected="false" aria-controls="prep-panel-json" tabindex="-1">交接 JSON</button>
+            </div>
+
+            <section id="prep-panel-shots" class="prep-panel" role="tabpanel" aria-labelledby="prep-tab-shots">
+              <div class="adaptation-warning" id="adaptation-warning"></div>
+              <div class="dispatch-toolbar" id="dispatch-toolbar" aria-label="视频模型提示词复制区" hidden>
+                <div>
+                  <span>DIRECT VIDEO INPUT</span>
+                  <strong>不用整理 JSON，直接复制完整视频提示词</strong>
+                  <p>每个任务已经合并图片使用方式、画幅、时长、运镜和负向约束。</p>
+                </div>
+                <button class="button button-primary" id="copy-all-shots" data-copy-all-shots type="button">复制全部 6 镜头</button>
+              </div>
+              <div class="prep-editor" id="prep-editor"></div>
+            </section>
+            <section id="prep-panel-assets" class="prep-panel" role="tabpanel" aria-labelledby="prep-tab-assets" hidden>
+              <div class="asset-checklist" id="asset-checklist"></div>
+              <fieldset class="human-gates">
+                <legend>人工放行关卡</legend>
+                <div id="human-gate-list"></div>
+              </fieldset>
+            </section>
+            <section id="prep-panel-json" class="prep-panel" role="tabpanel" aria-labelledby="prep-tab-json" hidden>
+              <p class="json-help">这是模型无关的交接协议。你的执行器只需把每个 shot 的 <code>model_task</code> 映射到自己的 API 参数。</p>
+              <pre class="json-preview" id="prep-json" tabindex="0"></pre>
+            </section>
+
+            <footer class="prep-output-actions">
+              <span id="prep-status" role="status">准备包已在本地生成</span>
+              <div>
+                <button class="text-button" id="prep-copy" type="button">复制 JSON</button>
+                <button class="button button-primary" id="prep-download" type="button">下载准备包 <span>↓</span></button>
+              </div>
+            </footer>
+          </div>
+        </div>
+        <div class="prep-error" id="prep-error" role="alert" hidden>前期样例数据未加载；研究页面仍可浏览。请重新运行 <code>scripts/build_demo.py</code>。</div>
+      </div>
+    </section>
+
+    <section class="evidence-section" id="evidence">
+      <div class="section-shell">
+        <header class="section-heading inverse-heading">
+          <div><p class="eyebrow">REPOSITORY AUDIT</p><h2>有真实运行时，<br>也有明显工程缺口。</h2></div>
+          <p>这里统计固定提交本身，不把 README 的宣传语当作测试结论。</p>
+        </header>
+        <div class="audit-metrics" id="audit-metrics"></div>
+        <div class="audit-grid">
+          <article class="audit-card strong-card">
+            <span>已实现</span><h3>从 Provider 到 ffmpeg 的完整链条</h3>
+            <p>图片、视频、音频任务都经过 Provider；beats.json 在每一阶段保存 URL、路径、时长和 Prompt。</p>
+          </article>
+          <article class="audit-card warning-card">
+            <span>未证明</span><h3>没有上游自动测试</h3>
+            <p>仓库有样例和“实测”注释，但没有测试目录、CI、OCR、口型或跨帧一致性指标。</p>
+          </article>
+          <article class="audit-card risk-card">
+            <span>当前阻力</span><h3>Windows 不能直接照 README 跑</h3>
+            <p>本机具备 Python、Pillow 与 ffmpeg，但缺 API Key；脚本还硬编码了 <code>/usr/bin/curl</code>。</p>
+          </article>
+        </div>
+        <ul class="risk-list" id="risk-list"></ul>
+      </div>
+    </section>
+
+    <section class="section-shell scenario-section" id="scenarios">
+      <header class="section-heading split-heading">
+        <div><p class="eyebrow">FIT / NOT FIT</p><h2>什么时候值得用，<br>什么时候应该停。</h2></div>
+        <p>风格统一并不等于事实准确；能自动出片也不等于可以无人审核。</p>
+      </header>
+      <div class="scenario-columns">
+        <div class="scenario-column fit-column"><div class="column-head"><span>适合</span><strong>USE IT</strong></div><div id="fit-list"></div></div>
+        <div class="scenario-column avoid-column"><div class="column-head"><span>谨慎</span><strong>STOP & CHECK</strong></div><div id="avoid-list"></div></div>
+      </div>
+    </section>
+
+    <section class="roadmap-section" id="roadmap">
+      <div class="section-shell roadmap-layout">
+        <header>
+          <p class="eyebrow">EXTENSION ROADMAP</p>
+          <h2>先补可信度，<br>再扩模型数量。</h2>
+          <p>对我们的最佳改造顺序不是继续堆视觉主题，而是先让结果可验证、可追溯、可恢复。</p>
+        </header>
+        <ol class="roadmap-list" id="roadmap-list"></ol>
+      </div>
+    </section>
+
+    <section class="meaning-section" id="meaning">
+      <div class="section-shell meaning-layout">
+        <div class="meaning-title">
+          <p class="eyebrow">WHAT IT MEANS TO US</p>
+          <h2 id="meaning-headline">它是从 Prompt 研究走向 Agent 媒体系统研究的桥。</h2>
+          <div class="recommendation-stamp" id="recommendation">研究与 Fork 价值高</div>
+        </div>
+        <div>
+          <ol class="meaning-points" id="meaning-points"></ol>
+          <div class="decision-box">
+            <span>采用判断</span>
+            <strong>固定版本做对照实验；吸收架构，不直接照搬生产。</strong>
+            <p>下一轮最有价值的实验，是让它与 Hand-Drawn Video Prompts 使用同一段口播，比较完整度、生成成本、文字准确率、失败率和最终可控性。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="error-panel" id="error-panel" role="alert" hidden>
+      <strong>研究数据没有加载成功</strong>
+      <p>基础说明仍然可读。请确认 <code>assets/research-data.json</code> 已由构建脚本同步，然后刷新页面。</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><strong>0829 Codex Research Lab</strong><span>证据优先 · 固定版本 · 明确边界</span></div>
+    <nav aria-label="研究文件">
+      <a href="https://github.com/yydshly/0829_codex_project/blob/main/projects/vox-director-study/README.md" target="_blank" rel="noreferrer">项目 README ↗</a>
+      <a href="https://github.com/yydshly/0829_codex_project/blob/main/projects/vox-director-study/notes/preproduction-guide.md" target="_blank" rel="noreferrer">前期指南 ↗</a>
+      <a href="https://github.com/Alisa0808/vox-director" target="_blank" rel="noreferrer">上游仓库 ↗</a>
+    </nav>
+    <p>本页展示固定提交中的公开媒体和结构化样例，不代表 Vox、Atlas Cloud 或上游作者背书。本研究未调用付费模型生成新视频。</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

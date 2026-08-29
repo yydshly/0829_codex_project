@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="用最新地月激光通信热点，实战演示 Hand-Drawn Video Prompts 如何把新闻编译成手绘短视频生产包。"
+    />
+    <title>热点新闻实战｜Hand-Drawn Video Prompts</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <header class="site-header">
+      <a class="brand" href="#overview" aria-label="回到研究页开头">
+        <span class="brand-mark" aria-hidden="true">R/02</span>
+        <span>Codex Research Lab</span>
+      </a>
+      <nav class="site-nav" aria-label="页面导航">
+        <a href="#demo">热点实战</a>
+        <a href="#final-film">完整成片</a>
+        <a href="#news-proof">来源事实</a>
+        <a href="#architecture">工作原理</a>
+        <a href="#decision">价值与扩展</a>
+      </nav>
+      <button class="icon-button" id="theme-toggle" type="button" aria-label="切换深浅主题">
+        <span class="theme-icon" aria-hidden="true">◐</span>
+        <span class="theme-label">深色</span>
+      </button>
+    </header>
+
+    <main id="main">
+      <section class="hero section-shell" id="overview" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="signal-dot"></span>2026-08-28 最新科技热点 · 双信源核验</p>
+          <h1 id="hero-title">一条地月新闻，<br /><span>被编译成 7 个镜头。</span></h1>
+          <p class="hero-lede">
+            用“我国首次在轨验证地月双向高速激光通信”做实战：从权威报道到 41 秒口播，再到七镜头 Prompt、七张实生成关键帧、中文配音、字幕和可播放参考成片。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#final-film">直接观看完整成片 <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="https://github.com/kaomei/hand-drawn-video-prompts">查看上游仓库 <span aria-hidden="true">↗</span></a>
+          </div>
+          <dl class="metric-row" aria-label="研究摘要">
+            <div><dt>7</dt><dd>热点镜头</dd></div>
+            <div><dt>41s</dt><dd>估算口播</dd></div>
+            <div><dt id="audit-count">28/28</dt><dd>Prompt 检查</dd></div>
+            <div><dt>7</dt><dd>实生成关键帧</dd></div>
+          </dl>
+        </div>
+        <figure class="hero-art paper-frame generated-hero">
+          <span class="tape tape-left" aria-hidden="true"></span>
+          <div class="generated-image-wrap">
+            <img src="assets/news-shot-02-generated.png" alt="按万里穿针镜头提示词实生成的手绘关键帧：地面望远镜以蓝色光束穿过月球旁的针孔" width="941" height="1672" />
+            <span class="deterministic-title">万里穿针</span>
+          </div>
+          <figcaption>
+            <span>本案例实生成关键帧</span>
+            <strong>模型画底图 · 代码叠加准确中文</strong>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="compiler-strip" aria-label="能力链路">
+        <div class="section-shell compiler-grid">
+          <div class="compiler-step"><span>01</span><strong>权威新闻</strong><small>来源与事实层</small></div>
+          <i aria-hidden="true">→</i>
+          <div class="compiler-step"><span>02</span><strong>口播与分镜</strong><small>4–6 秒/镜头</small></div>
+          <i aria-hidden="true">→</i>
+          <div class="compiler-step"><span>03</span><strong>双 Prompt</strong><small>静帧 + 运动</small></div>
+          <i aria-hidden="true">→</i>
+          <div class="compiler-step external"><span>04</span><strong>模型 + 代码</strong><small>画面概率层 / 事实确定层</small></div>
+        </div>
+      </section>
+
+      <section class="demo-section section-shell" id="demo" aria-labelledby="demo-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Breaking-news demo</p>
+            <h2 id="demo-title">最新热点 → 41 秒手绘短视频生产包</h2>
+          </div>
+          <p>新闻发表于 8 月 28 日，本案例于 8 月 29 日核验。这里可逐镜检查 Skill 交付的分镜合同与双 Prompt；下方成片则验证它如何进入真实生产链。</p>
+        </div>
+
+        <div class="demo-layout">
+          <article class="source-panel ink-card">
+            <div class="panel-kicker"><span>输入 / 已核验新闻口播</span><span id="duration-badge">约 41 秒</span></div>
+            <blockquote id="source-script">正在读取演示数据……</blockquote>
+            <div class="source-rule">
+              <span>编辑角度</span>
+              <p>不只报速度，重点解释“为什么难、为什么重要、未来用在哪里”。</p>
+            </div>
+            <div class="shot-rail" id="shot-rail" role="tablist" aria-label="选择演示镜头"></div>
+          </article>
+
+          <article class="workbench ink-card" aria-live="polite">
+            <div class="workbench-head">
+              <div>
+                <p class="panel-kicker">输出 / <span id="shot-number">镜头 01</span></p>
+                <h3 id="shot-title">读取中</h3>
+              </div>
+              <span class="duration-chip" id="shot-duration">—</span>
+            </div>
+            <p class="narration" id="shot-narration"></p>
+            <div class="output-tabs" role="tablist" aria-label="选择输出层">
+              <button type="button" role="tab" aria-selected="true" data-view="metaphor">视觉隐喻</button>
+              <button type="button" role="tab" aria-selected="false" data-view="image_prompt">静帧 Prompt</button>
+              <button type="button" role="tab" aria-selected="false" data-view="video_prompt">运动 Prompt</button>
+              <button type="button" role="tab" aria-selected="false" data-view="entity_note">准确性风险</button>
+            </div>
+            <div class="output-card" id="output-panel" role="tabpanel" tabindex="0">
+              <div class="output-meta">
+                <span id="output-label">视觉隐喻</span>
+                <button class="copy-button" id="copy-button" type="button">复制内容</button>
+              </div>
+              <pre id="output-content">正在生成视图……</pre>
+            </div>
+            <p class="demo-boundary"><span aria-hidden="true">!</span> 数字、日期、机构名和字幕留在确定性代码层；生成模型只负责隐喻画面。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="final-film-section" id="final-film" aria-labelledby="final-film-title">
+        <div class="section-shell">
+          <div class="final-film-grid">
+          <div class="final-film-copy">
+            <p class="eyebrow">Our integrated case · 41.02s</p>
+            <h2 id="final-film-title">我们的案例已经接入：<br />现在可以和上游样片直接比较。</h2>
+            <p class="final-film-lede">左侧是本项目的地月激光通信案例：七张实生成关键帧、MiniMax 配音、准确字幕与代码运动。右侧保留上游 Demo 722；两者并排展示，但不伪装成同一模型、同一素材或同一生产条件下的严格对照实验。</p>
+            <div class="film-pipeline" aria-label="本案例成片链路">
+              <span>权威新闻</span><i>→</i><span>Skill 分镜</span><i>→</i><span>AI 生图 × 7</span><i>→</i><span>代码合成</span>
+            </div>
+            <dl class="film-specs">
+              <div><dt>画面</dt><dd>7 张 AI 实生成关键帧</dd></div>
+              <div><dt>运动</dt><dd>FFmpeg 语义区域纸片装配</dd></div>
+              <div><dt>声音</dt><dd><span id="tts-provider-label">中文 TTS</span> + AAC</dd></div>
+              <div><dt>交付</dt><dd>H.264 · 20fps · 41.02s</dd></div>
+            </dl>
+            <div class="film-actions">
+              <a class="button button-primary" href="assets/news-case-final.mp4" download>下载 MP4 <span aria-hidden="true">↓</span></a>
+              <a class="button button-secondary" href="../media/news-case.srt" download>下载字幕 SRT</a>
+            </div>
+            <p class="film-boundary"><strong>真实边界：</strong>这不是 Flow/Veo 生成的视频运动。图像由生成模型完成，切入与定格运动由代码完成；它展示的是一条成本低、可复现的参考成片路线。</p>
+            <p class="integration-status"><span>✓ 已接入真实资产</span> 页面读取实际构建元数据；视频、字幕、七镜头数据与生产脚本来自同一项目。</p>
+          </div>
+
+            <div class="film-compare-grid" aria-label="本案例与上游样片对照">
+            <figure class="final-film-player case-film-player">
+              <span class="tape tape-left" aria-hidden="true"></span>
+              <div class="film-card-heading"><span>本项目 / 可复现</span><strong>地月激光通信热点案例</strong></div>
+              <video controls preload="metadata" playsinline poster="assets/news-case-poster.jpg" aria-label="地月激光通信七镜头完整参考成片">
+                <source src="assets/news-case-final.mp4" type="video/mp4" />
+                当前浏览器无法播放 MP4；你仍可使用上方下载链接查看完整成片。
+              </video>
+              <figcaption><span>本案例成片</span><strong>AI 生图 + 语义区域代码运动 + MiniMax 配音</strong></figcaption>
+            </figure>
+
+            <figure class="final-film-player reference-film-player">
+              <span class="tape tape-right" aria-hidden="true"></span>
+              <div class="film-card-heading"><span>上游仓库 / 展示证据</span><strong>Demo 722 参考样片</strong></div>
+              <video controls preload="none" playsinline poster="assets/shot-01.webp" aria-label="上游 Demo 722 参考样片">
+                <source src="assets/demo-722.mp4" type="video/mp4" />
+                当前浏览器无法播放上游参考 MP4。
+              </video>
+              <figcaption><span>上游参考</span><strong>图生视频 + 配音 + 剪辑的共同结果</strong></figcaption>
+            </figure>
+            </div>
+          </div>
+
+          <div class="quality-diagnosis" aria-labelledby="quality-diagnosis-title">
+            <div class="quality-diagnosis-heading">
+              <p class="eyebrow">Why the reference feels better</p>
+              <h3 id="quality-diagnosis-title">差距主要不在 Prompt，<br />而在生成链路的最后一公里。</h3>
+              <p>Skill 负责把文案编译成分镜、隐喻和约束；它不会自动提供角色一致性、对象拆层、真实局部运动或镜头调度。上游样片把这些能力交给了图生视频与后期，我们此前只用了整图和代码切片。</p>
+            </div>
+            <div class="quality-gap-grid">
+              <article><span>01</span><strong>对象级运动</strong><p>上游让奖杯、人物、放大镜、机器依次出现；我们只有完成态 PNG，没有独立人物与道具图层。</p></article>
+              <article><span>02</span><strong>动作贴合谓词</strong><p>“观察、称重、推动”都有对应动作；代码滑入只能表达出现，不能表达人物真正操作物体。</p></article>
+              <article><span>03</span><strong>跨镜头一致性</strong><p>上游重复使用同一分析师角色；我们的七张图独立生成，人物、线条密度与造型会轻微漂移。</p></article>
+              <article><span>04</span><strong>时间线密度</strong><p>旧版约 1.15 秒完成整图，随后长时间静止；本轮按每镜头语义边界把装配铺到约 2.75–3.75 秒。</p></article>
+            </div>
+            <div class="quality-paths">
+              <div><span>已完成 / 代码层</span><strong>语义区域纸片装配</strong><p>每镜头按月球、光束、人物或装置所在区域设置切分边界，改善节奏并避免机械等分；仍不等于对象真的动起来。</p></div>
+              <div><span>下一档 / 资产层</span><strong>透明语义图层</strong><p>人物、望远镜、光束、箭头分别输出透明 PNG，再由代码按语义运动，可重复且可控。</p></div>
+              <div><span>接近上游 / 模型层</span><strong>首尾帧图生视频</strong><p>空白首帧 + 完成末帧交给视频模型生成对象装配，最后再用代码叠加准确文字、字幕和声音。</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="news-proof-section section-shell" id="news-proof" aria-labelledby="news-proof-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Source → fact → metaphor</p>
+            <h2 id="news-proof-title">先锁事实，<br />再做视觉隐喻</h2>
+          </div>
+          <p>热点内容最危险的不是画得不好看，而是把数字、时间、机构或未来计划画成了不存在的事实。这套演示把四种信息明确分层。</p>
+        </div>
+
+        <div class="truth-stack" aria-label="热点内容四层信息结构">
+          <article class="truth-card source-truth"><span>01 / 来源</span><strong>谁在什么时候发布</strong><p>中国科学院 8 月 27 日报道；新华社 8 月 28 日再次核验并补充参与单位与用途。</p></article>
+          <article class="truth-card fact-truth"><span>02 / 事实</span><strong>可逐项回查的数据</strong><p>超过 40 万公里；上行 1.25Mbps；下行 100Mbps；8K 图像约 12 秒。</p></article>
+          <article class="truth-card metaphor-truth"><span>03 / 隐喻</span><strong>模型可以自由表达</strong><p>万里穿针、噪声中捞光子、地月信息高速路——帮助理解，但不冒充设备实拍。</p></article>
+          <article class="truth-card opinion-truth"><span>04 / 观点</span><strong>明确标注编辑判断</strong><p>“深空竞争也比数据回传能力”是本案例的收束观点，不伪装成科研机构原话。</p></article>
+        </div>
+
+        <div class="source-and-generation">
+          <article class="source-ledger ink-card">
+            <p class="card-label">权威来源 / 访问于 2026-08-29</p>
+            <h3 id="news-headline">我国首次在轨验证地月双向高速激光通信能力</h3>
+            <div class="source-links" id="source-links">
+              <a href="https://www.cas.cn/cm/202608/t20260827_5119119.shtml">
+                <span>中国科学院 · 2026-08-27</span><strong>技术难点、速率与 8K 回传对比</strong><i aria-hidden="true">↗</i>
+              </a>
+              <a href="https://www.xinhuanet.com/20260828/2846f43524b94d66bb78c7271d7e9466/c.html">
+                <span>新华网 · 2026-08-28</span><strong>首次在轨验证、参与单位与未来用途</strong><i aria-hidden="true">↗</i>
+              </a>
+            </div>
+            <p class="source-note" id="news-why">选择理由正在从演示数据读取……</p>
+          </article>
+
+          <figure class="generation-proof paper-frame">
+            <div class="generated-image-wrap">
+              <img src="assets/news-shot-02-generated.png" alt="万里穿针镜头的实生成无文字底图" width="941" height="1672" loading="lazy" />
+              <span class="deterministic-title">万里穿针</span>
+              <span class="subtitle-safe" aria-hidden="true">字幕安全区</span>
+            </div>
+            <figcaption>
+              <span class="proof-badge">本次实生成</span>
+              <p><strong>Skill</strong> 规定构图、色板、隐喻与禁用项；<strong>图像模型</strong> 画无文字底图；<strong>HTML/CSS</strong> 准确叠加中文。</p>
+              <small>这是七张独立生成底图中的一张；上方完整成片将它与另外六张关键帧一起投入确定性合成。</small>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="evidence-section" id="evidence" aria-labelledby="evidence-title">
+        <div class="section-shell">
+          <div class="section-heading inverse-heading">
+            <div>
+              <p class="eyebrow">Evidence audit</p>
+              <h2 id="evidence-title">仓库说了什么，资产实际做到了什么</h2>
+            </div>
+            <p>事实来自固定 commit 的本地文件、像素采样、媒体元数据和规则对照；解释与建议单独标记。</p>
+          </div>
+
+          <div class="evidence-metrics">
+            <article><strong>24</strong><span>上游文件</span><small>14 Markdown + 8 媒体 + 许可/忽略文件</small></article>
+            <article><strong>8</strong><span>提交</span><small>单一贡献者，轻量规范仓库</small></article>
+            <article><strong>0</strong><span>可执行源码</span><small>无 API、生成器、测试或渲染器</small></article>
+            <article><strong>2</strong><span>完整 MP4</span><small>32.45s / 40.87s，540×960</small></article>
+          </div>
+
+          <div class="audit-grid">
+            <article class="audit-card audit-primary">
+              <p class="card-label">实测 / 背景一致性</p>
+              <h3>“精确色号”是约束目标，<br />不是生成结果保证。</h3>
+              <div class="color-comparison" aria-label="目标色与四张图片顶部区域均值对比">
+                <div style="--swatch:#f8f6ef"><span></span><b>#F8F6EF</b><small>目标</small></div>
+                <div style="--swatch:rgb(247,242,231)"><span></span><b>≈ #F7F2E7</b><small>四图顶部均值</small></div>
+              </div>
+              <p>对 4 张 PNG 顶部空白区域共 2,240 个像素点采样，命中精确 `#F8F6EF` 的比例为 <strong>0%</strong>；这验证了上游自己提出的后处理建议。</p>
+            </article>
+
+            <article class="audit-card">
+              <p class="card-label">观察 / 规则漂移</p>
+              <h3>当前规则与旧样例存在 4 类不一致</h3>
+              <ul class="check-list">
+                <li><span>01</span>视觉组数量：2–4 vs 3–5</li>
+                <li><span>02</span>人物比例：克制自然 vs 大头小身</li>
+                <li><span>03</span>关键词：画内文字 vs 后期图层</li>
+                <li><span>04</span>空白首帧 vs 文字全程固定</li>
+              </ul>
+            </article>
+
+            <article class="audit-card">
+              <p class="card-label">判断 / 成熟度</p>
+              <h3>是一套可用 SOP，尚不是生产系统</h3>
+              <div class="maturity-scale" aria-label="成熟度分层">
+                <div class="active"><span>规范</span><b>已具备</b></div>
+                <div class="active"><span>样例</span><b>已具备</b></div>
+                <div><span>评测</span><b>缺失</b></div>
+                <div><span>自动化</span><b>依赖宿主</b></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="media-evidence">
+            <div class="media-copy">
+              <p class="card-label">上游成片 / Demo 722</p>
+              <h3>它证明流程能产出可观看样片，但不能单独归因给 Skill。</h3>
+              <p>视频包含图像生成、图生视频、配音、字幕和剪辑的共同结果。仓库没有记录完整模型版本、随机种子、调用参数与成本，因此它是展示证据，不是严格可重复实验。</p>
+              <dl>
+                <div><dt>画幅</dt><dd>540 × 960 / 9:16</dd></div>
+                <div><dt>编码</dt><dd>H.264 + AAC</dd></div>
+                <div><dt>帧率</dt><dd>20 fps</dd></div>
+              </dl>
+            </div>
+            <video controls preload="metadata" poster="assets/shot-01.webp">
+              <source src="assets/demo-722.mp4" type="video/mp4" />
+              当前浏览器无法播放 MP4；核心研究内容不依赖视频。
+            </video>
+          </div>
+
+          <div class="sample-strip" aria-label="上游静帧样本">
+            <figure><img src="assets/shot-01.webp" alt="分析师把奖杯推开并观察电表的上游样片" loading="lazy" /><figcaption>冠军奖杯 → 电表</figcaption></figure>
+            <figure><img src="assets/shot-02.webp" alt="分析师用天平比较账单和账本的上游样片" loading="lazy" /><figcaption>账单 ↔ 折旧表</figcaption></figure>
+            <figure><img src="assets/shot-04.webp" alt="四人把芯片推向吞金机器的上游样片" loading="lazy" /><figcaption>算力投入 → 吞金兽</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="architecture-section section-shell" id="architecture" aria-labelledby="architecture-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">How it works</p>
+            <h2 id="architecture-title">价值来自中间层，而不是新模型</h2>
+          </div>
+          <p>它用宿主大模型完成语义理解，再通过重复约束、首尾帧运动语法和确定性后期分层来压低生成随机性。</p>
+        </div>
+
+        <div class="architecture-map" role="img" aria-label="从中文口播经过 Skill 编译到外部生成和确定性合成的流程图">
+          <article class="map-node input-node"><span>输入</span><strong>中文口播</strong><small>观点 / 因果 / 转折</small></article>
+          <div class="map-arrow"><b>语义解析</b><i>→</i></div>
+          <article class="map-node skill-node"><span>本仓库</span><strong>Prompt 编译规则</strong><small>分镜 · 隐喻 · 风格锁 · 风险路由</small></article>
+          <div class="map-split">
+            <div><i>↘</i><b>概率层</b></div>
+            <div><i>↗</i><b>确定性层</b></div>
+          </div>
+          <div class="map-outputs">
+            <article class="map-node"><span>外部模型</span><strong>静帧 + 动态片段</strong><small>Flow / 其他生成器</small></article>
+            <article class="map-node"><span>后期工具</span><strong>字幕 + Logo + 数字</strong><small>准确文字与品牌资产</small></article>
+          </div>
+        </div>
+
+        <div class="principle-grid">
+          <article><span>01</span><h3>语义分镜</h3><p>按观点推进拆分，而不是按标点截断；每镜头只保留一个核心关系。</p></article>
+          <article><span>02</span><h3>约束注入</h3><p>在每条 Prompt 中重复比例、底色、线条、配色、构图和禁止项。</p></article>
+          <article><span>03</span><h3>运动降维</h3><p>锁定镜头，以纸片滑入和轻微弹跳替代复杂表演，最终贴合尾帧。</p></article>
+          <article><span>04</span><h3>风险分层</h3><p>隐喻交给生成模型，Logo、数字、长文本和字幕交给确定性工具。</p></article>
+        </div>
+      </section>
+
+      <section class="boundary-section">
+        <div class="section-shell">
+          <div class="boundary-grid">
+            <article class="boundary-good">
+              <p class="card-label">仓库直接提供</p>
+              <h3>可复用的创意 SOP</h3>
+              <ul><li>中文语义分镜方法</li><li>固定视觉风格与构图约束</li><li>静帧/运动双 Prompt 模板</li><li>实体准确性与后期分流</li></ul>
+            </article>
+            <article class="boundary-dependent">
+              <p class="card-label">取决于宿主环境</p>
+              <h3>“自动成片”能力</h3>
+              <ul><li>生图与图生视频连接器</li><li>中文 TTS 和字幕转录</li><li>时间线与视频导出工具</li><li>异步任务等待与失败重试</li></ul>
+            </article>
+            <article class="boundary-missing">
+              <p class="card-label">仓库没有提供</p>
+              <h3>生产级基础设施</h3>
+              <ul><li>Flow / Nano Banana API 调用</li><li>结构化 JSON 输出协议</li><li>自动质量评测与回归测试</li><li>队列、成本、版本与素材管理</li></ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="decision-section section-shell" id="decision" aria-labelledby="decision-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Value · scenarios · extensions</p>
+            <h2 id="decision-title">对你的价值：把“追热点”变成可复用流程</h2>
+          </div>
+          <p>它节省的不是一次复制 Prompt 的时间，而是反复做资料归纳、找解释角度、拆镜头、统一风格和交接后期的认知成本。</p>
+        </div>
+
+        <div class="value-grid" aria-label="对个人、团队和品牌的价值">
+          <article><span>个人创作者</span><strong>从空白页到生产包</strong><p>把“读资料—找角度—拆镜头—写双 Prompt”压成一个可检查的步骤链。</p></article>
+          <article><span>内容团队</span><strong>同一份镜头合同协作</strong><p>编辑、设计、生成和后期共享同一份事实、画面与风险说明，减少口头返工。</p></article>
+          <article><span>长期栏目</span><strong>风格与隐喻可以积累</strong><p>角色、色板、开场、结尾和领域隐喻不再每条视频从零开始。</p></article>
+        </div>
+
+        <div class="scenario-block">
+          <div class="scenario-intro"><p class="card-label">使用场景</p><h3>最适合“抽象但可核实”的内容</h3><p>越需要把因果、数字和概念讲清楚，这套方式越有价值；越依赖现场真实性，越需要谨慎。</p></div>
+          <div class="scenario-grid">
+            <article class="scenario-fit"><span>高适配</span><strong>科技 / 财经热点解读</strong><p>用隐喻解释技术难点、市场关系与数字变化。</p></article>
+            <article class="scenario-fit"><span>高适配</span><strong>知识科普 / 课程短视频</strong><p>连续 4–6 秒教学镜头，便于保持风格和认知节奏。</p></article>
+            <article class="scenario-fit"><span>高适配</span><strong>品牌观点 / 创始人 IP</strong><p>把固定语气、人物与视觉资产沉淀为栏目模板。</p></article>
+            <article class="scenario-risk"><span>谨慎使用</span><strong>灾难、战争与未核实爆料</strong><p>事实变化快且误导成本高，不能让漂亮隐喻掩盖不确定性。</p></article>
+          </div>
+        </div>
+
+        <div class="decision-table" role="table" aria-label="采用路径比较">
+          <div class="decision-row decision-head" role="row">
+            <span role="columnheader">路径</span><span role="columnheader">适合谁</span><span role="columnheader">先做什么</span><span role="columnheader">判断</span>
+          </div>
+          <div class="decision-row" role="row">
+            <strong role="cell">直接使用</strong><span role="cell">偶尔制作科技/财经短视频</span><span role="cell">安装 Skill，手动复制 Prompt</span><b class="fit-good" role="cell">立即可用</b>
+          </div>
+          <div class="decision-row featured" role="row">
+            <strong role="cell">Fork 定制</strong><span role="cell">有固定栏目或个人品牌</span><span role="cell">换成你的隐喻库、色板与角色 Bible</span><b class="fit-best" role="cell">最推荐</b>
+          </div>
+          <div class="decision-row" role="row">
+            <strong role="cell">产品化</strong><span role="cell">需要规模化批量生产</span><span role="cell">先补 JSON Schema、适配器、合成与评测</span><b class="fit-warn" role="cell">工程量大</b>
+          </div>
+        </div>
+
+        <div class="roadmap">
+          <div class="roadmap-intro"><p class="card-label">可扩展方向</p><h3>从 Prompt Skill，<br />走向热点生产系统。</h3><p>先保证事实和文字，再追求更多模型、更多画风和更快产量。</p></div>
+          <ol>
+            <li><span>P0</span><div><strong>新闻事实层 + 来源 Schema</strong><p>把来源、发布时间、事实、观点与隐喻分字段存储，新闻变化时可以追踪和纠错。</p></div></li>
+            <li><span>P0</span><div><strong>确定性文字与数据图层</strong><p>把中文、机构名、数字、单位和字幕从概率模型中剥离；本页“万里穿针”已经这样做。</p></div></li>
+            <li><span>P1</span><div><strong>热点监测 + 选题评分</strong><p>按新鲜度、信源质量、受众相关性和视觉化潜力筛选新闻，而不是只追搜索热度。</p></div></li>
+            <li><span>P1</span><div><strong>多模型适配 + 自动评测</strong><p>按 Flow、Veo、Kling 等能力生成不同运动语法，并检测色板、构图和末帧漂移。</p></div></li>
+            <li><span>P2</span><div><strong>栏目资产 + 生产编排</strong><p>补角色 Bible、领域隐喻库、TTS、字幕、时间线、重试、成本与版本追踪。</p></div></li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Hand-Drawn Video Prompts 能力研究</strong>
+        <span>研究日期 2026-08-29 · 上游 commit <code>dae2da3</code></span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/kaomei/hand-drawn-video-prompts">上游仓库 ↗</a>
+        <a href="../../">Research Lab</a>
+      </div>
+      <p>上游代码与媒体按 MIT License 使用并保留许可副本。本次案例调用图像模型生成 7 张无文字关键帧，并用 FFmpeg、中文 TTS 与确定性字幕制作 41 秒参考成片；未调用 Flow 或其他视频生成模型。</p>
+    </footer>
+  </body>
+</html>

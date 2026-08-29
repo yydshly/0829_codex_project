@@ -1,0 +1,20 @@
+{
+  "id": "openreel-video-capability-summary",
+  "title": "OpenReel Video 能力与复用边界总结",
+  "summary": "OpenReel 是本地优先的浏览器视频剪辑器，并扩展了桌面原生编码与 Agent/MCP 控制；当前安装和验证成本较高，先保存架构理解与按需复用入口。",
+  "status": "archived",
+  "path": "projects/openreel-video-capability-summary",
+  "source_url": "https://github.com/Augani/openreel-video",
+  "demo_url": "",
+  "tags": [
+    "agent",
+    "archived",
+    "browser-video",
+    "mcp",
+    "video-editor",
+    "webcodecs",
+    "webgpu"
+  ],
+  "created": "2026-08-29",
+  "updated": "2026-08-29"
+}

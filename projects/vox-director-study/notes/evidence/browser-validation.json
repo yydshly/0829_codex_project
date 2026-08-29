@@ -1,0 +1,218 @@
+{
+  "generatedAt": "2026-08-29T11:59:09.625Z",
+  "baseUrl": "http://127.0.0.1:8765/.site/projects/vox-director-study/",
+  "playwrightVersion": "1.62.1",
+  "matrix": {
+    "desktop-light-overview": {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "theme": "light",
+      "reducedMotion": false,
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interaction": {},
+      "status": "pass"
+    },
+    "desktop-light-preproduction": {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "theme": "light",
+      "reducedMotion": false,
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interaction": {
+        "keyboardMode": "true",
+        "focusedMode": "mode-tab-aroll",
+        "aRollTitle": "真人口播改造",
+        "aRollStages": 4,
+        "cRollTitle": "单图锚定",
+        "stageTitle": "图片编辑",
+        "moneyVideo": "https://raw.githubusercontent.com/Alisa0808/vox-director/668ec3946fe0139bc985313b15c1a300fca42f94/assets/showcase-money.mp4",
+        "moneySample": "货币简史",
+        "posterOnlyVisible": true,
+        "videoHidden": true,
+        "disabledAssetLink": "true",
+        "themeAfterToggle": "dark",
+        "prepSample": "30 秒时间线",
+        "prepBeats": 3,
+        "prepShots": 6,
+        "prepDuration": "3 BEATS6 SHOTS15s16:9",
+        "adaptationWarning": "主题已变化：当前镜头仍是结构参考，请在下方逐项重写；导出包会标记 requires-manual-rewrite。",
+        "prepFocusedTab": "prep-tab-assets",
+        "assetPanelVisible": true,
+        "endFrameAsset": "01主题与受众 Brief用 15 秒解释可控视频前期READY02逐镜头脚本6/6 个镜头含画面与运动描述READY03关键帧 / 参考图6/6 个镜头带上游参考；改主题时必须替换REPLACE04尾帧需要为 6 个镜头准备 end_frameMISSING05确定性文字层标题、中文、数字和 Logo 建议在生成后叠加PLAN06旁白与字幕3 段旁白需要录制、TTS 或人工配音PLAN07音乐与音效先确定节奏、授权与响度目标，再进入混音PLAN08模型参数映射reference_image · end_frame · motion_prompt · duration · aspect → 待选择的视频模型MAP",
+        "copyStatus": "JSON 已复制到剪贴板",
+        "downloadName": "tang-30s-preproduction-pack.json"
+      },
+      "status": "pass"
+    },
+    "desktop-dunhuang-demonstration": {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "theme": "light",
+      "reducedMotion": false,
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interaction": {
+        "dunhuangSample": "dunhuang-30s",
+        "dunhuangTopic": "敦煌：沙漠中的世界十字路口",
+        "dunhuangRoute": "image-to-video",
+        "dunhuangDuration": "30",
+        "dunhuangWarning": "研究示范已载入：前期预案和 6 张 Codex 关键帧已完成；视频尚未生成，请按逐镜头运动提示交给你的视频模型。",
+        "dunhuangNarration": "河西走廊的尽头，敦煌守在沙漠边缘。向东是中原，向西，是绿洲与更远的世界。",
+        "dunhuangPromptSources": 6,
+        "dunhuangAssetStatus": "01主题与受众 Brief敦煌：沙漠中的世界十字路口READY02逐镜头脚本6/6 个镜头含画面与运动描述READY03Codex 关键帧6/6 张本地关键帧已生成；可直接交给视频模型READY04确定性文字层标题、中文、数字和 Logo 建议在生成后叠加PLAN05旁白与字幕3 段旁白需要录制、TTS 或人工配音PLAN06音乐与音效先确定节奏、授权与响度目标，再进入混音PLAN07模型参数映射still_prompt · reference_image · motion_prompt · duration · aspect → 你的视频模型（待填写）MAP",
+        "firstShotCopyStatus": "B01-S01 完整视频提示词已复制",
+        "firstShotClipboardLength": 318,
+        "copyAllStatus": "全部 6 个视频任务已复制",
+        "allShotsClipboardLength": 2057,
+        "copiedShotIds": [
+          "B01-S01",
+          "B01-S02",
+          "B02-S01",
+          "B02-S02",
+          "B03-S01",
+          "B03-S02"
+        ],
+        "dunhuangJsonReady": true,
+        "dunhuangReferenceImages": [
+          "assets/dunhuang/B01-S01.png",
+          "assets/dunhuang/B01-S02.png",
+          "assets/dunhuang/B02-S01.png",
+          "assets/dunhuang/B02-S02.png",
+          "assets/dunhuang/B03-S01.png",
+          "assets/dunhuang/B03-S02.png"
+        ],
+        "dunhuangMissingRequired": []
+      },
+      "status": "pass"
+    },
+    "desktop-dark-samples": {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "theme": "dark",
+      "reducedMotion": false,
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interaction": {},
+      "status": "pass"
+    },
+    "tablet-light-modes": {
+      "viewport": [
+        768,
+        900
+      ],
+      "theme": "light",
+      "reducedMotion": false,
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interaction": {},
+      "status": "pass"
+    },
+    "mobile-dark-preproduction": {
+      "viewport": [
+        390,
+        844
+      ],
+      "theme": "dark",
+      "reducedMotion": true,
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interaction": {
+        "dunhuangSample": "dunhuang-30s",
+        "dunhuangTopic": "敦煌：沙漠中的世界十字路口",
+        "dunhuangRoute": "image-to-video",
+        "dunhuangDuration": "30",
+        "dunhuangWarning": "研究示范已载入：前期预案和 6 张 Codex 关键帧已完成；视频尚未生成，请按逐镜头运动提示交给你的视频模型。",
+        "dunhuangNarration": "河西走廊的尽头，敦煌守在沙漠边缘。向东是中原，向西，是绿洲与更远的世界。",
+        "dunhuangPromptSources": 6,
+        "dunhuangAssetStatus": "01主题与受众 Brief敦煌：沙漠中的世界十字路口READY02逐镜头脚本6/6 个镜头含画面与运动描述READY03Codex 关键帧6/6 张本地关键帧已生成；可直接交给视频模型READY04确定性文字层标题、中文、数字和 Logo 建议在生成后叠加PLAN05旁白与字幕3 段旁白需要录制、TTS 或人工配音PLAN06音乐与音效先确定节奏、授权与响度目标，再进入混音PLAN07模型参数映射still_prompt · reference_image · motion_prompt · duration · aspect → 你的视频模型（待填写）MAP",
+        "firstShotCopyStatus": "B01-S01 完整视频提示词已复制",
+        "firstShotClipboardLength": 318,
+        "copyAllStatus": "全部 6 个视频任务已复制",
+        "allShotsClipboardLength": 2057,
+        "copiedShotIds": [
+          "B01-S01",
+          "B01-S02",
+          "B02-S01",
+          "B02-S02",
+          "B03-S01",
+          "B03-S02"
+        ],
+        "dunhuangJsonReady": true,
+        "dunhuangReferenceImages": [
+          "assets/dunhuang/B01-S01.png",
+          "assets/dunhuang/B01-S02.png",
+          "assets/dunhuang/B02-S01.png",
+          "assets/dunhuang/B02-S02.png",
+          "assets/dunhuang/B03-S01.png",
+          "assets/dunhuang/B03-S02.png"
+        ],
+        "dunhuangMissingRequired": []
+      },
+      "status": "pass"
+    },
+    "mobile-error-state": {
+      "viewport": [
+        390,
+        844
+      ],
+      "theme": "light",
+      "reducedMotion": false,
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interaction": {},
+      "status": "pass"
+    },
+    "mobile-prep-error-state": {
+      "viewport": [
+        390,
+        844
+      ],
+      "theme": "dark",
+      "reducedMotion": false,
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interaction": {},
+      "status": "pass"
+    }
+  },
+  "summary": {
+    "surfaces": 8,
+    "failures": 0,
+    "screenshots": [
+      "desktop-dark-samples.png",
+      "desktop-dunhuang-demonstration.png",
+      "desktop-light-overview.png",
+      "desktop-light-preproduction.png",
+      "mobile-dark-preproduction.png",
+      "mobile-error-state.png",
+      "mobile-prep-error-state.png",
+      "tablet-light-modes.png"
+    ]
+  }
+}

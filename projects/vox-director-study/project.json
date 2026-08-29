@@ -1,0 +1,17 @@
+{
+  "id": "vox-director-study",
+  "title": "Vox Director 端到端视频能力研究",
+  "summary": "Vox Director 如何把主题、口播视频或单张照片编排为纸张拼贴成片，它比 Prompt Skill 多了什么，工程边界与采用价值是什么？",
+  "status": "completed",
+  "path": "projects/vox-director-study",
+  "source_url": "https://github.com/Alisa0808/vox-director",
+  "demo_url": "https://yydshly.github.io/0829_codex_project/projects/vox-director-study/",
+  "tags": [
+    "agent-skill",
+    "ai-video",
+    "ffmpeg",
+    "research"
+  ],
+  "created": "2026-08-29",
+  "updated": "2026-08-29"
+}

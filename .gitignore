@@ -12,6 +12,7 @@ Desktop.ini
 .env.*
 !.env.example
 *.local
+projects/hand-drawn-video-prompts-study/config/minimax.local.json
 *.pem
 *.key
 

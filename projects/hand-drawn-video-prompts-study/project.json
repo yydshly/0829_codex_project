@@ -1,0 +1,12 @@
+{
+  "id": "hand-drawn-video-prompts-study",
+  "title": "Hand-Drawn Video Prompts 能力研究",
+  "summary": "该 Skill 能否稳定地把中文口播转为可执行、风格一致且风险分层的竖屏短视频提示词，其能力边界与扩展价值是什么？",
+  "status": "completed",
+  "path": "projects/hand-drawn-video-prompts-study",
+  "source_url": "https://github.com/kaomei/hand-drawn-video-prompts",
+  "demo_url": "https://yydshly.github.io/0829_codex_project/projects/hand-drawn-video-prompts-study/",
+  "tags": ["agent-skill", "ai-video", "prompt-engineering", "research"],
+  "created": "2026-08-29",
+  "updated": "2026-08-29"
+}

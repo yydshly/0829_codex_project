@@ -1,0 +1,117 @@
+{
+  "id": "dunhuang-30s",
+  "kind": "research-demonstration",
+  "label": "敦煌 30 秒示范",
+  "project": "dunhuang-crossroads-30s",
+  "topic": "敦煌：沙漠中的世界十字路口",
+  "language": "zh-CN",
+  "aspect": "9:16",
+  "style": "东方历史纸张拼贴",
+  "arc": "相遇 → 交流 → 留存",
+  "upstream_model": "not-applicable",
+  "source_file": "data/dunhuang-demo.json",
+  "structural_basis": "examples/tang-30s.beats.json",
+  "default_route": "image-to-video",
+  "target_model": "你的视频模型（待填写）",
+  "keyframe_generator": "Codex built-in imagegen",
+  "video_generation_status": "not-run; ready for external scheduling",
+  "video_dispatch_file": "notes/dunhuang-video-dispatch.md",
+  "beat_count": 3,
+  "shot_count": 6,
+  "timeline_seconds": 30,
+  "palette": ["沙金色", "青金石蓝", "朱砂红", "经卷米白"],
+  "facts_to_verify": [
+    "敦煌在河西走廊与古代东西交通网络中的位置",
+    "壁画、经卷与多元文化交流之间的表达边界",
+    "避免把跨越多个时代的服饰、器物和洞窟样式混为同一时期"
+  ],
+  "beats": [
+    {
+      "id": "B01",
+      "title": "沙漠中的门",
+      "narration": "河西走廊的尽头，敦煌守在沙漠边缘。向东是中原，向西，是绿洲与更远的世界。",
+      "background": "沙金色与旧地图米白",
+      "feel": "辽阔、神秘、正在靠近",
+      "shots": [
+        {
+          "id": "B01-S01",
+          "duration": 5,
+          "scene": "俯视一张层层展开的古代交通地图，河西走廊像纸带穿过山脉与沙漠，敦煌以朱砂圆点成为汇聚中心",
+          "still_prompt": "9:16 竖屏东方历史编辑拼贴。沙金色手工纸为底，撕边旧地图、墨线山脉、青金石蓝河流和朱砂红路线层层叠放；敦煌位置用无文字的朱砂圆点与放射线强调。真实纸张阴影、壁画矿物颜料质感、轻微套印偏移，不生成可读文字。",
+          "still_prompt_source": "codex-built-in-imagegen",
+          "motion_prompt": "镜头从地图全景缓慢推进敦煌圆点；不同纸层以轻微视差移动，路线依次亮起，构图和圆点位置保持稳定。",
+          "reference_image": "assets/dunhuang/B01-S01.png",
+          "reference_video": ""
+        },
+        {
+          "id": "B01-S02",
+          "duration": 5,
+          "scene": "剪纸驼队越过前景沙丘，远处出现绿洲城门与烽燧剪影，地图碎片像风吹纸页从画面两侧掠过",
+          "still_prompt": "9:16 竖屏历史纸张拼贴。暖沙金背景，黑褐驼队剪影横向穿过撕纸沙丘，远处绿洲、城门与烽燧由青金石蓝和朱砂红纸片构成；保留大面积天空与真实纸纤维，人物不需要清晰面孔，不生成文字。",
+          "still_prompt_source": "codex-built-in-imagegen",
+          "motion_prompt": "横向跟随驼队；前景沙丘移动较快、城门较慢，纸页被风卷起后落下，驼队轮廓和队形保持连续。",
+          "reference_image": "assets/dunhuang/B01-S02.png",
+          "reference_video": ""
+        }
+      ]
+    },
+    {
+      "id": "B02",
+      "title": "文明在这里相遇",
+      "narration": "商旅带来的不只有丝绸和香料。语言、音乐、信仰与绘画，也在这里彼此看见。",
+      "background": "青金石蓝与朱砂红",
+      "feel": "繁盛、流动、多元",
+      "shots": [
+        {
+          "id": "B02-S01",
+          "duration": 5,
+          "scene": "市集桌面俯拍，丝绸、香料、玻璃器、经卷与钱币以纸质贴片围成交流圆环，不同服饰的手从四周伸入画面",
+          "still_prompt": "9:16 竖屏东方市集编辑拼贴。青金石蓝纸面上摆放丝绸、香料、玻璃器、卷轴和钱币的高质感剪纸贴片；不同肤色与服饰袖口的手从四边伸入，形成交换动作。朱砂印章形状仅作图形，不含文字；矿物色、金箔碎片、纸张阴影清晰。",
+          "still_prompt_source": "codex-built-in-imagegen",
+          "motion_prompt": "垂直俯拍保持稳定；手和物件分层进入圆环，丝绸轻摆、香料颗粒短暂散开，最后所有元素停在清晰构图中。",
+          "reference_image": "assets/dunhuang/B02-S01.png",
+          "reference_video": ""
+        },
+        {
+          "id": "B02-S02",
+          "duration": 5,
+          "scene": "琵琶、鼓、舞姿剪影与飞天飘带从壁画色块中展开，颜料碎片连接成跨文化的视觉节奏",
+          "still_prompt": "9:16 竖屏敦煌矿物色拼贴。经卷米白底，琵琶、鼓、舞者剪影、飞天飘带与壁画色块组成向上展开的节奏；青金石蓝、石绿、朱砂红和少量金色，人物采用壁画式平面轮廓与纸张肌理，不生成现代舞台或文字。",
+          "still_prompt_source": "codex-built-in-imagegen",
+          "motion_prompt": "镜头轻微上升；飘带沿一条主曲线缓慢展开，乐器局部轻振，矿物颜料颗粒在节拍上聚散，人物轮廓与面部保持稳定。",
+          "reference_image": "assets/dunhuang/B02-S02.png",
+          "reference_video": ""
+        }
+      ]
+    },
+    {
+      "id": "B03",
+      "title": "时间被留下",
+      "narration": "旅人继续远行，故事却留在洞窟、壁画与经卷里。敦煌保存的，是世界曾经相遇的证据。",
+      "background": "洞窟暗褐与经卷米白",
+      "feel": "安静、庄重、余韵悠长",
+      "shots": [
+        {
+          "id": "B03-S01",
+          "duration": 5,
+          "scene": "镜头穿过黑色洞窟门形，内部壁画像层层纸幕被光照亮，飞天、莲花与云纹从暗处逐级显现",
+          "still_prompt": "9:16 竖屏洞窟纸艺场景。深褐近黑的洞窟门形作为前景，内部以多层纸幕表现矿物色壁画、飞天、莲花与云纹；一束暖光从侧上方照入，边缘可见年代磨损与纸纤维。庄重安静，不生成现代灯具与文字。",
+          "still_prompt_source": "codex-built-in-imagegen",
+          "motion_prompt": "缓慢穿过洞窟门形并轻微上仰；光线逐层照亮壁画纸幕，尘埃缓慢漂浮，壁画主体、脸部和纹样不重绘不变形。",
+          "reference_image": "assets/dunhuang/B03-S01.png",
+          "reference_video": ""
+        },
+        {
+          "id": "B03-S02",
+          "duration": 5,
+          "scene": "一卷经卷在画面中央展开，地图路线、驼队、乐器和壁画碎片依次回到卷轴周围，最终形成一个完整圆环",
+          "still_prompt": "9:16 竖屏收束画面。经卷米白纸卷在中央展开，周围环绕旧地图路线、驼队剪影、琵琶、矿物色壁画碎片和朱砂印章图形；沙金、青金石蓝、朱砂红形成平衡圆环，大面积留白用于后期标题，不在画面中生成文字。",
+          "still_prompt_source": "codex-built-in-imagegen",
+          "motion_prompt": "镜头缓慢拉远；经卷展开，前五个镜头的代表元素从四周回到圆环并逐一停稳，最后留出中央标题区，避免元素融化、跳变或文字生成。",
+          "reference_image": "assets/dunhuang/B03-S02.png",
+          "reference_video": ""
+        }
+      ]
+    }
+  ]
+}

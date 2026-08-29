@@ -11,15 +11,18 @@
 
 项目状态统一使用：`planned`（计划中）、`active`（进行中）、`paused`（暂停）、`completed`（已完成）、`archived`（已归档）。
 
-当前研究以 GitHubDaily 的开源项目发现与内容索引为起点，并将候选项目逐步转化为可复现、可比较、可展示的独立研究记录。
+当前研究从 GitHubDaily 的信息索引定位开始，并继续对 Hand-Drawn Video Prompts 等具体仓库做可复现的能力、资产和工程边界验证。每个已完成项目均提供独立 README、证据与 GitHub Pages 演示。
 
 <!-- PROJECTS:START -->
-| 子项目 | 研究问题 | 状态 | 在线展示 | 最近更新 |
-| --- | --- | --- | --- | --- |
-| [GitHubDaily 项目信息库说明](projects/githubdaily-capability-map/) | GitHubDaily 是一份人工整理的 GitHub 项目清单。它保存项目名称、链接、中文简介、分类和年度记录，但不保存项目源代码；本项目分析清单中是否有值得保留的优秀项目，以及它对研究选题的参考价值。 | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/githubdaily-capability-map/) | 2026-08-29 |
-| [GoFilm 来源机制简析](projects/gofilm-source-summary/) | 简要归档 GoFilm 的第三方影视采集 API、主附源聚合与部署机制；核心问题已在 Moovie 研究中覆盖，后续按需参考。 | 已归档 | — | 2026-08-29 |
-| [Rachel Digital Human Production 采用价值研究](projects/rachel-digital-human-production-study/) | 该 Skill 是否提供独立数字人能力；审计确认它只是 MiniMax 与 HeyGen 的固定流程封装，且与既有研究高度重复，因此归档。 | 已归档 | — | 2026-08-29 |
-| [Toonflow 能力与复用边界总结](projects/toonflow-capability-summary/) | Toonflow 是与 AIComicBuilder 高度重合的 AI 短剧生产工作台；本项目保存其 Agent、Skill、模型 API 与复用边界，当前不重复部署，待连续短剧生产需求出现时重新评估。 | 已归档 | — | 2026-08-29 |
+| 子项目 | 研究源库 | 研究问题 | 状态 | 在线展示 | 最近更新 |
+| --- | --- | --- | --- | --- | --- |
+| [GitHubDaily 项目信息库说明](projects/githubdaily-capability-map/) | [打开源库](https://github.com/GitHubDaily/GitHubDaily) | GitHubDaily 是一份人工整理的 GitHub 项目清单。它保存项目名称、链接、中文简介、分类和年度记录，但不保存项目源代码；本项目分析清单中是否有值得保留的优秀项目，以及它对研究选题的参考价值。 | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/githubdaily-capability-map/) | 2026-08-29 |
+| [GoFilm 来源机制简析](projects/gofilm-source-summary/) | [打开源库](https://github.com/ProudMuBai/GoFilm) | 简要归档 GoFilm 的第三方影视采集 API、主附源聚合与部署机制；核心问题已在 Moovie 研究中覆盖，后续按需参考。 | 已归档 | — | 2026-08-29 |
+| [Hand-Drawn Video Prompts 能力研究](projects/hand-drawn-video-prompts-study/) | [打开源库](https://github.com/kaomei/hand-drawn-video-prompts) | 该 Skill 能否稳定地把中文口播转为可执行、风格一致且风险分层的竖屏短视频提示词，其能力边界与扩展价值是什么？ | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/hand-drawn-video-prompts-study/) | 2026-08-29 |
+| [OpenReel Video 能力与复用边界总结](projects/openreel-video-capability-summary/) | [打开源库](https://github.com/Augani/openreel-video) | OpenReel 是本地优先的浏览器视频剪辑器，并扩展了桌面原生编码与 Agent/MCP 控制；当前安装和验证成本较高，先保存架构理解与按需复用入口。 | 已归档 | — | 2026-08-29 |
+| [Rachel Digital Human Production 采用价值研究](projects/rachel-digital-human-production-study/) | [打开源库](https://github.com/Jingyi-Wu-Richael/rachel-digital-human-production) | 该 Skill 是否提供独立数字人能力；审计确认它只是 MiniMax 与 HeyGen 的固定流程封装，且与既有研究高度重复，因此归档。 | 已归档 | — | 2026-08-29 |
+| [Toonflow 能力与复用边界总结](projects/toonflow-capability-summary/) | [打开源库](https://github.com/HBAI-Ltd/Toonflow-app) | Toonflow 是与 AIComicBuilder 高度重合的 AI 短剧生产工作台；本项目保存其 Agent、Skill、模型 API 与复用边界，当前不重复部署，待连续短剧生产需求出现时重新评估。 | 已归档 | — | 2026-08-29 |
+| [Vox Director 端到端视频能力研究](projects/vox-director-study/) | [打开源库](https://github.com/Alisa0808/vox-director) | Vox Director 如何把主题、口播视频或单张照片编排为纸张拼贴成片，它比 Prompt Skill 多了什么，工程边界与采用价值是什么？ | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/vox-director-study/) | 2026-08-29 |
 <!-- PROJECTS:END -->
 
 项目索引数据保存在 [`projects/catalog.json`](projects/catalog.json)，上表由脚本自动维护。

@@ -43,23 +43,27 @@ def markdown_cell(value: object) -> str:
 def render_projects_table(projects: list[dict[str, Any]]) -> str:
     """Render the generated section of the root README."""
     lines = [
-        "| 子项目 | 研究问题 | 状态 | 在线展示 | 最近更新 |",
-        "| --- | --- | --- | --- | --- |",
+        "| 子项目 | 研究源库 | 研究问题 | 状态 | 在线展示 | 最近更新 |",
+        "| --- | --- | --- | --- | --- | --- |",
     ]
     if not projects:
-        lines.append("| 暂无项目 | 使用下方命令创建第一个研究项目 | — | — | — |")
+        lines.append(
+            "| 暂无项目 | — | 使用下方命令创建第一个研究项目 | — | — | — |"
+        )
         return "\n".join(lines)
 
     for project in sorted(projects, key=lambda item: item["id"]):
         title = markdown_cell(project["title"])
         path = markdown_cell(project["path"])
+        source_url = str(project.get("source_url", "")).strip()
+        source = f"[打开源库]({source_url})" if source_url else "—"
         summary = markdown_cell(project["summary"])
         status = STATUS_LABELS.get(project["status"], project["status"])
         demo_url = str(project.get("demo_url", "")).strip()
         demo = f"[打开演示]({demo_url})" if demo_url else "—"
         updated = markdown_cell(project["updated"])
         lines.append(
-            f"| [{title}]({path}/) | {summary} | {status} | {demo} | {updated} |"
+            f"| [{title}]({path}/) | {source} | {summary} | {status} | {demo} | {updated} |"
         )
     return "\n".join(lines)
 

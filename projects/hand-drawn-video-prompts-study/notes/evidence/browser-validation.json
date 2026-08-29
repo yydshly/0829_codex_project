@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-08-29T11:53:25.466Z",
+  "canonicalUrl": "http://127.0.0.1:8000/projects/hand-drawn-video-prompts-study/",
+  "playwrightVersion": "1.62.1",
+  "checks": [
+    {
+      "name": "desktop-light-demo",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "theme": "light",
+      "horizontalOverflow": false,
+      "imagesLoaded": 5,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interactionJourney": "pass",
+      "screenshot": "browser/desktop-light-demo.png"
+    },
+    {
+      "name": "desktop-dark-evidence",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "colorScheme": "dark",
+      "reducedMotion": "no-preference",
+      "theme": "dark",
+      "horizontalOverflow": false,
+      "imagesLoaded": 5,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interactionJourney": "not repeated",
+      "screenshot": "browser/desktop-dark-evidence.png"
+    },
+    {
+      "name": "desktop-light-final-film",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "theme": "light",
+      "horizontalOverflow": false,
+      "imagesLoaded": 5,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interactionJourney": "not repeated",
+      "screenshot": "browser/desktop-light-final-film.png"
+    },
+    {
+      "name": "desktop-light-news-proof",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "theme": "light",
+      "horizontalOverflow": false,
+      "imagesLoaded": 5,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interactionJourney": "not repeated",
+      "screenshot": "browser/desktop-light-news-proof.png"
+    },
+    {
+      "name": "tablet-light-architecture",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "theme": "light",
+      "horizontalOverflow": false,
+      "imagesLoaded": 5,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interactionJourney": "not repeated",
+      "screenshot": "browser/tablet-light-architecture.png"
+    },
+    {
+      "name": "mobile-dark-hero",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "colorScheme": "dark",
+      "reducedMotion": "reduce",
+      "theme": "dark",
+      "horizontalOverflow": false,
+      "imagesLoaded": 5,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interactionJourney": "not repeated",
+      "screenshot": "browser/mobile-dark-hero.png"
+    },
+    {
+      "name": "data-error-fallback",
+      "status": "pass",
+      "recovery": "serve the project through the documented HTTP command"
+    },
+    {
+      "name": "media-error-fallback",
+      "status": "pass",
+      "recovery": "direct MP4/SRT links and method boundary remain available"
+    }
+  ],
+  "summary": {
+    "pass": 8,
+    "fail": 0
+  }
+}

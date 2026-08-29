@@ -1,0 +1,706 @@
+{
+  "schema": "research-lab.preproduction-pack/v1",
+  "generated_from_commit": "668ec3946fe0139bc985313b15c1a300fca42f94",
+  "notice": "上游样例提供结构参考；修改主题后必须人工重写和核验逐镜头内容。",
+  "routes": [
+    {
+      "id": "image-to-video",
+      "name": "关键帧 → 视频",
+      "best_for": "已有图片模型，视频模型支持首帧或参考图",
+      "required": [
+        "still_prompt",
+        "reference_image",
+        "motion_prompt",
+        "duration",
+        "aspect"
+      ],
+      "optional": [
+        "negative_prompt",
+        "seed",
+        "end_frame"
+      ]
+    },
+    {
+      "id": "text-to-video",
+      "name": "文本 → 视频",
+      "best_for": "没有关键帧模型，直接按镜头生成",
+      "required": [
+        "scene",
+        "motion_prompt",
+        "duration",
+        "aspect"
+      ],
+      "optional": [
+        "negative_prompt",
+        "reference_image",
+        "seed"
+      ]
+    },
+    {
+      "id": "first-last-frame",
+      "name": "首尾帧 → 视频",
+      "best_for": "需要明确构图变化或转场终点",
+      "required": [
+        "reference_image",
+        "end_frame",
+        "motion_prompt",
+        "duration",
+        "aspect"
+      ],
+      "optional": [
+        "negative_prompt",
+        "seed"
+      ]
+    },
+    {
+      "id": "reference-to-video",
+      "name": "参考素材 → 视频",
+      "best_for": "人物、产品或品牌主体需要保持一致",
+      "required": [
+        "reference_image",
+        "scene",
+        "motion_prompt",
+        "duration",
+        "aspect"
+      ],
+      "optional": [
+        "reference_video",
+        "identity_notes",
+        "negative_prompt"
+      ]
+    }
+  ],
+  "human_gates": [
+    {
+      "id": "facts",
+      "label": "事实与数字已核验"
+    },
+    {
+      "id": "rights",
+      "label": "人物、声音、Logo 与素材权利已确认"
+    },
+    {
+      "id": "text",
+      "label": "中文、数字和 Logo 改为后期确定性叠加"
+    },
+    {
+      "id": "identity",
+      "label": "人物/产品锚点逐镜头复核"
+    },
+    {
+      "id": "continuity",
+      "label": "相邻镜头构图、色彩与主体连续"
+    },
+    {
+      "id": "audio",
+      "label": "旁白时长、字幕和镜头时长对齐"
+    }
+  ],
+  "demonstrations": [
+    {
+      "id": "dunhuang-30s",
+      "kind": "research-demonstration",
+      "label": "敦煌 30 秒示范",
+      "project": "dunhuang-crossroads-30s",
+      "topic": "敦煌：沙漠中的世界十字路口",
+      "language": "zh-CN",
+      "aspect": "9:16",
+      "style": "东方历史纸张拼贴",
+      "arc": "相遇 → 交流 → 留存",
+      "upstream_model": "not-applicable",
+      "source_file": "data/dunhuang-demo.json",
+      "structural_basis": "examples/tang-30s.beats.json",
+      "default_route": "image-to-video",
+      "target_model": "你的视频模型（待填写）",
+      "keyframe_generator": "Codex built-in imagegen",
+      "video_generation_status": "not-run; ready for external scheduling",
+      "video_dispatch_file": "notes/dunhuang-video-dispatch.md",
+      "beat_count": 3,
+      "shot_count": 6,
+      "timeline_seconds": 30,
+      "palette": [
+        "沙金色",
+        "青金石蓝",
+        "朱砂红",
+        "经卷米白"
+      ],
+      "facts_to_verify": [
+        "敦煌在河西走廊与古代东西交通网络中的位置",
+        "壁画、经卷与多元文化交流之间的表达边界",
+        "避免把跨越多个时代的服饰、器物和洞窟样式混为同一时期"
+      ],
+      "beats": [
+        {
+          "id": "B01",
+          "title": "沙漠中的门",
+          "narration": "河西走廊的尽头，敦煌守在沙漠边缘。向东是中原，向西，是绿洲与更远的世界。",
+          "background": "沙金色与旧地图米白",
+          "feel": "辽阔、神秘、正在靠近",
+          "shots": [
+            {
+              "id": "B01-S01",
+              "duration": 5,
+              "scene": "俯视一张层层展开的古代交通地图，河西走廊像纸带穿过山脉与沙漠，敦煌以朱砂圆点成为汇聚中心",
+              "still_prompt": "9:16 竖屏东方历史编辑拼贴。沙金色手工纸为底，撕边旧地图、墨线山脉、青金石蓝河流和朱砂红路线层层叠放；敦煌位置用无文字的朱砂圆点与放射线强调。真实纸张阴影、壁画矿物颜料质感、轻微套印偏移，不生成可读文字。",
+              "still_prompt_source": "codex-built-in-imagegen",
+              "motion_prompt": "镜头从地图全景缓慢推进敦煌圆点；不同纸层以轻微视差移动，路线依次亮起，构图和圆点位置保持稳定。",
+              "reference_image": "assets/dunhuang/B01-S01.png",
+              "reference_video": ""
+            },
+            {
+              "id": "B01-S02",
+              "duration": 5,
+              "scene": "剪纸驼队越过前景沙丘，远处出现绿洲城门与烽燧剪影，地图碎片像风吹纸页从画面两侧掠过",
+              "still_prompt": "9:16 竖屏历史纸张拼贴。暖沙金背景，黑褐驼队剪影横向穿过撕纸沙丘，远处绿洲、城门与烽燧由青金石蓝和朱砂红纸片构成；保留大面积天空与真实纸纤维，人物不需要清晰面孔，不生成文字。",
+              "still_prompt_source": "codex-built-in-imagegen",
+              "motion_prompt": "横向跟随驼队；前景沙丘移动较快、城门较慢，纸页被风卷起后落下，驼队轮廓和队形保持连续。",
+              "reference_image": "assets/dunhuang/B01-S02.png",
+              "reference_video": ""
+            }
+          ]
+        },
+        {
+          "id": "B02",
+          "title": "文明在这里相遇",
+          "narration": "商旅带来的不只有丝绸和香料。语言、音乐、信仰与绘画，也在这里彼此看见。",
+          "background": "青金石蓝与朱砂红",
+          "feel": "繁盛、流动、多元",
+          "shots": [
+            {
+              "id": "B02-S01",
+              "duration": 5,
+              "scene": "市集桌面俯拍，丝绸、香料、玻璃器、经卷与钱币以纸质贴片围成交流圆环，不同服饰的手从四周伸入画面",
+              "still_prompt": "9:16 竖屏东方市集编辑拼贴。青金石蓝纸面上摆放丝绸、香料、玻璃器、卷轴和钱币的高质感剪纸贴片；不同肤色与服饰袖口的手从四边伸入，形成交换动作。朱砂印章形状仅作图形，不含文字；矿物色、金箔碎片、纸张阴影清晰。",
+              "still_prompt_source": "codex-built-in-imagegen",
+              "motion_prompt": "垂直俯拍保持稳定；手和物件分层进入圆环，丝绸轻摆、香料颗粒短暂散开，最后所有元素停在清晰构图中。",
+              "reference_image": "assets/dunhuang/B02-S01.png",
+              "reference_video": ""
+            },
+            {
+              "id": "B02-S02",
+              "duration": 5,
+              "scene": "琵琶、鼓、舞姿剪影与飞天飘带从壁画色块中展开，颜料碎片连接成跨文化的视觉节奏",
+              "still_prompt": "9:16 竖屏敦煌矿物色拼贴。经卷米白底，琵琶、鼓、舞者剪影、飞天飘带与壁画色块组成向上展开的节奏；青金石蓝、石绿、朱砂红和少量金色，人物采用壁画式平面轮廓与纸张肌理，不生成现代舞台或文字。",
+              "still_prompt_source": "codex-built-in-imagegen",
+              "motion_prompt": "镜头轻微上升；飘带沿一条主曲线缓慢展开，乐器局部轻振，矿物颜料颗粒在节拍上聚散，人物轮廓与面部保持稳定。",
+              "reference_image": "assets/dunhuang/B02-S02.png",
+              "reference_video": ""
+            }
+          ]
+        },
+        {
+          "id": "B03",
+          "title": "时间被留下",
+          "narration": "旅人继续远行，故事却留在洞窟、壁画与经卷里。敦煌保存的，是世界曾经相遇的证据。",
+          "background": "洞窟暗褐与经卷米白",
+          "feel": "安静、庄重、余韵悠长",
+          "shots": [
+            {
+              "id": "B03-S01",
+              "duration": 5,
+              "scene": "镜头穿过黑色洞窟门形，内部壁画像层层纸幕被光照亮，飞天、莲花与云纹从暗处逐级显现",
+              "still_prompt": "9:16 竖屏洞窟纸艺场景。深褐近黑的洞窟门形作为前景，内部以多层纸幕表现矿物色壁画、飞天、莲花与云纹；一束暖光从侧上方照入，边缘可见年代磨损与纸纤维。庄重安静，不生成现代灯具与文字。",
+              "still_prompt_source": "codex-built-in-imagegen",
+              "motion_prompt": "缓慢穿过洞窟门形并轻微上仰；光线逐层照亮壁画纸幕，尘埃缓慢漂浮，壁画主体、脸部和纹样不重绘不变形。",
+              "reference_image": "assets/dunhuang/B03-S01.png",
+              "reference_video": ""
+            },
+            {
+              "id": "B03-S02",
+              "duration": 5,
+              "scene": "一卷经卷在画面中央展开，地图路线、驼队、乐器和壁画碎片依次回到卷轴周围，最终形成一个完整圆环",
+              "still_prompt": "9:16 竖屏收束画面。经卷米白纸卷在中央展开，周围环绕旧地图路线、驼队剪影、琵琶、矿物色壁画碎片和朱砂印章图形；沙金、青金石蓝、朱砂红形成平衡圆环，大面积留白用于后期标题，不在画面中生成文字。",
+              "still_prompt_source": "codex-built-in-imagegen",
+              "motion_prompt": "镜头缓慢拉远；经卷展开，前五个镜头的代表元素从四周回到圆环并逐一停稳，最后留出中央标题区，避免元素融化、跳变或文字生成。",
+              "reference_image": "assets/dunhuang/B03-S02.png",
+              "reference_video": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "samples": [
+    {
+      "id": "money-15s",
+      "label": "15 秒三段式",
+      "project": "money-15s",
+      "topic": "money is trust (15s teaser)",
+      "language": "en",
+      "aspect": "9:16",
+      "style": "collage",
+      "arc": "hook_payoff",
+      "upstream_model": "google/gemini-omni-flash/image-to-video",
+      "source_file": "examples/money-15s.beats.json",
+      "beat_count": 3,
+      "shot_count": 3,
+      "timeline_seconds": 15.0,
+      "beats": [
+        {
+          "id": "B01",
+          "title": "MONEY",
+          "narration": "For five thousand years, money kept changing shape.",
+          "background": "warm gold amber",
+          "feel": "intriguing, grand",
+          "shots": [
+            {
+              "id": "B01-S01",
+              "duration": 5,
+              "scene": "a museum display of the evolution of money in a row: cowrie shells, a gold coin, a paper banknote, a credit card, a glowing bitcoin, labels beneath",
+              "still_prompt": "a museum display of the evolution of money in a row: cowrie shells, a gold coin, a paper banknote, a credit card, a glowing bitcoin, labels beneath",
+              "still_prompt_source": "derived-from-scene",
+              "motion_prompt": "push_in; each money object lifts and settles in turn down the row, halftone dots pulse, a couple of coins glint",
+              "reference_image": "",
+              "reference_video": ""
+            }
+          ]
+        },
+        {
+          "id": "B02",
+          "title": "SHELLS TO CODE",
+          "narration": "Shells, gold, paper, plastic, then pure code.",
+          "background": "cold teal",
+          "feel": "brisk, building",
+          "shots": [
+            {
+              "id": "B02-S01",
+              "duration": 5,
+              "scene": "the five forms of money as bold cut-outs in a left-to-right procession: shell, gold coin, banknote, credit card, glowing bitcoin",
+              "still_prompt": "the five forms of money as bold cut-outs in a left-to-right procession: shell, gold coin, banknote, credit card, glowing bitcoin",
+              "still_prompt_source": "derived-from-scene",
+              "motion_prompt": "pan; the whole row slides left-to-right, each form swaps into the next, the bitcoin at the end spins and glows",
+              "reference_image": "",
+              "reference_video": ""
+            }
+          ]
+        },
+        {
+          "id": "B03",
+          "title": "IT'S TRUST",
+          "narration": "But money was never the thing. It is the trust.",
+          "background": "bold red",
+          "feel": "profound, resonant, still",
+          "shots": [
+            {
+              "id": "B03-S01",
+              "duration": 5,
+              "scene": "a close cut-in of an open cupped hand holding a single coin, warm light, radiating paper rays",
+              "still_prompt": "a close cut-in of an open cupped hand holding a single coin, warm light, radiating paper rays",
+              "still_prompt_source": "derived-from-scene",
+              "motion_prompt": "static; the coin settles, a soft glow pulses once, everything else still — minimal, the point lands",
+              "reference_image": "",
+              "reference_video": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tang-30s",
+      "label": "30 秒时间线",
+      "project": "tang-30s",
+      "topic": "The Tang Dynasty — golden age of Chinese civilization",
+      "language": "en",
+      "aspect": "16:9",
+      "style": "collage",
+      "arc": "upstream-not-recorded",
+      "upstream_model": "upstream-not-recorded",
+      "source_file": "examples/tang-30s.beats.json",
+      "beat_count": 3,
+      "shot_count": 6,
+      "timeline_seconds": 31.0,
+      "beats": [
+        {
+          "id": "B01",
+          "title": "盛唐",
+          "narration": "In the seventh century, Tang China built Chang'an — the largest, richest city on Earth. The whole world came to its gates.",
+          "background": "imperial deep-red",
+          "feel": "",
+          "shots": [
+            {
+              "id": "B01-S01",
+              "duration": 5,
+              "scene": "a Tang emperor on a golden throne in dragon robes with court ladies, tall palace halls and pagodas of Chang'an behind, cut-out ink-wash mountains and drifting clouds",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat imperial deep-red paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a Tang emperor on a golden throne in dragon robes with court ladies, tall palace halls and pagodas of Chang'an behind, cut-out ink-wash mountains and drifting clouds. Include a title cartouche with large red Chinese characters '盛唐' and a small clean English subtitle 'TANG GOLDEN AGE', plus a single red seal stamp. Keep the headline crisp and legible. Aspect ratio 16:9.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "slow commanding push-in toward the enthroned emperor; paper clouds drift; halftone dots pulse on the beat",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/8eafd46c-baae-470e-bf62-443d33ee9d0f.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260708-1b4ed14cd3fdd61e83ae1a3e900ee440-0.mp4"
+            },
+            {
+              "id": "B01-S02",
+              "duration": 5,
+              "scene": "a close cut-in of foreign envoys from many nations bowing before the Tang throne, silk banners and gift boxes, sepia old-photograph cut-out figures",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat imperial deep-red paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a close cut-in of foreign envoys from many nations bowing before the Tang throne, silk banners and gift boxes, sepia old-photograph cut-out figures. No big headline banner in this shot (keep only a small red seal); it is a cut-in detail of the same scene. Aspect ratio 16:9.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow steady push-in on the bowing envoys; torn-paper edges and washi tape flutter lightly",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/20260708-21f9c125aeae5df109b3284b21de8864-0.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260708-072567748798ba138813874152cf1be0-0.mp4"
+            }
+          ]
+        },
+        {
+          "id": "B02",
+          "title": "丝绸之路",
+          "narration": "Along the Silk Road, caravans carried silk and paper west, and returned with gold, new faiths, and ideas — Tang China, open to the world.",
+          "background": "warm ochre",
+          "feel": "",
+          "shots": [
+            {
+              "id": "B02-S01",
+              "duration": 6,
+              "scene": "a long Bactrian camel caravan crossing layered paper desert dunes, cut-out ink-wash mountains, an oasis town scrap on the horizon",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat warm ochre paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a long Bactrian camel caravan crossing layered paper desert dunes, cut-out ink-wash mountains, an oasis town scrap on the horizon. Include a title cartouche with large red Chinese characters '丝绸之路' and a small clean English subtitle 'THE SILK ROAD', plus a single red seal stamp. Keep the headline crisp and legible. Aspect ratio 16:9.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "dynamic lateral parallax pan following the caravan; layered paper dunes and mountains slide at different depths; clouds drift",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/20260708-3d5f39f2b2afc0c105d9d5fade529834-0.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260708-72d7130197b406eea41d1978f03146d4-0.mp4"
+            },
+            {
+              "id": "B02-S02",
+              "duration": 5,
+              "scene": "a close cut-in of Silk Road merchants trading a bundle of silk and a porcelain vase beside a camel, sepia old-photograph cut-out figures",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat warm ochre paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a close cut-in of Silk Road merchants trading a bundle of silk and a porcelain vase beside a camel, sepia old-photograph cut-out figures. No big headline banner in this shot (keep only a small red seal); it is a cut-in detail of the same scene. Aspect ratio 16:9.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow push-in on the merchants' exchanging hands; a yellow zigzag scrap flutters lightly",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/2ce2e2af-33cc-49d3-9ed2-f9bfc2266eaa.png",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260708-6830bed0dad0981e2289cde91bceeb3b-0.mp4"
+            }
+          ]
+        },
+        {
+          "id": "B03",
+          "title": "诗的盛世",
+          "narration": "It was the golden age of poetry — Li Bai and Du Fu, still sung today. For three centuries, the Tang burned brightest.",
+          "background": "deep indigo night-blue",
+          "feel": "",
+          "shots": [
+            {
+              "id": "B03-S01",
+              "duration": 5,
+              "scene": "Tang poets gathered by a river raising wine cups under a large cut-out full moon, plum-blossom branches and hanging red lanterns",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat deep indigo night-blue paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): Tang poets gathered by a river raising wine cups under a large cut-out full moon, plum-blossom branches and hanging red lanterns. Include a title cartouche with large red Chinese characters '诗的盛世' and a small clean English subtitle 'AGE OF POETRY', plus a single red seal stamp. Keep the headline crisp and legible. Aspect ratio 16:9.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "gentle rise revealing the poets and the full moon; paper lanterns sway; plum petals drift across layers",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/20260708-0b387962055f5dbd7cb054bb95439fc5-0.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260708-1c0305faa313dccf33407c1f3c28fcaf-0.mp4"
+            },
+            {
+              "id": "B03-S02",
+              "duration": 5,
+              "scene": "a close cut-in of a single Tang poet raising a wine cup toward the glowing full moon, drifting plum petals and a flying paper crane",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat deep indigo night-blue paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a close cut-in of a single Tang poet raising a wine cup toward the glowing full moon, drifting plum petals and a flying paper crane. No big headline banner in this shot (keep only a small red seal); it is a cut-in detail of the same scene. Aspect ratio 16:9.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "slow push toward the raised cup and the moon; a paper crane glides across; petals fall on the beat",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/20260708-521f6e1973afc64647089cb4b80aeb56-0.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260708-24e7369d795ccb4e20b6261a0625d806-0.mp4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "money-60s",
+      "label": "60 秒解释型",
+      "project": "money-60s",
+      "topic": "A Brief History of Money",
+      "language": "en",
+      "aspect": "9:16",
+      "style": "collage",
+      "arc": "upstream-not-recorded",
+      "upstream_model": "google/gemini-omni-flash/image-to-video",
+      "source_file": "examples/money-60s-9x16-english.beats.json",
+      "beat_count": 6,
+      "shot_count": 12,
+      "timeline_seconds": 60.0,
+      "beats": [
+        {
+          "id": "B01",
+          "title": "BEFORE MONEY",
+          "narration": "For most of history, there was no money. You traded a goat for grain, and hoped the other person actually wanted a goat.",
+          "background": "earthy clay tan",
+          "feel": "ancient, humble, rough",
+          "shots": [
+            {
+              "id": "B01-S01",
+              "duration": 5,
+              "scene": "two ancient traders facing off in a barter, a cut-out goat, sacks of grain, a scatter of cowrie shells, a scratched clay tablet, a torn arrow scrap between them",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat earthy clay tan paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): two ancient traders facing off in a barter, a cut-out goat, sacks of grain, a scatter of cowrie shells, a scratched clay tablet, a torn arrow scrap between them. Include a torn-paper banner with a big bold cut-out English headline 'BEFORE MONEY', plus a single red seal stamp. Keep the headline crisp and legible. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow gentle push-in on the whole collage; layered paper elements drift with parallax; halftone pulses softly",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/20260710-24f931dd4d943e0088d44019aebf059a-0.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-b3ecfd2a9e7e94fe8acd5ec3b942fd15-0.mp4"
+            },
+            {
+              "id": "B01-S02",
+              "duration": 5,
+              "scene": "a close cut-in of two hands exchanging a bundle of grain for a small goat, scattered cowrie shells and a torn arrow scrap",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat earthy clay tan paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a close cut-in of two hands exchanging a bundle of grain for a small goat, scattered cowrie shells and a torn arrow scrap. No big headline banner in this shot (keep only a small seal); it is a cut-in detail of the same scene. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow push-in on the detail; paper cut-outs drift gently; halftone pulses",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/05c17813-f6ae-440e-9fd8-698edf3506e3.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-d2e7619b66306d0cbc75a79692e6b73c-0.mp4"
+            }
+          ]
+        },
+        {
+          "id": "B02",
+          "title": "FIRST MONEY",
+          "narration": "So people found a shortcut. Shells, then metal. Around 600 BC, the kingdom of Lydia struck the very first coins.",
+          "background": "warm gold amber",
+          "feel": "dawn of value, gleaming, awe",
+          "shots": [
+            {
+              "id": "B02-S01",
+              "duration": 5,
+              "scene": "a string of cowrie shells, a heap of gold, a big stamped ancient Lydian coin as the focal cut-out, an ancient hand reaching in, halftone sunburst rays",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat warm gold amber paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a string of cowrie shells, a heap of gold, a big stamped ancient Lydian coin as the focal cut-out, an ancient hand reaching in, halftone sunburst rays. Include a torn-paper banner with a big bold cut-out English headline 'FIRST MONEY', plus a single red seal stamp. Keep the headline crisp and legible. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow gentle push-in on the whole collage; layered paper elements drift with parallax; halftone pulses softly",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/1f88d0ca-cabb-44e4-9255-a8c7fd562603.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-0b11e729562ffe50cb32ef82dd9d0c00-0.mp4"
+            },
+            {
+              "id": "B02-S02",
+              "duration": 5,
+              "scene": "a close cut-in of a single big stamped ancient Lydian coin held between fingertips, glinting gold nuggets around it",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat warm gold amber paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a close cut-in of a single big stamped ancient Lydian coin held between fingertips, glinting gold nuggets around it. No big headline banner in this shot (keep only a small seal); it is a cut-in detail of the same scene. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow push-in on the detail; paper cut-outs drift gently; halftone pulses",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/20260710-1701645bc039673fa82e01c9729c3aa4-0.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-5a28e25adfb6d90f7bcb81393d865d43-0.mp4"
+            }
+          ]
+        },
+        {
+          "id": "B03",
+          "title": "PAPER PROMISES",
+          "narration": "A thousand years ago, Song-dynasty China did something radical: money made of paper. A promise you could fold into your pocket.",
+          "background": "imperial deep-red",
+          "feel": "revolutionary, clever, bold",
+          "shots": [
+            {
+              "id": "B03-S01",
+              "duration": 5,
+              "scene": "a Song-dynasty jiaozi paper banknote as the hero cut-out, a Chinese scholar-official, a bright red ink seal stamp, a stack of round coins turning into a folded paper note",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat imperial deep-red paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a Song-dynasty jiaozi paper banknote as the hero cut-out, a Chinese scholar-official, a bright red ink seal stamp, a stack of round coins turning into a folded paper note. Include a torn-paper banner with a big bold cut-out English headline 'PAPER PROMISES', plus a single red seal stamp. Keep the headline crisp and legible. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow gentle push-in on the whole collage; layered paper elements drift with parallax; halftone pulses softly",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/e1c5c824-417e-4ab4-a380-4e3a65dbb0c3.png",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-c17bf5794286c49216a1b6d42bf4229a-0.mp4"
+            },
+            {
+              "id": "B03-S02",
+              "duration": 5,
+              "scene": "a close cut-in of the Song jiaozi paper banknote with a bright red ink seal being pressed onto it, a hand folding the note",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat imperial deep-red paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a close cut-in of the Song jiaozi paper banknote with a bright red ink seal being pressed onto it, a hand folding the note. No big headline banner in this shot (keep only a small seal); it is a cut-in detail of the same scene. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow push-in on the detail; paper cut-outs drift gently; halftone pulses",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/64ba6ffc-fefb-4bf0-a4cd-3c0bdff3a8f4.png",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-8a34c31bb5490c7a82f3904f858b77df-0.mp4"
+            }
+          ]
+        },
+        {
+          "id": "B04",
+          "title": "BANKS & PLASTIC",
+          "narration": "Paper needed guardians. Banks rose. Then plastic, and suddenly your money was just a number inside a machine.",
+          "background": "cold steel blue",
+          "feel": "institutional, cold, modern",
+          "shots": [
+            {
+              "id": "B04-S01",
+              "duration": 5,
+              "scene": "a marble bank facade with columns and a heavy vault door, a vintage embossed credit card as a bold cut-out, a ledger book, a 1950s hand holding the card, halftone",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat cold steel blue paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a marble bank facade with columns and a heavy vault door, a vintage embossed credit card as a bold cut-out, a ledger book, a 1950s hand holding the card, halftone. Include a torn-paper banner with a big bold cut-out English headline 'BANKS & PLASTIC', plus a single red seal stamp. Keep the headline crisp and legible. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow gentle push-in on the whole collage; layered paper elements drift with parallax; halftone pulses softly",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/a90d43f8-da15-461e-8ff3-2f21909fe1cf.png",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-49b94001c71b6acb6cb75cb9b2c2de5d-0.mp4"
+            },
+            {
+              "id": "B04-S02",
+              "duration": 5,
+              "scene": "a close cut-in of a 1950s hand pulling a vintage embossed credit card from a wallet, a bank ledger line and stacked coins",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat cold steel blue paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a close cut-in of a 1950s hand pulling a vintage embossed credit card from a wallet, a bank ledger line and stacked coins. No big headline banner in this shot (keep only a small seal); it is a cut-in detail of the same scene. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow push-in on the detail; paper cut-outs drift gently; halftone pulses",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/9241c76a-41dc-43ea-8863-30037d491368.png",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-c79a304694a297c632a37a866e1a68eb-0.mp4"
+            }
+          ]
+        },
+        {
+          "id": "B05",
+          "title": "MONEY GOES DIGITAL",
+          "narration": "Then money left the physical world entirely. Screens. Apps. And in 2009, Bitcoin. Cash with no bank, no border, no paper.",
+          "background": "dark charcoal with neon glow",
+          "feel": "electric, frontier, cold neon energy",
+          "shots": [
+            {
+              "id": "B05-S01",
+              "duration": 5,
+              "scene": "a glowing smartphone showing a payment, a bright bitcoin coin as the focal cut-out, a web of glowing network nodes, streams of ones and zeros, neon cyan and orange accents on a dark ground",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat dark charcoal with neon glow paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a glowing smartphone showing a payment, a bright bitcoin coin as the focal cut-out, a web of glowing network nodes, streams of ones and zeros, neon cyan and orange accents on a dark ground. Include a torn-paper banner with a big bold cut-out English headline 'MONEY GOES DIGITAL', plus a single red seal stamp. Keep the headline crisp and legible. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow gentle push-in on the whole collage; layered paper elements drift with parallax; halftone pulses softly",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/58ddc086-75d0-437c-a464-7956925bf593.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-d04ce26f42b95f007725a5d954147265-0.mp4"
+            },
+            {
+              "id": "B05-S02",
+              "duration": 5,
+              "scene": "a close cut-in of a smartphone screen showing a digital payment beside a glowing bitcoin symbol, streams of binary and neon glow",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat dark charcoal with neon glow paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a close cut-in of a smartphone screen showing a digital payment beside a glowing bitcoin symbol, streams of binary and neon glow. No big headline banner in this shot (keep only a small seal); it is a cut-in detail of the same scene. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow push-in on the detail; paper cut-outs drift gently; halftone pulses",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/20260710-a0cf695f1a3a3842def13f6d8231ce57-0.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-41a66e1093b4fced3b3a90b599633218-0.mp4"
+            }
+          ]
+        },
+        {
+          "id": "B06",
+          "title": "WHAT IS MONEY?",
+          "narration": "From shells to code, money never truly changed. It was always the same thing: a story we all agree to believe.",
+          "background": "bold gold on black",
+          "feel": "reflective, profound, resonant, cinematic",
+          "shots": [
+            {
+              "id": "B06-S01",
+              "duration": 5,
+              "scene": "a montage collage of a cowrie shell, a gold coin, a paper banknote, a credit card and a bitcoin arranged in a row, a pair of open cupped hands beneath them, bold radiating rays",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat bold gold on black paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a montage collage of a cowrie shell, a gold coin, a paper banknote, a credit card and a bitcoin arranged in a row, a pair of open cupped hands beneath them, bold radiating rays. Include a torn-paper banner with a big bold cut-out English headline 'WHAT IS MONEY?', plus a single red seal stamp. Keep the headline crisp and legible. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow gentle push-in on the whole collage; layered paper elements drift with parallax; halftone pulses softly",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/e7191fcd-d852-4fd2-a4ac-c6b8f35a19fd.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-42095ffbd00f44bee94ee4bba0ae5ea3-0.mp4"
+            },
+            {
+              "id": "B06-S02",
+              "duration": 5,
+              "scene": "a close cut-in of open cupped hands cradling a cowrie shell, a gold coin, a paper banknote and a bitcoin together, radiating rays",
+              "still_prompt": "Mixed-media hand-cut PAPER COLLAGE, editorial motion-graphic zine style. Clearly layered paper cut-outs with visible torn and scissor-cut edges, tape corners and soft real paper drop shadows, on a bold flat bold gold on black paper background. Halftone print dots, newspaper-clipping scraps, paper-stencil shapes, aged paper texture, slight print misregistration. Scattered geometric collage accents (a small blue paper triangle, a red circle, a zigzag, halftone strips, bits of washi tape). Figures are PRINTED-texture cut-outs of real imagery (sepia old photographs / Chinese woodblock-print / mural), NOT CGI, NOT a 3D render — keep print grain and paper imperfections. High-contrast, punchy, tactile, hand-assembled. SCENE (as layered paper cut-outs): a close cut-in of open cupped hands cradling a cowrie shell, a gold coin, a paper banknote and a bitcoin together, radiating rays. No big headline banner in this shot (keep only a small seal); it is a cut-in detail of the same scene. Aspect ratio 9:16.",
+              "still_prompt_source": "upstream",
+              "motion_prompt": "one slow push-in on the detail; paper cut-outs drift gently; halftone pulses",
+              "reference_image": "https://atlas-media.oss-us-west-1.aliyuncs.com/images/20260710-11b67691afe353e6916b5409f748b7d4-0.jpg",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/20260710-fc6389e475178e27e2361488029e26bc-0.mp4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ronaldo",
+      "label": "人物生涯节点",
+      "project": "ronaldo",
+      "topic": "Cristiano Ronaldo — a career in five moments (collage tribute)",
+      "language": "en",
+      "aspect": "9:16",
+      "style": "collage",
+      "arc": "upstream-not-recorded",
+      "upstream_model": "kwaivgi/kling-video-o3-pro/image-to-video",
+      "source_file": "examples/ronaldo-9x16-kling.beats.json",
+      "beat_count": 5,
+      "shot_count": 5,
+      "timeline_seconds": 25.0,
+      "beats": [
+        {
+          "id": "B01",
+          "title": "Beat 1",
+          "narration": "In 2004, a boy of nineteen wept before a nation. The dream was over. The legend had not yet begun.",
+          "background": "",
+          "feel": "",
+          "shots": [
+            {
+              "id": "B01-S01",
+              "duration": 5,
+              "scene": "In 2004, a boy of nineteen wept before a nation. The dream was over. The legend had not yet begun.",
+              "still_prompt": "In 2004, a boy of nineteen wept before a nation. The dream was over. The legend had not yet begun.",
+              "still_prompt_source": "derived-from-scene",
+              "motion_prompt": "one slow push-in on the crying young footballer; aged newspaper edges and halftone dots drift softly; somber and still",
+              "reference_image": "https://atlas-img.oss-accelerate-overseas.aliyuncs.com/images/ad8f99b9-20c7-4aac-aefa-242c2c39e5b2.png",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/196de7b6-ea0a-4482-95c6-96b7f35e8f4b.mp4"
+            }
+          ]
+        },
+        {
+          "id": "B02",
+          "title": "Beat 2",
+          "narration": "By 2008, he ruled the continent — his first Ballon d'Or, and the whole world at his feet.",
+          "background": "",
+          "feel": "",
+          "shots": [
+            {
+              "id": "B02-S01",
+              "duration": 5,
+              "scene": "By 2008, he ruled the continent — his first Ballon d'Or, and the whole world at his feet.",
+              "still_prompt": "By 2008, he ruled the continent — his first Ballon d'Or, and the whole world at his feet.",
+              "still_prompt_source": "derived-from-scene",
+              "motion_prompt": "one slow push-in on the roaring player; the golden trophy gleams; halftone dots pulse gently",
+              "reference_image": "https://atlas-img.oss-accelerate-overseas.aliyuncs.com/images/b792a763-16ac-4b8e-8b9a-f31139564ae2.png",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/0bb9e3c9-36ba-413c-92d8-1998d0caa569.mp4"
+            }
+          ]
+        },
+        {
+          "id": "B03",
+          "title": "Beat 3",
+          "narration": "In Madrid he became immortal — Champions League after Champions League. La Duodécima.",
+          "background": "",
+          "feel": "",
+          "shots": [
+            {
+              "id": "B03-S01",
+              "duration": 5,
+              "scene": "In Madrid he became immortal — Champions League after Champions League. La Duodécima.",
+              "still_prompt": "In Madrid he became immortal — Champions League after Champions League. La Duodécima.",
+              "still_prompt_source": "derived-from-scene",
+              "motion_prompt": "one slow rise from the player's outstretched arms up to the stacked trophies; paper cut-outs drift lightly",
+              "reference_image": "https://atlas-img.oss-accelerate-overseas.aliyuncs.com/images/dfb61cc7-8e35-4b7d-8657-b3b75097ff59.png",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/39397378-03d6-48a4-832c-bdcb5cf49689.mp4"
+            }
+          ]
+        },
+        {
+          "id": "B04",
+          "title": "Beat 4",
+          "narration": "Then the impossible — an overhead strike that turned a rival stadium into applause.",
+          "background": "",
+          "feel": "",
+          "shots": [
+            {
+              "id": "B04-S01",
+              "duration": 5,
+              "scene": "Then the impossible — an overhead strike that turned a rival stadium into applause.",
+              "still_prompt": "Then the impossible — an overhead strike that turned a rival stadium into applause.",
+              "still_prompt_source": "derived-from-scene",
+              "motion_prompt": "one slow zoom into the bicycle-kick silhouette as the orange starburst radiates; halftone dots pulse",
+              "reference_image": "https://atlas-img.oss-accelerate-overseas.aliyuncs.com/images/6cd2726d-a9e9-4942-bee1-9184c1286f7d.png",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/617ad105-48f7-4d52-b655-f21f60d8a140.mp4"
+            }
+          ]
+        },
+        {
+          "id": "B05",
+          "title": "Beat 5",
+          "narration": "And in 2016, he lifted a continent. Portugal, champions of Europe. Cristiano, forever.",
+          "background": "",
+          "feel": "",
+          "shots": [
+            {
+              "id": "B05-S01",
+              "duration": 5,
+              "scene": "And in 2016, he lifted a continent. Portugal, champions of Europe. Cristiano, forever.",
+              "still_prompt": "And in 2016, he lifted a continent. Portugal, champions of Europe. Cristiano, forever.",
+              "still_prompt_source": "derived-from-scene",
+              "motion_prompt": "one slow push-in as the player lifts the trophy; gold confetti drifts down; red-and-green ribbons flutter softly",
+              "reference_image": "https://atlas-img.oss-accelerate-overseas.aliyuncs.com/images/25cf570c-7efb-46f3-a976-e1ae3a5201e5.png",
+              "reference_video": "https://atlas-media.oss-us-west-1.aliyuncs.com/videos/6d11f3de-7f5a-4959-91fc-c5cae5dc99d1.mp4"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

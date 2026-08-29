@@ -1,0 +1,475 @@
+{
+  "generated_at": "2026-08-29",
+  "target_background": "#F8F6EF",
+  "summary": {
+    "demo_contract_checks": 28,
+    "demo_contract_failures": 0,
+    "news_provenance_checks": 8,
+    "news_provenance_failures": 0,
+    "upstream_drift_observations": 4,
+    "png_assets_inspected": 4,
+    "video_assets_inspected": 2,
+    "generated_frames_inspected": 7,
+    "final_video_inspected": true
+  },
+  "repository": {
+    "commit": "dae2da391d58fdd42c7c4475742eb4c989cf53f2",
+    "commit_count": 8,
+    "file_count": 24,
+    "file_types": {
+      ".gif": 2,
+      ".md": 14,
+      ".mp4": 2,
+      ".png": 4,
+      "[none]": 2
+    },
+    "executable_source_file_count": 0,
+    "bundled_test_file_count": 0
+  },
+  "demo_checks": [
+    {
+      "id": "shot-01-duration",
+      "pass": true,
+      "evidence": "6 seconds; expected 4–6"
+    },
+    {
+      "id": "shot-01-image_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-01-video_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-01-required-fields",
+      "pass": true,
+      "evidence": "narration, metaphor, keyword, and entity note"
+    },
+    {
+      "id": "shot-02-duration",
+      "pass": true,
+      "evidence": "6 seconds; expected 4–6"
+    },
+    {
+      "id": "shot-02-image_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-02-video_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-02-required-fields",
+      "pass": true,
+      "evidence": "narration, metaphor, keyword, and entity note"
+    },
+    {
+      "id": "shot-03-duration",
+      "pass": true,
+      "evidence": "6 seconds; expected 4–6"
+    },
+    {
+      "id": "shot-03-image_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-03-video_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-03-required-fields",
+      "pass": true,
+      "evidence": "narration, metaphor, keyword, and entity note"
+    },
+    {
+      "id": "shot-04-duration",
+      "pass": true,
+      "evidence": "6 seconds; expected 4–6"
+    },
+    {
+      "id": "shot-04-image_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-04-video_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-04-required-fields",
+      "pass": true,
+      "evidence": "narration, metaphor, keyword, and entity note"
+    },
+    {
+      "id": "shot-05-duration",
+      "pass": true,
+      "evidence": "6 seconds; expected 4–6"
+    },
+    {
+      "id": "shot-05-image_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-05-video_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-05-required-fields",
+      "pass": true,
+      "evidence": "narration, metaphor, keyword, and entity note"
+    },
+    {
+      "id": "shot-06-duration",
+      "pass": true,
+      "evidence": "6 seconds; expected 4–6"
+    },
+    {
+      "id": "shot-06-image_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-06-video_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-06-required-fields",
+      "pass": true,
+      "evidence": "narration, metaphor, keyword, and entity note"
+    },
+    {
+      "id": "shot-07-duration",
+      "pass": true,
+      "evidence": "5 seconds; expected 4–6"
+    },
+    {
+      "id": "shot-07-image_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-07-video_prompt",
+      "pass": true,
+      "evidence": "all contract fragments present"
+    },
+    {
+      "id": "shot-07-required-fields",
+      "pass": true,
+      "evidence": "narration, metaphor, keyword, and entity note"
+    }
+  ],
+  "news_checks": [
+    {
+      "id": "news-source-diversity",
+      "pass": true,
+      "evidence": "observed official hosts: www.cas.cn, www.xinhuanet.com"
+    },
+    {
+      "id": "news-recency-record",
+      "pass": true,
+      "evidence": "published=2026-08-28; generated=2026-08-29"
+    },
+    {
+      "id": "news-facts-retained-in-script",
+      "pass": true,
+      "evidence": "required tokens: 超过40万公里, 1.25Mbps, 100Mbps, 8K, 12秒"
+    },
+    {
+      "id": "editorial-opinion-separated",
+      "pass": true,
+      "evidence": "final editorial conclusion has no fact refs and is labeled in its risk note"
+    },
+    {
+      "id": "all-generated-frames-recorded",
+      "pass": true,
+      "evidence": "7/7 generated frame paths are present and recorded per shot"
+    },
+    {
+      "id": "final-deliverables-recorded",
+      "pass": true,
+      "evidence": "MP4, SRT, voiceover and explicit no-video-model boundary"
+    },
+    {
+      "id": "subtitle-timeline-complete",
+      "pass": true,
+      "evidence": "7 subtitle cues for 7 shots"
+    },
+    {
+      "id": "final-video-media-contract",
+      "pass": true,
+      "evidence": "H.264/AAC, 1080x1920, 20fps, approximately 41.02s"
+    }
+  ],
+  "documentation_drift": [
+    {
+      "id": "visual-group-count",
+      "observed": true,
+      "evidence": "Current SKILL.md says two to four groups; output-example.md still asks for 3–5."
+    },
+    {
+      "id": "character-proportion",
+      "observed": true,
+      "evidence": "Older public output asks for large head/tiny body; current SKILL.md forbids it."
+    },
+    {
+      "id": "keyword-placement-mode",
+      "observed": true,
+      "evidence": "Prompt mode defaults to embedded short keywords; complete-video workflow routes keywords to post-production."
+    },
+    {
+      "id": "blank-first-frame-vs-fixed-keyword",
+      "observed": true,
+      "evidence": "A completely blank First Frame and an on-image keyword fixed throughout the shot cannot both be literal without a separate overlay rule."
+    }
+  ],
+  "png_assets": [
+    {
+      "file": "q-doodle-shot-01.png",
+      "width": 941,
+      "height": 1672,
+      "aspect_ratio": 0.562799,
+      "aspect_error_percent_vs_9_16": 0.0532,
+      "top_band_sample_count": 560,
+      "top_band_mean_rgb": [
+        246.86,
+        242.27,
+        230.88
+      ],
+      "exact_f8f6ef_fraction": 0.0,
+      "mean_rgb_distance_from_f8f6ef": 9.37
+    },
+    {
+      "file": "q-doodle-shot-02.png",
+      "width": 941,
+      "height": 1672,
+      "aspect_ratio": 0.562799,
+      "aspect_error_percent_vs_9_16": 0.0532,
+      "top_band_sample_count": 560,
+      "top_band_mean_rgb": [
+        247.33,
+        242.51,
+        231.77
+      ],
+      "exact_f8f6ef_fraction": 0.0,
+      "mean_rgb_distance_from_f8f6ef": 8.58
+    },
+    {
+      "file": "q-doodle-shot-04.png",
+      "width": 941,
+      "height": 1672,
+      "aspect_ratio": 0.562799,
+      "aspect_error_percent_vs_9_16": 0.0532,
+      "top_band_sample_count": 560,
+      "top_band_mean_rgb": [
+        246.99,
+        242.37,
+        231.33
+      ],
+      "exact_f8f6ef_fraction": 0.0,
+      "mean_rgb_distance_from_f8f6ef": 9.07
+    },
+    {
+      "file": "q-doodle-style-reference.png",
+      "width": 941,
+      "height": 1672,
+      "aspect_ratio": 0.562799,
+      "aspect_error_percent_vs_9_16": 0.0532,
+      "top_band_sample_count": 560,
+      "top_band_mean_rgb": [
+        247.95,
+        243.58,
+        231.53
+      ],
+      "exact_f8f6ef_fraction": 0.0,
+      "mean_rgb_distance_from_f8f6ef": 8.87
+    }
+  ],
+  "video_assets": [
+    {
+      "file": "hand-drawn-video-demo-722.mp4",
+      "status": "inspected",
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 540,
+          "height": 960,
+          "r_frame_rate": "20/1"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "r_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "duration": "32.450000",
+        "size": "1274759"
+      }
+    },
+    {
+      "file": "hand-drawn-video-demo-723.mp4",
+      "status": "inspected",
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 540,
+          "height": 960,
+          "r_frame_rate": "20/1"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "r_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "duration": "40.865011",
+        "size": "3152706"
+      }
+    }
+  ],
+  "generated_frames": [
+    {
+      "file": "news-shot-01-generated.png",
+      "width": 941,
+      "height": 1672,
+      "aspect_ratio": 0.562799,
+      "aspect_error_percent_vs_9_16": 0.0532,
+      "top_band_sample_count": 560,
+      "top_band_mean_rgb": [
+        252.14,
+        247.4,
+        235.27
+      ],
+      "exact_f8f6ef_fraction": 0.0,
+      "mean_rgb_distance_from_f8f6ef": 6.31
+    },
+    {
+      "file": "news-shot-02-generated.png",
+      "width": 941,
+      "height": 1672,
+      "aspect_ratio": 0.562799,
+      "aspect_error_percent_vs_9_16": 0.0532,
+      "top_band_sample_count": 560,
+      "top_band_mean_rgb": [
+        242.29,
+        238.09,
+        227.44
+      ],
+      "exact_f8f6ef_fraction": 0.0,
+      "mean_rgb_distance_from_f8f6ef": 21.43
+    },
+    {
+      "file": "news-shot-03-generated.png",
+      "width": 941,
+      "height": 1672,
+      "aspect_ratio": 0.562799,
+      "aspect_error_percent_vs_9_16": 0.0532,
+      "top_band_sample_count": 560,
+      "top_band_mean_rgb": [
+        250.91,
+        242.56,
+        232.21
+      ],
+      "exact_f8f6ef_fraction": 0.0,
+      "mean_rgb_distance_from_f8f6ef": 13.61
+    },
+    {
+      "file": "news-shot-04-generated.png",
+      "width": 941,
+      "height": 1672,
+      "aspect_ratio": 0.562799,
+      "aspect_error_percent_vs_9_16": 0.0532,
+      "top_band_sample_count": 560,
+      "top_band_mean_rgb": [
+        249.44,
+        244.08,
+        233.38
+      ],
+      "exact_f8f6ef_fraction": 0.0,
+      "mean_rgb_distance_from_f8f6ef": 8.83
+    },
+    {
+      "file": "news-shot-05-generated.png",
+      "width": 941,
+      "height": 1672,
+      "aspect_ratio": 0.562799,
+      "aspect_error_percent_vs_9_16": 0.0532,
+      "top_band_sample_count": 560,
+      "top_band_mean_rgb": [
+        244.88,
+        241.24,
+        232.2
+      ],
+      "exact_f8f6ef_fraction": 0.0,
+      "mean_rgb_distance_from_f8f6ef": 12.96
+    },
+    {
+      "file": "news-shot-06-generated.png",
+      "width": 941,
+      "height": 1672,
+      "aspect_ratio": 0.562799,
+      "aspect_error_percent_vs_9_16": 0.0532,
+      "top_band_sample_count": 560,
+      "top_band_mean_rgb": [
+        252.64,
+        245.35,
+        232.69
+      ],
+      "exact_f8f6ef_fraction": 0.0,
+      "mean_rgb_distance_from_f8f6ef": 9.6
+    },
+    {
+      "file": "news-shot-07-generated.png",
+      "width": 941,
+      "height": 1672,
+      "aspect_ratio": 0.562799,
+      "aspect_error_percent_vs_9_16": 0.0532,
+      "top_band_sample_count": 560,
+      "top_band_mean_rgb": [
+        243.76,
+        239.15,
+        229.46
+      ],
+      "exact_f8f6ef_fraction": 0.0,
+      "mean_rgb_distance_from_f8f6ef": 16.23
+    }
+  ],
+  "final_video": {
+    "file": "news-case-final.mp4",
+    "status": "inspected",
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "r_frame_rate": "20/1"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "41.020996",
+      "size": "3940412"
+    }
+  }
+}

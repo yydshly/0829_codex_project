@@ -1,0 +1,179 @@
+{
+  "title": "一束光打通地月信息高速路",
+  "mode": "news_prompt_plus_deterministic_text",
+  "generated_at": "2026-08-29",
+  "selected_as_of": "2026-08-29T15:30:00+08:00",
+  "upstream_commit": "dae2da391d58fdd42c7c4475742eb4c989cf53f2",
+  "news": {
+    "headline": "我国首次在轨验证地月双向高速激光通信能力",
+    "published_at": "2026-08-28",
+    "why_selected": "截至 2026-08-29，这是近 48 小时内同时具备权威信源、重大科技突破、公众关注度和强视觉隐喻空间的中文热点之一。‘万里穿针’、‘噪声中捞光子’与‘地月信息高速路’天然适合手绘短视频表达。",
+    "editorial_angle": "不只复述通信速率，而是解释这项突破为什么难、为什么重要，以及它如何改变未来探月任务的数据回传能力。",
+    "sources": [
+      {
+        "publisher": "中国科学院",
+        "title": "我国首次实现地月双向高速激光通信",
+        "published_at": "2026-08-27",
+        "url": "https://www.cas.cn/cm/202608/t20260827_5119119.shtml",
+        "accessed_at": "2026-08-29",
+        "supports": "超过40万公里、三项技术难点、1.25Mbps上行、100Mbps下行，以及8K月面图像约12秒的对比。"
+      },
+      {
+        "publisher": "新华网",
+        "title": "我国首次在轨验证地月双向高速激光通信能力",
+        "published_at": "2026-08-28",
+        "url": "https://www.xinhuanet.com/20260828/2846f43524b94d66bb78c7271d7e9466/c.html",
+        "accessed_at": "2026-08-29",
+        "supports": "首次在轨验证、牵头与协作单位、寥寥几个光子的弱信号，以及未来载人登月、月球科研站和深空探测用途。"
+      }
+    ],
+    "verified_facts": [
+      "试验在超过40万公里的地月距离建立双向激光链路。",
+      "这是我国首次在轨验证地月双向高速激光通信能力。",
+      "试验初步实现上行1.25Mbps、下行100Mbps。",
+      "主要难点包括运动中高精度瞄准、极弱光子信号探测和提高传输速度。",
+      "公开报道以8K月面图像为例：传统5Mbps微波链路约需4到5分钟，百Mbps激光通信约需12秒。"
+    ]
+  },
+  "source_script": "8月28日，中国首次在超过40万公里的地月距离，在轨验证双向高速激光通信。真正的难点，是让极细光束在运动中持续瞄准；微小误差，到月球附近就会偏出数公里。信号返回地面时，只剩几个光子，还要从月光、星光和城市灯光的噪声中捞出来。团队攻克跟踪、单光子探测和编码难题，实现上行1.25Mbps、下行100Mbps。一张8K月面图像，回传时间从四到五分钟，缩短到约12秒。这不只是月球网速更快，而是在为载人登月、月球科研站和深空探测铺路。未来深空竞争，不只比谁飞得远，也比谁能把数据更快、更稳地带回来。",
+  "estimated_duration_seconds": 41,
+  "method_note": "由 Codex 依据固定提交中的 SKILL.md 与 style-guide.md 编译，并用中国科学院、新华网公开报道核对事实。七张无文字关键帧由内置图像生成模型分别生成；最终参考成片由 FFmpeg 按每镜头自定义语义区域进行纸片装配和克制回弹，并叠加可切换的 MiniMax Speech 2.8 HD / Microsoft Huihui 中文 TTS、准确字幕和来源信息。实际音频提供方记录在 demo/assets/news-case-build.json。未调用 Flow 或其他视频生成模型。",
+  "production_boundary": "本案例已完成新闻核验、口播重写、七镜头生产包、七张实生成关键帧、中文配音、字幕时间线和 41 秒 H.264/AAC 参考成片。画面内容来自图像生成，运动来自确定性代码合成，因此它演示了这套 Skill 如何接入一条可复现的低成本成片链路，不代表原生图生视频模型的动态表现。",
+  "final_video": {
+    "asset": "assets/news-case-final.mp4",
+    "poster": "assets/news-case-poster.jpg",
+    "subtitles": "../media/news-case.srt",
+    "voiceover": "../media/news-case-voiceover.m4a",
+    "duration_seconds": 41.02,
+    "resolution": "1080x1920",
+    "video_codec": "H.264",
+    "audio_codec": "AAC",
+    "composition": "七张 AI 实生成关键帧 + FFmpeg 语义区域纸片装配 + 可切换中文 TTS + ASS 硬字幕",
+    "video_model_used": false
+  },
+  "shots": [
+    {
+      "id": "01",
+      "title": "地月光路",
+      "narration": "8月28日，中国首次在超过40万公里的地月距离，在轨验证双向高速激光通信。",
+      "duration_seconds": 6,
+      "motion_cuts": [620, 1100],
+      "metaphor": "地球与月球之间，一条细窄的钴蓝色光路像刚铺好的纸带桥被点亮，两端各有一座小型望远镜。",
+      "keyword": "地月光路",
+      "image_prompt": "Modern Q-version hand-drawn crayon illustration, vertical 9:16, on a solid warm-white canvas background with exact base color #F8F6EF and only extremely subtle low-contrast paper grain. Show a simple Earth paper circle at the lower left and a Moon paper circle at the upper right, connected by one very thin saturated cobalt blue laser ribbon like a newly opened bridge. Place one small generic telescope silhouette at each end, with a sunflower-yellow pulse moving in both directions and one vivid tomato red signal marker near the center. Use thick imperfect black hand-drawn marker and wax-crayon outlines, restrained Q-version proportions, and bold flat color blocks. Keep 3 large readable visual groups within about 65% of the frame width, preserve generous upper breathing room, and reserve the bottom 15% completely clear for subtitles. Leave a clean upper-left area for the deterministic Chinese keyword overlay ‘地月光路’; do not render any text, dates, numbers, national flags, institutional marks, logos or watermark. No photorealism, glossy lighting, gradient, complex star field or 3D.",
+      "video_prompt": "Create a 6-second vertical 9:16 tactile 10–12 fps paper stop-motion assembly from a completely blank #F8F6EF warm-white First Frame to the supplied completed Last Frame. Use a locked flat frontal camera. Treat every element as a rigid flat paper cutout. The Earth and Moon circles slide into opposite corners, the two telescope silhouettes pop into place, and one thin blue paper laser ribbon draws steadily between them. A yellow pulse travels once in each direction while the red signal marker makes one restrained settling bounce. Preserve the exact supplied final composition, crayon texture and three-color palette, and hold the exact final illustration for the last 0.8 seconds. Keep the bottom subtitle zone empty and add no text, numbers, flags or logos. No camera drift, zoom, parallax, liquid morphing, extra celestial bodies or watermark. No audio.",
+      "entity_note": "日期、‘超过40万公里’和‘首次’都属于事实层，应由旁白与字幕准确呈现；画面只表达双向链路，不绘制数字或机构标志。",
+      "fact_refs": [0, 1],
+      "generated_asset": "assets/news-shot-01-generated.png",
+      "generated_asset_note": "按该镜头无文字静帧 Prompt 实生成；中文关键词和事实字幕由代码叠加。"
+    },
+    {
+      "id": "02",
+      "title": "万里穿针",
+      "narration": "真正的难点，是让极细光束在运动中持续瞄准；微小误差，到月球附近就会偏出数公里。",
+      "duration_seconds": 6,
+      "motion_cuts": [650, 1100],
+      "metaphor": "一位克制比例的科研人员转动巨大望远镜，把一束细蓝光精准穿过月球旁高速移动的针孔；旁边一条错误红光偏离目标。",
+      "keyword": "万里穿针",
+      "image_prompt": "Modern Q-version hand-drawn crayon illustration, vertical 9:16, on a solid warm-white canvas background with exact base color #F8F6EF and extremely subtle low-contrast paper grain. At the lower left, one restrained Q-version researcher operates a large simple ground telescope. A hair-thin saturated cobalt blue laser line crosses the frame and passes precisely through a sunflower-yellow needle eye mounted beside a small Moon paper circle at the upper right. Add one short vivid tomato red dashed error ray that misses the needle eye by a visible distance, making the precision contrast instantly readable. Use thick imperfect black hand-drawn marker and wax-crayon outlines for the paper objects, bold flat color blocks, and no realistic space rendering. Keep 3 large readable visual groups within roughly 65% of the frame width, preserve generous upper breathing room, and reserve the bottom 15% completely clear for subtitles. Leave a clean upper-left area for the deterministic Chinese keyword overlay ‘万里穿针’; do not render any text, numbers, logos, flags or watermark. No photorealism, glossy light, dense stars, gradient, cyber HUD or 3D.",
+      "video_prompt": "Create a 6-second vertical 9:16 tactile 10–12 fps paper stop-motion assembly from a completely blank #F8F6EF warm-white First Frame to the supplied completed Last Frame. Use a locked flat frontal camera. Treat the researcher, telescope, Moon, needle eye and rays as rigid flat paper cutout elements. The researcher and telescope pop into place, the yellow needle eye slides near the Moon, then the thin blue ray rotates once on a hinge until it passes through the moving needle eye. A short red dashed error ray appears, misses, and settles below it. Preserve the supplied shapes, restrained proportions, crayon texture and palette; settle into and hold the exact final illustration for the last 0.8 seconds. Keep the title and subtitle areas empty and add no text, digits or marks. No camera drift, zoom, parallax, face morphing, lip sync, extra people, logos or watermark. No audio.",
+      "entity_note": "‘万里穿针’是报道采用的解释性比喻，不是试验装置的真实外形；‘数公里偏差’保留在字幕，画面用一条偏离光线表达，避免虚构具体数值。",
+      "fact_refs": [0, 1],
+      "generated_asset": "assets/news-shot-02-generated.png",
+      "generated_asset_note": "按该镜头无文字静帧 Prompt 实生成；中文关键词和事实字幕由代码叠加。"
+    },
+    {
+      "id": "03",
+      "title": "噪声捞光",
+      "narration": "信号返回地面时，只剩几个光子，还要从月光、星光和城市灯光的噪声中捞出来。",
+      "duration_seconds": 6,
+      "motion_cuts": [650, 1150],
+      "metaphor": "巨大的钴蓝色滤网从红黄噪声海洋里捞出三颗微小光点，地面望远镜在一旁接住它们。",
+      "keyword": "噪声捞光",
+      "image_prompt": "Modern Q-version hand-drawn crayon illustration, vertical 9:16, on a solid warm-white canvas background with exact base color #F8F6EF and only extremely subtle low-contrast paper grain. In the center, a large simple saturated cobalt blue sieve lifts three tiny sunflower-yellow photon dots from a loose field of vivid tomato red and muted yellow noise scribbles representing moonlight, starlight and city light. At the lower right, one generic ground telescope receives the separated photon dots, while one restrained Q-version researcher watches from the left. Use thick imperfect black hand-drawn marker and wax-crayon outlines, bold flat color blocks and tactile paper edges. Keep 3 large readable visual groups within about 65% of the frame width, leave generous space above, and reserve the bottom 15% completely clear for subtitles. Leave a clean upper-right area for the deterministic Chinese keyword overlay ‘噪声捞光’; do not render any text, numbers, logos, institutional marks or watermark. No photorealism, realistic city, dense star field, gradient, glow effects or 3D.",
+      "video_prompt": "Create a 6-second vertical 9:16 tactile 10–12 fps paper stop-motion assembly from a completely blank #F8F6EF warm-white First Frame to the supplied completed Last Frame. Use a locked flat frontal camera. Treat all people, telescope, sieve, photon dots and noise scribbles as rigid flat paper cutout pieces. The red and yellow noise marks scatter into the center, the blue sieve slides upward through them, and exactly three yellow photon dots remain above the sieve before moving once toward the telescope. The researcher makes one small hinge-like nod. Preserve the exact supplied final composition, crayon texture and palette and hold the final illustration for the last 0.8 seconds. Keep the title and subtitle areas empty and add no text or numbers. No camera drift, zoom, parallax, particle storm, face morphing, extra characters, logos or watermark. No audio.",
+      "entity_note": "‘三颗光点’只是让‘寥寥几个光子’在手机画面上可读的视觉符号，不代表公开资料给出的精确光子计数；不能把画面数量写进事实字幕。",
+      "fact_refs": [1],
+      "generated_asset": "assets/news-shot-03-generated.png",
+      "generated_asset_note": "按该镜头无文字静帧 Prompt 实生成；中文关键词和事实字幕由代码叠加。"
+    },
+    {
+      "id": "04",
+      "title": "三关打通",
+      "narration": "团队攻克跟踪、单光子探测和编码难题，实现上行1.25兆、下行100兆。",
+      "duration_seconds": 6,
+      "motion_cuts": [500, 900, 1350],
+      "metaphor": "瞄准镜、单光子漏斗和编码齿轮组成三座纸门，一条蓝色数据带依次穿过并分成上下行两条箭头。",
+      "keyword": "三关打通",
+      "image_prompt": "Modern Q-version hand-drawn crayon illustration, vertical 9:16, on a solid warm-white canvas background with exact base color #F8F6EF and extremely subtle low-contrast paper grain. Arrange three large paper mechanisms in one clear diagonal sequence: a cobalt blue target reticle for capture and tracking, a sunflower-yellow funnel catching one tiny photon dot for single-photon detection, and a vivid tomato red coding gear with simple blank notches. One blue data ribbon passes through all three and splits into a thin upward arrow and a much wider downward arrow without labels or numbers. Use thick imperfect black hand-drawn marker and wax-crayon outlines, bold flat colors and tactile cut-paper edges. Keep 4 large readable visual groups within roughly 68% of the frame width, preserve upper breathing room, and reserve the bottom 15% clear for subtitles. Leave a clean upper-left area for the deterministic Chinese keyword overlay ‘三关打通’; do not render any text, digits, logos or watermark. No photorealism, circuitry, cyber HUD, gradient or 3D.",
+      "video_prompt": "Create a 6-second vertical 9:16 tactile 10–12 fps paper stop-motion assembly from a completely blank #F8F6EF warm-white First Frame to the supplied completed Last Frame. Use a locked flat frontal camera. Treat the reticle, funnel, photon, gear and ribbon as rigid flat paper cutout elements. The three mechanisms pop into place one after another, the blue data ribbon threads through each gate, and the red coding gear turns by one small fixed step. The ribbon then splits into one narrow upward arrow and one visibly wider downward arrow. Preserve the exact final shapes, positions, crayon texture and palette; hold the exact final illustration for the last 0.8 seconds. Keep all text regions empty and add no labels, numbers or marks. No camera drift, zoom, parallax, liquid motion, extra mechanisms, logos or watermark. No audio.",
+      "entity_note": "1.25Mbps 与 100Mbps 是精确测试速率，必须由字幕或确定性数据层呈现；画面只以不同箭头宽度表达上下行差异，不能让模型绘制数字。",
+      "fact_refs": [0, 1],
+      "generated_asset": "assets/news-shot-04-generated.png",
+      "generated_asset_note": "按该镜头无文字静帧 Prompt 实生成；中文关键词和事实字幕由代码叠加。"
+    },
+    {
+      "id": "05",
+      "title": "十二秒回传",
+      "narration": "一张8K月面图像，回传时间从四到五分钟，缩短到约十二秒。",
+      "duration_seconds": 6,
+      "motion_cuts": [520, 980, 1400],
+      "metaphor": "同一张月面照片沿两条跑道回传：旧跑道拖着长日历，新激光跑道用一只短秒表迅速抵达地球。",
+      "keyword": "十二秒回传",
+      "image_prompt": "Modern Q-version hand-drawn crayon illustration, vertical 9:16, on a solid warm-white canvas background with exact base color #F8F6EF and only extremely subtle low-contrast paper grain. Show one blank square Moon-photo paper tile at the top splitting onto two simple routes toward an Earth paper circle below. The left route is a long muted tomato red coiled microwave path dragging a stack of blank calendar sheets; the right route is a short straight saturated cobalt blue laser path carrying a sunflower-yellow stopwatch with a fast motion tick. Use thick imperfect black hand-drawn marker and wax-crayon outlines, bold flat colors and restrained Q-version icon proportions. Keep 3 large readable visual groups within about 65% of the frame width, preserve generous upper space, and reserve the bottom 15% completely clear for subtitles. Leave a clean upper-right area for the deterministic Chinese keyword overlay ‘十二秒回传’; do not render any text, digits, clock numerals, logos or watermark. No photorealism, realistic lunar photo, gradient, glow, speed blur or 3D.",
+      "video_prompt": "Create a 6-second vertical 9:16 tactile 10–12 fps paper stop-motion assembly from a completely blank #F8F6EF warm-white First Frame to the supplied completed Last Frame. Use a locked flat frontal camera. Treat the Moon-photo tile, Earth, routes, calendar and stopwatch as rigid flat paper cutout elements. The blank Moon-photo tile appears, the long red route curls slowly toward Earth while blank calendar sheets stack behind it, then the short blue route draws in one quick step and the yellow stopwatch slides to Earth first. Preserve the exact supplied final composition, crayon texture and palette and hold the exact final illustration for the last 0.8 seconds. Keep title and subtitle zones empty and add no numbers or text. No camera drift, zoom, parallax, realistic orbital motion, extra objects, logos or watermark. No audio.",
+      "entity_note": "8K、5Mbps、4到5分钟和12秒均为精确比较，只能放在旁白、字幕或代码数据层；跑道长度是解释性比喻，不能替代测试条件说明。",
+      "fact_refs": [0],
+      "generated_asset": "assets/news-shot-05-generated.png",
+      "generated_asset_note": "按该镜头无文字静帧 Prompt 实生成；中文关键词和事实字幕由代码叠加。"
+    },
+    {
+      "id": "06",
+      "title": "月球宽带",
+      "narration": "这不只是月球网速更快，而是在为载人登月、月球科研站和深空探测铺路。",
+      "duration_seconds": 6,
+      "motion_cuts": [760, 1320],
+      "metaphor": "月面科研站把高清照片、实验数据和航天员通信装进三辆纸片小车，经蓝色光路驶回地球。",
+      "keyword": "月球宽带",
+      "image_prompt": "Modern Q-version hand-drawn crayon illustration, vertical 9:16, on a solid warm-white canvas background with exact base color #F8F6EF and extremely subtle low-contrast paper grain. Place a simple generic Moon research station near the upper center, with one restrained Q-version astronaut paper figure beside it. Three small paper data carts carry a blank image tile, a simple waveform icon and a sunflower-yellow sample box along one cobalt blue laser road toward a small Earth circle at the lower left. Add one tomato red deep-space arrow continuing beyond the Moon to imply future exploration. Use thick imperfect black hand-drawn marker and wax-crayon outlines and bold flat yellow, blue and red blocks. Keep 4 readable visual groups within roughly 68% of frame width, preserve upper breathing room, and reserve the bottom 15% completely clear for subtitles. Leave a clean upper-left area for the deterministic Chinese keyword overlay ‘月球宽带’; do not render any text, flags, agency marks, mission patches, numbers, logos or watermark. No photorealism, realistic spacesuit, complex base architecture, gradient, dense stars or 3D.",
+      "video_prompt": "Create a 6-second vertical 9:16 tactile 10–12 fps paper stop-motion assembly from a completely blank #F8F6EF warm-white First Frame to the supplied completed Last Frame. Use a locked flat frontal camera. Treat the research station, astronaut, data carts, Earth and arrows as rigid flat paper cutout elements. The station and astronaut pop into place, the blue laser road draws toward Earth, and the three data carts make one short staggered slide along it. The red deep-space arrow unfolds once behind the Moon. Preserve the supplied final shapes, restrained proportions, crayon texture and palette and hold the exact final illustration for the last 0.8 seconds. Keep all text areas empty and add no words, flags or logos. No camera drift, zoom, parallax, walking cycle, face morphing, extra vehicles or watermark. No audio.",
+      "entity_note": "载人登月、月球科研站和深空探测是公开报道中的未来用途，不等于这些系统已经建成；画面必须保持‘能力铺路’而非‘项目已落地’的语气。",
+      "fact_refs": [0, 1],
+      "generated_asset": "assets/news-shot-06-generated.png",
+      "generated_asset_note": "按该镜头无文字静帧 Prompt 实生成；中文关键词和事实字幕由代码叠加。"
+    },
+    {
+      "id": "07",
+      "title": "数据带回来",
+      "narration": "未来深空竞争，不只比谁飞得远，也比谁能把数据更快、更稳地带回来。",
+      "duration_seconds": 5,
+      "motion_cuts": [700, 1320],
+      "metaphor": "两枚纸火箭飞向远方，但只有一枚同时牵着稳定蓝色数据卷轴返回地球，强调探索价值最终由数据闭环决定。",
+      "keyword": "数据带回来",
+      "image_prompt": "Modern Q-version hand-drawn crayon illustration, vertical 9:16, on a solid warm-white canvas background with exact base color #F8F6EF and only extremely subtle low-contrast paper grain. Show two generic paper rockets near the upper half moving toward a simple Moon arc. One vivid tomato red rocket has only a long outbound trail, while one sunflower-yellow rocket also carries a stable saturated cobalt blue data ribbon that loops back into a small Earth paper circle below. At the Earth end, one restrained Q-version researcher receives a neat blank data scroll. Use thick imperfect black hand-drawn marker and wax-crayon outlines, bold flat colors and tactile paper edges. Keep 3 large readable visual groups within about 65% of the frame width, preserve generous upper breathing room, and reserve the bottom 15% completely clear for subtitles. Leave a clean upper-right area for the deterministic Chinese keyword overlay ‘数据带回来’; do not render any text, numbers, national flags, company or agency logos, mission marks or watermark. No photorealism, detailed spacecraft, gradient, dense stars, cinematic lighting or 3D.",
+      "video_prompt": "Create a 5-second vertical 9:16 tactile 10–12 fps paper stop-motion assembly from a completely blank #F8F6EF warm-white First Frame to the supplied completed Last Frame. Use a locked flat frontal camera. Treat both rockets, the Moon arc, Earth, researcher and data ribbon as rigid flat paper cutout elements. Both rockets make one short upward slide, then only the yellow rocket unfurls a blue paper data ribbon that curves back to Earth. The researcher receives the blank scroll with one hinge-like hand motion. Preserve the exact supplied final composition, crayon texture and palette and hold the exact final illustration for the last 0.8 seconds. Keep the title and subtitle zones empty and add no text, flags or logos. No camera drift, zoom, parallax, rocket exhaust particles, face morphing, extra spacecraft or watermark. No audio.",
+      "entity_note": "‘深空竞争’是本演示的编辑性总结，不是信源的直接事实结论；页面应标为观点层，避免把它伪装成科研机构原话。",
+      "fact_refs": [],
+      "generated_asset": "assets/news-shot-07-generated.png",
+      "generated_asset_note": "按该镜头无文字静帧 Prompt 实生成；中文关键词和事实字幕由代码叠加。"
+    }
+  ],
+  "value": {
+    "for_creator": "把追热点时最耗时的‘读资料—找角度—拆分镜头—写两套 Prompt’压缩成一份结构化生产包，同时强制标出哪些内容不能交给概率模型自由发挥。",
+    "for_team": "让编辑、设计、视频生成和后期围绕同一镜头合同协作；同一套数据可以进入人工工具，也可以进入后续自动化流水线。",
+    "for_brand": "沉淀可复用的栏目语气、隐喻库、角色和色板，使热点产出不再每次从零开始，并降低不同操作者造成的风格漂移。"
+  },
+  "scenarios": [
+    {"name": "科技与财经热点解读", "fit": "high", "reason": "抽象概念、数字关系和因果链适合用简洁视觉隐喻解释。"},
+    {"name": "知识科普与课程短视频", "fit": "high", "reason": "可把一个概念拆成连续4–6秒教学镜头，并保持统一画风。"},
+    {"name": "品牌观点与创始人IP", "fit": "high", "reason": "可以固化角色、配色、语气和固定结尾，形成栏目辨识度。"},
+    {"name": "实时灾难、战争或未经核实爆料", "fit": "low", "reason": "事实快速变化且误导成本高，生成隐喻容易掩盖不确定性，必须加强人工审核。"}
+  ],
+  "extensions": [
+    {"priority": "P0", "name": "新闻事实层与来源 Schema", "outcome": "把来源、发布时间、事实、观点和视觉隐喻分字段存储，支持更新与纠错。"},
+    {"priority": "P0", "name": "确定性文字与数据图层", "outcome": "数字、机构名、字幕和单位由代码合成，生成模型只负责画面。"},
+    {"priority": "P1", "name": "热点监测与选题评分", "outcome": "按新鲜度、可信度、受众相关性和视觉化潜力筛选候选新闻。"},
+    {"priority": "P1", "name": "多模型适配与质量评测", "outcome": "为不同生图/视频模型调整语法，并自动检测色板、构图、文字和末帧漂移。"},
+    {"priority": "P2", "name": "栏目资产与生产编排", "outcome": "加入角色Bible、领域隐喻库、TTS、字幕、时间线、重试、成本和版本追踪。"}
+  ]
+}

@@ -1,0 +1,6 @@
+[submodule "projects/hand-drawn-video-prompts-study/upstream"]
+	path = projects/hand-drawn-video-prompts-study/upstream
+	url = https://github.com/kaomei/hand-drawn-video-prompts.git
+[submodule "projects/vox-director-study/upstream"]
+	path = projects/vox-director-study/upstream
+	url = https://github.com/Alisa0808/vox-director.git

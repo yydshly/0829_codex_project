@@ -19,18 +19,38 @@
       "updated": "2026-08-29"
     },
     {
-      "id": "gofilm-source-summary",
-      "title": "GoFilm 来源机制简析",
-      "summary": "简要归档 GoFilm 的第三方影视采集 API、主附源聚合与部署机制；核心问题已在 Moovie 研究中覆盖，后续按需参考。",
+      "id": "hand-drawn-video-prompts-study",
+      "title": "Hand-Drawn Video Prompts 能力研究",
+      "summary": "该 Skill 能否稳定地把中文口播转为可执行、风格一致且风险分层的竖屏短视频提示词，其能力边界与扩展价值是什么？",
+      "status": "completed",
+      "path": "projects/hand-drawn-video-prompts-study",
+      "source_url": "https://github.com/kaomei/hand-drawn-video-prompts",
+      "demo_url": "https://yydshly.github.io/0829_codex_project/projects/hand-drawn-video-prompts-study/",
+      "tags": [
+        "agent-skill",
+        "ai-video",
+        "prompt-engineering",
+        "research"
+      ],
+      "created": "2026-08-29",
+      "updated": "2026-08-29"
+    },
+    {
+      "id": "openreel-video-capability-summary",
+      "title": "OpenReel Video 能力与复用边界总结",
+      "summary": "OpenReel 是本地优先的浏览器视频剪辑器，并扩展了桌面原生编码与 Agent/MCP 控制；当前安装和验证成本较高，先保存架构理解与按需复用入口。",
       "status": "archived",
-      "path": "projects/gofilm-source-summary",
-      "source_url": "https://github.com/ProudMuBai/GoFilm",
+      "path": "projects/openreel-video-capability-summary",
+      "source_url": "https://github.com/Augani/openreel-video",
       "demo_url": "",
       "tags": [
-        "applecms",
+        "agent",
         "archived",
-        "golang",
-        "video-aggregation"
+        "browser-video",
+        "mcp",
+        "video-editor",
+        "webcodecs",
+        "webgpu"
       ],
       "created": "2026-08-29",
       "updated": "2026-08-29"
@@ -67,6 +87,40 @@
         "archived",
         "novel-adaptation",
         "workflow"
+      ],
+      "created": "2026-08-29",
+      "updated": "2026-08-29"
+    },
+    {
+      "id": "vox-director-study",
+      "title": "Vox Director 端到端视频能力研究",
+      "summary": "Vox Director 如何把主题、口播视频或单张照片编排为纸张拼贴成片，它比 Prompt Skill 多了什么，工程边界与采用价值是什么？",
+      "status": "completed",
+      "path": "projects/vox-director-study",
+      "source_url": "https://github.com/Alisa0808/vox-director",
+      "demo_url": "https://yydshly.github.io/0829_codex_project/projects/vox-director-study/",
+      "tags": [
+        "agent-skill",
+        "ai-video",
+        "ffmpeg",
+        "research"
+      ],
+      "created": "2026-08-29",
+      "updated": "2026-08-29"
+    },
+    {
+      "id": "gofilm-source-summary",
+      "title": "GoFilm 来源机制简析",
+      "summary": "简要归档 GoFilm 的第三方影视采集 API、主附源聚合与部署机制；核心问题已在 Moovie 研究中覆盖，后续按需参考。",
+      "status": "archived",
+      "path": "projects/gofilm-source-summary",
+      "source_url": "https://github.com/ProudMuBai/GoFilm",
+      "demo_url": "",
+      "tags": [
+        "applecms",
+        "archived",
+        "golang",
+        "video-aggregation"
       ],
       "created": "2026-08-29",
       "updated": "2026-08-29"

@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "project": "vox-director-study",
+    "generated_at": "2026-08-29",
+    "upstream_url": "https://github.com/Alisa0808/vox-director",
+    "upstream_commit": "668ec3946fe0139bc985313b15c1a300fca42f94",
+    "upstream_commit_date": "2026-08-11T23:39:37+08:00",
+    "license": "MIT"
+  },
+  "verdict": {
+    "label": "可运行的端到端 Agent Skill",
+    "headline": "它交付的不只是 Prompt，而是一条从分镜到 final.mp4 的生产链。",
+    "summary": "宿主 Agent 负责创意判断，Atlas Cloud 负责生成式媒体，Python 与 ffmpeg 负责状态、时间线、字幕和混音。仓库已经越过纯 SOP 阶段，但仍缺测试、事实溯源、跨平台与生产治理。",
+    "maturity": "可运行原型 / 实验性生产套件"
+  },
+  "comparison": {
+    "hand_drawn": {
+      "name": "Hand-Drawn Video Prompts",
+      "role": "Prompt 编译器",
+      "input": "已经写好的中文口播",
+      "output": "分镜、视觉隐喻、静帧 Prompt、运动 Prompt、风险提示",
+      "stops_at": "把制作说明交给人或外部工具"
+    },
+    "vox_director": {
+      "name": "Vox Director",
+      "role": "导演 + 生成编排 + 后期",
+      "input": "主题、口播视频或单张照片",
+      "output": "关键帧、视频片段、配音、音乐、字幕和 final.mp4",
+      "continues_with": "主动调用媒体模型并用 ffmpeg 合成"
+    }
+  },
+  "modes": [
+    {
+      "id": "broll",
+      "short": "B",
+      "name": "主题成片",
+      "input": "一句主题，例如「用 30 秒讲清楚唐代为什么开放」",
+      "promise": "从零写叙事节拍，生成整套拼贴 B-roll、旁白、音乐与字幕。",
+      "output": "一支由 AI 拼贴海报组成的解释视频",
+      "evidence": "仓库提供 4 支可播放成片与 4 份 beats.json，其中唐代、货币、足球、硅谷视频随仓库提交。",
+      "boundary": "脚本事实由宿主 Agent 生成；仓库没有内建检索、引文或事实核验层。",
+      "stages": [
+        {"label": "选叙事弧", "script": "Agent + beat-layer.md", "kind": "creative", "detail": "从 timeline、how_it_works、AIDA 等 14 种结构中选择。"},
+        {"label": "风格试片", "script": "style_bakeoff.py", "kind": "human", "detail": "同一代表镜头生成 3–4 种主题，用户按画面选择。"},
+        {"label": "关键帧", "script": "keyframes.py", "kind": "generative", "detail": "为每个 shot 生成带纸边、阴影和标题的拼贴海报。"},
+        {"label": "让海报动", "script": "clips.py", "kind": "generative", "detail": "一条运镜轴加丰富元素运动，并锁定文字与平面布局。"},
+        {"label": "声音", "script": "audio.py", "kind": "generative", "detail": "逐 beat 旁白与一条完整背景音乐；可选参考音频克隆。"},
+        {"label": "合成", "script": "assemble.py", "kind": "deterministic", "detail": "ffmpeg 归一镜头、对齐旁白、压低音乐、叠字幕和水印。"}
+      ]
+    },
+    {
+      "id": "aroll",
+      "short": "A",
+      "name": "真人口播改造",
+      "input": "一段已经录好的 talking-head 视频",
+      "promise": "保留原始表演与声音，把人物轮廓和周围世界重绘成拼贴视觉。",
+      "output": "沿用真人原声的拼贴风格口播片",
+      "evidence": "实现包含 ASR 分段、视频编辑模型主备路由，以及原始音频重新混入；仓库未捆绑 A-roll 成片样例。",
+      "boundary": "重新混入原声可保证声音来源和时间范围，但生成后嘴部是否逐帧同步仍需视觉指标验证。",
+      "stages": [
+        {"label": "ASR 分段", "script": "asr_beats.py", "kind": "deterministic", "detail": "按标点和停顿切成不超过约 9.5 秒的 beat。"},
+        {"label": "人工复核", "script": "beats.json approval", "kind": "human", "detail": "确认切点、主题和每段需要出现的贴纸内容。"},
+        {"label": "视频改造", "script": "aroll_clips.py", "kind": "generative", "detail": "主模型失败后按段切换备用模型，不重做已成功片段。"},
+        {"label": "原声回填", "script": "aroll_assemble.py", "kind": "deterministic", "detail": "丢弃模型音频，把原视频对应片段的声音重新混入。"}
+      ]
+    },
+    {
+      "id": "croll",
+      "short": "C",
+      "name": "单图锚定",
+      "input": "一张人物自拍、产品照或包装图",
+      "promise": "把真实主体作为摄影贴纸锁定，让不同 beat 的拼贴世界围绕它生成。",
+      "output": "主体连续出现的产品或个人 IP 拼贴视频",
+      "evidence": "实现包含图片编辑、脸部/服装/标签冻结提示，以及可选声音克隆；仓库未捆绑 C-roll 成片样例。",
+      "boundary": "所谓 pixel-faithful 是提示词约束，不是像素比较保证；产品标签与人脸仍应自动检测和人工复核。",
+      "stages": [
+        {"label": "主体分类", "script": "croll_keyframes.py", "kind": "deterministic", "detail": "区分 portrait 与 product，生成不同的冻结约束。"},
+        {"label": "图片编辑", "script": "croll_keyframes.py", "kind": "generative", "detail": "主体照片作为参考，场景与背景按主题生成。"},
+        {"label": "锚点保护", "script": "anchor_freeze", "kind": "creative", "detail": "动作提示锁定脸、衣服或标签，减少视频阶段重绘。"},
+        {"label": "标准后半程", "script": "clips.py → audio.py → assemble.py", "kind": "mixed", "detail": "复用 B-roll 的运动、声音和合成管线。"}
+      ]
+    }
+  ],
+  "samples": [
+    {
+      "id": "tang",
+      "title": "中国文明演进 / 唐代",
+      "subtitle": "16:9 · 29.98 秒 · 3 beats / 6 shots",
+      "poster": "assets/tang.jpg",
+      "video": "https://raw.githubusercontent.com/Alisa0808/vox-director/668ec3946fe0139bc985313b15c1a300fca42f94/assets/showcase-tang.mp4",
+      "source_file": "assets/showcase-tang.mp4",
+      "example_file": "examples/tang-30s.beats.json",
+      "proof": "仓库随附视频 + 完整 beats.json",
+      "orientation": "landscape"
+    },
+    {
+      "id": "money",
+      "title": "货币简史",
+      "subtitle": "9:16 · 58.93 秒 · 6 beats / 12 shots",
+      "poster": "assets/money.jpg",
+      "video": "https://raw.githubusercontent.com/Alisa0808/vox-director/668ec3946fe0139bc985313b15c1a300fca42f94/assets/showcase-money.mp4",
+      "source_file": "assets/showcase-money.mp4",
+      "example_file": "examples/money-60s-9x16-english.beats.json",
+      "proof": "仓库随附视频 + 完整生成 URL 与 Prompt",
+      "orientation": "portrait"
+    },
+    {
+      "id": "football",
+      "title": "足球史",
+      "subtitle": "16:9 · 62.88 秒",
+      "poster": "assets/football.jpg",
+      "video": "https://raw.githubusercontent.com/Alisa0808/vox-director/668ec3946fe0139bc985313b15c1a300fca42f94/assets/showcase-football.mp4",
+      "source_file": "assets/showcase-football.mp4",
+      "example_file": "examples/ronaldo-9x16-kling.beats.json",
+      "proof": "仓库随附视频；另有真人体育主题 Kling 示例",
+      "orientation": "landscape"
+    },
+    {
+      "id": "silicon-valley",
+      "title": "硅谷史",
+      "subtitle": "16:9 · 59.11 秒",
+      "poster": "assets/silicon-valley.jpg",
+      "video": "https://raw.githubusercontent.com/Alisa0808/vox-director/668ec3946fe0139bc985313b15c1a300fca42f94/assets/showcase-silicon-valley.mp4",
+      "source_file": "assets/showcase-silicon-valley.mp4",
+      "example_file": "",
+      "proof": "仓库随附视频；未提供对应 beats.json",
+      "orientation": "landscape"
+    },
+    {
+      "id": "mexican",
+      "title": "墨西哥街头美食",
+      "subtitle": "README 展示项 · 仓库只有缩略图",
+      "poster": "assets/mexican.jpg",
+      "video": "",
+      "source_file": "assets/thumbs/mexican.jpg",
+      "example_file": "",
+      "proof": "仅缩略图；不能把它计作仓库内可复现视频",
+      "orientation": "portrait"
+    }
+  ],
+  "repository": {
+    "commit_count": 29,
+    "file_count": 47,
+    "python_files": 18,
+    "markdown_files": 10,
+    "bundled_tests": 0,
+    "bundled_videos": 4,
+    "bundled_video_seconds": 210.9,
+    "beats_examples": 4,
+    "provider_implementations": 1
+  },
+  "scenarios": {
+    "fit": [
+      {"name": "知识与历史解释", "why": "时间线、误区纠正和 how-it-works 结构可直接映射到短片。"},
+      {"name": "品牌和产品故事", "why": "主题试片、产品照片锚定和固定旁白适合形成栏目视觉。"},
+      {"name": "真人口播包装", "why": "已经有观点和表演，只需要用拼贴背景提升信息密度。"},
+      {"name": "低实拍素材的 B-roll", "why": "抽象概念可被拆成海报，适合快速补充剪辑素材。"}
+    ],
+    "avoid": [
+      {"name": "精确 UI 与数据图表", "why": "生成模型会改字、改数字或重排界面。"},
+      {"name": "无审核的热点新闻", "why": "当前没有信源、事实与更正机制。"},
+      {"name": "复杂连续表演", "why": "分段生成难以保证长程人物与动作连续。"},
+      {"name": "严格 SLA 批量生产", "why": "缺测试、预算治理、任务队列和质量阈值。"}
+    ]
+  },
+  "extensions": [
+    {"priority": "P0", "name": "事实与来源 Schema", "value": "让每个 beat 区分来源事实、编辑观点和视觉隐喻，补上知识内容最关键的可信度层。"},
+    {"priority": "P0", "name": "确定性标题与 OCR", "value": "模型只画无文字底图，中文、数字、Logo 在后期叠加并自动核对。"},
+    {"priority": "P0", "name": "Windows 与配置化", "value": "移除 /usr/bin/curl 和 python3 假设，为路径、模型和输出尺寸加校验。"},
+    {"priority": "P0", "name": "生成证据账本", "value": "保存 prediction ID、模型版本、参数、耗时、成本、失败原因和最终 take。"},
+    {"priority": "P1", "name": "多 Provider 适配", "value": "把 Atlas Cloud 从唯一实现变成可替换后端，并按任务选择不同模型。"},
+    {"priority": "P1", "name": "自动质量评测", "value": "检查 OCR、人物相似度、标签保真、闪烁、黑帧、音量和口型偏差。"},
+    {"priority": "P1", "name": "断点与预算编排", "value": "增加缓存、幂等键、预算上限、局部重跑和失败队列。"},
+    {"priority": "P2", "name": "可视化 beats 编辑器", "value": "在时间线上选择风格、替换单镜头、修字幕和对比重生成结果。"}
+  ],
+  "meaning": {
+    "headline": "它是 Research Lab 从“Prompt 研究”走向“Agent 媒体系统研究”的桥。",
+    "points": [
+      "它补齐了上一个 Hand-Drawn 研究缺失的模型调用、异步轮询、TTS、音乐、时间线和成片层。",
+      "它提供了可复用的中间协议 beats.json，适合成为不同视频 Skill 的统一比较单位。",
+      "真正值得吸收的是生成式媒体与确定性后期的分工，而不是固定模仿某一种拼贴风格。",
+      "推荐固定版本做对照实验并借鉴架构；在补齐跨平台、事实层、质量门和成本证据前，不直接作为生产依赖。"
+    ],
+    "recommendation": "研究与 Fork 价值高；直接生产采用需先工程化。"
+  },
+  "local_environment": [
+    {"item": "Python 3.10 / Pillow", "status": "ready"},
+    {"item": "ffmpeg / ffprobe", "status": "ready"},
+    {"item": "Windows curl.exe", "status": "ready"},
+    {"item": "ATLASCLOUD_API_KEY", "status": "missing"},
+    {"item": "python3 命令", "status": "missing"},
+    {"item": "/usr/bin/curl", "status": "incompatible"}
+  ],
+  "risks": [
+    "Provider 抽象存在，但当前只有 Atlas Cloud 一个实现。",
+    "Skill 要求执行前查询实时模型列表，脚本客户端没有自动完成这一步。",
+    "任务卡住或失败会重新提交，可能创建新的计费任务。",
+    "B-roll Schema 声称支持 3:4，但 assemble.py 的 RES 表没有 3:4。",
+    "标题烘焙在概率性图片中，没有 OCR 或像素级文字校验。",
+    "A-roll 的原声回填不等于生成画面已经通过口型同步测量。",
+    "代码、Skill 和样例受 MIT 许可；人物、声音、Logo、外部模型与生成素材权利需要单独确认。"
+  ]
+}

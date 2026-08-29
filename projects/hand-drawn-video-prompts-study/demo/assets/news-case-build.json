@@ -1,0 +1,13 @@
+{
+    "tts_provider":  "MiniMax",
+    "semantic_region_layers":  true,
+    "semantic_object_layers":  false,
+    "video_model_used":  false,
+    "duration_seconds":  41.021,
+    "voice":  "Chinese (Mandarin)_News_Anchor",
+    "built_at":  "2026-08-29T19:46:34.0255170+08:00",
+    "model":  "speech-2.8-hd",
+    "motion_profile":  "semantic_region_reveal",
+    "tts_label":  "MiniMax Speech 2.8 HD",
+    "video_motion":  "FFmpeg semantic-region paper assembly with restrained settle"
+}

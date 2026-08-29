@@ -1,0 +1,270 @@
+{
+  "generated_at": "2026-08-29",
+  "summary": {
+    "contract_checks": 25,
+    "contract_failures": 0,
+    "boundary_observations": 5,
+    "videos_inspected": 4,
+    "beats_examples_inspected": 4
+  },
+  "repository": {
+    "commit": "668ec3946fe0139bc985313b15c1a300fca42f94",
+    "commit_count": 29,
+    "file_count": 47,
+    "file_types": {
+      ".jpg": 5,
+      ".json": 6,
+      ".md": 10,
+      ".mp4": 4,
+      ".py": 18,
+      ".skill": 1,
+      ".txt": 1,
+      "[none]": 2
+    },
+    "python_files": 18,
+    "markdown_files": 10,
+    "bundled_test_paths": 0
+  },
+  "checks": [
+    {
+      "id": "fixed-upstream-commit",
+      "pass": true,
+      "evidence": "668ec3946fe0139bc985313b15c1a300fca42f94"
+    },
+    {
+      "id": "canonical-data-commit",
+      "pass": true,
+      "evidence": "668ec3946fe0139bc985313b15c1a300fca42f94"
+    },
+    {
+      "id": "demo-data-synced",
+      "pass": true,
+      "evidence": "11f7b2a2facefc069b2a7ce6c7dbef57fd59aa45230d46cb870867cd7b5c697f"
+    },
+    {
+      "id": "three-input-modes",
+      "pass": true,
+      "evidence": "broll, aroll, croll"
+    },
+    {
+      "id": "mode-stage-contract",
+      "pass": true,
+      "evidence": "broll=6, aroll=4, croll=4"
+    },
+    {
+      "id": "bundled-videos",
+      "pass": true,
+      "evidence": "4 inspected"
+    },
+    {
+      "id": "video-audio-contract",
+      "pass": true,
+      "evidence": "showcase-football.mp4:h264+aac, showcase-money.mp4:h264+aac, showcase-silicon-valley.mp4:h264+aac, showcase-tang.mp4:h264+aac"
+    },
+    {
+      "id": "beats-examples",
+      "pass": true,
+      "evidence": "4 beats.json examples"
+    },
+    {
+      "id": "sample-proof-levels",
+      "pass": true,
+      "evidence": "5 listed; 4 fixed video URLs; 1 poster-only"
+    },
+    {
+      "id": "scenario-boundaries",
+      "pass": true,
+      "evidence": "fit and avoid lists present"
+    },
+    {
+      "id": "prioritized-extensions",
+      "pass": true,
+      "evidence": "P0, P1, P2"
+    },
+    {
+      "id": "meaning-recorded",
+      "pass": true,
+      "evidence": "研究与 Fork 价值高；直接生产采用需先工程化。"
+    },
+    {
+      "id": "static-demo-files",
+      "pass": true,
+      "evidence": "index.html, styles.css, app.js, favicon.svg"
+    },
+    {
+      "id": "upstream-license-copied",
+      "pass": true,
+      "evidence": "demo/assets/LICENSE-upstream.txt"
+    },
+    {
+      "id": "thumbnails-copied",
+      "pass": true,
+      "evidence": "5 local posters"
+    },
+    {
+      "id": "preproduction-data-synced",
+      "pass": true,
+      "evidence": "67c1b70e6b826481eafc5002766983d89f38b2661ad1eec7f71315d96d0b883e"
+    },
+    {
+      "id": "preproduction-samples",
+      "pass": true,
+      "evidence": "4 normalized upstream examples"
+    },
+    {
+      "id": "preproduction-coverage",
+      "pass": true,
+      "evidence": "17 beats / 26 shots"
+    },
+    {
+      "id": "provider-neutral-routes",
+      "pass": true,
+      "evidence": "4 provider-neutral dispatch routes"
+    },
+    {
+      "id": "human-gate-contract",
+      "pass": true,
+      "evidence": "6 explicit human gates"
+    },
+    {
+      "id": "dunhuang-demonstration-contract",
+      "pass": true,
+      "evidence": "1 research demonstration / 30s / 3 beats / 6 shots"
+    },
+    {
+      "id": "dunhuang-shot-completeness",
+      "pass": true,
+      "evidence": "6 shots include scene, still prompt, motion prompt, duration"
+    },
+    {
+      "id": "dunhuang-keyframes-synced",
+      "pass": true,
+      "evidence": "6 canonical PNGs are referenced and copied to demo/assets/dunhuang"
+    },
+    {
+      "id": "dunhuang-keyframe-dimensions",
+      "pass": true,
+      "evidence": "B01-S01.png=941x1672, B01-S02.png=941x1672, B02-S01.png=941x1672, B02-S02.png=941x1672, B03-S01.png=941x1672, B03-S02.png=941x1672"
+    },
+    {
+      "id": "dunhuang-video-dispatch-guide",
+      "pass": true,
+      "evidence": "6 shot IDs, image inputs, motion prompts, negative constraints, and no-video boundary recorded"
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "single-provider-implementation",
+      "observed": true,
+      "evidence": "Provider interface is extensible, but the registry contains only AtlasCloudProvider."
+    },
+    {
+      "id": "windows-curl-hardcode",
+      "observed": true,
+      "evidence": "atlas_cloud.py invokes /usr/bin/curl for upload and download."
+    },
+    {
+      "id": "model-list-is-agent-step",
+      "observed": true,
+      "evidence": "SKILL.md tells the agent to verify live model IDs; the API client has no model-list helper."
+    },
+    {
+      "id": "broll-three-four-resolution-gap",
+      "observed": true,
+      "evidence": "The public schema lists 3:4; B-roll assemble.RES only lists 16:9, 9:16, and 1:1."
+    },
+    {
+      "id": "no-bundled-tests",
+      "observed": true,
+      "evidence": "No upstream path contains a tests directory or test file path."
+    }
+  ],
+  "videos": [
+    {
+      "file": "showcase-football.mp4",
+      "status": "inspected",
+      "duration": 62.88,
+      "size": 8257315,
+      "width": 1280,
+      "height": 720,
+      "fps": "24/1",
+      "video_codec": "h264",
+      "audio_codec": "aac"
+    },
+    {
+      "file": "showcase-money.mp4",
+      "status": "inspected",
+      "duration": 58.93,
+      "size": 8493950,
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "video_codec": "h264",
+      "audio_codec": "aac"
+    },
+    {
+      "file": "showcase-silicon-valley.mp4",
+      "status": "inspected",
+      "duration": 59.11,
+      "size": 6144834,
+      "width": 1280,
+      "height": 720,
+      "fps": "24/1",
+      "video_codec": "h264",
+      "audio_codec": "aac"
+    },
+    {
+      "file": "showcase-tang.mp4",
+      "status": "inspected",
+      "duration": 29.98,
+      "size": 7928635,
+      "width": 1280,
+      "height": 720,
+      "fps": "24/1",
+      "video_codec": "h264",
+      "audio_codec": "aac"
+    }
+  ],
+  "examples": [
+    {
+      "file": "money-15s.beats.json",
+      "topic": "money is trust (15s teaser)",
+      "aspect": "9:16",
+      "beats": 3,
+      "shots": 3,
+      "keyframe_urls": 0,
+      "clip_urls": 0,
+      "video_model": "google/gemini-omni-flash/image-to-video"
+    },
+    {
+      "file": "money-60s-9x16-english.beats.json",
+      "topic": "A Brief History of Money",
+      "aspect": "9:16",
+      "beats": 6,
+      "shots": 12,
+      "keyframe_urls": 12,
+      "clip_urls": 12,
+      "video_model": "google/gemini-omni-flash/image-to-video"
+    },
+    {
+      "file": "ronaldo-9x16-kling.beats.json",
+      "topic": "Cristiano Ronaldo — a career in five moments (collage tribute)",
+      "aspect": "9:16",
+      "beats": 5,
+      "shots": 5,
+      "keyframe_urls": 5,
+      "clip_urls": 5,
+      "video_model": "kwaivgi/kling-video-o3-pro/image-to-video"
+    },
+    {
+      "file": "tang-30s.beats.json",
+      "topic": "The Tang Dynasty — golden age of Chinese civilization",
+      "aspect": "16:9",
+      "beats": 3,
+      "shots": 6,
+      "keyframe_urls": 6,
+      "clip_urls": 6,
+      "video_model": null
+    }
+  ]
+}
