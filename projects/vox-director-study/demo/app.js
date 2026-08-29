@@ -15,6 +15,7 @@ const state = {
   prepSample: null,
   prepViewIndex: 0,
   prepGates: {},
+  caseHashApplied: false,
 };
 
 const byId = (id) => document.getElementById(id);
@@ -246,6 +247,7 @@ function scalePrepDuration(target) {
 function prepAssets(route, pack) {
   const shots = pack.beats.flatMap((beat) => beat.shots);
   const withReferences = shots.filter((shot) => shot.reference_image).length;
+  const completedVideos = shots.filter((shot) => shot.reference_video?.startsWith("assets/")).length;
   const completeScripts = shots.filter((shot) => shot.scene && shot.motion_prompt).length;
   const generatedKeyframes = pack.source.keyframe_generator === "Codex built-in imagegen";
   const items = [
@@ -256,14 +258,23 @@ function prepAssets(route, pack) {
     items.push(generatedKeyframes
       ? { name: "Codex 关键帧", detail: `${withReferences}/${shots.length} 张本地关键帧已生成；可直接交给视频模型`, state: withReferences === shots.length ? "READY" : "MISSING" }
       : { name: "关键帧 / 参考图", detail: `${withReferences}/${shots.length} 个镜头带上游参考；改主题时必须替换`, state: withReferences === shots.length ? "REPLACE" : "MISSING" });
+    if (generatedKeyframes) {
+      items.push({ name: "已生成视频", detail: `${completedVideos}/${shots.length} 个本地镜头视频已回填；逐镜头查看独立复核结论`, state: completedVideos ? "REVIEW" : "MISSING" });
+    }
+  }
+  if (pack.rough_cut) {
+    items.push({ name: "30 秒画面粗剪", detail: `${pack.rough_cut.version} · ${pack.rough_cut.duration_seconds}s · ${pack.rough_cut.dimensions} · 静音 AAC 占位轨`, state: "REVIEW" });
+    if (pack.rough_cut.sound_preview) {
+      items.push({ name: pack.case_closure?.status === "completed" ? "30 秒最终声音版" : "30 秒声音试听", detail: `${pack.rough_cut.sound_preview.version} · ${pack.rough_cut.sound_preview.voice} · 原创程序化环境声`, state: pack.case_closure?.status === "completed" ? "DONE" : "REVIEW" });
+    }
   }
   if (route.id === "first-last-frame") {
     items.push({ name: "尾帧", detail: `需要为 ${shots.length} 个镜头准备 end_frame`, state: "MISSING" });
   }
   items.push(
     { name: "确定性文字层", detail: "标题、中文、数字和 Logo 建议在生成后叠加", state: "PLAN" },
-    { name: "旁白与字幕", detail: `${pack.beats.length} 段旁白需要录制、TTS 或人工配音`, state: "PLAN" },
-    { name: "音乐与音效", detail: "先确定节奏、授权与响度目标，再进入混音", state: "PLAN" },
+    { name: "旁白与字幕", detail: pack.case_closure?.status === "completed" ? `${pack.beats.length} 段神经网络旁白与 SRT 已交付；字幕未烧录` : `${pack.beats.length} 段旁白需要录制、TTS 或人工配音`, state: pack.case_closure?.status === "completed" ? "DONE" : "PLAN" },
+    { name: "音乐与音效", detail: pack.case_closure?.status === "completed" ? "程序化环境声、ducking 与响度混音已完成；未使用外部采样" : "先确定节奏、授权与响度目标，再进入混音", state: pack.case_closure?.status === "completed" ? "DONE" : "PLAN" },
     { name: "模型参数映射", detail: `${route.required.join(" · ")} → ${pack.project.model}`, state: "MAP" },
   );
   return items;
@@ -291,6 +302,8 @@ function makePrepPack() {
         aspect,
         reference_image: shot.reference_image,
         reference_video: shot.reference_video,
+        previous_versions: shot.previous_versions || [],
+        video_review: shot.video_review || null,
         end_frame: "",
         negative_prompt: "no baked-in text; no identity drift; no layout warping; no flicker",
       };
@@ -318,9 +331,10 @@ function makePrepPack() {
         : source.kind === "research-demonstration" ? "research-demonstration-ready" : "sample-content-loaded",
       keyframe_generator: source.keyframe_generator || "upstream-or-not-provided",
       video_generation_status: source.video_generation_status || "not-run",
+      completed_video_count: source.completed_video_count || 0,
       video_dispatch_file: source.video_dispatch_file || "",
       notice: source.kind === "research-demonstration"
-        ? "本预案由 Research Lab 基于上游结构编写；6 张关键帧由 Codex 内置图片模型生成，视频尚未生成。"
+        ? `本预案由 Research Lab 基于上游结构编写；6 张关键帧由 Codex 内置图片模型生成，${source.completed_video_count || 0}/6 个用户视频已回填，最终 V2 已完成。`
         : state.prepData.notice,
     },
     project: {
@@ -335,9 +349,11 @@ function makePrepPack() {
     adaptation_instruction: adapted
       ? `只借用「${source.label}」的节奏结构。请围绕「${topic}」逐段重写 title、narration、scene、still_prompt 与 motion_prompt，并逐项人工核验。`
       : source.kind === "research-demonstration"
-        ? "当前示范已完成前期脚本与 6 张关键帧；请把每张 reference_image 连同对应 motion_prompt 交给图生视频模型。"
+        ? "当前示范已完成最终 V2；如需复用结构，可把每张 reference_image 连同对应 motion_prompt 交给其他图生视频模型。"
         : "当前加载的是上游样例原稿；投入新项目之前仍需核验事实、权利与模型参数。",
     human_gates: state.prepData.human_gates.map((gate) => ({ ...gate, approved: Boolean(state.prepGates[gate.id]) })),
+    rough_cut: adapted ? null : source.rough_cut || null,
+    case_closure: adapted ? null : source.case_closure || null,
     beats,
   };
   pack.asset_checklist = prepAssets(route, pack);
@@ -376,6 +392,372 @@ function renderPrepAssets(pack) {
   }));
 }
 
+function renderRoughCut(source, adapted) {
+  const root = byId("rough-cut-preview");
+  const roughCut = adapted ? null : source.rough_cut;
+  root.replaceChildren();
+  root.hidden = !roughCut;
+  if (!roughCut) return;
+
+  const head = document.createElement("header");
+  const heading = document.createElement("div");
+  const kicker = document.createElement("span");
+  const title = document.createElement("h3");
+  const status = document.createElement("strong");
+  const grid = document.createElement("div");
+  const media = document.createElement("div");
+  const video = document.createElement("video");
+  const fallback = document.createElement("p");
+  const copy = document.createElement("div");
+  const specs = document.createElement("p");
+  const provenance = document.createElement("div");
+  const materialSource = document.createElement("p");
+  const assemblySource = document.createElement("p");
+  const audio = document.createElement("p");
+  const order = document.createElement("p");
+  const actions = document.createElement("div");
+  const downloadVideo = document.createElement("a");
+  const downloadSrt = document.createElement("a");
+
+  head.className = "rough-cut-head";
+  kicker.className = "rough-cut-kicker";
+  kicker.textContent = "PICTURE ROUGH CUT / 01";
+  title.textContent = roughCut.title;
+  status.className = "rough-cut-status";
+  status.textContent = `${roughCut.version.toUpperCase()} · 画面粗剪待声音决策`;
+  heading.append(kicker, title);
+  head.append(heading, status);
+
+  grid.className = "rough-cut-grid";
+  media.className = "rough-cut-media";
+  video.src = roughCut.reference_video;
+  video.poster = "assets/dunhuang/B01-S01.png";
+  video.controls = true;
+  video.preload = "metadata";
+  video.playsInline = true;
+  video.setAttribute("aria-label", "敦煌 30 秒画面粗剪播放器");
+  fallback.className = "rough-cut-fallback";
+  fallback.hidden = true;
+  fallback.textContent = "30 秒粗剪没有加载成功；六段原始镜头、旁白时间稿和下载信息仍然保留，请确认发布资产后重试。";
+  video.addEventListener("error", () => { fallback.hidden = false; });
+  media.append(video, fallback);
+
+  copy.className = "rough-cut-copy";
+  specs.className = "rough-cut-specs";
+  specs.textContent = `${roughCut.duration_seconds}s · ${roughCut.dimensions} · ${roughCut.fps}fps · ${roughCut.video_codec.toUpperCase()} / ${roughCut.audio_codec.toUpperCase()}`;
+  provenance.className = "rough-cut-provenance";
+  materialSource.dataset.source = "rough-cut-materials";
+  materialSource.textContent = "画面素材：用户外部模型生成的 6 段当前通过视频";
+  assemblySource.dataset.source = "rough-cut-assembly";
+  assemblySource.textContent = "粗剪合成：Codex / Research Lab 使用 FFmpeg；非原库本次执行";
+  provenance.append(materialSource, assemblySource);
+  audio.innerHTML = `<strong>声音边界：</strong>静音双声道 AAC 占位轨；未生成旁白、音乐或音效。`;
+  order.innerHTML = `<strong>镜头顺序：</strong>${roughCut.shot_order.join(" → ")}；每段 5 秒硬切。`;
+  actions.className = "rough-cut-actions";
+  downloadVideo.className = "button button-primary";
+  downloadVideo.href = roughCut.reference_video;
+  downloadVideo.download = "dunhuang-rough-cut-v1.mp4";
+  downloadVideo.textContent = "下载 30 秒粗剪";
+  downloadSrt.className = "button button-secondary";
+  downloadSrt.href = roughCut.narration_subtitles;
+  downloadSrt.download = "dunhuang-narration-v1.srt";
+  downloadSrt.textContent = "下载旁白时间稿";
+  actions.append(downloadVideo, downloadSrt);
+  copy.append(specs, provenance, audio, order, actions);
+  grid.append(media, copy);
+  root.append(head, grid);
+}
+
+function renderSoundPreview(source, adapted) {
+  const root = byId("sound-preview");
+  const roughCut = adapted ? null : source.rough_cut;
+  const sound = roughCut?.sound_preview;
+  root.replaceChildren();
+  root.hidden = !sound;
+  if (!sound) return;
+
+  const head = document.createElement("header");
+  const heading = document.createElement("div");
+  const kicker = document.createElement("span");
+  const title = document.createElement("h3");
+  const status = document.createElement("strong");
+  const grid = document.createElement("div");
+  const video = document.createElement("video");
+  const fallback = document.createElement("p");
+  const copy = document.createElement("div");
+  const specs = document.createElement("p");
+  const provenance = document.createElement("div");
+  const voice = document.createElement("p");
+  const ambient = document.createElement("p");
+  const assembly = document.createElement("p");
+  const note = document.createElement("p");
+  const cues = document.createElement("p");
+  const history = document.createElement("p");
+  const actions = document.createElement("div");
+
+  head.className = "sound-preview-head";
+  kicker.className = "sound-preview-kicker";
+  kicker.textContent = "SOUND PREVIEW / 02";
+  title.textContent = sound.title;
+  status.className = "sound-preview-status";
+  status.textContent = sound.status === "completed-case-default-v2"
+    ? `${sound.version.toUpperCase()} · 案例完成版（声音可替换）`
+    : `${sound.version.toUpperCase()} · 可替换声音试听`;
+  heading.append(kicker, title);
+  head.append(heading, status);
+
+  grid.className = "sound-preview-grid";
+  video.src = sound.reference_video;
+  video.poster = "assets/dunhuang/B01-S01.png";
+  video.controls = true;
+  video.preload = "metadata";
+  video.playsInline = true;
+  video.setAttribute("aria-label", "敦煌 30 秒带声音试听播放器");
+  fallback.className = "sound-preview-fallback";
+  fallback.hidden = true;
+  fallback.textContent = "声音试听没有加载成功；静音画面粗剪、旁白 SRT 和声音分轨仍可单独下载，请确认发布资产后重试。";
+  video.addEventListener("error", () => { fallback.hidden = false; });
+  const media = document.createElement("div");
+  media.className = "sound-preview-media";
+  media.append(video, fallback);
+
+  copy.className = "sound-preview-copy";
+  specs.className = "sound-preview-specs";
+  specs.textContent = `${sound.duration_seconds}s · ${sound.dimensions} · ${sound.fps}fps · ${sound.sample_rate / 1000}kHz stereo · ${sound.integrated_loudness_lufs} LUFS`;
+  provenance.className = "sound-preview-provenance";
+  voice.dataset.source = "sound-voice";
+  voice.textContent = `旁白试听：${sound.voice} · ${sound.voice_source} · 语速 ${sound.voice_rate} · 音高 ${sound.voice_pitch}`;
+  ambient.dataset.source = "sound-ambient";
+  ambient.textContent = "环境声：Codex / Research Lab 使用 FFmpeg 程序化合成 · 无外部音乐或采样";
+  assembly.dataset.source = "sound-assembly";
+  assembly.textContent = "混音：Codex / Research Lab 对齐、ducking 与响度归一化 · 非原库本次执行";
+  provenance.append(voice, ambient, assembly);
+  note.innerHTML = `<strong>使用边界：</strong>${sound.voice_usage_note}。`;
+  cues.innerHTML = `<strong>旁白落点：</strong>${sound.narration_cues.map((cue) => `${cue.beat} ${cue.start_seconds.toFixed(2)}s`).join(" · ")}；三段均在各自 10 秒窗口内结束。`;
+  history.innerHTML = sound.previous_version
+    ? `<strong>上版保留：</strong>${sound.previous_version.version.toUpperCase()} ${sound.previous_version.voice}；因“${sound.previous_version.replacement_reason}”不再作为默认试听。`
+    : "";
+  actions.className = "sound-preview-actions";
+  [
+    [sound.reference_video, "下载声音试听"],
+    [sound.narration_stem, "下载旁白分轨"],
+    [sound.ambient_stem, "下载环境声分轨"],
+    [sound.mix_stem, "下载混音分轨"],
+  ].forEach(([href, label], index) => {
+    const link = document.createElement("a");
+    link.className = `button ${index === 0 ? "button-primary" : "button-secondary"}`;
+    link.href = href;
+    link.download = href.split("/").at(-1);
+    link.textContent = label;
+    actions.append(link);
+  });
+  copy.append(specs, provenance, note, cues);
+  if (sound.previous_version) copy.append(history);
+  copy.append(actions);
+  grid.append(media, copy);
+  root.append(head, grid);
+}
+
+function caseBlockHeader(code, titleText, copyText) {
+  const head = document.createElement("header");
+  const titleWrap = document.createElement("div");
+  const codeLabel = document.createElement("span");
+  const title = document.createElement("h3");
+  const copy = document.createElement("p");
+  head.className = "case-block-head";
+  codeLabel.textContent = code;
+  title.textContent = titleText;
+  copy.textContent = copyText;
+  titleWrap.append(codeLabel, title);
+  head.append(titleWrap, copy);
+  return head;
+}
+
+function renderCaseStudy(source, adapted) {
+  const root = byId("case-study");
+  const nav = byId("case-nav-link");
+  const content = byId("case-study-content");
+  const closure = adapted ? null : source.case_closure;
+  root.hidden = !closure;
+  nav.hidden = !closure;
+  content.replaceChildren();
+  if (!closure) return;
+
+  const final = document.createElement("article");
+  const media = document.createElement("div");
+  const video = document.createElement("video");
+  const fallback = document.createElement("p");
+  const copy = document.createElement("div");
+  const badge = document.createElement("strong");
+  const title = document.createElement("h3");
+  const subtitle = document.createElement("p");
+  const summary = document.createElement("p");
+  const metrics = document.createElement("div");
+  const actions = document.createElement("div");
+  const download = document.createElement("a");
+  const documentLink = document.createElement("a");
+
+  final.className = "case-final";
+  final.dataset.caseStatus = closure.status;
+  media.className = "case-final-media";
+  video.src = closure.final_video;
+  video.poster = "assets/dunhuang/B01-S01.png";
+  video.controls = true;
+  video.preload = "metadata";
+  video.playsInline = true;
+  video.setAttribute("aria-label", "敦煌完成案例最终成片播放器");
+  fallback.className = "case-final-fallback";
+  fallback.hidden = true;
+  fallback.textContent = "最终成片没有加载成功；下面的案例结论、能力归属和生产链仍可阅读，也可返回准备台下载分轨与静音粗剪。";
+  video.addEventListener("error", () => { fallback.hidden = false; });
+  media.append(video, fallback);
+
+  copy.className = "case-final-copy";
+  badge.className = "case-complete-badge";
+  badge.textContent = `案例已完成 · ${closure.completed_at} · FINAL V2`;
+  title.textContent = closure.title;
+  subtitle.className = "case-subtitle";
+  subtitle.textContent = closure.subtitle;
+  summary.className = "case-summary";
+  summary.textContent = closure.summary;
+  metrics.className = "case-metrics";
+  metrics.setAttribute("aria-label", "案例交付摘要");
+  closure.metrics.forEach((item) => {
+    const cell = document.createElement("div");
+    const value = document.createElement("strong");
+    const label = document.createElement("span");
+    value.textContent = item.value;
+    label.textContent = item.label;
+    cell.append(value, label);
+    metrics.append(cell);
+  });
+  actions.className = "case-final-actions";
+  download.className = "button button-primary";
+  download.href = closure.final_video;
+  download.download = closure.final_download_name;
+  download.textContent = "下载最终成片";
+  documentLink.className = "button button-secondary";
+  documentLink.href = closure.case_document_url;
+  documentLink.target = "_blank";
+  documentLink.rel = "noreferrer";
+  documentLink.textContent = "查看完整案例复盘 ↗";
+  actions.append(download, documentLink);
+  copy.append(badge, title, subtitle, summary, metrics, actions);
+  final.append(media, copy);
+  content.append(final);
+
+  const ownership = document.createElement("section");
+  const ownershipGrid = document.createElement("div");
+  ownership.className = "case-block";
+  ownershipGrid.className = "case-ownership";
+  ownershipGrid.dataset.caseEvidence = "ownership";
+  closure.ownership.forEach((item, index) => {
+    const article = document.createElement("article");
+    const number = document.createElement("b");
+    const heading = document.createElement("strong");
+    const detail = document.createElement("p");
+    article.className = "case-owner";
+    article.dataset.owner = item.id;
+    number.textContent = `SOURCE / ${String(index + 1).padStart(2, "0")}`;
+    heading.textContent = item.label;
+    detail.textContent = item.summary;
+    article.append(number, heading, detail);
+    ownershipGrid.append(article);
+  });
+  ownership.append(caseBlockHeader("OWNERSHIP / 01", "先分清：谁完成了什么", "原库、Codex 和用户外部模型分别承担不同层，不能把本研究成片误写成上游仓库的直接生成结果。"), ownershipGrid);
+  content.append(ownership);
+
+  const chain = document.createElement("section");
+  const chainList = document.createElement("ol");
+  chain.className = "case-block";
+  chainList.className = "case-chain";
+  chainList.dataset.caseEvidence = "production-chain";
+  closure.production_chain.forEach((item, index) => {
+    const li = document.createElement("li");
+    const number = document.createElement("b");
+    const label = document.createElement("span");
+    number.textContent = String(index + 1).padStart(2, "0");
+    label.textContent = item;
+    li.append(number, label);
+    chainList.append(li);
+  });
+  chain.append(caseBlockHeader("WORKFLOW / 02", "一支片真正需要的完整链路", "从固定证据到最终交付，生成模型只是其中一环；拆镜头、质检、版本和确定性后期同样属于核心生产资产。"), chainList);
+  content.append(chain);
+
+  const learnings = document.createElement("section");
+  const learningGrid = document.createElement("div");
+  learnings.className = "case-block";
+  learningGrid.className = "case-insights";
+  learningGrid.dataset.caseEvidence = "key-learnings";
+  closure.key_learnings.forEach((item) => {
+    const article = document.createElement("article");
+    const heading = document.createElement("h4");
+    const detail = document.createElement("p");
+    article.className = "case-insight";
+    heading.textContent = item.title;
+    detail.textContent = item.detail;
+    article.append(heading, detail);
+    learningGrid.append(article);
+  });
+  learnings.append(caseBlockHeader("LEARNINGS / 03", "经过实操后，我们补充确认了什么", "这些结论来自首帧、尾帧、重做、版本管理、粗剪和声音交付，不是仅靠阅读 README 得出的推测。"), learningGrid);
+  content.append(learnings);
+
+  const fit = document.createElement("section");
+  const fitGrid = document.createElement("div");
+  fit.className = "case-block";
+  fitGrid.className = "case-fit-grid";
+  [["best", "最适合", closure.best_fit], ["avoid", "不适合直接套用", closure.not_best_fit]].forEach(([kind, headingText, items]) => {
+    const article = document.createElement("article");
+    const heading = document.createElement("h4");
+    const list = document.createElement("ul");
+    article.className = "case-fit-card";
+    article.dataset.fit = kind;
+    heading.textContent = headingText;
+    items.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      list.append(li);
+    });
+    article.append(heading, list);
+    fitGrid.append(article);
+  });
+  fit.append(caseBlockHeader("SCENARIOS / 04", "这个方法最适合用在哪里", "它擅长可拆镜头、可逐段放行、可统一包装的内容；对连续表演和精密口型仍需更强的专用能力。"), fitGrid);
+  content.append(fit);
+
+  const extensions = document.createElement("section");
+  const extensionList = document.createElement("ul");
+  extensions.className = "case-block";
+  extensionList.className = "case-extension-list";
+  closure.extension_priorities.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    extensionList.append(li);
+  });
+  extensions.append(caseBlockHeader("NEXT / 05", "可扩展方向：先稳定，再自动化", "P0 解决 provider、状态和恢复；P1 提升质检与交付；P2 再做多模型路由和可积累评测。"), extensionList);
+  content.append(extensions);
+
+  const meaning = document.createElement("section");
+  const meaningCard = document.createElement("div");
+  const meaningTitle = document.createElement("h4");
+  const meaningList = document.createElement("ul");
+  meaning.className = "case-block";
+  meaningCard.className = "case-meaning";
+  meaningTitle.textContent = "对我们的意义：从提示词，升级为制作系统。";
+  meaningList.className = "case-meaning-list";
+  closure.meaning.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    meaningList.append(li);
+  });
+  meaningCard.append(meaningTitle, meaningList);
+  meaning.append(meaningCard);
+  content.append(meaning);
+  if (!state.caseHashApplied && location.hash === "#case-study") {
+    state.caseHashApplied = true;
+    requestAnimationFrame(() => root.scrollIntoView({ block: "start" }));
+  }
+}
+
 function renderHumanGates() {
   byId("human-gate-list").replaceChildren(...state.prepData.human_gates.map((gate) => {
     const label = document.createElement("label");
@@ -406,8 +788,11 @@ function refreshPrepDerived(statusMessage = "准备包已在本地更新") {
   warning.textContent = adapted
     ? "主题已变化：当前镜头仍是结构参考，请在下方逐项重写；导出包会标记 requires-manual-rewrite。"
     : source.kind === "research-demonstration"
-      ? "研究示范已载入：前期预案和 6 张 Codex 关键帧已完成；视频尚未生成，请按逐镜头运动提示交给你的视频模型。"
+      ? `研究示范已完成：6 张 Codex 关键帧、${source.completed_video_count || 0}/6 个当前视频、1 个静音画面粗剪和最终声音版 V2 已回填；成片使用在线神经网络 TTS 与原创程序化环境声，完整结论见下方完成案例。`
       : "当前载入上游样例原稿。它可直接用于研究，但正式生产前仍需事实、权利与模型参数复核。";
+  renderRoughCut(source, adapted);
+  renderSoundPreview(source, adapted);
+  renderCaseStudy(source, adapted);
   refreshDispatchPreviews();
   setText("prep-status", statusMessage);
   return pack;
@@ -505,6 +890,7 @@ async function copyAllShotDispatches() {
 }
 
 function createDispatchCard(shot) {
+  const needsRevision = Boolean(shot.video_review && !shot.video_review.creative_status?.startsWith("approved-"));
   const card = document.createElement("section");
   const head = document.createElement("div");
   const heading = document.createElement("div");
@@ -516,15 +902,15 @@ function createDispatchCard(shot) {
   card.className = "dispatch-card";
   card.setAttribute("aria-label", `${shot.id} 视频模型直接输入`);
   head.className = "dispatch-card-head";
-  eyebrow.textContent = "VIDEO MODEL READY";
-  title.textContent = "这一整块可以直接复制";
+  eyebrow.textContent = "CODEX / RESEARCH LAB 新增提示卡";
+  title.textContent = needsRevision ? "需要重做时，复制这一整块" : "这一整块可以直接复制";
   button.type = "button";
   button.className = "button button-primary dispatch-copy-button";
   button.dataset.copyShot = shot.id;
-  button.textContent = "复制本镜头";
-  button.setAttribute("aria-label", `复制 ${shot.id} 完整视频提示词`);
+  button.textContent = needsRevision ? "复制重做提示" : "复制本镜头";
+  button.setAttribute("aria-label", `复制 ${shot.id} ${needsRevision ? "重做" : "完整视频"}提示词`);
   button.addEventListener("click", () => copyShotDispatch(shot, button));
-  help.textContent = "先把上面的关键帧上传给视频模型，再粘贴下面全部文字。";
+  help.textContent = "这张调度卡由本研究整理：先把上面的 Codex 关键帧上传给视频模型，再粘贴下面全部文字。";
   preview.dataset.dispatchPreview = shot.id;
   preview.tabIndex = 0;
   preview.textContent = makeShotDispatchText(shot);
@@ -532,6 +918,77 @@ function createDispatchCard(shot) {
   head.append(heading, button);
   card.append(head, help, preview);
   return card;
+}
+
+function createGeneratedVideo(shot) {
+  const review = shot.video_review || {};
+  const approved = review.creative_status?.startsWith("approved-");
+  const needsFullRegeneration = review.creative_status === "requires-full-regeneration";
+  const versionLabel = (review.version || "v1").toUpperCase();
+  const section = document.createElement("section");
+  const head = document.createElement("div");
+  const label = document.createElement("span");
+  const title = document.createElement("strong");
+  const grid = document.createElement("div");
+  const video = document.createElement("video");
+  const copy = document.createElement("div");
+  const status = document.createElement("b");
+  const specs = document.createElement("p");
+  const strength = document.createElement("p");
+  const issue = document.createElement("p");
+  const recommendation = document.createElement("p");
+  const history = document.createElement("div");
+  const reviewSource = document.createElement("p");
+  const fallback = document.createElement("p");
+  section.className = "generated-video";
+  section.setAttribute("aria-label", `${shot.id} 用户生成视频 ${review.version || "v1"}`);
+  head.className = "generated-video-head";
+  label.className = "asset-source-label";
+  label.dataset.source = "user-video";
+  label.textContent = "用户外部模型产物 · 非原库生成";
+  title.textContent = `${shot.id} · ${review.version || "v1"} 已回填`;
+  grid.className = "generated-video-grid";
+  video.src = shot.reference_video;
+  video.poster = shot.reference_image;
+  video.controls = true;
+  video.preload = "metadata";
+  video.playsInline = true;
+  video.setAttribute("aria-label", `${shot.id} ${versionLabel} 当前视频播放器`);
+  copy.className = "generated-video-review";
+  status.className = "video-review-status";
+  status.dataset.status = review.creative_status || "review";
+  status.textContent = review.creative_status === "usable-with-tail-revision"
+    ? `可用 ${versionLabel} · 建议重做尾部`
+    : approved ? `通过 ${versionLabel} · 可进入剪辑`
+      : needsFullRegeneration ? `未通过 ${versionLabel} · 建议整段重做` : "等待人工复核";
+  specs.textContent = `${review.duration_seconds || shot.duration}s · ${review.dimensions || "竖屏"} · ${review.fps || "—"}fps · ${(review.video_codec || "").toUpperCase()} / ${(review.audio_codec || "").toUpperCase()}`;
+  strength.innerHTML = `<strong>保留得好：</strong>${review.strength || "等待复核"}`;
+  issue.innerHTML = `<strong>${approved ? "复核备注" : needsFullRegeneration ? "未通过原因" : "尾帧问题"}：</strong>${review.issue || "等待复核"}`;
+  recommendation.innerHTML = `<strong>建议：</strong>${review.recommendation || "等待复核"}`;
+  history.className = "video-version-history";
+  if (shot.previous_versions?.length) {
+    const historyTitle = document.createElement("strong");
+    historyTitle.textContent = "历史版本（保留，不作为当前播放）";
+    history.append(historyTitle);
+    shot.previous_versions.forEach((item) => {
+      const row = document.createElement("p");
+      row.textContent = `${(item.version || "旧版").toUpperCase()} · ${item.summary || item.creative_status || "已保留"}`;
+      history.append(row);
+    });
+  }
+  reviewSource.className = "review-source-label";
+  reviewSource.dataset.source = "codex-review";
+  reviewSource.textContent = "质量复核：Codex / Research Lab 首中尾帧检查";
+  fallback.className = "video-fallback";
+  fallback.hidden = true;
+  fallback.textContent = "视频没有加载成功；关键帧和完整提示词仍可使用。请确认本地 MP4 已同步后重试。";
+  video.addEventListener("error", () => { fallback.hidden = false; });
+  head.append(label, title);
+  copy.append(status, reviewSource, specs, strength, issue, recommendation);
+  if (history.childElementCount) copy.append(history);
+  grid.append(video, copy);
+  section.append(head, grid, fallback);
+  return section;
 }
 
 function renderPrepEditor() {
@@ -562,6 +1019,7 @@ function renderPrepEditor() {
     beat.shots.forEach((shot, shotIndex) => {
       const details = document.createElement("details");
       details.className = "shot-editor";
+      details.dataset.shotId = shot.id;
       details.open = beatIndex === 0 && shotIndex === 0;
       const summary = document.createElement("summary");
       const name = document.createElement("strong");
@@ -579,9 +1037,12 @@ function renderPrepEditor() {
         image.src = shot.reference_image;
         image.alt = `${shot.id} 敦煌示范关键帧`;
         image.loading = "eager";
-        caption.textContent = `CODEX 关键帧 · ${shot.id} · 可作为图生视频首帧`;
+        caption.className = "asset-source-label";
+        caption.dataset.source = "codex-image";
+        caption.textContent = `本研究新增 · Codex 图片模型关键帧 · ${shot.id} · 可作为图生视频首帧`;
         keyframe.append(image, caption);
         fields.append(keyframe);
+        if (shot.reference_video?.startsWith("assets/")) fields.append(createGeneratedVideo(shot));
         fields.append(createDispatchCard(shot));
       }
       const durationLabel = document.createElement("label");
@@ -608,7 +1069,9 @@ function renderPrepEditor() {
       origin.textContent = shot.still_prompt_source === "upstream"
         ? "静帧 Prompt 来自固定上游样例"
         : shot.still_prompt_source === "codex-built-in-imagegen"
-          ? "关键帧已由 Codex 内置图片模型生成；视频尚未生成"
+          ? shot.reference_video
+            ? "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填"
+            : "关键帧由 Codex 图片模型生成；视频仍待用户外部模型生成"
           : "上游未提供静帧 Prompt；当前值由 scene 归一化而来";
       fields.append(
         durationLabel,

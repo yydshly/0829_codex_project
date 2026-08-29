@@ -14,8 +14,180 @@
   "default_route": "image-to-video",
   "target_model": "你的视频模型（待填写）",
   "keyframe_generator": "Codex built-in imagegen",
-  "video_generation_status": "not-run; ready for external scheduling",
+  "video_generation_status": "case complete; 6 of 6 user-supplied shot videos approved; 30-second V2 final preview assembled and published in the research page",
+  "completed_video_count": 6,
   "video_dispatch_file": "notes/dunhuang-video-dispatch.md",
+  "rough_cut": {
+    "title": "敦煌 30 秒画面粗剪",
+    "version": "v1",
+    "reference_video": "assets/dunhuang/final/dunhuang-rough-cut-v1.mp4",
+    "narration_subtitles": "assets/dunhuang/final/dunhuang-narration-v1.srt",
+    "edit_decision_list": "notes/dunhuang-edit-decision-list.md",
+    "duration_seconds": 30.0,
+    "dimensions": "720x1280",
+    "fps": 30,
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "audio_status": "silent-placeholder-track; no narration, music, or sound effects generated",
+    "assembly_source": "Codex / Research Lab deterministic FFmpeg assembly",
+    "material_source": "six user-supplied external-model videos",
+    "upstream_execution": "not executed by vox-director in this project",
+    "edit_style": "six 5-second shots with hard cuts; centered 9:16 crop; no baked-in titles or subtitles",
+    "status": "picture-rough-cut-ready-for-review",
+    "sound_preview": {
+      "title": "敦煌 30 秒声音试听",
+      "version": "v2",
+      "reference_video": "assets/dunhuang/final/dunhuang-sound-preview-v2.mp4",
+      "narration_stem": "assets/dunhuang/final/dunhuang-narration-yunyang-v2.m4a",
+      "ambient_stem": "assets/dunhuang/final/dunhuang-ambient-bed-v1.m4a",
+      "mix_stem": "assets/dunhuang/final/dunhuang-audio-mix-v2.m4a",
+      "duration_seconds": 30.0,
+      "dimensions": "720x1280",
+      "fps": 30,
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "sample_rate": 48000,
+      "channels": 2,
+      "integrated_loudness_lufs": -17.6,
+      "max_volume_db": -1.2,
+      "voice": "Microsoft Yunyang Neural zh-CN Adult Male",
+      "voice_rate": "-6%",
+      "voice_pitch": "-8Hz",
+      "voice_source": "Microsoft Edge online neural TTS via edge-tts preview",
+      "voice_direction": "professional, reliable, restrained historical-documentary narration",
+      "voice_usage_note": "神经网络试听音色，不冒充真人录音；旁白文本曾发送给在线 TTS 服务，对外发布前需重新确认音色选择和使用条款",
+      "ambient_source": "Codex / Research Lab procedural FFmpeg synthesis; no external samples or music tracks",
+      "ambient_direction": "restrained low drone, filtered pink-noise wind, and subtle beat-boundary tones",
+      "assembly_source": "Codex / Research Lab FFmpeg alignment, ducking, loudness normalization, and muxing",
+      "upstream_execution": "not generated or mixed by vox-director in this project",
+      "status": "completed-case-default-v2",
+      "narration_cues": [
+        { "beat": "B01", "start_seconds": 0.5, "source_duration_seconds": 8.76 },
+        { "beat": "B02", "start_seconds": 10.55, "source_duration_seconds": 8.232 },
+        { "beat": "B03", "start_seconds": 20.35, "source_duration_seconds": 9.096 }
+      ],
+      "previous_version": {
+        "version": "v1",
+        "reference_video": "assets/dunhuang/final/dunhuang-sound-preview-v1.mp4",
+        "narration_stem": "assets/dunhuang/final/dunhuang-narration-kangkang-v1.m4a",
+        "mix_stem": "assets/dunhuang/final/dunhuang-audio-mix-v1.m4a",
+        "voice": "Microsoft Kangkang zh-CN Adult Male",
+        "replacement_reason": "用户实听后认为系统音色机械、与敦煌纪录片气质不符"
+      }
+    },
+    "shot_order": [
+      "B01-S01-v2",
+      "B01-S02-v1",
+      "B02-S01-v2",
+      "B02-S02-v1",
+      "B03-S01-v1",
+      "B03-S02-v1"
+    ]
+  },
+  "case_closure": {
+    "status": "completed",
+    "completed_at": "2026-08-30",
+    "title": "敦煌：沙漠中的世界十字路口",
+    "subtitle": "从仓库研究到 30 秒可播放成片的完整验证",
+    "summary": "本案例证明，vox-director 的核心价值不是替代视频模型，而是把主题研究、beats、shots、关键帧、外部生成、人工复核、确定性剪辑和声音交付组织成可追溯的导演工作流。",
+    "final_video": "assets/dunhuang/final/dunhuang-sound-preview-v2.mp4",
+    "final_download_name": "dunhuang-crossroads-final-v2.mp4",
+    "case_document": "notes/dunhuang-case-study.md",
+    "case_document_url": "https://github.com/yydshly/0829_codex_project/blob/main/projects/vox-director-study/notes/dunhuang-case-study.md",
+    "metrics": [
+      { "value": "30s", "label": "最终时长" },
+      { "value": "3", "label": "叙事 Beats" },
+      { "value": "6/6", "label": "通过镜头" },
+      { "value": "8", "label": "视频版本留档" },
+      { "value": "6", "label": "Codex 关键帧" },
+      { "value": "V2", "label": "默认声音版" }
+    ],
+    "ownership": [
+      {
+        "id": "upstream",
+        "label": "vox-director 原库",
+        "summary": "提供 B/A/C-roll 三种导演模式、阶段式 Skill、provider/assemble 代码、beats/shots 样例和 ffmpeg 成片思路；它是编排层，不是通用视频生成模型。"
+      },
+      {
+        "id": "codex",
+        "label": "Codex / Research Lab 补充",
+        "summary": "完成固定版本审计、模型无关准备台、敦煌脚本与逐镜头提示、6 张关键帧、媒体质检、版本管理、粗剪、在线 TTS、环境声、混音、网页和验收。"
+      },
+      {
+        "id": "user",
+        "label": "用户与外部模型",
+        "summary": "用户调度外部视频模型生成 6 个当前镜头和 2 个历史版本，并根据复核意见重做 B01-S01 与 B02-S01；这些视频不是原库或 Codex 视频模型生成。"
+      }
+    ],
+    "production_chain": [
+      "固定源码与样例证据",
+      "主题、受众与事实边界",
+      "3 个 Beats 的叙事弧",
+      "6 个 Shots 与模型任务",
+      "Codex 生成 6 张首帧",
+      "外部视频模型生成与重做",
+      "人工首中尾帧质检与版本放行",
+      "FFmpeg 粗剪、旁白、声音与交付"
+    ],
+    "key_learnings": [
+      {
+        "title": "原库更像导演协议，不是生成引擎",
+        "detail": "它最值得复用的是输入模式、阶段、beats/shots 数据结构、人工关卡和 assemble 思路；真正的图片、视频、声音仍由外部模型或后期工具执行。"
+      },
+      {
+        "title": "只有首帧能锁定起点，不能保证终点",
+        "detail": "首帧适合锁构图、角色、材质和色彩，但镜头后半段仍可能出现路线增生、文字、额外肢体或材质漂移，因此必须检查中帧和尾帧。"
+      },
+      {
+        "title": "首尾帧路线适合需要明确落点的转场",
+        "detail": "当镜头必须落到指定构图、形态或下一镜头连接点时，应同时提供首尾帧；代价是依赖模型支持，并仍需检查运动连续性，而不是把两张相同图片当作有效首尾帧。"
+      },
+      {
+        "title": "Prompt 之外，版本与质检才让流程可生产",
+        "detail": "本案例保留 v1/v2、审核结论、SHA、媒体规格和回退路径。没有这些，重做会覆盖证据，无法判断哪一版进入剪辑。"
+      },
+      {
+        "title": "声音与文字应作为独立确定性层",
+        "detail": "原视频模型音轨没有进入粗剪；统一旁白、环境声、字幕和标题在镜头通过后单独制作，更容易替换、授权、控响度和保证中文正确。"
+      }
+    ],
+    "best_fit": [
+      "知识纪录片、历史文化和路线叙事",
+      "品牌故事、产品解释和系列化短片",
+      "需要统一视觉模板、多人/多模型协作和版本留痕的内容生产",
+      "可以先拆镜头、逐段放行，再进行确定性后期的项目"
+    ],
+    "not_best_fit": [
+      "强即兴、长镜头和复杂连续表演",
+      "高精度多人对白、口型同步和角色跨镜绝对一致",
+      "希望一次提示直接出最终成片且不进行人工复核的场景"
+    ],
+    "extension_priorities": [
+      "P0：接入更多图片/视频/声音 provider，补齐 Windows 与错误重试",
+      "P0：把 shot 资产、版本、审批和失败恢复做成正式状态机",
+      "P1：自动抽取首中尾帧，增加文字、肢体、构图和风格漂移质检",
+      "P1：把字幕、标题、安全区、响度和授权清单纳入统一交付",
+      "P2：按镜头类型路由多模型，并积累风格模板与质量评测数据"
+    ],
+    "meaning": [
+      "把零散 Prompt 升级为可复用、可审计、可替换模型的制作 SOP。",
+      "把创意决策、生成执行和确定性后期分层，降低更换模型与返工成本。",
+      "让每个镜头的输入、版本、问题和放行结论可追溯，适合团队协作。",
+      "可与现有图片风格能力组合：图片 Skill 负责视觉语言，导演层负责叙事、镜头和交付。"
+    ],
+    "deliverables": [
+      "media/dunhuang/final/dunhuang-sound-preview-v2.mp4",
+      "media/dunhuang/final/dunhuang-rough-cut-v1.mp4",
+      "media/dunhuang/final/dunhuang-narration-yunyang-v2.m4a",
+      "media/dunhuang/final/dunhuang-ambient-bed-v1.m4a",
+      "media/dunhuang/final/dunhuang-audio-mix-v2.m4a",
+      "media/dunhuang/final/dunhuang-narration-v1.srt",
+      "notes/dunhuang-case-study.md",
+      "notes/dunhuang-video-dispatch.md",
+      "notes/dunhuang-edit-decision-list.md",
+      "notes/dunhuang-sound-direction.md"
+    ]
+  },
   "beat_count": 3,
   "shot_count": 6,
   "timeline_seconds": 30,
@@ -39,9 +211,31 @@
           "scene": "俯视一张层层展开的古代交通地图，河西走廊像纸带穿过山脉与沙漠，敦煌以朱砂圆点成为汇聚中心",
           "still_prompt": "9:16 竖屏东方历史编辑拼贴。沙金色手工纸为底，撕边旧地图、墨线山脉、青金石蓝河流和朱砂红路线层层叠放；敦煌位置用无文字的朱砂圆点与放射线强调。真实纸张阴影、壁画矿物颜料质感、轻微套印偏移，不生成可读文字。",
           "still_prompt_source": "codex-built-in-imagegen",
-          "motion_prompt": "镜头从地图全景缓慢推进敦煌圆点；不同纸层以轻微视差移动，路线依次亮起，构图和圆点位置保持稳定。",
+          "motion_prompt": "镜头只做一次非常缓慢、平稳的推进，最终停在敦煌圆点；不同纸层仅产生轻微视差。只允许原图中已经存在的细红路线沿原路径柔和亮起，路线的数量、位置、长度和形状必须保持不变；禁止绘制新路线、禁止延长路线、禁止树枝状生长或增加任何分叉，敦煌圆点与地图构图全程稳定。",
           "reference_image": "assets/dunhuang/B01-S01.png",
-          "reference_video": ""
+          "reference_video": "assets/dunhuang/video/B01-S01-v2.mp4",
+          "previous_versions": [
+            {
+              "version": "v1",
+              "reference_video": "assets/dunhuang/video/B01-S01-v1.mp4",
+              "creative_status": "usable-with-tail-revision",
+              "summary": "纸张风格与敦煌圆点稳定，但尾段红色路线出现树枝状扩张；已由 v2 替代。"
+            }
+          ],
+          "video_review": {
+            "version": "v2",
+            "source": "user-supplied",
+            "technical_status": "pass",
+            "creative_status": "approved-v2",
+            "duration_seconds": 5.062,
+            "dimensions": "474x842",
+            "fps": 30,
+            "video_codec": "h264",
+            "audio_codec": "aac",
+            "strength": "纸张拼贴、矿物配色、山脉、河流和敦煌圆点全程稳定；镜头只做平稳推近，红色路线保持既有数量、位置与形态，没有再生长或新增分叉。",
+            "issue": "未发现需要重新生成的主体漂移或路线扩张；尾帧属于自然推近后的构图裁切。",
+            "recommendation": "通过 v2，可进入剪辑；建议保留完整推进节奏，并把尾帧停在敦煌圆点仍清楚居中的位置。"
+          }
         },
         {
           "id": "B01-S02",
@@ -51,7 +245,21 @@
           "still_prompt_source": "codex-built-in-imagegen",
           "motion_prompt": "横向跟随驼队；前景沙丘移动较快、城门较慢，纸页被风卷起后落下，驼队轮廓和队形保持连续。",
           "reference_image": "assets/dunhuang/B01-S02.png",
-          "reference_video": ""
+          "reference_video": "assets/dunhuang/video/B01-S02-v1.mp4",
+          "video_review": {
+            "version": "v1",
+            "source": "user-supplied",
+            "technical_status": "pass",
+            "creative_status": "approved-v1",
+            "duration_seconds": 5.088,
+            "dimensions": "496x864",
+            "fps": 24,
+            "video_codec": "h264",
+            "audio_codec": "aac",
+            "strength": "驼队轮廓和队形连续，纸张拼贴与沙金配色稳定；横向跟随、前景沙丘与远处城门的层次变化清楚，没有文字或明显主体变形。",
+            "issue": "领队骆驼在尾段自然离开左侧画面，属于横向跟随结果；与下一镜衔接时需要选择不突兀的切点。",
+            "recommendation": "通过 v1，可进入剪辑；优先在队形仍完整、城门已更清楚的后半段选择出点，无需为视觉稳定性重做。"
+          }
         }
       ]
     },
@@ -68,9 +276,31 @@
           "scene": "市集桌面俯拍，丝绸、香料、玻璃器、经卷与钱币以纸质贴片围成交流圆环，不同服饰的手从四周伸入画面",
           "still_prompt": "9:16 竖屏东方市集编辑拼贴。青金石蓝纸面上摆放丝绸、香料、玻璃器、卷轴和钱币的高质感剪纸贴片；不同肤色与服饰袖口的手从四边伸入，形成交换动作。朱砂印章形状仅作图形，不含文字；矿物色、金箔碎片、纸张阴影清晰。",
           "still_prompt_source": "codex-built-in-imagegen",
-          "motion_prompt": "垂直俯拍保持稳定；手和物件分层进入圆环，丝绸轻摆、香料颗粒短暂散开，最后所有元素停在清晰构图中。",
+          "motion_prompt": "以输入关键帧为严格首帧，垂直俯拍机位全程锁定。所有手、袖口、丝绸、香料碗、瓶子、卷轴和钱币必须保持输入图中的数量、位置、轮廓与手工剪纸材质；只允许各纸片做极小幅度的分层进入并停稳，丝绸轻摆一次，香料仅在碗内轻微颤动。禁止新增手或器物，禁止把纸艺手、瓶子或丝绸变成写实材质，卷轴必须保持卷起且完全无字，不得展开或生成文字。最后一秒回到清晰稳定的纸艺交流圆环。",
           "reference_image": "assets/dunhuang/B02-S01.png",
-          "reference_video": ""
+          "reference_video": "assets/dunhuang/video/B02-S01-v2.mp4",
+          "previous_versions": [
+            {
+              "version": "v1",
+              "reference_video": "assets/dunhuang/video/B02-S01-v1.mp4",
+              "creative_status": "requires-full-regeneration",
+              "summary": "中后段写实化、新增手部动作，卷轴展开并生成文字；已由 v2 替代。"
+            }
+          ],
+          "video_review": {
+            "version": "v2",
+            "source": "user-supplied",
+            "technical_status": "pass",
+            "creative_status": "approved-v2",
+            "duration_seconds": 5.062,
+            "dimensions": "474x842",
+            "fps": 30,
+            "video_codec": "h264",
+            "audio_codec": "aac",
+            "strength": "垂直俯拍和手工剪纸材质全程稳定；画面保持五只手、丝绸、香料碗、瓶子与卷起的空白卷轴，第六枚硬币从下方手中落下后与其余五枚组成清楚的六枚圆环。",
+            "issue": "未发现新增手、器物写实化、卷轴展开或文字生成；动作集中在放下硬币与极轻微纸片变化。",
+            "recommendation": "通过 v2，可进入剪辑；建议完整保留从持币到六枚成环的动作，并在圆环稳定后切出。"
+          }
         },
         {
           "id": "B02-S02",
@@ -80,7 +310,21 @@
           "still_prompt_source": "codex-built-in-imagegen",
           "motion_prompt": "镜头轻微上升；飘带沿一条主曲线缓慢展开，乐器局部轻振，矿物颜料颗粒在节拍上聚散，人物轮廓与面部保持稳定。",
           "reference_image": "assets/dunhuang/B02-S02.png",
-          "reference_video": ""
+          "reference_video": "assets/dunhuang/video/B02-S02-v1.mp4",
+          "video_review": {
+            "version": "v1",
+            "source": "user-supplied",
+            "technical_status": "pass",
+            "creative_status": "approved-v1",
+            "duration_seconds": 5.088,
+            "dimensions": "496x864",
+            "fps": 24,
+            "video_codec": "h264",
+            "audio_codec": "aac",
+            "strength": "舞者姿态、双臂和面部连续，琵琶与鼓轮廓稳定；红、青飘带保持清晰的 S 形展开，纸艺壁画语言和矿物配色贯穿全段，没有文字、额外肢体或现代舞台。",
+            "issue": "中后段粗粝纸纤维逐渐变成更平滑、立体的纸艺浮雕，灯光也更戏剧化；镜头上移后底部莲花逐渐离开画面，属于轻微风格与构图变化。",
+            "recommendation": "通过 v1，可进入剪辑。建议在人物、飘带与乐器都清晰的后半段选择出点，并用下一镜洞窟暗部承接灯光变化；无需重新生成。"
+          }
         }
       ]
     },
@@ -99,7 +343,21 @@
           "still_prompt_source": "codex-built-in-imagegen",
           "motion_prompt": "缓慢穿过洞窟门形并轻微上仰；光线逐层照亮壁画纸幕，尘埃缓慢漂浮，壁画主体、脸部和纹样不重绘不变形。",
           "reference_image": "assets/dunhuang/B03-S01.png",
-          "reference_video": ""
+          "reference_video": "assets/dunhuang/video/B03-S01-v1.mp4",
+          "video_review": {
+            "version": "v1",
+            "source": "user-supplied",
+            "technical_status": "pass",
+            "creative_status": "approved-v1",
+            "duration_seconds": 5.175,
+            "dimensions": "768x1344",
+            "fps": 24,
+            "video_codec": "h264",
+            "audio_codec": "aac",
+            "strength": "洞窟门形、两位壁画人物、莲花、云纹和纵深拱门在首中尾保持连续；暖光随缓慢推进逐级增强，没有文字、额外人物、现代物件或明显主体变形。",
+            "issue": "起始画面已经较亮，后半段光照进一步增强，‘从黑暗中显现’的明暗反差弱于原设想；顶部飞天的局部色彩随光照略有变浅，属于轻微照明变化。",
+            "recommendation": "通过 v1，可进入剪辑。建议直接承接上一镜暗部，并在调色时略压低前 0.5 秒曝光以加强洞窟由暗到明的层次；无需重新生成。"
+          }
         },
         {
           "id": "B03-S02",
@@ -109,7 +367,21 @@
           "still_prompt_source": "codex-built-in-imagegen",
           "motion_prompt": "镜头缓慢拉远；经卷展开，前五个镜头的代表元素从四周回到圆环并逐一停稳，最后留出中央标题区，避免元素融化、跳变或文字生成。",
           "reference_image": "assets/dunhuang/B03-S02.png",
-          "reference_video": ""
+          "reference_video": "assets/dunhuang/video/B03-S02-v1.mp4",
+          "video_review": {
+            "version": "v1",
+            "source": "user-supplied",
+            "technical_status": "pass",
+            "creative_status": "approved-v1",
+            "duration_seconds": 5.088,
+            "dimensions": "496x864",
+            "fps": 24,
+            "video_codec": "h264",
+            "audio_codec": "aac",
+            "strength": "纸艺与矿物配色连续，中央卷轴始终保持大面积无字留白；驼队、琵琶、莲花、云纹和路线圆环清晰归位，结尾构图完整，没有文字或明显主体变形。",
+            "issue": "3 秒后镜头仍持续缓慢拉远，未完全满足‘最后两秒画面静止’；尾帧本身清晰稳定，可直接作为定格帧。",
+            "recommendation": "通过 v1，可进入剪辑。若中央需要停留标题，可在后期冻结最后一帧 1–2 秒；无需为画面稳定性重新生成。"
+          }
         }
       ]
     }

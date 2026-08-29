@@ -5,7 +5,7 @@
 ## 项目信息
 
 - 状态：`completed`
-- 创建与更新：2026-08-29
+- 创建：2026-08-29；完成更新：2026-08-30
 - 研究对象：[Alisa0808/vox-director](https://github.com/Alisa0808/vox-director)
 - 固定上游提交：`668ec3946fe0139bc985313b15c1a300fca42f94`
 - 上游获取方式：[`upstream/`](upstream/) Git submodule
@@ -17,6 +17,17 @@
 `vox-director` 是一个**可运行的端到端 Agent 视频 Skill**，不是新的图片或视频模型。宿主 Agent 负责叙事、风格选择和审批，Atlas Cloud 上的媒体模型负责图片、视频、TTS 与音乐，Python 和 ffmpeg 负责状态、时间线、字幕、混音与导出。
 
 它与此前研究的 `hand-drawn-video-prompts` 最大差别是：后者交付“怎样制作”的 Prompt 生产包，Vox Director 会继续调用生成模型并尝试交付 `final.mp4`。
+
+## 完成案例：敦煌 30 秒成片
+
+本项目已经从仓库研究走到一支完整案例。专属页面默认展示《敦煌：沙漠中的世界十字路口》最终 V2，并集中说明能力归属、完整生产链、首帧/尾帧经验、适用场景、局限、扩展方向和对我们的意义。
+
+- [打开完成案例](https://yydshly.github.io/0829_codex_project/projects/vox-director-study/?demo=dunhuang#case-study)
+- [阅读完整案例复盘](notes/dunhuang-case-study.md)
+- 最终文件：`media/dunhuang/final/dunhuang-sound-preview-v2.mp4`
+- 结果：30.000 秒、720×1280、30fps、H.264、48kHz 双声道 AAC；6/6 当前镜头通过，2 个失败 v1 与替换原因保留。
+
+案例验证后的核心认识：只有首帧可以锁定起点，但不能保证尾部不漂移；需要明确落点时应使用真正不同的首尾帧，同时继续检查中间运动。Prompt、版本、人工质检、失败恢复、确定性剪辑、声音和文字层共同构成可生产的交付，而不是附属步骤。
 
 ## 没有它的视频模型，也能使用
 
@@ -31,7 +42,15 @@
 
 详细说明见 [样例目录](notes/sample-catalog.md) 和 [前期导演台指南](notes/preproduction-guide.md)。
 
-完整示范：打开发布页的 `?demo=dunhuang#prep`，可直接载入《敦煌：沙漠中的世界十字路口》30 秒预案。示范包含 3 beats、6 shots、中文旁白、6 张 Codex 生成的 9:16 关键帧和无缺失输入的交接 JSON。展开镜头后点击“复制本镜头”即可获得一整段可投喂文本，也可点击顶部“复制全部 6 镜头”。视频模型尚未调用；独立调度文档见 [敦煌视频调度提示](notes/dunhuang-video-dispatch.md)。
+## 先分清：原库能力与本研究实现
+
+| 来源 | 真正包含的内容 | 不应误解为 |
+| --- | --- | --- |
+| vox-director 原库 | 以 `beats.json` 为中间协议的 B/A/C-roll 编排脚本、Atlas Cloud Provider、人工审批节点、媒体生成阶段和 ffmpeg/Pillow 确定性后期；随库附带 4 支 MP4 与 4 份结构样例 | 当前 Research Lab 网页、敦煌主题或 Codex 图片能力 |
+| Codex / Research Lab 新增 | 固定版本审计、模型无关前期导演台、4 份样例规范化、敦煌 30 秒脚本与逐镜头提示、6 张 Codex 关键帧、视频回填/复核界面、FFmpeg 画面粗剪、在线神经网络 TTS/程序化环境声试听、浏览器验收与发布页 | vox-director 原库自带 UI、原库已经生成的敦煌视频或原库在本项目内完成的粗剪/配音/混音 |
+| 用户外部模型产物 | 敦煌示范中的 6 段当前 MP4，以及 B01-S01、B02-S01 两段保留的 v1；均由用户在其他视频模型生成后提供 | vox-director 或 Codex 在本项目内生成的视频 |
+
+完整示范：打开发布页的 `?demo=dunhuang#case-study`，可直接看到《敦煌：沙漠中的世界十字路口》完成案例；准备台仍保留 30 秒预案、3 beats、6 shots、中文旁白、6 张 Codex 生成的 9:16 关键帧和无缺失输入的交接 JSON。六段当前视频均已通过：`B01-S01 v2` 修复路线扩张，`B02-S01 v2` 锁定五只手、六枚硬币、纸艺器物和卷起的无字卷轴，其余四段使用通过的 v1。页面可播放/下载静音画面粗剪与最终声音版 V2；声音版采用 Microsoft Edge `zh-CN-YunyangNeural` 普通话神经网络男声和不含外部采样的 FFmpeg 程序化环境声，并提供旁白、环境声、混音分轨和 SRT。它是本研究案例的完成版，但不冒充真人或原库输出；三段非敏感旁白文本曾发送给在线 TTS 服务，正式商业发布前仍需确认音色及使用条款。Kangkang 声音 v1 和两个被替换的视频 v1 仍作为历史保留。详见 [完整案例复盘](notes/dunhuang-case-study.md)、[30 秒粗剪清单](notes/dunhuang-edit-decision-list.md) 和 [声音方向](notes/dunhuang-sound-direction.md)。
 
 ## 首先看能力演示
 
@@ -47,10 +66,11 @@
 
 ```powershell
 python projects/vox-director-study/scripts/build_demo.py
-python -m http.server 8765 --directory .
+python scripts/build_site.py
+python -m http.server 8765 --directory .site
 ```
 
-打开 `http://127.0.0.1:8765/projects/vox-director-study/demo/`。
+打开 `http://127.0.0.1:8765/projects/vox-director-study/`。
 
 ## 固定提交审计
 
@@ -61,7 +81,7 @@ python -m http.server 8765 --directory .
 - 0 个上游测试路径；
 - Provider 接口存在，但只有 Atlas Cloud 一个实现。
 
-自动审计执行 25 项本地研究、前期包、敦煌关键帧与调度提示契约检查；另记录 5 项上游工程边界。机器可读证据见 [audit-results.json](notes/evidence/audit-results.json)。
+自动审计执行 48 项本地研究、前期包、敦煌关键帧、视频版本、粗剪、声音、完成案例与交付文件契约检查；另记录 5 项上游工程边界。真实浏览器矩阵覆盖 10 个桌面、平板、手机、主题、键盘、错误与媒体降级 surface。机器可读证据见 [audit-results.json](notes/evidence/audit-results.json) 和 [browser-validation.json](notes/evidence/browser-validation.json)。
 
 ## 适合与不适合
 
@@ -90,7 +110,7 @@ projects/vox-director-study/
 ├─ upstream/                    # 固定上游 Git submodule
 ├─ data/research-data.json      # 演示与报告的规范数据
 ├─ data/preproduction-data.json # 4 套模型无关样例结构
-├─ media/dunhuang/              # 6 张 Codex 生成的关键帧源文件
+├─ media/dunhuang/              # 6 张 Codex 关键帧与 6 段用户生成视频
 ├─ demo/                        # 零依赖交互研究页
 ├─ scripts/build_demo.py        # 同步数据、缩略图与上游许可证
 ├─ scripts/build_preproduction.py # 规范化 17 beats / 26 shots
@@ -124,9 +144,16 @@ node projects/vox-director-study/tests/browser_acceptance.cjs
 
 上游按 MIT License 发布；演示复用的缩略图保留了 [LICENSE-upstream.txt](demo/assets/LICENSE-upstream.txt)。代码许可不自动覆盖人物肖像、声音、Logo、外部模型服务条款和生成素材的商业使用权。
 
-本研究没有 Atlas Cloud API Key，也没有调用视频模型。敦煌示范的 6 张关键帧由 Codex 内置图片模型生成并保存到项目；后续视频仍由用户选定的视频模型调度。因此验证边界是“固定源码 + 随库样例 + 本地编排审计 + Codex 关键帧 + 可交互前期演示”，不是独立复跑 Vox Director 的 Atlas Cloud 成片流程。
+本研究没有 Atlas Cloud API Key，也没有直接调用视频模型。敦煌示范的 6 张关键帧由 Codex 内置图片模型生成；6 段视频均由用户在外部视频模型生成后提供，并已原样复制、检查和回填。30 秒画面粗剪、Yunyang Neural 在线 TTS 试听、程序化环境声和混音由 Codex / Research Lab 编排完成，不代表 vox-director 在本项目内执行了媒体生成或声音制作。因此验证边界是“固定源码 + 随库样例 + 本地编排审计 + Codex 关键帧 + 用户视频回填 + Codex 确定性后期/试听声音”，不是独立复跑 Vox Director 的 Atlas Cloud 成片流程。
 
 ## 研究日志
+
+### 2026-08-30
+
+- 将敦煌示范收口为完成案例，最终 V2 成片成为专属页面的默认结果。
+- 新增网页完成案例区，集中呈现能力归属、8 步生产链、5 项关键发现、适合/不适合边界、扩展优先级和对我们的意义。
+- 新增 `notes/dunhuang-case-study.md`，完整记录首帧与首尾帧差异、版本与质检经验、最终规格、交付目录、复现方式和发布边界。
+- 保留所有静音版、分轨、历史视频和 Kangkang 声音 v1；完成版不覆盖可追溯证据。
 
 ### 2026-08-29
 
@@ -136,4 +163,13 @@ node projects/vox-director-study/tests/browser_acceptance.cjs
 - 制作三模式能力控制台、真实样例影院、场景边界、扩展路线和采用意义页面。
 - 新增模型无关前期导演台、动态资产清单、人工关卡以及复制/下载 JSON 交接包。
 - 用 Codex 内置图片模型生成 6 张敦煌关键帧，并补充逐镜头视频调度提示。
+- 接收并回填用户生成的 B01-S01 v1；检查首、中、尾帧，记录尾帧路线分叉问题并收紧重做提示。
+- 接收并回填用户生成的 B01-S02 v1；检查首、中、尾帧，确认驼队队形、城市剪影和纸层视差稳定，批准进入剪辑。
+- 接收并回填用户生成的 B02-S01 v1；检查首、中、尾帧，记录写实化、新增手部与卷轴文字问题，并收紧整段重做提示。
+- 接收并回填用户生成的 B03-S02 v1；确认结尾纸艺、中央无字留白与圆环归位通过，记录尾帧后期冻结建议。
+- 接收并回填用户生成的 B02-S02 v1；确认人物、乐器和 S 形飘带稳定，记录纸艺从粗粝纹理转向平滑浮雕的剪辑注意。
+- 接收并回填用户生成的 B03-S01 v1；确认洞窟门形、壁画人物、莲花与云纹连续稳定，批准进入剪辑并记录前 0.5 秒压暗建议。
+- 接收 B01-S01 与 B02-S01 重做视频并映射为 v2；首中尾帧确认路线、五只手、六枚硬币、卷轴和纸艺材质稳定，批准进入剪辑，同时保留两个 v1 及原审核记录。
+- 将六段当前通过版统一为 720×1280、30fps，各取 5 秒硬切合成 30 秒画面粗剪；移除模型原音并保留静音 AAC 占位轨，生成三段中文旁白 SRT 和可追溯的镜头版本清单。
+- 使用 Microsoft Edge `zh-CN-YunyangNeural` 神经网络男声生成三段可替换旁白，以 −6% 语速、−8 Hz 音高调整到各自 10 秒窗口；用 FFmpeg 程序化合成无外部采样的低频/风声环境声，完成 ducking、响度归一化、30 秒声音试听 v2 与三条 AAC 分轨。原 Kangkang v1 保留但不再默认播放。
 - 建立标准库审计与真实浏览器验收，记录跨平台和工程成熟度边界。

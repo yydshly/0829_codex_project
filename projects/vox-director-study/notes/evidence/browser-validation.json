@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-29T11:59:09.625Z",
-  "baseUrl": "http://127.0.0.1:8765/.site/projects/vox-director-study/",
+  "generatedAt": "2026-08-29T20:43:35.825Z",
+  "baseUrl": "http://127.0.0.1:8765/projects/vox-director-study/",
   "playwrightVersion": "1.62.1",
   "matrix": {
     "desktop-light-overview": {
@@ -70,14 +70,134 @@
         "dunhuangTopic": "敦煌：沙漠中的世界十字路口",
         "dunhuangRoute": "image-to-video",
         "dunhuangDuration": "30",
-        "dunhuangWarning": "研究示范已载入：前期预案和 6 张 Codex 关键帧已完成；视频尚未生成，请按逐镜头运动提示交给你的视频模型。",
+        "dunhuangWarning": "研究示范已完成：6 张 Codex 关键帧、6/6 个当前视频、1 个静音画面粗剪和最终声音版 V2 已回填；成片使用在线神经网络 TTS 与原创程序化环境声，完整结论见下方完成案例。",
         "dunhuangNarration": "河西走廊的尽头，敦煌守在沙漠边缘。向东是中原，向西，是绿洲与更远的世界。",
         "dunhuangPromptSources": 6,
-        "dunhuangAssetStatus": "01主题与受众 Brief敦煌：沙漠中的世界十字路口READY02逐镜头脚本6/6 个镜头含画面与运动描述READY03Codex 关键帧6/6 张本地关键帧已生成；可直接交给视频模型READY04确定性文字层标题、中文、数字和 Logo 建议在生成后叠加PLAN05旁白与字幕3 段旁白需要录制、TTS 或人工配音PLAN06音乐与音效先确定节奏、授权与响度目标，再进入混音PLAN07模型参数映射still_prompt · reference_image · motion_prompt · duration · aspect → 你的视频模型（待填写）MAP",
+        "dunhuangAssetStatus": "01主题与受众 Brief敦煌：沙漠中的世界十字路口READY02逐镜头脚本6/6 个镜头含画面与运动描述READY03Codex 关键帧6/6 张本地关键帧已生成；可直接交给视频模型READY04已生成视频6/6 个本地镜头视频已回填；逐镜头查看独立复核结论REVIEW0530 秒画面粗剪v1 · 30s · 720x1280 · 静音 AAC 占位轨REVIEW0630 秒最终声音版v2 · Microsoft Yunyang Neural zh-CN Adult Male · 原创程序化环境声DONE07确定性文字层标题、中文、数字和 Logo 建议在生成后叠加PLAN08旁白与字幕3 段神经网络旁白与 SRT 已交付；字幕未烧录DONE09音乐与音效程序化环境声、ducking 与响度混音已完成；未使用外部采样DONE10模型参数映射still_prompt · reference_image · motion_prompt · duration · aspect → 你的视频模型（待填写）MAP",
+        "videoReviewStatuses": [
+          "通过 V2 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑",
+          "通过 V2 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑"
+        ],
+        "videoVersionHistories": [
+          "历史版本（保留，不作为当前播放）V1 · 纸张风格与敦煌圆点稳定，但尾段红色路线出现树枝状扩张；已由 v2 替代。",
+          "历史版本（保留，不作为当前播放）V1 · 中后段写实化、新增手部动作，卷轴展开并生成文字；已由 v2 替代。"
+        ],
+        "codexImageSourceLabels": [
+          "本研究新增 · Codex 图片模型关键帧 · B01-S01 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B01-S02 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B02-S01 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B02-S02 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B03-S01 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B03-S02 · 可作为图生视频首帧"
+        ],
+        "userVideoSourceLabels": [
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成"
+        ],
+        "codexReviewSourceLabels": [
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查"
+        ],
+        "promptOrigins": [
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填"
+        ],
+        "roughCutProvenance": "画面素材：用户外部模型生成的 6 段当前通过视频粗剪合成：Codex / Research Lab 使用 FFmpeg；非原库本次执行",
+        "soundPreviewProvenance": "旁白试听：Microsoft Yunyang Neural zh-CN Adult Male · Microsoft Edge online neural TTS via edge-tts preview · 语速 -6% · 音高 -8Hz环境声：Codex / Research Lab 使用 FFmpeg 程序化合成 · 无外部音乐或采样混音：Codex / Research Lab 对齐、ducking 与响度归一化 · 非原库本次执行",
+        "roughCutMetadata": {
+          "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/final/dunhuang-rough-cut-v1.mp4",
+          "duration": 30,
+          "width": 720,
+          "height": 1280,
+          "audioTracks": 1
+        },
+        "soundPreviewMetadata": {
+          "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/final/dunhuang-sound-preview-v2.mp4",
+          "duration": 30,
+          "width": 720,
+          "height": 1280,
+          "audioTracks": 1
+        },
+        "completedCaseText": "\n      \n        \n          COMPLETED CASE / 16从库的结构，走到一支完成的片。\n          最终成片、能力归属、生产链与经过实操验证的结论集中在这里；准备台仍保留全部镜头和版本证据。\n        \n        最终成片没有加载成功；下面的案例结论、能力归属和生产链仍可阅读，也可返回准备台下载分轨与静音粗剪。案例已完成 · 2026-08-30 · FINAL V2敦煌：沙漠中的世界十字路口从仓库研究到 30 秒可播放成片的完整验证本案例证明，vox-director 的核心价值不是替代视频模型，而是把主题研究、beats、shots、关键帧、外部生成、人工复核、确定性剪辑和声音交付组织成可追溯的导演工作流。30s最终时长3叙事 Beats6/6通过镜头8视频版本留档6Codex 关键帧V2默认声音版下载最终成片查看完整案例复盘 ↗OWNERSHIP / 01先分清：谁完成了什么原库、Codex 和用户外部模型分别承担不同层，不能把本研究成片误写成上游仓库的直接生成结果。SOURCE / 01vox-director 原库提供 B/A/C-roll 三种导演模式、阶段式 Skill、provider/assemble 代码、beats/shots 样例和 ffmpeg 成片思路；它是编排层，不是通用视频生成模型。SOURCE / 02Codex / Research Lab 补充完成固定版本审计、模型无关准备台、敦煌脚本与逐镜头提示、6 张关键帧、媒体质检、版本管理、粗剪、在线 TTS、环境声、混音、网页和验收。SOURCE / 03用户与外部模型用户调度外部视频模型生成 6 个当前镜头和 2 个历史版本，并根据复核意见重做 B01-S01 与 B02-S01；这些视频不是原库或 Codex 视频模型生成。WORKFLOW / 02一支片真正需要的完整链路从固定证据到最终交付，生成模型只是其中一环；拆镜头、质检、版本和确定性后期同样属于核心生产资产。01固定源码与样例证据02主题、受众与事实边界033 个 Beats 的叙事弧046 个 Shots 与模型任务05Codex 生成 6 张首帧06外部视频模型生成与重做07人工首中尾帧质检与版本放行08FFmpeg 粗剪、旁白、声音与交付LEARNINGS / 03经过实操后，我们补充确认了什么这些结论来自首帧、尾帧、重做、版本管理、粗剪和声音交付，不是仅靠阅读 README 得出的推测。原库更像导演协议，不是生成引擎它最值得复用的是输入模式、阶段、beats/shots 数据结构、人工关卡和 assemble 思路；真正的图片、视频、声音仍由外部模型或后期工具执行。只有首帧能锁定起点，不能保证终点首帧适合锁构图、角色、材质和色彩，但镜头后半段仍可能出现路线增生、文字、额外肢体或材质漂移，因此必须检查中帧和尾帧。首尾帧路线适合需要明确落点的转场当镜头必须落到指定构图、形态或下一镜头连接点时，应同时提供首尾帧；代价是依赖模型支持，并仍需检查运动连续性，而不是把两张相同图片当作有效首尾帧。Prompt 之外，版本与质检才让流程可生产本案例保留 v1/v2、审核结论、SHA、媒体规格和回退路径。没有这些，重做会覆盖证据，无法判断哪一版进入剪辑。声音与文字应作为独立确定性层原视频模型音轨没有进入粗剪；统一旁白、环境声、字幕和标题在镜头通过后单独制作，更容易替换、授权、控响度和保证中文正确。SCENARIOS / 04这个方法最适合用在哪里它擅长可拆镜头、可逐段放行、可统一包装的内容；对连续表演和精密口型仍需更强的专用能力。最适合知识纪录片、历史文化和路线叙事品牌故事、产品解释和系列化短片需要统一视觉模板、多人/多模型协作和版本留痕的内容生产可以先拆镜头、逐段放行，再进行确定性后期的项目不适合直接套用强即兴、长镜头和复杂连续表演高精度多人对白、口型同步和角色跨镜绝对一致希望一次提示直接出最终成片且不进行人工复核的场景NEXT / 05可扩展方向：先稳定，再自动化P0 解决 provider、状态和恢复；P1 提升质检与交付；P2 再做多模型路由和可积累评测。P0：接入更多图片/视频/声音 provider，补齐 Windows 与错误重试P0：把 shot 资产、版本、审批和失败恢复做成正式状态机P1：自动抽取首中尾帧，增加文字、肢体、构图和风格漂移质检P1：把字幕、标题、安全区、响度和授权清单纳入统一交付P2：按镜头类型路由多模型，并积累风格模板与质量评测数据对我们的意义：从提示词，升级为制作系统。把零散 Prompt 升级为可复用、可审计、可替换模型的制作 SOP。把创意决策、生成执行和确定性后期分层，降低更换模型与返工成本。让每个镜头的输入、版本、问题和放行结论可追溯，适合团队协作。可与现有图片风格能力组合：图片 Skill 负责视觉语言，导演层负责叙事、镜头和交付。\n      \n    ",
+        "completedCaseMetadata": {
+          "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/final/dunhuang-sound-preview-v2.mp4",
+          "duration": 30,
+          "width": 720,
+          "height": 1280,
+          "audioTracks": 1
+        },
+        "videoMetadata": [
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B01-S01-v2.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B01-S01.png",
+            "duration": 5.061995,
+            "width": 474,
+            "height": 842
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B01-S02-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B01-S02.png",
+            "duration": 5.088,
+            "width": 496,
+            "height": 864
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B02-S01-v2.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B02-S01.png",
+            "duration": 5.061995,
+            "width": 474,
+            "height": 842
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B02-S02-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B02-S02.png",
+            "duration": 5.088,
+            "width": 496,
+            "height": 864
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B03-S01-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B03-S01.png",
+            "duration": 5.175,
+            "width": 768,
+            "height": 1344
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B03-S02-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B03-S02.png",
+            "duration": 5.088,
+            "width": 496,
+            "height": 864
+          }
+        ],
+        "videoPlaybackTimes": [
+          0.155391,
+          0.162394,
+          0.176929,
+          0.164516,
+          0.174739,
+          0.161662
+        ],
         "firstShotCopyStatus": "B01-S01 完整视频提示词已复制",
-        "firstShotClipboardLength": 318,
+        "firstShotClipboardLength": 398,
         "copyAllStatus": "全部 6 个视频任务已复制",
-        "allShotsClipboardLength": 2057,
+        "allShotsClipboardLength": 2267,
         "copiedShotIds": [
           "B01-S01",
           "B01-S02",
@@ -94,6 +214,14 @@
           "assets/dunhuang/B02-S02.png",
           "assets/dunhuang/B03-S01.png",
           "assets/dunhuang/B03-S02.png"
+        ],
+        "dunhuangReferenceVideos": [
+          "assets/dunhuang/video/B01-S01-v2.mp4",
+          "assets/dunhuang/video/B01-S02-v1.mp4",
+          "assets/dunhuang/video/B02-S01-v2.mp4",
+          "assets/dunhuang/video/B02-S02-v1.mp4",
+          "assets/dunhuang/video/B03-S01-v1.mp4",
+          "assets/dunhuang/video/B03-S02-v1.mp4"
         ],
         "dunhuangMissingRequired": []
       },
@@ -127,13 +255,13 @@
       "interaction": {},
       "status": "pass"
     },
-    "mobile-dark-preproduction": {
+    "tablet-light-completed-case": {
       "viewport": [
-        390,
-        844
+        768,
+        900
       ],
-      "theme": "dark",
-      "reducedMotion": true,
+      "theme": "light",
+      "reducedMotion": false,
       "horizontalOverflow": false,
       "consoleErrors": [],
       "pageErrors": [],
@@ -143,14 +271,134 @@
         "dunhuangTopic": "敦煌：沙漠中的世界十字路口",
         "dunhuangRoute": "image-to-video",
         "dunhuangDuration": "30",
-        "dunhuangWarning": "研究示范已载入：前期预案和 6 张 Codex 关键帧已完成；视频尚未生成，请按逐镜头运动提示交给你的视频模型。",
+        "dunhuangWarning": "研究示范已完成：6 张 Codex 关键帧、6/6 个当前视频、1 个静音画面粗剪和最终声音版 V2 已回填；成片使用在线神经网络 TTS 与原创程序化环境声，完整结论见下方完成案例。",
         "dunhuangNarration": "河西走廊的尽头，敦煌守在沙漠边缘。向东是中原，向西，是绿洲与更远的世界。",
         "dunhuangPromptSources": 6,
-        "dunhuangAssetStatus": "01主题与受众 Brief敦煌：沙漠中的世界十字路口READY02逐镜头脚本6/6 个镜头含画面与运动描述READY03Codex 关键帧6/6 张本地关键帧已生成；可直接交给视频模型READY04确定性文字层标题、中文、数字和 Logo 建议在生成后叠加PLAN05旁白与字幕3 段旁白需要录制、TTS 或人工配音PLAN06音乐与音效先确定节奏、授权与响度目标，再进入混音PLAN07模型参数映射still_prompt · reference_image · motion_prompt · duration · aspect → 你的视频模型（待填写）MAP",
+        "dunhuangAssetStatus": "01主题与受众 Brief敦煌：沙漠中的世界十字路口READY02逐镜头脚本6/6 个镜头含画面与运动描述READY03Codex 关键帧6/6 张本地关键帧已生成；可直接交给视频模型READY04已生成视频6/6 个本地镜头视频已回填；逐镜头查看独立复核结论REVIEW0530 秒画面粗剪v1 · 30s · 720x1280 · 静音 AAC 占位轨REVIEW0630 秒最终声音版v2 · Microsoft Yunyang Neural zh-CN Adult Male · 原创程序化环境声DONE07确定性文字层标题、中文、数字和 Logo 建议在生成后叠加PLAN08旁白与字幕3 段神经网络旁白与 SRT 已交付；字幕未烧录DONE09音乐与音效程序化环境声、ducking 与响度混音已完成；未使用外部采样DONE10模型参数映射still_prompt · reference_image · motion_prompt · duration · aspect → 你的视频模型（待填写）MAP",
+        "videoReviewStatuses": [
+          "通过 V2 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑",
+          "通过 V2 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑"
+        ],
+        "videoVersionHistories": [
+          "历史版本（保留，不作为当前播放）V1 · 纸张风格与敦煌圆点稳定，但尾段红色路线出现树枝状扩张；已由 v2 替代。",
+          "历史版本（保留，不作为当前播放）V1 · 中后段写实化、新增手部动作，卷轴展开并生成文字；已由 v2 替代。"
+        ],
+        "codexImageSourceLabels": [
+          "本研究新增 · Codex 图片模型关键帧 · B01-S01 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B01-S02 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B02-S01 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B02-S02 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B03-S01 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B03-S02 · 可作为图生视频首帧"
+        ],
+        "userVideoSourceLabels": [
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成"
+        ],
+        "codexReviewSourceLabels": [
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查"
+        ],
+        "promptOrigins": [
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填"
+        ],
+        "roughCutProvenance": "画面素材：用户外部模型生成的 6 段当前通过视频粗剪合成：Codex / Research Lab 使用 FFmpeg；非原库本次执行",
+        "soundPreviewProvenance": "旁白试听：Microsoft Yunyang Neural zh-CN Adult Male · Microsoft Edge online neural TTS via edge-tts preview · 语速 -6% · 音高 -8Hz环境声：Codex / Research Lab 使用 FFmpeg 程序化合成 · 无外部音乐或采样混音：Codex / Research Lab 对齐、ducking 与响度归一化 · 非原库本次执行",
+        "roughCutMetadata": {
+          "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/final/dunhuang-rough-cut-v1.mp4",
+          "duration": 30,
+          "width": 720,
+          "height": 1280,
+          "audioTracks": 1
+        },
+        "soundPreviewMetadata": {
+          "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/final/dunhuang-sound-preview-v2.mp4",
+          "duration": 30,
+          "width": 720,
+          "height": 1280,
+          "audioTracks": 1
+        },
+        "completedCaseText": "\n      \n        \n          COMPLETED CASE / 16从库的结构，走到一支完成的片。\n          最终成片、能力归属、生产链与经过实操验证的结论集中在这里；准备台仍保留全部镜头和版本证据。\n        \n        最终成片没有加载成功；下面的案例结论、能力归属和生产链仍可阅读，也可返回准备台下载分轨与静音粗剪。案例已完成 · 2026-08-30 · FINAL V2敦煌：沙漠中的世界十字路口从仓库研究到 30 秒可播放成片的完整验证本案例证明，vox-director 的核心价值不是替代视频模型，而是把主题研究、beats、shots、关键帧、外部生成、人工复核、确定性剪辑和声音交付组织成可追溯的导演工作流。30s最终时长3叙事 Beats6/6通过镜头8视频版本留档6Codex 关键帧V2默认声音版下载最终成片查看完整案例复盘 ↗OWNERSHIP / 01先分清：谁完成了什么原库、Codex 和用户外部模型分别承担不同层，不能把本研究成片误写成上游仓库的直接生成结果。SOURCE / 01vox-director 原库提供 B/A/C-roll 三种导演模式、阶段式 Skill、provider/assemble 代码、beats/shots 样例和 ffmpeg 成片思路；它是编排层，不是通用视频生成模型。SOURCE / 02Codex / Research Lab 补充完成固定版本审计、模型无关准备台、敦煌脚本与逐镜头提示、6 张关键帧、媒体质检、版本管理、粗剪、在线 TTS、环境声、混音、网页和验收。SOURCE / 03用户与外部模型用户调度外部视频模型生成 6 个当前镜头和 2 个历史版本，并根据复核意见重做 B01-S01 与 B02-S01；这些视频不是原库或 Codex 视频模型生成。WORKFLOW / 02一支片真正需要的完整链路从固定证据到最终交付，生成模型只是其中一环；拆镜头、质检、版本和确定性后期同样属于核心生产资产。01固定源码与样例证据02主题、受众与事实边界033 个 Beats 的叙事弧046 个 Shots 与模型任务05Codex 生成 6 张首帧06外部视频模型生成与重做07人工首中尾帧质检与版本放行08FFmpeg 粗剪、旁白、声音与交付LEARNINGS / 03经过实操后，我们补充确认了什么这些结论来自首帧、尾帧、重做、版本管理、粗剪和声音交付，不是仅靠阅读 README 得出的推测。原库更像导演协议，不是生成引擎它最值得复用的是输入模式、阶段、beats/shots 数据结构、人工关卡和 assemble 思路；真正的图片、视频、声音仍由外部模型或后期工具执行。只有首帧能锁定起点，不能保证终点首帧适合锁构图、角色、材质和色彩，但镜头后半段仍可能出现路线增生、文字、额外肢体或材质漂移，因此必须检查中帧和尾帧。首尾帧路线适合需要明确落点的转场当镜头必须落到指定构图、形态或下一镜头连接点时，应同时提供首尾帧；代价是依赖模型支持，并仍需检查运动连续性，而不是把两张相同图片当作有效首尾帧。Prompt 之外，版本与质检才让流程可生产本案例保留 v1/v2、审核结论、SHA、媒体规格和回退路径。没有这些，重做会覆盖证据，无法判断哪一版进入剪辑。声音与文字应作为独立确定性层原视频模型音轨没有进入粗剪；统一旁白、环境声、字幕和标题在镜头通过后单独制作，更容易替换、授权、控响度和保证中文正确。SCENARIOS / 04这个方法最适合用在哪里它擅长可拆镜头、可逐段放行、可统一包装的内容；对连续表演和精密口型仍需更强的专用能力。最适合知识纪录片、历史文化和路线叙事品牌故事、产品解释和系列化短片需要统一视觉模板、多人/多模型协作和版本留痕的内容生产可以先拆镜头、逐段放行，再进行确定性后期的项目不适合直接套用强即兴、长镜头和复杂连续表演高精度多人对白、口型同步和角色跨镜绝对一致希望一次提示直接出最终成片且不进行人工复核的场景NEXT / 05可扩展方向：先稳定，再自动化P0 解决 provider、状态和恢复；P1 提升质检与交付；P2 再做多模型路由和可积累评测。P0：接入更多图片/视频/声音 provider，补齐 Windows 与错误重试P0：把 shot 资产、版本、审批和失败恢复做成正式状态机P1：自动抽取首中尾帧，增加文字、肢体、构图和风格漂移质检P1：把字幕、标题、安全区、响度和授权清单纳入统一交付P2：按镜头类型路由多模型，并积累风格模板与质量评测数据对我们的意义：从提示词，升级为制作系统。把零散 Prompt 升级为可复用、可审计、可替换模型的制作 SOP。把创意决策、生成执行和确定性后期分层，降低更换模型与返工成本。让每个镜头的输入、版本、问题和放行结论可追溯，适合团队协作。可与现有图片风格能力组合：图片 Skill 负责视觉语言，导演层负责叙事、镜头和交付。\n      \n    ",
+        "completedCaseMetadata": {
+          "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/final/dunhuang-sound-preview-v2.mp4",
+          "duration": 30,
+          "width": 720,
+          "height": 1280,
+          "audioTracks": 1
+        },
+        "videoMetadata": [
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B01-S01-v2.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B01-S01.png",
+            "duration": 5.061995,
+            "width": 474,
+            "height": 842
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B01-S02-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B01-S02.png",
+            "duration": 5.088,
+            "width": 496,
+            "height": 864
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B02-S01-v2.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B02-S01.png",
+            "duration": 5.061995,
+            "width": 474,
+            "height": 842
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B02-S02-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B02-S02.png",
+            "duration": 5.088,
+            "width": 496,
+            "height": 864
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B03-S01-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B03-S01.png",
+            "duration": 5.175,
+            "width": 768,
+            "height": 1344
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B03-S02-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B03-S02.png",
+            "duration": 5.088,
+            "width": 496,
+            "height": 864
+          }
+        ],
+        "videoPlaybackTimes": [
+          0.164636,
+          0.170289,
+          0.160899,
+          0.163124,
+          0.167486,
+          0.174004
+        ],
         "firstShotCopyStatus": "B01-S01 完整视频提示词已复制",
-        "firstShotClipboardLength": 318,
+        "firstShotClipboardLength": 398,
         "copyAllStatus": "全部 6 个视频任务已复制",
-        "allShotsClipboardLength": 2057,
+        "allShotsClipboardLength": 2267,
         "copiedShotIds": [
           "B01-S01",
           "B01-S02",
@@ -167,6 +415,187 @@
           "assets/dunhuang/B02-S02.png",
           "assets/dunhuang/B03-S01.png",
           "assets/dunhuang/B03-S02.png"
+        ],
+        "dunhuangReferenceVideos": [
+          "assets/dunhuang/video/B01-S01-v2.mp4",
+          "assets/dunhuang/video/B01-S02-v1.mp4",
+          "assets/dunhuang/video/B02-S01-v2.mp4",
+          "assets/dunhuang/video/B02-S02-v1.mp4",
+          "assets/dunhuang/video/B03-S01-v1.mp4",
+          "assets/dunhuang/video/B03-S02-v1.mp4"
+        ],
+        "dunhuangMissingRequired": []
+      },
+      "status": "pass"
+    },
+    "mobile-dark-preproduction": {
+      "viewport": [
+        390,
+        844
+      ],
+      "theme": "dark",
+      "reducedMotion": true,
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interaction": {
+        "dunhuangSample": "dunhuang-30s",
+        "dunhuangTopic": "敦煌：沙漠中的世界十字路口",
+        "dunhuangRoute": "image-to-video",
+        "dunhuangDuration": "30",
+        "dunhuangWarning": "研究示范已完成：6 张 Codex 关键帧、6/6 个当前视频、1 个静音画面粗剪和最终声音版 V2 已回填；成片使用在线神经网络 TTS 与原创程序化环境声，完整结论见下方完成案例。",
+        "dunhuangNarration": "河西走廊的尽头，敦煌守在沙漠边缘。向东是中原，向西，是绿洲与更远的世界。",
+        "dunhuangPromptSources": 6,
+        "dunhuangAssetStatus": "01主题与受众 Brief敦煌：沙漠中的世界十字路口READY02逐镜头脚本6/6 个镜头含画面与运动描述READY03Codex 关键帧6/6 张本地关键帧已生成；可直接交给视频模型READY04已生成视频6/6 个本地镜头视频已回填；逐镜头查看独立复核结论REVIEW0530 秒画面粗剪v1 · 30s · 720x1280 · 静音 AAC 占位轨REVIEW0630 秒最终声音版v2 · Microsoft Yunyang Neural zh-CN Adult Male · 原创程序化环境声DONE07确定性文字层标题、中文、数字和 Logo 建议在生成后叠加PLAN08旁白与字幕3 段神经网络旁白与 SRT 已交付；字幕未烧录DONE09音乐与音效程序化环境声、ducking 与响度混音已完成；未使用外部采样DONE10模型参数映射still_prompt · reference_image · motion_prompt · duration · aspect → 你的视频模型（待填写）MAP",
+        "videoReviewStatuses": [
+          "通过 V2 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑",
+          "通过 V2 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑",
+          "通过 V1 · 可进入剪辑"
+        ],
+        "videoVersionHistories": [
+          "历史版本（保留，不作为当前播放）V1 · 纸张风格与敦煌圆点稳定，但尾段红色路线出现树枝状扩张；已由 v2 替代。",
+          "历史版本（保留，不作为当前播放）V1 · 中后段写实化、新增手部动作，卷轴展开并生成文字；已由 v2 替代。"
+        ],
+        "codexImageSourceLabels": [
+          "本研究新增 · Codex 图片模型关键帧 · B01-S01 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B01-S02 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B02-S01 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B02-S02 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B03-S01 · 可作为图生视频首帧",
+          "本研究新增 · Codex 图片模型关键帧 · B03-S02 · 可作为图生视频首帧"
+        ],
+        "userVideoSourceLabels": [
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成",
+          "用户外部模型产物 · 非原库生成"
+        ],
+        "codexReviewSourceLabels": [
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查",
+          "质量复核：Codex / Research Lab 首中尾帧检查"
+        ],
+        "promptOrigins": [
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填",
+          "来源拆分：关键帧由 Codex 图片模型生成；视频由用户外部模型生成并回填"
+        ],
+        "roughCutProvenance": "画面素材：用户外部模型生成的 6 段当前通过视频粗剪合成：Codex / Research Lab 使用 FFmpeg；非原库本次执行",
+        "soundPreviewProvenance": "旁白试听：Microsoft Yunyang Neural zh-CN Adult Male · Microsoft Edge online neural TTS via edge-tts preview · 语速 -6% · 音高 -8Hz环境声：Codex / Research Lab 使用 FFmpeg 程序化合成 · 无外部音乐或采样混音：Codex / Research Lab 对齐、ducking 与响度归一化 · 非原库本次执行",
+        "roughCutMetadata": {
+          "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/final/dunhuang-rough-cut-v1.mp4",
+          "duration": 30,
+          "width": 720,
+          "height": 1280,
+          "audioTracks": 1
+        },
+        "soundPreviewMetadata": {
+          "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/final/dunhuang-sound-preview-v2.mp4",
+          "duration": 30,
+          "width": 720,
+          "height": 1280,
+          "audioTracks": 1
+        },
+        "completedCaseText": "\n      \n        \n          COMPLETED CASE / 16从库的结构，走到一支完成的片。\n          最终成片、能力归属、生产链与经过实操验证的结论集中在这里；准备台仍保留全部镜头和版本证据。\n        \n        最终成片没有加载成功；下面的案例结论、能力归属和生产链仍可阅读，也可返回准备台下载分轨与静音粗剪。案例已完成 · 2026-08-30 · FINAL V2敦煌：沙漠中的世界十字路口从仓库研究到 30 秒可播放成片的完整验证本案例证明，vox-director 的核心价值不是替代视频模型，而是把主题研究、beats、shots、关键帧、外部生成、人工复核、确定性剪辑和声音交付组织成可追溯的导演工作流。30s最终时长3叙事 Beats6/6通过镜头8视频版本留档6Codex 关键帧V2默认声音版下载最终成片查看完整案例复盘 ↗OWNERSHIP / 01先分清：谁完成了什么原库、Codex 和用户外部模型分别承担不同层，不能把本研究成片误写成上游仓库的直接生成结果。SOURCE / 01vox-director 原库提供 B/A/C-roll 三种导演模式、阶段式 Skill、provider/assemble 代码、beats/shots 样例和 ffmpeg 成片思路；它是编排层，不是通用视频生成模型。SOURCE / 02Codex / Research Lab 补充完成固定版本审计、模型无关准备台、敦煌脚本与逐镜头提示、6 张关键帧、媒体质检、版本管理、粗剪、在线 TTS、环境声、混音、网页和验收。SOURCE / 03用户与外部模型用户调度外部视频模型生成 6 个当前镜头和 2 个历史版本，并根据复核意见重做 B01-S01 与 B02-S01；这些视频不是原库或 Codex 视频模型生成。WORKFLOW / 02一支片真正需要的完整链路从固定证据到最终交付，生成模型只是其中一环；拆镜头、质检、版本和确定性后期同样属于核心生产资产。01固定源码与样例证据02主题、受众与事实边界033 个 Beats 的叙事弧046 个 Shots 与模型任务05Codex 生成 6 张首帧06外部视频模型生成与重做07人工首中尾帧质检与版本放行08FFmpeg 粗剪、旁白、声音与交付LEARNINGS / 03经过实操后，我们补充确认了什么这些结论来自首帧、尾帧、重做、版本管理、粗剪和声音交付，不是仅靠阅读 README 得出的推测。原库更像导演协议，不是生成引擎它最值得复用的是输入模式、阶段、beats/shots 数据结构、人工关卡和 assemble 思路；真正的图片、视频、声音仍由外部模型或后期工具执行。只有首帧能锁定起点，不能保证终点首帧适合锁构图、角色、材质和色彩，但镜头后半段仍可能出现路线增生、文字、额外肢体或材质漂移，因此必须检查中帧和尾帧。首尾帧路线适合需要明确落点的转场当镜头必须落到指定构图、形态或下一镜头连接点时，应同时提供首尾帧；代价是依赖模型支持，并仍需检查运动连续性，而不是把两张相同图片当作有效首尾帧。Prompt 之外，版本与质检才让流程可生产本案例保留 v1/v2、审核结论、SHA、媒体规格和回退路径。没有这些，重做会覆盖证据，无法判断哪一版进入剪辑。声音与文字应作为独立确定性层原视频模型音轨没有进入粗剪；统一旁白、环境声、字幕和标题在镜头通过后单独制作，更容易替换、授权、控响度和保证中文正确。SCENARIOS / 04这个方法最适合用在哪里它擅长可拆镜头、可逐段放行、可统一包装的内容；对连续表演和精密口型仍需更强的专用能力。最适合知识纪录片、历史文化和路线叙事品牌故事、产品解释和系列化短片需要统一视觉模板、多人/多模型协作和版本留痕的内容生产可以先拆镜头、逐段放行，再进行确定性后期的项目不适合直接套用强即兴、长镜头和复杂连续表演高精度多人对白、口型同步和角色跨镜绝对一致希望一次提示直接出最终成片且不进行人工复核的场景NEXT / 05可扩展方向：先稳定，再自动化P0 解决 provider、状态和恢复；P1 提升质检与交付；P2 再做多模型路由和可积累评测。P0：接入更多图片/视频/声音 provider，补齐 Windows 与错误重试P0：把 shot 资产、版本、审批和失败恢复做成正式状态机P1：自动抽取首中尾帧，增加文字、肢体、构图和风格漂移质检P1：把字幕、标题、安全区、响度和授权清单纳入统一交付P2：按镜头类型路由多模型，并积累风格模板与质量评测数据对我们的意义：从提示词，升级为制作系统。把零散 Prompt 升级为可复用、可审计、可替换模型的制作 SOP。把创意决策、生成执行和确定性后期分层，降低更换模型与返工成本。让每个镜头的输入、版本、问题和放行结论可追溯，适合团队协作。可与现有图片风格能力组合：图片 Skill 负责视觉语言，导演层负责叙事、镜头和交付。\n      \n    ",
+        "completedCaseMetadata": {
+          "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/final/dunhuang-sound-preview-v2.mp4",
+          "duration": 30,
+          "width": 720,
+          "height": 1280,
+          "audioTracks": 1
+        },
+        "videoMetadata": [
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B01-S01-v2.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B01-S01.png",
+            "duration": 5.061995,
+            "width": 474,
+            "height": 842
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B01-S02-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B01-S02.png",
+            "duration": 5.088,
+            "width": 496,
+            "height": 864
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B02-S01-v2.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B02-S01.png",
+            "duration": 5.061995,
+            "width": 474,
+            "height": 842
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B02-S02-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B02-S02.png",
+            "duration": 5.088,
+            "width": 496,
+            "height": 864
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B03-S01-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B03-S01.png",
+            "duration": 5.175,
+            "width": 768,
+            "height": 1344
+          },
+          {
+            "src": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/video/B03-S02-v1.mp4",
+            "poster": "http://127.0.0.1:8765/projects/vox-director-study/assets/dunhuang/B03-S02.png",
+            "duration": 5.088,
+            "width": 496,
+            "height": 864
+          }
+        ],
+        "videoPlaybackTimes": [
+          0.16785,
+          0.158081,
+          0.157104,
+          0.162516,
+          0.161891,
+          0.158904
+        ],
+        "firstShotCopyStatus": "B01-S01 完整视频提示词已复制",
+        "firstShotClipboardLength": 398,
+        "copyAllStatus": "全部 6 个视频任务已复制",
+        "allShotsClipboardLength": 2267,
+        "copiedShotIds": [
+          "B01-S01",
+          "B01-S02",
+          "B02-S01",
+          "B02-S02",
+          "B03-S01",
+          "B03-S02"
+        ],
+        "dunhuangJsonReady": true,
+        "dunhuangReferenceImages": [
+          "assets/dunhuang/B01-S01.png",
+          "assets/dunhuang/B01-S02.png",
+          "assets/dunhuang/B02-S01.png",
+          "assets/dunhuang/B02-S02.png",
+          "assets/dunhuang/B03-S01.png",
+          "assets/dunhuang/B03-S02.png"
+        ],
+        "dunhuangReferenceVideos": [
+          "assets/dunhuang/video/B01-S01-v2.mp4",
+          "assets/dunhuang/video/B01-S02-v1.mp4",
+          "assets/dunhuang/video/B02-S01-v2.mp4",
+          "assets/dunhuang/video/B02-S02-v1.mp4",
+          "assets/dunhuang/video/B03-S01-v1.mp4",
+          "assets/dunhuang/video/B03-S02-v1.mp4"
         ],
         "dunhuangMissingRequired": []
       },
@@ -199,19 +628,44 @@
       "failedRequests": [],
       "interaction": {},
       "status": "pass"
+    },
+    "mobile-video-fallback": {
+      "viewport": [
+        390,
+        844
+      ],
+      "theme": "light",
+      "reducedMotion": false,
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interaction": {},
+      "status": "pass"
     }
   },
   "summary": {
-    "surfaces": 8,
+    "surfaces": 10,
     "failures": 0,
     "screenshots": [
+      "B01-S01-v2-review.png",
+      "B02-S01-v2-review.png",
       "desktop-dark-samples.png",
       "desktop-dunhuang-demonstration.png",
       "desktop-light-overview.png",
       "desktop-light-preproduction.png",
+      "dunhuang-completed-case.png",
+      "dunhuang-rough-cut-v1-review.png",
+      "dunhuang-sound-preview-v1-review.png",
+      "dunhuang-sound-preview-v2-review.png",
       "mobile-dark-preproduction.png",
+      "mobile-dunhuang-completed-case.png",
+      "mobile-dunhuang-rough-cut.png",
+      "mobile-dunhuang-sound-preview.png",
       "mobile-error-state.png",
       "mobile-prep-error-state.png",
+      "mobile-video-fallback.png",
+      "tablet-light-completed-case.png",
       "tablet-light-modes.png"
     ]
   }

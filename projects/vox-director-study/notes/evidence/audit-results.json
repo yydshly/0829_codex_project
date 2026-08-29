@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-08-29",
   "summary": {
-    "contract_checks": 25,
+    "contract_checks": 48,
     "contract_failures": 0,
     "boundary_observations": 5,
     "videos_inspected": 4,
@@ -104,7 +104,7 @@
     {
       "id": "preproduction-data-synced",
       "pass": true,
-      "evidence": "67c1b70e6b826481eafc5002766983d89f38b2661ad1eec7f71315d96d0b883e"
+      "evidence": "edc1f94030ef46e356829c2953dcde4992bf703ea9141f5124b56f328cae6d31"
     },
     {
       "id": "preproduction-samples",
@@ -150,6 +150,121 @@
       "id": "dunhuang-video-dispatch-guide",
       "pass": true,
       "evidence": "6 shot IDs, image inputs, motion prompts, negative constraints, and no-video boundary recorded"
+    },
+    {
+      "id": "dunhuang-first-video",
+      "pass": true,
+      "evidence": "B01-S01 v2: 5.06s / 474x842 / h264+aac / canonical and demo SHA match"
+    },
+    {
+      "id": "dunhuang-first-video-history",
+      "pass": true,
+      "evidence": "B01-S01 v1 remains in canonical media, demo assets, and JSON history"
+    },
+    {
+      "id": "dunhuang-second-video",
+      "pass": true,
+      "evidence": "B01-S02 v1: 5.09s / 496x864 / h264+aac / canonical and demo SHA match"
+    },
+    {
+      "id": "dunhuang-third-video",
+      "pass": true,
+      "evidence": "B02-S01 v2: 5.06s / 474x842 / h264+aac / canonical and demo SHA match"
+    },
+    {
+      "id": "dunhuang-third-video-history",
+      "pass": true,
+      "evidence": "B02-S01 v1 remains in canonical media, demo assets, and JSON history"
+    },
+    {
+      "id": "dunhuang-fourth-video",
+      "pass": true,
+      "evidence": "B03-S02 v1: 5.09s / 496x864 / h264+aac / canonical and demo SHA match"
+    },
+    {
+      "id": "dunhuang-fifth-video",
+      "pass": true,
+      "evidence": "B02-S02 v1: 5.09s / 496x864 / h264+aac / canonical and demo SHA match"
+    },
+    {
+      "id": "dunhuang-sixth-video",
+      "pass": true,
+      "evidence": "B03-S01 v1: 5.17s / 768x1344 / h264+aac / canonical and demo SHA match"
+    },
+    {
+      "id": "dunhuang-rough-cut-media",
+      "pass": true,
+      "evidence": "rough cut canonical/demo SHA match: 41b142205b792128406e416c06d1c0134ebff81bb0ecbad82ae0455848247831"
+    },
+    {
+      "id": "dunhuang-rough-cut-spec",
+      "pass": true,
+      "evidence": "30.0s / 720x1280 / 30/1 / h264+aac"
+    },
+    {
+      "id": "dunhuang-rough-cut-silent-audio",
+      "pass": true,
+      "evidence": "AAC placeholder max volume: -91.0 dB"
+    },
+    {
+      "id": "dunhuang-rough-cut-order",
+      "pass": true,
+      "evidence": "six current versions are ordered and documented as six 5-second cuts"
+    },
+    {
+      "id": "dunhuang-narration-timecode",
+      "pass": true,
+      "evidence": "three 10-second narration cues synced; audio explicitly remains a silent placeholder"
+    },
+    {
+      "id": "dunhuang-narration-masters",
+      "pass": true,
+      "evidence": "B01-yunyang-v2.mp3=8.76s, B02-yunyang-v2.mp3=8.23s, B03-yunyang-v2.mp3=9.1s"
+    },
+    {
+      "id": "dunhuang-sound-v1-retained",
+      "pass": true,
+      "evidence": "Kangkang v1 preview, narration, and mix retained and referenced as previous_version"
+    },
+    {
+      "id": "dunhuang-sound-artifacts-synced",
+      "pass": true,
+      "evidence": "sound preview, narration, ambient, and mix canonical/demo SHA pairs match"
+    },
+    {
+      "id": "dunhuang-sound-preview-spec",
+      "pass": true,
+      "evidence": "30.0s / 720x1280 / h264+aac / 48000Hz"
+    },
+    {
+      "id": "dunhuang-sound-stem-spec",
+      "pass": true,
+      "evidence": "narration, ambient, and mix stems are 30.0-second AAC files"
+    },
+    {
+      "id": "dunhuang-sound-mix-level",
+      "pass": true,
+      "evidence": "mix loudness -17.6 LUFS / max -1.2 dB"
+    },
+    {
+      "id": "dunhuang-sound-cue-fit",
+      "pass": true,
+      "evidence": "three narration cues fit their beat windows; Yunyang neural TTS and procedural no-sample provenance recorded"
+    },
+    {
+      "id": "dunhuang-completed-case-contract",
+      "pass": true,
+      "evidence": "completed status / final V2 / 3 owners / 8 workflow steps / 5 learnings / 4 meaning points"
+    },
+    {
+      "id": "dunhuang-case-study-deliverables",
+      "pass": true,
+      "evidence": "case document covers ownership, workflow, frame routing, scenarios, meaning, extensions, boundaries; all indexed deliverables exist"
+    },
+    {
+      "id": "capability-provenance-contract",
+      "pass": true,
+      "evidence": "three source layers are explicit in the prep overview, every Dunhuang shot, and README"
     }
   ],
   "boundaries": [
@@ -189,7 +304,9 @@
       "height": 720,
       "fps": "24/1",
       "video_codec": "h264",
-      "audio_codec": "aac"
+      "audio_codec": "aac",
+      "sample_rate": "44100",
+      "channels": 1
     },
     {
       "file": "showcase-money.mp4",
@@ -200,7 +317,9 @@
       "height": 1280,
       "fps": "24/1",
       "video_codec": "h264",
-      "audio_codec": "aac"
+      "audio_codec": "aac",
+      "sample_rate": "44100",
+      "channels": 1
     },
     {
       "file": "showcase-silicon-valley.mp4",
@@ -211,7 +330,9 @@
       "height": 720,
       "fps": "24/1",
       "video_codec": "h264",
-      "audio_codec": "aac"
+      "audio_codec": "aac",
+      "sample_rate": "96000",
+      "channels": 1
     },
     {
       "file": "showcase-tang.mp4",
@@ -222,7 +343,9 @@
       "height": 720,
       "fps": "24/1",
       "video_codec": "h264",
-      "audio_codec": "aac"
+      "audio_codec": "aac",
+      "sample_rate": "44100",
+      "channels": 1
     }
   ],
   "examples": [
@@ -265,6 +388,86 @@
       "keyframe_urls": 6,
       "clip_urls": 6,
       "video_model": null
+    }
+  ],
+  "dunhuang_videos": [
+    {
+      "file": "B01-S01-v2.mp4",
+      "status": "inspected",
+      "duration": 5.06,
+      "size": 8099385,
+      "width": 474,
+      "height": 842,
+      "fps": "30/1",
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "sample_rate": "44100",
+      "channels": 2
+    },
+    {
+      "file": "B01-S02-v1.mp4",
+      "status": "inspected",
+      "duration": 5.09,
+      "size": 2075071,
+      "width": 496,
+      "height": 864,
+      "fps": "24/1",
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "sample_rate": "32000",
+      "channels": 2
+    },
+    {
+      "file": "B02-S01-v2.mp4",
+      "status": "inspected",
+      "duration": 5.06,
+      "size": 4966709,
+      "width": 474,
+      "height": 842,
+      "fps": "30/1",
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "sample_rate": "44100",
+      "channels": 2
+    },
+    {
+      "file": "B02-S02-v1.mp4",
+      "status": "inspected",
+      "duration": 5.09,
+      "size": 2837426,
+      "width": 496,
+      "height": 864,
+      "fps": "24/1",
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "sample_rate": "32000",
+      "channels": 2
+    },
+    {
+      "file": "B03-S01-v1.mp4",
+      "status": "inspected",
+      "duration": 5.17,
+      "size": 2409223,
+      "width": 768,
+      "height": 1344,
+      "fps": "24/1",
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "sample_rate": "32000",
+      "channels": 2
+    },
+    {
+      "file": "B03-S02-v1.mp4",
+      "status": "inspected",
+      "duration": 5.09,
+      "size": 2620243,
+      "width": 496,
+      "height": 864,
+      "fps": "24/1",
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "sample_rate": "32000",
+      "channels": 2
     }
   ]
 }

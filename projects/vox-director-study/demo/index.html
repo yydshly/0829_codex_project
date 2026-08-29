@@ -20,6 +20,7 @@
       <a href="#modes">能力</a>
       <a href="#samples">样例</a>
       <a href="#prep">准备台</a>
+      <a href="#case-study" id="case-nav-link" hidden>完成案例</a>
       <a href="#roadmap">扩展</a>
       <a href="#meaning">意义</a>
     </nav>
@@ -156,6 +157,34 @@
           <p>从 4 份上游 beats 样例中选一个结构，或直接载入完整的“敦煌”示范；逐镜头修改旁白、画面和运动提示，再交给你已有的图片或视频模型。</p>
         </header>
 
+        <aside class="provenance-map" id="capability-provenance" aria-labelledby="provenance-title">
+          <header>
+            <p>CAPABILITY PROVENANCE / 先看来源</p>
+            <h3 id="provenance-title">页面效果不等于原库原生能力</h3>
+            <span>下面三部分共同组成当前演示，但来源和责任边界不同。</span>
+          </header>
+          <div class="provenance-grid">
+            <article class="provenance-card" data-source="upstream">
+              <span>01 / 原库真实能力</span>
+              <h4>vox-director</h4>
+              <p>用 <code>beats.json</code> 串联 B/A/C-roll 的分镜、媒体生成、人工审批与 ffmpeg 合成；仓库附带 4 支 MP4 和 4 份结构样例。</p>
+              <small>源码与随库资产证据</small>
+            </article>
+            <article class="provenance-card" data-source="codex">
+              <span>02 / Codex · Research Lab 新增</span>
+              <h4>研究与前期演示层</h4>
+              <p>本页面、仓库审计、模型无关准备台、敦煌脚本与提示词、6 张关键帧、视频复核界面和自动验收，均为本研究新增，不是原库自带 UI。</p>
+              <small>Codex 实现与本地验证</small>
+            </article>
+            <article class="provenance-card" data-source="user">
+              <span>03 / 用户外部模型产物</span>
+              <h4>敦煌 6 段视频</h4>
+              <p>六段 MP4 由用户在其他视频模型中生成后提供；本研究只负责原样回填、首中尾帧检查、质量判断和页面播放。</p>
+              <small>不是原库或 Codex 生成的视频</small>
+            </article>
+          </div>
+        </aside>
+
         <div class="prep-workspace">
           <form class="prep-controls" id="prep-form">
             <div class="prep-control-head">
@@ -218,6 +247,8 @@
 
             <section id="prep-panel-shots" class="prep-panel" role="tabpanel" aria-labelledby="prep-tab-shots">
               <div class="adaptation-warning" id="adaptation-warning"></div>
+              <section class="rough-cut-card" id="rough-cut-preview" aria-label="30 秒画面粗剪" hidden></section>
+              <section class="sound-preview-card" id="sound-preview" aria-label="30 秒声音试听" hidden></section>
               <div class="dispatch-toolbar" id="dispatch-toolbar" aria-label="视频模型提示词复制区" hidden>
                 <div>
                   <span>DIRECT VIDEO INPUT</span>
@@ -250,6 +281,16 @@
           </div>
         </div>
         <div class="prep-error" id="prep-error" role="alert" hidden>前期样例数据未加载；研究页面仍可浏览。请重新运行 <code>scripts/build_demo.py</code>。</div>
+      </div>
+    </section>
+
+    <section class="case-study-section" id="case-study" aria-label="敦煌完成案例" hidden>
+      <div class="section-shell">
+        <header class="section-heading case-study-heading">
+          <div><p class="eyebrow">COMPLETED CASE / 16</p><h2>从库的结构，<br>走到一支完成的片。</h2></div>
+          <p>最终成片、能力归属、生产链与经过实操验证的结论集中在这里；准备台仍保留全部镜头和版本证据。</p>
+        </header>
+        <div id="case-study-content"></div>
       </div>
     </section>
 
@@ -328,6 +369,7 @@
     <div><strong>0829 Codex Research Lab</strong><span>证据优先 · 固定版本 · 明确边界</span></div>
     <nav aria-label="研究文件">
       <a href="https://github.com/yydshly/0829_codex_project/blob/main/projects/vox-director-study/README.md" target="_blank" rel="noreferrer">项目 README ↗</a>
+      <a href="https://github.com/yydshly/0829_codex_project/blob/main/projects/vox-director-study/notes/dunhuang-case-study.md" target="_blank" rel="noreferrer">完成案例复盘 ↗</a>
       <a href="https://github.com/yydshly/0829_codex_project/blob/main/projects/vox-director-study/notes/preproduction-guide.md" target="_blank" rel="noreferrer">前期指南 ↗</a>
       <a href="https://github.com/Alisa0808/vox-director" target="_blank" rel="noreferrer">上游仓库 ↗</a>
     </nav>

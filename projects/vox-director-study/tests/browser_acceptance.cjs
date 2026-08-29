@@ -30,12 +30,25 @@ async function inspect(browser, config) {
     if (message.type() === "error") consoleErrors.push(message.text());
   });
   page.on("pageerror", (error) => pageErrors.push(String(error)));
-  page.on("requestfailed", (request) => failedRequests.push(`${request.url()}: ${request.failure()?.errorText || "failed"}`));
+  page.on("requestfailed", (request) => {
+    const errorText = request.failure()?.errorText || "failed";
+    if (request.resourceType() === "media" && errorText === "net::ERR_ABORTED") return;
+    failedRequests.push(`${request.url()}: ${errorText}`);
+  });
 
   await page.goto(config.url || baseUrl, { waitUntil: "networkidle" });
   await page.waitForFunction(() => document.documentElement.dataset.ready === "true");
   await page.waitForFunction(() => document.querySelectorAll("#prep-sample option").length >= 5);
   await page.waitForFunction(() => [...document.images].every((image) => image.complete && image.naturalWidth > 0));
+  if (config.dunhuang) {
+    await page.waitForFunction(() => {
+      const videos = [...document.querySelectorAll(".generated-video video")];
+      return videos.length === 6 && videos.every((video) => video.readyState >= 1);
+    });
+  }
+  if (config.caseHash) {
+    await page.waitForFunction(() => location.hash === "#case-study" && !document.querySelector("#case-study")?.hidden && document.querySelector("#case-study").getBoundingClientRect().top >= 70 && document.querySelector("#case-study").getBoundingClientRect().top < 220);
+  }
 
   const basic = await page.evaluate(() => ({
     title: document.title,
@@ -53,6 +66,20 @@ async function inspect(browser, config) {
     prepDispatchCards: document.querySelectorAll("#prep-editor .dispatch-card").length,
     prepShotCopyButtons: document.querySelectorAll("#prep-editor [data-copy-shot]").length,
     prepCopyAllButtons: document.querySelectorAll("#prep-panel-shots [data-copy-all-shots]").length,
+    prepVideos: document.querySelectorAll("#prep-editor .generated-video video").length,
+    videoReviewStatuses: document.querySelectorAll("#prep-editor .video-review-status").length,
+    roughCutVideos: document.querySelectorAll("#rough-cut-preview video").length,
+    soundPreviewVideos: document.querySelectorAll("#sound-preview video").length,
+    caseStudyVideos: document.querySelectorAll("#case-study video").length,
+    caseStatus: document.querySelector("#case-study .case-final")?.dataset.caseStatus || "",
+    caseOwners: document.querySelectorAll("#case-study .case-owner").length,
+    caseChainSteps: document.querySelectorAll("#case-study .case-chain li").length,
+    caseLearnings: document.querySelectorAll("#case-study .case-insight").length,
+    caseFitCards: document.querySelectorAll("#case-study .case-fit-card").length,
+    caseExtensions: document.querySelectorAll("#case-study .case-extension-list li").length,
+    caseMeaning: document.querySelectorAll("#case-study .case-meaning-list li").length,
+    provenanceCards: document.querySelectorAll("#capability-provenance .provenance-card").length,
+    provenanceText: document.querySelector("#capability-provenance")?.textContent || "",
     samples: document.querySelectorAll(".sample-button").length,
     risks: document.querySelectorAll("#risk-list li").length,
     roadmap: document.querySelectorAll("#roadmap-list li").length,
@@ -76,15 +103,27 @@ async function inspect(browser, config) {
   assert(basic.modeTabs === 3, `${config.name}: expected three mode tabs`);
   assert(basic.prepTabs === 3, `${config.name}: expected three preproduction tabs`);
   assert(basic.prepSamples === 5, `${config.name}: expected four upstream structures plus one demonstration`);
+  assert(basic.provenanceCards === 3, `${config.name}: three-way capability provenance map missing`);
+  assert(basic.provenanceText.includes("原库真实能力") && basic.provenanceText.includes("Codex · Research Lab 新增") && basic.provenanceText.includes("用户外部模型产物"), `${config.name}: capability provenance labels incomplete`);
   if (config.dunhuang) {
     assert(basic.prepBeats === 3 && basic.prepShots === 6, `${config.name}: Dunhuang 3-beat / 6-shot plan missing`);
     assert(basic.prepKeyframes === 6, `${config.name}: six generated Dunhuang keyframes missing`);
     assert(basic.prepDispatchCards === 6 && basic.prepShotCopyButtons === 6, `${config.name}: six direct-copy video task cards missing`);
     assert(basic.prepCopyAllButtons === 1, `${config.name}: copy-all video tasks control missing`);
+    assert(basic.prepVideos === 6 && basic.videoReviewStatuses === 6, `${config.name}: six user videos or review statuses missing`);
+    assert(basic.roughCutVideos === 1, `${config.name}: 30-second picture rough cut missing`);
+    assert(basic.soundPreviewVideos === 1, `${config.name}: 30-second sound preview missing`);
+    assert(basic.caseStudyVideos === 1 && basic.caseStatus === "completed", `${config.name}: completed-case final video or status missing`);
+    assert(basic.caseOwners === 3 && basic.caseChainSteps === 8 && basic.caseLearnings === 5, `${config.name}: completed-case ownership, workflow, or learnings incomplete`);
+    assert(basic.caseFitCards === 2 && basic.caseExtensions === 5 && basic.caseMeaning === 4, `${config.name}: completed-case scenarios, extensions, or meaning incomplete`);
   } else {
     assert(basic.prepBeats === 3 && basic.prepShots === 3, `${config.name}: default 15s structure missing`);
     assert(basic.prepKeyframes === 0, `${config.name}: local demonstration keyframes leaked into default sample`);
     assert(basic.prepDispatchCards === 0 && basic.prepShotCopyButtons === 0, `${config.name}: demonstration dispatch cards leaked into default sample`);
+    assert(basic.prepVideos === 0, `${config.name}: demonstration video leaked into default sample`);
+    assert(basic.roughCutVideos === 0, `${config.name}: demonstration rough cut leaked into default sample`);
+    assert(basic.soundPreviewVideos === 0, `${config.name}: demonstration sound preview leaked into default sample`);
+    assert(basic.caseStudyVideos === 0, `${config.name}: completed demonstration case leaked into default sample`);
   }
   assert(basic.samples === 5, `${config.name}: expected five sample controls`);
   assert(basic.risks === 7, `${config.name}: expected seven risk records`);
@@ -109,13 +148,112 @@ async function inspect(browser, config) {
     interaction.dunhuangNarration = await page.locator(".narration-editor textarea").first().inputValue();
     interaction.dunhuangPromptSources = await page.locator(".prompt-origin").count();
     interaction.dunhuangAssetStatus = await page.locator("#asset-checklist").textContent();
+    interaction.videoReviewStatuses = await page.locator(".video-review-status").allTextContents();
+    interaction.videoVersionHistories = await page.locator(".video-version-history").allTextContents();
+    interaction.codexImageSourceLabels = await page.locator("[data-source='codex-image']").allTextContents();
+    interaction.userVideoSourceLabels = await page.locator("[data-source='user-video']").allTextContents();
+    interaction.codexReviewSourceLabels = await page.locator("[data-source='codex-review']").allTextContents();
+    interaction.promptOrigins = await page.locator(".prompt-origin").allTextContents();
+    interaction.roughCutProvenance = await page.locator(".rough-cut-provenance").textContent();
+    interaction.soundPreviewProvenance = await page.locator(".sound-preview-provenance").textContent();
     assert(interaction.dunhuangSample === "dunhuang-30s", "Dunhuang demonstration: URL did not select the preset");
     assert(interaction.dunhuangTopic.includes("沙漠中的世界十字路口"), "Dunhuang demonstration: topic missing");
     assert(interaction.dunhuangRoute === "image-to-video" && interaction.dunhuangDuration === "30", "Dunhuang demonstration: route or duration wrong");
-    assert(interaction.dunhuangWarning.includes("研究示范已载入"), "Dunhuang demonstration: provenance label missing");
+    assert(interaction.dunhuangWarning.includes("研究示范已完成"), "Dunhuang demonstration: completed status missing");
+    assert(interaction.dunhuangWarning.includes("静音画面粗剪") && interaction.dunhuangWarning.includes("最终声音版 V2") && interaction.dunhuangWarning.includes("神经网络 TTS"), "Dunhuang demonstration: final-video status missing");
     assert(interaction.dunhuangNarration.includes("河西走廊"), "Dunhuang demonstration: Chinese narration missing");
     assert(interaction.dunhuangPromptSources === 6, "Dunhuang demonstration: prompt provenance missing");
     assert(interaction.dunhuangAssetStatus.includes("6/6 张本地关键帧已生成"), "Dunhuang demonstration: generated keyframe readiness missing");
+    assert(interaction.dunhuangAssetStatus.includes("6/6 个本地镜头视频已回填"), "Dunhuang demonstration: completed video progress missing");
+    assert(interaction.dunhuangAssetStatus.includes("30 秒最终声音版") && interaction.dunhuangAssetStatus.includes("程序化环境声、ducking 与响度混音已完成"), "Dunhuang demonstration: completed final-audio asset status missing");
+    assert(interaction.videoReviewStatuses[0].includes("通过 V2") && interaction.videoReviewStatuses[0].includes("进入剪辑"), "Dunhuang demonstration: first v2 approval status missing");
+    assert(interaction.videoReviewStatuses[1].includes("通过 V1") && interaction.videoReviewStatuses[1].includes("进入剪辑"), "Dunhuang demonstration: second video approval status missing");
+    assert(interaction.videoReviewStatuses[2].includes("通过 V2") && interaction.videoReviewStatuses[2].includes("进入剪辑"), "Dunhuang demonstration: third v2 approval status missing");
+    assert(interaction.videoReviewStatuses[3].includes("通过 V1") && interaction.videoReviewStatuses[3].includes("进入剪辑"), "Dunhuang demonstration: B02-S02 approval status missing");
+    assert(interaction.videoReviewStatuses[4].includes("通过 V1") && interaction.videoReviewStatuses[4].includes("进入剪辑"), "Dunhuang demonstration: B03-S01 approval status missing");
+    assert(interaction.videoReviewStatuses[5].includes("通过 V1") && interaction.videoReviewStatuses[5].includes("进入剪辑"), "Dunhuang demonstration: B03-S02 approval status missing");
+    assert(interaction.videoVersionHistories.length === 2 && interaction.videoVersionHistories[0].includes("路线出现树枝状扩张") && interaction.videoVersionHistories[1].includes("卷轴展开并生成文字"), "Dunhuang demonstration: v1 history records missing");
+    assert(interaction.codexImageSourceLabels.length === 6 && interaction.codexImageSourceLabels.every((text) => text.includes("Codex 图片模型关键帧")), "Dunhuang demonstration: Codex image provenance missing");
+    assert(interaction.userVideoSourceLabels.length === 6 && interaction.userVideoSourceLabels.every((text) => text.includes("用户外部模型产物") && text.includes("非原库生成")), "Dunhuang demonstration: user video provenance missing");
+    assert(interaction.codexReviewSourceLabels.length === 6 && interaction.codexReviewSourceLabels.every((text) => text.includes("Codex / Research Lab")), "Dunhuang demonstration: review provenance missing");
+    assert(interaction.promptOrigins.length === 6 && interaction.promptOrigins.every((text) => text.includes("关键帧由 Codex") && text.includes("视频由用户外部模型")), "Dunhuang demonstration: per-shot split provenance missing");
+    assert(interaction.roughCutProvenance.includes("用户外部模型") && interaction.roughCutProvenance.includes("Codex / Research Lab") && interaction.roughCutProvenance.includes("非原库本次执行"), "Dunhuang demonstration: rough-cut provenance missing");
+    assert(interaction.soundPreviewProvenance.includes("Microsoft Yunyang Neural") && interaction.soundPreviewProvenance.includes("Microsoft Edge online neural TTS") && interaction.soundPreviewProvenance.includes("无外部音乐或采样") && interaction.soundPreviewProvenance.includes("非原库本次执行"), "Dunhuang demonstration: sound-preview provenance missing");
+    interaction.roughCutMetadata = await page.locator("#rough-cut-preview video").evaluate(async (video) => {
+      video.muted = true;
+      await video.play();
+      return { src: video.currentSrc, duration: video.duration, width: video.videoWidth, height: video.videoHeight, audioTracks: video.captureStream?.().getAudioTracks().length ?? null };
+    });
+    await page.waitForFunction(() => document.querySelector("#rough-cut-preview video")?.currentTime > 0.15);
+    await page.locator("#rough-cut-preview video").evaluate((video) => video.pause());
+    assert(interaction.roughCutMetadata.src.endsWith("assets/dunhuang/final/dunhuang-rough-cut-v1.mp4"), "Dunhuang demonstration: rough-cut video src wrong");
+    assert(Math.abs(interaction.roughCutMetadata.duration - 30) < 0.08 && interaction.roughCutMetadata.width === 720 && interaction.roughCutMetadata.height === 1280, "Dunhuang demonstration: rough-cut browser metadata wrong");
+    const roughCutLinks = await page.locator(".rough-cut-actions a").evaluateAll((links) => links.map((link) => ({ href: link.href, download: link.download })));
+    assert(roughCutLinks.length === 2 && roughCutLinks[0].href.endsWith("dunhuang-rough-cut-v1.mp4") && roughCutLinks[1].href.endsWith("dunhuang-narration-v1.srt"), "Dunhuang demonstration: rough-cut or narration download missing");
+    interaction.soundPreviewMetadata = await page.locator("#sound-preview video").evaluate(async (video) => {
+      video.muted = true;
+      await video.play();
+      return { src: video.currentSrc, duration: video.duration, width: video.videoWidth, height: video.videoHeight, audioTracks: video.captureStream?.().getAudioTracks().length ?? null };
+    });
+    await page.waitForFunction(() => document.querySelector("#sound-preview video")?.currentTime > 0.15);
+    await page.locator("#sound-preview video").evaluate((video) => video.pause());
+    assert(interaction.soundPreviewMetadata.src.endsWith("assets/dunhuang/final/dunhuang-sound-preview-v2.mp4"), "Dunhuang demonstration: sound-preview video src wrong");
+    assert(Math.abs(interaction.soundPreviewMetadata.duration - 30) < 0.08 && interaction.soundPreviewMetadata.width === 720 && interaction.soundPreviewMetadata.height === 1280 && interaction.soundPreviewMetadata.audioTracks === 1, "Dunhuang demonstration: sound-preview browser metadata or audio track wrong");
+    const soundLinks = await page.locator(".sound-preview-actions a").evaluateAll((links) => links.map((link) => ({ href: link.href, download: link.download })));
+    assert(soundLinks.length === 4 && soundLinks[0].href.endsWith("dunhuang-sound-preview-v2.mp4") && soundLinks[1].href.endsWith("dunhuang-narration-yunyang-v2.m4a") && soundLinks[2].href.endsWith("dunhuang-ambient-bed-v1.m4a") && soundLinks[3].href.endsWith("dunhuang-audio-mix-v2.m4a"), "Dunhuang demonstration: sound-preview download set incomplete");
+    interaction.completedCaseText = await page.locator("#case-study").textContent();
+    assert(interaction.completedCaseText.includes("案例已完成") && interaction.completedCaseText.includes("先分清：谁完成了什么") && interaction.completedCaseText.includes("只有首帧能锁定起点") && interaction.completedCaseText.includes("从提示词，升级为制作系统"), "Dunhuang demonstration: completed-case summary missing essential conclusions");
+    interaction.completedCaseMetadata = await page.locator("#case-study video").evaluate(async (video) => {
+      video.muted = true;
+      await video.play();
+      return { src: video.currentSrc, duration: video.duration, width: video.videoWidth, height: video.videoHeight, audioTracks: video.captureStream?.().getAudioTracks().length ?? null };
+    });
+    await page.waitForFunction(() => document.querySelector("#case-study video")?.currentTime > 0.15);
+    await page.locator("#case-study video").evaluate((video) => video.pause());
+    assert(interaction.completedCaseMetadata.src.endsWith("assets/dunhuang/final/dunhuang-sound-preview-v2.mp4"), "Dunhuang demonstration: completed-case final video src wrong");
+    assert(Math.abs(interaction.completedCaseMetadata.duration - 30) < 0.08 && interaction.completedCaseMetadata.width === 720 && interaction.completedCaseMetadata.height === 1280 && interaction.completedCaseMetadata.audioTracks === 1, "Dunhuang demonstration: completed-case final video metadata or audio track wrong");
+    const caseLinks = await page.locator(".case-final-actions a").evaluateAll((links) => links.map((link) => ({ href: link.href, download: link.download })));
+    assert(caseLinks.length === 2 && caseLinks[0].href.endsWith("dunhuang-sound-preview-v2.mp4") && caseLinks[0].download === "dunhuang-crossroads-final-v2.mp4" && caseLinks[1].href.includes("notes/dunhuang-case-study.md"), "Dunhuang demonstration: completed-case delivery links incomplete");
+    interaction.videoMetadata = [];
+    interaction.videoPlaybackTimes = [];
+    const videoPlayers = page.locator(".generated-video video");
+    for (let videoIndex = 0; videoIndex < 6; videoIndex += 1) {
+      interaction.videoMetadata.push(await videoPlayers.nth(videoIndex).evaluate(async (video) => {
+        video.muted = true;
+        await video.play();
+        return {
+          src: video.currentSrc,
+          poster: video.poster,
+          duration: video.duration,
+          width: video.videoWidth,
+          height: video.videoHeight,
+        };
+      }));
+      await page.waitForFunction((index) => document.querySelectorAll(".generated-video video")[index]?.currentTime > 0.15, videoIndex);
+      interaction.videoPlaybackTimes.push(await videoPlayers.nth(videoIndex).evaluate((video) => {
+        video.pause();
+        return video.currentTime;
+      }));
+    }
+    assert(interaction.videoMetadata[0].src.endsWith("assets/dunhuang/video/B01-S01-v2.mp4"), "Dunhuang demonstration: first v2 local video src wrong");
+    assert(interaction.videoMetadata[0].poster.endsWith("assets/dunhuang/B01-S01.png"), "Dunhuang demonstration: first video poster wrong");
+    assert(Math.abs(interaction.videoMetadata[0].duration - 5.062) < 0.08 && interaction.videoMetadata[0].width === 474 && interaction.videoMetadata[0].height === 842, "Dunhuang demonstration: first v2 browser video metadata wrong");
+    assert(interaction.videoMetadata[1].src.endsWith("assets/dunhuang/video/B01-S02-v1.mp4"), "Dunhuang demonstration: second local video src wrong");
+    assert(interaction.videoMetadata[1].poster.endsWith("assets/dunhuang/B01-S02.png"), "Dunhuang demonstration: second video poster wrong");
+    assert(Math.abs(interaction.videoMetadata[1].duration - 5.088) < 0.08 && interaction.videoMetadata[1].width === 496 && interaction.videoMetadata[1].height === 864, "Dunhuang demonstration: second browser video metadata wrong");
+    assert(interaction.videoMetadata[2].src.endsWith("assets/dunhuang/video/B02-S01-v2.mp4"), "Dunhuang demonstration: third v2 local video src wrong");
+    assert(interaction.videoMetadata[2].poster.endsWith("assets/dunhuang/B02-S01.png"), "Dunhuang demonstration: third video poster wrong");
+    assert(Math.abs(interaction.videoMetadata[2].duration - 5.062) < 0.08 && interaction.videoMetadata[2].width === 474 && interaction.videoMetadata[2].height === 842, "Dunhuang demonstration: third v2 browser video metadata wrong");
+    assert(interaction.videoMetadata[3].src.endsWith("assets/dunhuang/video/B02-S02-v1.mp4"), "Dunhuang demonstration: fourth local video src wrong");
+    assert(interaction.videoMetadata[3].poster.endsWith("assets/dunhuang/B02-S02.png"), "Dunhuang demonstration: fourth video poster wrong");
+    assert(Math.abs(interaction.videoMetadata[3].duration - 5.088) < 0.08 && interaction.videoMetadata[3].width === 496 && interaction.videoMetadata[3].height === 864, "Dunhuang demonstration: fourth browser video metadata wrong");
+    assert(interaction.videoMetadata[4].src.endsWith("assets/dunhuang/video/B03-S01-v1.mp4"), "Dunhuang demonstration: fifth local video src wrong");
+    assert(interaction.videoMetadata[4].poster.endsWith("assets/dunhuang/B03-S01.png"), "Dunhuang demonstration: fifth video poster wrong");
+    assert(Math.abs(interaction.videoMetadata[4].duration - 5.175) < 0.08 && interaction.videoMetadata[4].width === 768 && interaction.videoMetadata[4].height === 1344, "Dunhuang demonstration: fifth browser video metadata wrong");
+    assert(interaction.videoMetadata[5].src.endsWith("assets/dunhuang/video/B03-S02-v1.mp4"), "Dunhuang demonstration: sixth local video src wrong");
+    assert(interaction.videoMetadata[5].poster.endsWith("assets/dunhuang/B03-S02.png"), "Dunhuang demonstration: sixth video poster wrong");
+    assert(Math.abs(interaction.videoMetadata[5].duration - 5.088) < 0.08 && interaction.videoMetadata[5].width === 496 && interaction.videoMetadata[5].height === 864, "Dunhuang demonstration: sixth browser video metadata wrong");
+    assert(interaction.videoPlaybackTimes.every((value) => value > 0.15), "Dunhuang demonstration: a local video did not decode and play");
     const firstShotCopy = page.locator("[data-copy-shot='B01-S01']");
     await firstShotCopy.focus();
     await page.keyboard.press("Enter");
@@ -126,7 +264,9 @@ async function inspect(browser, config) {
     assert(firstShotClipboard.includes("【B01-S01｜图生视频任务】"), "Dunhuang demonstration: copied shot ID missing");
     assert(firstShotClipboard.includes("完整视频提示词：") && firstShotClipboard.includes("负向提示词："), "Dunhuang demonstration: copied task is still fragmented");
     assert(firstShotClipboard.includes("B01-S01.png") && firstShotClipboard.includes("9:16｜5 秒") && firstShotClipboard.includes("敦煌圆点"), "Dunhuang demonstration: copied image name, parameters, or scene missing");
+    assert(firstShotClipboard.includes("禁止树枝状生长") && firstShotClipboard.includes("增加任何分叉"), "Dunhuang demonstration: tightened tail retry constraint missing");
     assert(!firstShotClipboard.includes("B01-S02"), "Dunhuang demonstration: single-shot copy included another shot");
+    assert((await page.locator("[data-copy-shot='B02-S01']").textContent()).includes("复制本镜头"), "Dunhuang demonstration: approved third video copy action missing");
     await page.locator("[data-copy-all-shots]").click();
     await page.waitForFunction(() => document.querySelector("#prep-status")?.textContent.includes("全部 6 个视频任务已复制"));
     interaction.copyAllStatus = await page.locator("#prep-status").textContent();
@@ -136,19 +276,56 @@ async function inspect(browser, config) {
     interaction.copiedShotIds = copiedShotIds;
     assert(copiedShotIds.join(",") === "B01-S01,B01-S02,B02-S01,B02-S02,B03-S01,B03-S02", "Dunhuang demonstration: copy-all order or coverage wrong");
     assert((allShotsClipboard.match(/负向提示词：/g) || []).length === 6, "Dunhuang demonstration: copy-all negative prompts incomplete");
+    assert(allShotsClipboard.includes("禁止把纸艺手、瓶子或丝绸变成写实材质") && allShotsClipboard.includes("卷轴必须保持卷起且完全无字"), "Dunhuang demonstration: tightened B02-S01 retry constraints missing");
     await page.locator("#prep-tab-json").click();
     const demoJson = await page.locator("#prep-json").textContent();
     const demoPack = JSON.parse(demoJson);
     const demoShots = demoPack.beats.flatMap((beat) => beat.shots);
     interaction.dunhuangJsonReady = demoJson.includes('"content_status": "research-demonstration-ready"');
     interaction.dunhuangReferenceImages = demoShots.map((shot) => shot.reference_image);
+    interaction.dunhuangReferenceVideos = demoShots.map((shot) => shot.reference_video).filter(Boolean);
     interaction.dunhuangMissingRequired = demoShots.flatMap((shot) => shot.model_task.missing_required);
     assert(interaction.dunhuangJsonReady, "Dunhuang demonstration: handoff provenance missing from JSON");
     assert(demoJson.includes("敦煌：沙漠中的世界十字路口"), "Dunhuang demonstration: topic missing from JSON");
     assert(demoPack.source.keyframe_generator === "Codex built-in imagegen", "Dunhuang demonstration: keyframe generator missing from JSON");
     assert(interaction.dunhuangReferenceImages.length === 6 && interaction.dunhuangReferenceImages.every((value) => value.startsWith("assets/dunhuang/")), "Dunhuang demonstration: local keyframe paths missing from JSON");
+    assert(interaction.dunhuangReferenceVideos.join(",") === "assets/dunhuang/video/B01-S01-v2.mp4,assets/dunhuang/video/B01-S02-v1.mp4,assets/dunhuang/video/B02-S01-v2.mp4,assets/dunhuang/video/B02-S02-v1.mp4,assets/dunhuang/video/B03-S01-v1.mp4,assets/dunhuang/video/B03-S02-v1.mp4", "Dunhuang demonstration: current local video paths missing from JSON");
+    assert(demoShots[0].previous_versions?.[0]?.reference_video.endsWith("B01-S01-v1.mp4") && demoShots[2].previous_versions?.[0]?.reference_video.endsWith("B02-S01-v1.mp4"), "Dunhuang demonstration: v1 paths missing from JSON history");
+    assert(demoPack.rough_cut?.reference_video.endsWith("dunhuang-rough-cut-v1.mp4") && demoPack.rough_cut?.audio_status.includes("silent-placeholder-track") && demoPack.rough_cut?.shot_order.length === 6, "Dunhuang demonstration: rough-cut handoff metadata missing");
+    assert(demoPack.rough_cut?.sound_preview?.reference_video.endsWith("dunhuang-sound-preview-v2.mp4") && demoPack.rough_cut?.sound_preview?.voice.includes("Microsoft Yunyang Neural") && demoPack.rough_cut?.sound_preview?.voice_source.includes("online neural TTS") && demoPack.rough_cut?.sound_preview?.previous_version?.voice.includes("Microsoft Kangkang") && demoPack.rough_cut?.sound_preview?.narration_cues.length === 3, "Dunhuang demonstration: sound-preview handoff metadata missing");
+    assert(demoPack.case_closure?.status === "completed" && demoPack.case_closure?.final_video.endsWith("dunhuang-sound-preview-v2.mp4") && demoPack.case_closure?.deliverables.length === 10, "Dunhuang demonstration: completed-case handoff metadata missing");
     assert(interaction.dunhuangMissingRequired.length === 0, "Dunhuang demonstration: image-to-video dispatch still has missing inputs");
     await page.locator("#prep-tab-shots").click();
+    if (config.name === "desktop-dunhuang-demonstration") {
+      await page.locator("#rough-cut-preview").scrollIntoViewIfNeeded();
+      await page.locator("#rough-cut-preview").screenshot({ path: path.join(evidenceDir, "dunhuang-rough-cut-v1-review.png") });
+      await page.locator("#sound-preview").scrollIntoViewIfNeeded();
+      await page.locator("#sound-preview").screenshot({ path: path.join(evidenceDir, "dunhuang-sound-preview-v2-review.png") });
+      await page.locator("#case-study").screenshot({ path: path.join(evidenceDir, "dunhuang-completed-case.png") });
+      for (const shotId of ["B01-S01", "B02-S01"]) {
+        const card = page.locator(`[data-shot-id='${shotId}'] .generated-video`);
+        await card.evaluate((element) => { element.closest("details").open = true; });
+        await card.scrollIntoViewIfNeeded();
+        await card.screenshot({ path: path.join(evidenceDir, `${shotId}-v2-review.png`) });
+      }
+    }
+    if (config.name === "mobile-dark-preproduction") {
+      for (const [selector, filename] of [["#rough-cut-preview", "mobile-dunhuang-rough-cut.png"], ["#sound-preview", "mobile-dunhuang-sound-preview.png"]]) {
+        const card = page.locator(selector);
+        await card.evaluate((element) => {
+          const margin = Number.parseFloat(getComputedStyle(element).scrollMarginTop) || 74;
+          const absoluteTop = element.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({ top: Math.max(0, absoluteTop - margin), behavior: "instant" });
+        });
+        await card.screenshot({ path: path.join(evidenceDir, filename) });
+      }
+      const completedCase = page.locator("#case-study .case-final");
+      await completedCase.evaluate((element) => {
+        const absoluteTop = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: Math.max(0, absoluteTop - 92), behavior: "instant" });
+      });
+      await completedCase.screenshot({ path: path.join(evidenceDir, "mobile-dunhuang-completed-case.png") });
+    }
   }
   if (config.interactions) {
     const bTab = page.locator("#mode-tab-broll");
@@ -233,10 +410,25 @@ async function inspect(browser, config) {
     assert(interaction.downloadName.endsWith("-preproduction-pack.json"), "preproduction: JSON download filename wrong");
   }
 
-  await page.locator(config.captureSelector).evaluate((element) => {
-    const margin = Number.parseFloat(getComputedStyle(element).scrollMarginTop) || 80;
-    window.scrollTo({ top: Math.max(0, element.offsetTop - margin), behavior: "instant" });
+  const captureTarget = page.locator(config.captureSelector);
+  await captureTarget.evaluate((element) => {
+    const parentDetails = element.closest("details");
+    if (parentDetails) parentDetails.open = true;
   });
+  await captureTarget.evaluate((element) => {
+    const margin = Number.parseFloat(getComputedStyle(element).scrollMarginTop) || 80;
+    const absoluteTop = element.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: Math.max(0, absoluteTop - margin), behavior: "instant" });
+  });
+  const captureVideo = captureTarget.locator("video");
+  if (await captureVideo.count() === 1) {
+    await captureVideo.evaluate(async (video) => {
+      video.muted = true;
+      await video.play();
+    });
+    await page.waitForTimeout(300);
+    await captureVideo.evaluate((video) => video.pause());
+  }
   await page.screenshot({ path: path.join(evidenceDir, `${config.name}.png`), fullPage: false });
   await context.close();
   return { ...basic, interaction, consoleErrors, pageErrors, failedRequests };
@@ -296,20 +488,64 @@ async function inspectPrepErrorState(browser) {
   return { ...result, pageErrors };
 }
 
+async function inspectVideoFallbackState(browser) {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme: "light" });
+  const page = await context.newPage();
+  const pageErrors = [];
+  page.on("pageerror", (error) => pageErrors.push(String(error)));
+  await page.route("**/assets/dunhuang/video/*.mp4", (route) => route.abort("failed"));
+  await page.route("**/assets/dunhuang/final/*.mp4", (route) => route.abort("failed"));
+  await page.goto(`${baseUrl}?demo=dunhuang#prep`, { waitUntil: "networkidle" });
+  await page.waitForFunction(() => document.querySelectorAll("#prep-editor .shot-editor").length === 6);
+  await page.waitForFunction(() => document.querySelectorAll(".video-fallback:not([hidden])").length === 6);
+  await page.waitForFunction(() => document.querySelectorAll(".rough-cut-fallback:not([hidden])").length === 1);
+  await page.waitForFunction(() => document.querySelectorAll(".sound-preview-fallback:not([hidden])").length === 1);
+  await page.waitForFunction(() => document.querySelectorAll(".case-final-fallback:not([hidden])").length === 1);
+  const result = await page.evaluate(() => ({
+    fallbackCount: document.querySelectorAll(".video-fallback:not([hidden])").length,
+    fallbackText: [...document.querySelectorAll(".video-fallback:not([hidden])")].map((item) => item.textContent).join(" | "),
+    roughCutFallbackCount: document.querySelectorAll(".rough-cut-fallback:not([hidden])").length,
+    roughCutFallbackText: document.querySelector(".rough-cut-fallback:not([hidden])")?.textContent || "",
+    soundPreviewFallbackCount: document.querySelectorAll(".sound-preview-fallback:not([hidden])").length,
+    soundPreviewFallbackText: document.querySelector(".sound-preview-fallback:not([hidden])")?.textContent || "",
+    completedCaseFallbackCount: document.querySelectorAll(".case-final-fallback:not([hidden])").length,
+    completedCaseFallbackText: document.querySelector(".case-final-fallback:not([hidden])")?.textContent || "",
+    completedCaseText: document.querySelector("#case-study")?.textContent || "",
+    keyframeStillVisible: Boolean(document.querySelector(".generated-keyframe img")?.naturalWidth),
+    dispatchStillAvailable: document.querySelectorAll(".dispatch-card").length === 6,
+    scrollWidth: document.documentElement.scrollWidth,
+    innerWidth,
+    theme: document.documentElement.dataset.theme,
+  }));
+  assert(result.fallbackCount === 6 && result.fallbackText.includes("关键帧和完整提示词仍可使用"), "video fallback: per-video recovery messages missing");
+  assert(result.roughCutFallbackCount === 1 && result.roughCutFallbackText.includes("旁白时间稿"), "video fallback: rough-cut recovery message missing");
+  assert(result.soundPreviewFallbackCount === 1 && result.soundPreviewFallbackText.includes("声音分轨"), "video fallback: sound-preview recovery message missing");
+  assert(result.completedCaseFallbackCount === 1 && result.completedCaseFallbackText.includes("案例结论") && result.completedCaseText.includes("先分清：谁完成了什么"), "video fallback: completed-case summary or recovery message missing");
+  assert(result.keyframeStillVisible && result.dispatchStillAvailable, "video fallback: base workflow disappeared");
+  assert(result.scrollWidth <= result.innerWidth + 1, "video fallback: horizontal overflow");
+  assert(pageErrors.length === 0, `video fallback: page errors ${pageErrors.join(" | ")}`);
+  await page.locator("#case-study .case-final").scrollIntoViewIfNeeded();
+  await page.screenshot({ path: path.join(evidenceDir, "mobile-video-fallback.png"), fullPage: false });
+  await context.close();
+  return { ...result, pageErrors };
+}
+
 (async () => {
   const browser = await chromium.launch({ headless: true });
   const matrix = [
     { name: "desktop-light-overview", viewport: { width: 1440, height: 1000 }, colorScheme: "light", captureSelector: "#overview" },
     { name: "desktop-light-preproduction", viewport: { width: 1440, height: 1000 }, colorScheme: "light", captureSelector: "#prep", interactions: true },
-    { name: "desktop-dunhuang-demonstration", viewport: { width: 1440, height: 1000 }, colorScheme: "light", captureSelector: ".generated-keyframe img[alt*='B01-S01']", url: `${baseUrl}?demo=dunhuang#prep`, dunhuang: true },
+    { name: "desktop-dunhuang-demonstration", viewport: { width: 1440, height: 1000 }, colorScheme: "light", captureSelector: "#capability-provenance", url: `${baseUrl}?demo=dunhuang#prep`, dunhuang: true },
     { name: "desktop-dark-samples", viewport: { width: 1440, height: 1000 }, colorScheme: "dark", captureSelector: "#samples" },
     { name: "tablet-light-modes", viewport: { width: 768, height: 900 }, colorScheme: "light", captureSelector: "#modes" },
+    { name: "tablet-light-completed-case", viewport: { width: 768, height: 900 }, colorScheme: "light", captureSelector: "#case-study", url: `${baseUrl}?demo=dunhuang#case-study`, dunhuang: true, caseHash: true },
     { name: "mobile-dark-preproduction", viewport: { width: 390, height: 844 }, colorScheme: "dark", reducedMotion: "reduce", captureSelector: "#prep", url: `${baseUrl}?demo=dunhuang#prep`, dunhuang: true },
   ];
   const results = {};
   for (const config of matrix) results[config.name] = await inspect(browser, config);
   results["mobile-error-state"] = await inspectErrorState(browser);
   results["mobile-prep-error-state"] = await inspectPrepErrorState(browser);
+  results["mobile-video-fallback"] = await inspectVideoFallbackState(browser);
   await browser.close();
 
   const report = {
