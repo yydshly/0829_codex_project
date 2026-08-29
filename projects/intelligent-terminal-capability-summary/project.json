@@ -1,0 +1,12 @@
+{
+  "id": "intelligent-terminal-capability-summary",
+  "title": "Intelligent Terminal 能力与原理总结",
+  "summary": "Intelligent Terminal 是 Codex、Claude、Copilot 等 Agent CLI 之上的统一宿主、适配和终端调度层；个人当前可直接使用底层 CLI，没有额外采用价值，因此归档。",
+  "status": "archived",
+  "path": "projects/intelligent-terminal-capability-summary",
+  "source_url": "https://github.com/microsoft/intelligent-terminal",
+  "demo_url": "",
+  "tags": ["acp", "agent", "codex", "terminal", "windows"],
+  "created": "2026-08-29",
+  "updated": "2026-08-29"
+}
