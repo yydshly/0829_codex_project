@@ -1,0 +1,200 @@
+{
+  "version": "v0.6.11",
+  "commit": "e8082119649e6a8e1cf85eaf289adcabfdf39d4e",
+  "auditDate": "2026-08-29",
+  "categories": [
+    { "id": "all", "label": "全部" },
+    { "id": "ingest", "label": "资料摄取" },
+    { "id": "knowledge", "label": "知识编译" },
+    { "id": "retrieval", "label": "检索问答" },
+    { "id": "graph", "label": "知识图谱" },
+    { "id": "research", "label": "深度研究" },
+    { "id": "agent", "label": "Agent" },
+    { "id": "integration", "label": "外部集成" }
+  ],
+  "capabilities": [
+    {
+      "id": "multi-format-ingest",
+      "number": "01",
+      "category": "ingest",
+      "title": "多格式资料摄取",
+      "summary": "把 PDF、Office、EPUB/MOBI、Org、网页和媒体文件转成可处理的资料源。",
+      "mechanism": "Rust 后端组合 pdfium-render、docx-rs、calamine、office_oxide、AnyDoc、epub 与 mobi；复杂 PDF 可选 MinerU。",
+      "outputs": ["结构化 Markdown", "表格与章节语义", "原始资料副本"],
+      "evidence": [
+        { "label": "解析依赖", "path": "src-tauri/Cargo.toml", "line": 33 },
+        { "label": "格式矩阵", "path": "README.md", "line": 320 }
+      ],
+      "status": "源码确认",
+      "pending": "真实复杂版式与批量吞吐待后续样本实验"
+    },
+    {
+      "id": "multimodal-images",
+      "number": "02",
+      "category": "ingest",
+      "title": "多模态图片摄取",
+      "summary": "从 PDF 抽取嵌入图片，以视觉模型生成事实性说明，并让图片进入搜索结果。",
+      "mechanism": "图片按来源保存到 wiki/media，使用哈希去重字幕调用，再把图片引用注入来源摘要。",
+      "outputs": ["PNG 媒体资产", "视觉字幕", "可跳转的图片搜索结果"],
+      "evidence": [
+        { "label": "图片流水线", "path": "src/lib/ingest.ts", "line": 903 },
+        { "label": "图像抽取命令", "path": "src-tauri/src/commands/extract_images.rs", "line": 1 }
+      ],
+      "status": "源码确认",
+      "pending": "字幕事实性与视觉模型成本待实测"
+    },
+    {
+      "id": "two-stage-compiler",
+      "number": "03",
+      "category": "knowledge",
+      "title": "两阶段知识编译",
+      "summary": "先分析资料，再生成或合并 Wiki 页面，把一次性总结变成持续维护的知识结构。",
+      "mechanism": "阶段一提取实体、概念、论证、矛盾和页面建议；阶段二输出受约束的 FILE blocks，经路径校验后写入 Wiki。",
+      "outputs": ["来源摘要", "实体 / 概念页", "交叉引用", "Review 建议"],
+      "evidence": [
+        { "label": "自动摄取主流程", "path": "src/lib/ingest.ts", "line": 1025 },
+        { "label": "生成提示与约束", "path": "src/lib/ingest.ts", "line": 2225 }
+      ],
+      "status": "源码确认",
+      "pending": "页面合并质量与幻觉率待固定语料评测"
+    },
+    {
+      "id": "incremental-maintenance",
+      "number": "04",
+      "category": "knowledge",
+      "title": "增量维护与恢复",
+      "summary": "资料变化时只处理需要更新的内容，并用持久队列、重试、取消和长文检查点降低中断损失。",
+      "mechanism": "内容哈希避免重复摄取；队列保存到项目状态；同一项目写入串行化；长文按语义块分析并保存进度。",
+      "outputs": ["摄取队列", "哈希缓存", "警告日志", "长文检查点"],
+      "evidence": [
+        { "label": "持久队列", "path": "src/lib/ingest-queue.ts", "line": 273 },
+        { "label": "长文检查点", "path": "src/lib/ingest.ts", "line": 2872 }
+      ],
+      "status": "源码确认",
+      "pending": "当前摄取以单项目串行为主，大批量速度待测试"
+    },
+    {
+      "id": "persistent-wiki",
+      "number": "05",
+      "category": "knowledge",
+      "title": "持久 Markdown Wiki",
+      "summary": "将知识保存成可编辑、可迁移、可由 Obsidian 打开的 Markdown，而不是锁在聊天记录里。",
+      "mechanism": "原始资料、生成 Wiki、purpose/schema 三层分离；页面用 YAML frontmatter 和 [[wikilink]] 保留类型、来源与关系。",
+      "outputs": ["Markdown 页面", "YAML 来源字段", "Obsidian Vault", "可重建索引"],
+      "evidence": [
+        { "label": "三层架构", "path": "README.md", "line": 64 },
+        { "label": "来源约束", "path": "src/lib/ingest.ts", "line": 2242 }
+      ],
+      "status": "源码确认",
+      "pending": "Wiki 是派生视图，仍需回到原始资料核验关键事实"
+    },
+    {
+      "id": "review-lint",
+      "number": "06",
+      "category": "knowledge",
+      "title": "Review 与知识体检",
+      "summary": "把矛盾、孤立页面、缺失概念和需要人工判断的事项转成异步审核任务。",
+      "mechanism": "结构规则先做确定性检查，LLM 再做语义检查；Review 只允许创建页面、深度研究或跳过等约束动作。",
+      "outputs": ["结构问题", "语义问题", "人工审核卡", "修复建议"],
+      "evidence": [
+        { "label": "Lint 核心", "path": "src/lib/lint.ts", "line": 1 },
+        { "label": "Review 状态", "path": "src/stores/review-store.ts", "line": 1 }
+      ],
+      "status": "源码确认",
+      "pending": "语义冲突召回率与误报率待领域语料验证"
+    },
+    {
+      "id": "hybrid-retrieval",
+      "number": "07",
+      "category": "retrieval",
+      "title": "关键词 × 向量 × 图谱检索",
+      "summary": "关键词命中负责精确查找，向量负责语义召回，图谱补入已知关联页面。",
+      "mechanism": "Rust 搜索对中英文分词并计算标题/正文得分；可选 LanceDB chunk 向量；RRF 融合关键词与向量，再预留 15–30% 结果给一跳图谱邻居。",
+      "outputs": ["混合排序结果", "向量分数", "图谱关联来源", "正文片段"],
+      "evidence": [
+        { "label": "RRF 融合", "path": "src-tauri/src/commands/search.rs", "line": 414 },
+        { "label": "图谱补充", "path": "src-tauri/src/commands/search.rs", "line": 507 }
+      ],
+      "status": "源码确认",
+      "pending": "README 的 71.4% 召回声明尚未由本研究独立复现"
+    },
+    {
+      "id": "grounded-chat",
+      "number": "08",
+      "category": "retrieval",
+      "title": "可追溯问答模式",
+      "summary": "回答可以引用 Wiki 页面，并提供只读原始资料的 Faithful 模式，降低外部知识混入。",
+      "mechanism": "Agent 路由 Wiki、来源和图谱工具；Faithful 模式关闭 Web/AnyTXT；引用随消息持久化并可回看上下文图。",
+      "outputs": ["带路径引用的回答", "来源模式", "会话持久化", "引用关系图"],
+      "evidence": [
+        { "label": "Faithful 模式", "path": "src-tauri/src/agent/runtime.rs", "line": 225 },
+        { "label": "引用持久化", "path": "src/stores/chat-store.ts", "line": 43 }
+      ],
+      "status": "源码确认",
+      "pending": "引用目前主要是页面级，逐条 claim 的原文定位仍可加强"
+    },
+    {
+      "id": "graph-insights",
+      "number": "09",
+      "category": "graph",
+      "title": "知识图谱与缺口洞察",
+      "summary": "把 Wiki 双链和共同来源转成图谱，寻找社群、孤立页、稀疏群与桥接节点。",
+      "mechanism": "相关度综合直接链接、来源重叠、Adamic–Adar 和类型亲和；Louvain 发现社群并计算 cohesion。",
+      "outputs": ["ForceAtlas2 图谱", "知识社群", "意外连接", "研究缺口"],
+      "evidence": [
+        { "label": "四信号相关度", "path": "src/lib/graph-relevance.ts", "line": 31 },
+        { "label": "Louvain 聚类", "path": "src/lib/wiki-graph-analysis.ts", "line": 1 },
+        { "label": "缺口规则", "path": "src/lib/graph-insights.ts", "line": 124 }
+      ],
+      "status": "源码确认",
+      "pending": "图谱价值依赖 Wiki 链接和实体消歧质量"
+    },
+    {
+      "id": "deep-research",
+      "number": "10",
+      "category": "research",
+      "title": "知识缺口驱动的 Deep Research",
+      "summary": "从缺口生成搜索主题，收集网页或本地搜索结果，合成为带引用的研究页。",
+      "mechanism": "Tavily、SerpApi、SearXNG 等搜索源并行收集，验证综合文本与引用后写入 wiki/queries，并直接建立向量索引。",
+      "outputs": ["研究任务", "来源集合", "带引用综合页", "可检索研究结果"],
+      "evidence": [
+        { "label": "来源收集", "path": "src/lib/deep-research.ts", "line": 273 },
+        { "label": "写入与嵌入", "path": "src/lib/deep-research.ts", "line": 495 }
+      ],
+      "status": "源码确认",
+      "pending": "README 的“自动再摄取”已被源码中的直接嵌入策略取代"
+    },
+    {
+      "id": "agent-runtime",
+      "number": "11",
+      "category": "agent",
+      "title": "工具型 Agent 与 Skills",
+      "summary": "聊天不只生成文字，还能搜索 Wiki/来源/图谱/Web、读取 Skill、写文件和执行受控命令。",
+      "mechanism": "Rust Agent 规划工具调用；生成物限制在 agent-workspace；Wiki 写入有路径约束；外部 Shell 命令需要精确批准。",
+      "outputs": ["工具事件流", "Wiki 页面", "HTML / Markdown 等产物", "受控 Shell 结果"],
+      "evidence": [
+        { "label": "工具注册表", "path": "src-tauri/src/agent/tools.rs", "line": 423 },
+        { "label": "Skill 加载", "path": "src-tauri/src/agent/skills.rs", "line": 1 },
+        { "label": "批准机制", "path": "src-tauri/src/agent/runtime.rs", "line": 484 }
+      ],
+      "status": "源码确认",
+      "pending": "不同模型的工具调用稳定性与安全体验待运行验证"
+    },
+    {
+      "id": "api-mcp",
+      "number": "12",
+      "category": "integration",
+      "title": "本地 API、MCP 与 Web Clipper",
+      "summary": "让 Codex、Claude Code、脚本和浏览器扩展访问同一套本地知识库能力。",
+      "mechanism": "127.0.0.1:19828 提供 Token-aware JSON/SSE API；MCP 包装项目、文件、Review、搜索、聊天、图谱与重扫工具；Clipper 写入资料源。",
+      "outputs": ["9 个 MCP 工具", "本地 JSON/SSE API", "网页剪藏", "跨 Agent 知识服务"],
+      "evidence": [
+        { "label": "API 端口与前缀", "path": "src-tauri/src/api_server.rs", "line": 22 },
+        { "label": "MCP 工具", "path": "mcp-server/src/index.ts", "line": 37 },
+        { "label": "Clipper 服务", "path": "src-tauri/src/clip_server.rs", "line": 1 }
+      ],
+      "status": "源码确认",
+      "pending": "本地应用不等于全本地推理；云模型和搜索仍会发送内容到所配置服务"
+    }
+  ]
+}

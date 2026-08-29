@@ -1,0 +1,19 @@
+[
+  {
+    "id": "msg_1788022585386_7_f3eudl",
+    "role": "user",
+    "content": "慢 SQL 为什么只是触发因素，而不是充分根因？请依据所附页面回答。",
+    "timestamp": 1788022585386,
+    "conversationId": "conv_1788022548109_86ylgh",
+    "contextFiles": [
+      "E:/0829_codex_project/projects/llm-wiki-study/experiments/native-client/workspace/left-ear-codex-demo/wiki/concepts/触发因素不等于充分根因.md"
+    ]
+  },
+  {
+    "id": "msg_1788022585986_8_q5k8vc",
+    "role": "assistant",
+    "content": "Error: Backend Agent LLM is not configured or the selected Chat model is unavailable. Check Settings > Models and try again.",
+    "timestamp": 1788022585986,
+    "conversationId": "conv_1788022548109_86ylgh"
+  }
+]

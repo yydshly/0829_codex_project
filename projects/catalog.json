@@ -19,6 +19,23 @@
       "updated": "2026-08-29"
     },
     {
+      "id": "gofilm-source-summary",
+      "title": "GoFilm 来源机制简析",
+      "summary": "简要归档 GoFilm 的第三方影视采集 API、主附源聚合与部署机制；核心问题已在 Moovie 研究中覆盖，后续按需参考。",
+      "status": "archived",
+      "path": "projects/gofilm-source-summary",
+      "source_url": "https://github.com/ProudMuBai/GoFilm",
+      "demo_url": "",
+      "tags": [
+        "applecms",
+        "archived",
+        "golang",
+        "video-aggregation"
+      ],
+      "created": "2026-08-29",
+      "updated": "2026-08-29"
+    },
+    {
       "id": "hand-drawn-video-prompts-study",
       "title": "Hand-Drawn Video Prompts 能力研究",
       "summary": "该 Skill 能否稳定地把中文口播转为可执行、风格一致且风险分层的竖屏短视频提示词，其能力边界与扩展价值是什么？",
@@ -52,6 +69,24 @@
       ],
       "created": "2026-08-29",
       "updated": "2026-08-29"
+    },
+    {
+      "id": "llm-wiki-study",
+      "title": "LLM Wiki 能力与知识编译研究",
+      "summary": "验证 LLM Wiki 如何把多格式资料持续编译为可追溯 Markdown Wiki，并评估其摄取、混合检索、知识图谱、Agent/MCP 与本地优先边界。",
+      "status": "paused",
+      "path": "projects/llm-wiki-study",
+      "source_url": "https://github.com/nashsu/llm_wiki",
+      "demo_url": "https://yydshly.github.io/0829_codex_project/projects/llm-wiki-study/",
+      "tags": [
+        "knowledge-base",
+        "llm",
+        "mcp",
+        "rag",
+        "research"
+      ],
+      "created": "2026-08-29",
+      "updated": "2026-08-30"
     },
     {
       "id": "openreel-video-capability-summary",
@@ -139,23 +174,6 @@
         "ai-video",
         "ffmpeg",
         "research"
-      ],
-      "created": "2026-08-29",
-      "updated": "2026-08-29"
-    },
-    {
-      "id": "gofilm-source-summary",
-      "title": "GoFilm 来源机制简析",
-      "summary": "简要归档 GoFilm 的第三方影视采集 API、主附源聚合与部署机制；核心问题已在 Moovie 研究中覆盖，后续按需参考。",
-      "status": "archived",
-      "path": "projects/gofilm-source-summary",
-      "source_url": "https://github.com/ProudMuBai/GoFilm",
-      "demo_url": "",
-      "tags": [
-        "applecms",
-        "archived",
-        "golang",
-        "video-aggregation"
       ],
       "created": "2026-08-29",
       "updated": "2026-08-29"

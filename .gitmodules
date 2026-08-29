@@ -4,3 +4,6 @@
 [submodule "projects/vox-director-study/upstream"]
 	path = projects/vox-director-study/upstream
 	url = https://github.com/Alisa0808/vox-director.git
+[submodule "projects/llm-wiki-study/upstream"]
+	path = projects/llm-wiki-study/upstream
+	url = https://github.com/nashsu/llm_wiki.git

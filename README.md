@@ -20,6 +20,7 @@
 | [GoFilm 来源机制简析](projects/gofilm-source-summary/) | [打开源库](https://github.com/ProudMuBai/GoFilm) | 简要归档 GoFilm 的第三方影视采集 API、主附源聚合与部署机制；核心问题已在 Moovie 研究中覆盖，后续按需参考。 | 已归档 | — | 2026-08-29 |
 | [Hand-Drawn Video Prompts 能力研究](projects/hand-drawn-video-prompts-study/) | [打开源库](https://github.com/kaomei/hand-drawn-video-prompts) | 该 Skill 能否稳定地把中文口播转为可执行、风格一致且风险分层的竖屏短视频提示词，其能力边界与扩展价值是什么？ | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/hand-drawn-video-prompts-study/) | 2026-08-29 |
 | [Intelligent Terminal 能力与原理总结](projects/intelligent-terminal-capability-summary/) | [打开源库](https://github.com/microsoft/intelligent-terminal) | Intelligent Terminal 是 Codex、Claude、Copilot 等 Agent CLI 之上的统一宿主、适配和终端调度层；个人当前可直接使用底层 CLI，没有额外采用价值，因此归档。 | 已归档 | — | 2026-08-29 |
+| [LLM Wiki 能力与知识编译研究](projects/llm-wiki-study/) | [打开源库](https://github.com/nashsu/llm_wiki) | 验证 LLM Wiki 如何把多格式资料持续编译为可追溯 Markdown Wiki，并评估其摄取、混合检索、知识图谱、Agent/MCP 与本地优先边界。 | 暂停 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/llm-wiki-study/) | 2026-08-30 |
 | [OpenReel Video 能力与复用边界总结](projects/openreel-video-capability-summary/) | [打开源库](https://github.com/Augani/openreel-video) | OpenReel 是本地优先的浏览器视频剪辑器，并扩展了桌面原生编码与 Agent/MCP 控制；当前安装和验证成本较高，先保存架构理解与按需复用入口。 | 已归档 | — | 2026-08-29 |
 | [Rachel Digital Human Production 采用价值研究](projects/rachel-digital-human-production-study/) | [打开源库](https://github.com/Jingyi-Wu-Richael/rachel-digital-human-production) | 该 Skill 是否提供独立数字人能力；审计确认它只是 MiniMax 与 HeyGen 的固定流程封装，且与既有研究高度重复，因此归档。 | 已归档 | — | 2026-08-29 |
 | [Screenshot-to-Code 视觉 Agent 能力研究](projects/screenshot-to-code-agent-study/) | [打开源库](https://github.com/abi/screenshot-to-code) | 确认 screenshot-to-code 通过多模态模型、代码工具和浏览器反馈实现视觉前端复刻；Agent 闭环值得研究，但该能力对当前日常流程低频且重叠，因此不安装、不集成、不产品化。 | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/screenshot-to-code-agent-study/) | 2026-08-29 |
@@ -28,6 +29,14 @@
 <!-- PROJECTS:END -->
 
 项目索引数据保存在 [`projects/catalog.json`](projects/catalog.json)，上表由脚本自动维护。
+
+## 阶段研究提示：LLM Wiki
+
+[LLM Wiki 能力与知识编译研究](projects/llm-wiki-study/)已完成本阶段源码审计、网页能力展示、Codex 摄取实验和 Windows Tauri 原生客户端验证，当前状态为 `paused`。在线成果由 GitHub Pages 持续保留：[打开能力与原生实测网页](https://yydshly.github.io/0829_codex_project/projects/llm-wiki-study/)。
+
+它对本仓库的主要意义不是增加另一个聊天客户端，而是提供一个“模型之外的长期知识与能力层”候选：把原始资料编译为可编辑、可追溯的 Markdown Wiki，用图谱和混合检索为 Codex 等 Agent 提供证据，再把成熟的研究方法沉淀为 Skill。模型可以更换，来源、Wiki、关系、Review 和方法仍能保留；它与 Obsidian 更适合互补，而不是简单替代。
+
+当前不直接作为日常生产依赖。固定版本实测仍存在 Codex CLI / Chat planner / Skills 配置摩擦，PDF / 网页、大规模吞吐、向量召回、长期增量漂移和 API / MCP 闭环尚未完成。后期只有在需要长期专题知识库、多 Agent 共用本地知识，或上游发布重要版本时再重新开启；回顾应先阅读[阶段总结](projects/llm-wiki-study/notes/stage-summary.md)、[项目 README](projects/llm-wiki-study/README.md)、[原生实测结果](projects/llm-wiki-study/demo/assets/native-run-result.json)与[验证记录](projects/llm-wiki-study/notes/validation.md)，避免重复已经固定的研究。
 
 ## 技术参考备忘
 

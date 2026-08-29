@@ -1,0 +1,12 @@
+{
+  "id": "llm-wiki-study",
+  "title": "LLM Wiki 能力与知识编译研究",
+  "summary": "验证 LLM Wiki 如何把多格式资料持续编译为可追溯 Markdown Wiki，并评估其摄取、混合检索、知识图谱、Agent/MCP 与本地优先边界。",
+  "status": "paused",
+  "path": "projects/llm-wiki-study",
+  "source_url": "https://github.com/nashsu/llm_wiki",
+  "demo_url": "https://yydshly.github.io/0829_codex_project/projects/llm-wiki-study/",
+  "tags": ["knowledge-base", "llm", "mcp", "rag", "research"],
+  "created": "2026-08-29",
+  "updated": "2026-08-30"
+}

@@ -1,0 +1,55 @@
+[
+  {
+    "type": "missing-page",
+    "title": "慢 SQL 服务雪崩（合成案例）",
+    "description": "当前 wiki 只在 `left-ear-research-capsule.md` 里内嵌了这起合成事故，缺少一个独立案例页来承载故障链、监控缺口、发布门禁缺失和整改闭环。拆页后更容易复用到相似的数据库性能回归、连接池耗尽和重试放大问题上。",
+    "sourcePath": "E:/0829_codex_project/projects/llm-wiki-study/experiments/native-client/workspace/left-ear-codex-demo/raw/sources/left-ear-research-capsule.md",
+    "affectedPages": [
+      "wiki/sources/left-ear-research-capsule.md",
+      "wiki/concepts/触发因素不等于充分根因.md",
+      "wiki/concepts/系统性故障学习审查.md"
+    ],
+    "searchQueries": [
+      "慢 SQL 服务雪崩 连接池 耗尽 事故复盘",
+      "数据库 慢查询 重试 放大 故障分析",
+      "performance regression connection pool retry amplification postmortem"
+    ],
+    "options": [
+      {
+        "label": "Create Page",
+        "action": "Create Page"
+      },
+      {
+        "label": "Skip",
+        "action": "Skip"
+      }
+    ],
+    "id": "review-79e4d770",
+    "resolved": true,
+    "createdAt": 1788022186829,
+    "resolvedAction": "auto-resolved"
+  },
+  {
+    "type": "contradiction",
+    "title": "`left-ear-research-capsule.md` 的角色边界需要定型",
+    "description": "这份文件同时承担“来源页”和“派生综合页”两种角色：它既被当作 `source` 归档，又包含大量研究者自己的结构化判断与合成事实。需要人工决定是保持单页并明确标注，还是拆成“来源说明”和“综合结论”两页，以避免后续 provenance 混淆。",
+    "sourcePath": "E:/0829_codex_project/projects/llm-wiki-study/experiments/native-client/workspace/left-ear-codex-demo/raw/sources/left-ear-research-capsule.md",
+    "affectedPages": [
+      "wiki/sources/left-ear-research-capsule.md",
+      "wiki/log.md"
+    ],
+    "options": [
+      {
+        "label": "Create Page",
+        "action": "Create Page"
+      },
+      {
+        "label": "Skip",
+        "action": "Skip"
+      }
+    ],
+    "id": "review-403fb00e",
+    "resolved": false,
+    "createdAt": 1788022186829
+  }
+]

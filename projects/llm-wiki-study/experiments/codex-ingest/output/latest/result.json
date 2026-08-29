@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "experimentId": "left-ear-codex-auto-ingest-v1",
+  "status": "passed",
+  "statusLabel": "真实摄取通过",
+  "startedAt": "2026-08-29T15:34:53.171Z",
+  "completedAt": "2026-08-29T15:37:15.738Z",
+  "source": {
+    "displayName": "《左耳听风》研究胶囊：从慢 SQL 事故到系统性故障学习",
+    "path": "experiments/codex-ingest/input/left-ear-research-capsule.md",
+    "kind": "研究者自写结构摘要 + 合成事故",
+    "boundary": "不含 119 篇第三方专栏正文；不代表纸质书全量分析。",
+    "characters": 1655,
+    "bytes": 4389,
+    "sha256": "95c8a358af782a1cbdaca348f826ca0ea6e6f18b33a216bcff68989d3a16a9d2"
+  },
+  "engine": {
+    "llmWikiVersion": "v0.6.11",
+    "upstreamCommit": "e8082119649e6a8e1cf85eaf289adcabfdf39d4e",
+    "pipeline": "src/lib/ingest.ts::autoIngest",
+    "provider": "Codex CLI",
+    "model": "gpt-5.6-luna",
+    "transport": "Node study adapter mirroring upstream codex_cli.rs arguments",
+    "filesystemTransport": "Node fs adapter replacing Tauri invoke; autoIngest core unchanged",
+    "sandbox": "read-only",
+    "approvalPolicy": "never",
+    "ephemeral": true,
+    "embeddingEnabled": false,
+    "webSearchEnabled": false
+  },
+  "metrics": {
+    "elapsedMs": 142554,
+    "codexCalls": 3,
+    "promptCharacters": 36954,
+    "responseCharacters": 9941,
+    "inputTokens": 65131,
+    "cachedInputTokens": 26880,
+    "outputTokens": 6677,
+    "writtenPaths": 8,
+    "markdownPages": 8,
+    "thematicPages": 5,
+    "sourcedPages": 6,
+    "wikilinkRelations": 13,
+    "reviews": 2,
+    "lintFindings": 5
+  },
+  "acceptance": {
+    "sourceSummary": true,
+    "atLeastTwoThematicPages": true,
+    "sourceTraceability": true,
+    "atLeastTwoRelations": true,
+    "deterministicIndex": true,
+    "deterministicLog": true
+  },
+  "writtenPaths": [
+    "wiki/sources/left-ear-research-capsule.md",
+    "wiki/entities/左耳听风.md",
+    "wiki/cases/合成慢-sql-事故.md",
+    "wiki/concepts/直接触发与系统根因.md",
+    "wiki/methods/系统性故障学习审查.md",
+    "wiki/principles/不以归责替代治理.md",
+    "wiki/index.md",
+    "wiki/log.md"
+  ],
+  "calls": [
+    {
+      "call": 1,
+      "promptSha256": "9a03c4cc184ae438c3add77b12281800a58506196cc95e5cf920e4c59363cdbc",
+      "promptCharacters": 5658,
+      "responseCharacters": 4113,
+      "elapsedMs": 57598,
+      "exitCode": 0,
+      "agentMessages": 1,
+      "inputTokens": 19934,
+      "cachedInputTokens": 8960,
+      "outputTokens": 2705,
+      "model": "gpt-5.6-luna",
+      "isolation": true,
+      "stdoutFile": "evidence/codex-call-01.jsonl",
+      "stderrPreview": "2026-08-29T15:34:55.480357Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell"
+    },
+    {
+      "call": 2,
+      "promptSha256": "aa3343c1941f303f2fe3a4e19e8dfa509b5580e3486aa77fc53944dad38a869c",
+      "promptCharacters": 17646,
+      "responseCharacters": 5201,
+      "elapsedMs": 70060,
+      "exitCode": 0,
+      "agentMessages": 1,
+      "inputTokens": 22118,
+      "cachedInputTokens": 8960,
+      "outputTokens": 3548,
+      "model": "gpt-5.6-luna",
+      "isolation": true,
+      "stdoutFile": "evidence/codex-call-02.jsonl",
+      "stderrPreview": "2026-08-29T15:35:51.031741Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell"
+    },
+    {
+      "call": 3,
+      "promptSha256": "959867d54aed75f61dcb5fff9e7f59fc4e3755df5e15a44123a4483fe5e7f961",
+      "promptCharacters": 13650,
+      "responseCharacters": 627,
+      "elapsedMs": 14824,
+      "exitCode": 0,
+      "agentMessages": 1,
+      "inputTokens": 23079,
+      "cachedInputTokens": 8960,
+      "outputTokens": 424,
+      "model": "gpt-5.6-luna",
+      "isolation": true,
+      "stdoutFile": "evidence/codex-call-03.jsonl",
+      "stderrPreview": "2026-08-29T15:37:00.993247Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell"
+    }
+  ],
+  "pages": [
+    {
+      "path": "wiki/cases/合成慢-sql-事故.md",
+      "title": "合成慢 SQL 事故",
+      "type": "案例",
+      "sources": [
+        "left-ear-research-capsule.md"
+      ],
+      "wikilinks": [
+        "直接触发与系统根因",
+        "系统性故障学习审查"
+      ],
+      "characters": 1065,
+      "sha256": "1000c531b1a40dd1d4488fda52481f491bdbbbc41b091275c812909ffff9e8f4",
+      "excerpt": "这是研究者为检验系统性故障学习方法而编写的合成案例，不对应真实公司或真实事故，也不是《左耳听风》专栏原文中的事实。 高频慢 SQL 导致数据库查询占满连接池，接口延迟升高；重试进一步增加数据库压力，最终造成部分服务不可用。 ```text 高频慢 SQL → 连接池占满 → 接口延迟升高 → 重试增加数据库压力 → 部分服务不可用 ``` 来源只明确指出，异常发生后约 27 分钟值班人员才确认异常。发布、告警触发、止损、恢复等更精确时间"
+    },
+    {
+      "path": "wiki/concepts/直接触发与系统根因.md",
+      "title": "直接触发与系统根因",
+      "type": "概念",
+      "sources": [
+        "left-ear-research-capsule.md"
+      ],
+      "wikilinks": [],
+      "characters": 701,
+      "sha256": "0cd508082ceadede19ecdadee46ce92960241637e6980ea6cb24f8dc10986ccf",
+      "excerpt": "直接触发因素是启动故障过程的事件或条件；系统性根因则是使局部问题能够穿透多层防线并扩大为事故的系统条件。前者回答“故障从什么开始”，后者继续回答“为什么它能够失控”。 在合成慢 SQL 事故中，高频慢 SQL 是直接触发因素。连接池耗尽、重试放大、监控缺口、发布门禁缺失和应急处置缺口共同构成需要继续检查的系统条件。 典型扩散链为： ```text 慢查询 → 资源占用 → 延迟增加 → 重试放大 → 下游压力增加 → 服务不可用 ```"
+    },
+    {
+      "path": "wiki/entities/左耳听风.md",
+      "title": "《左耳听风》",
+      "type": "实体",
+      "sources": [
+        "left-ear-research-capsule.md"
+      ],
+      "wikilinks": [],
+      "characters": 455,
+      "sha256": "7e29d4df7ff674bd5a614b25638c79ab3651fef222ee9cd38cc8ddaa400d6699",
+      "excerpt": "《左耳听风》是本研究胶囊涉及的外部研究背景与主题对象。当前来源不是该专栏的原文，也不构成对其内容的完整复述或逐章分析。 研究曾使用第三方公开专栏镜像作为受控代理语料。该镜像的固定快照包含 119 个 Markdown 文件和 162 张图片，但这些统计不能推出已完成纸质书逐章分析。由于未发现可供本研究依赖的再分发许可，本研究不复制或上传专栏正文。 本 Wiki 中关于慢 SQL 的事故是研究者编写的合成案例，不能归属于《左耳听风》或表述"
+    },
+    {
+      "path": "wiki/index.md",
+      "title": "知识索引",
+      "type": "索引",
+      "sources": [],
+      "wikilinks": [
+        "sources/left-ear-research-capsule",
+        "entities/左耳听风",
+        "cases/合成慢-sql-事故",
+        "concepts/直接触发与系统根因",
+        "methods/系统性故障学习审查",
+        "principles/不以归责替代治理"
+      ],
+      "characters": 298,
+      "sha256": "adcb98eabfca6eb3091b365a158aaa77c3ae30dd583adaa557b08b84fdf2a946",
+      "excerpt": "本 Wiki 尚未摄取资料。索引将在真实摄取后由 LLM Wiki 确定性重建。 - sources/left-ear-research-capsule — 《左耳听风》研究胶囊 - entities/左耳听风 — 《左耳听风》 - cases/合成慢-sql-事故 — 合成慢 SQL 事故 - concepts/直接触发与系统根因 — 直接触发与系统根因 - methods/系统性故障学习审查 — 系统性故障学习审查 - princi"
+    },
+    {
+      "path": "wiki/log.md",
+      "title": "Wiki Log",
+      "type": "日志",
+      "sources": [],
+      "wikilinks": [],
+      "characters": 66,
+      "sha256": "daae1911c2d3bb33cd3263819907b843f9ae60bace1f5becbf60c91147d12048",
+      "excerpt": ""
+    },
+    {
+      "path": "wiki/methods/系统性故障学习审查.md",
+      "title": "系统性故障学习审查",
+      "type": "方法",
+      "sources": [
+        "left-ear-research-capsule.md"
+      ],
+      "wikilinks": [],
+      "characters": 760,
+      "sha256": "f1be98e3e4a9d3fd6efb36c0883046dd7b3d16f9b2eec28bfdfd98dcf3a86dd3",
+      "excerpt": "通过事实、扩散链和可改变的系统条件学习故障，避免将第一处技术错误直接当作充分根因。 输入包括事件时间线、指标、日志、告警记录、发布记录、查询计划、容量数据、重试行为、应急处置记录和相关团队访谈。证据不足时必须标记为未知。 1. 建立时间线，并分别标记已证实事实、推断和未知项。 2. 描述直接触发因素及影响扩散链。 3. 从技术机制、工程控制、协作流程和组织学习四层追问。 4. 为每项整改明确其改变的风险机制：降低发生概率、缩短发现时间、"
+    },
+    {
+      "path": "wiki/principles/不以归责替代治理.md",
+      "title": "不以归责替代治理",
+      "type": "原则",
+      "sources": [
+        "left-ear-research-capsule.md"
+      ],
+      "wikilinks": [],
+      "characters": 584,
+      "sha256": "c2dea0111bb076297dc957aa31aca7c27451c5d18cd71277dcbeebe64f08b9a9",
+      "excerpt": "事故复盘应优先识别可验证、可改变的系统条件，而不能把惩罚个人作为消除系统风险的主要治理手段。 该原则不表示个人行为永远无关，也不排除对违反明确职责或规则的行为进行责任判断。它要求责任判断不能取代对技术机制、工程控制、协作流程和组织学习的检查。 - 发布前是否检查查询计划、索引变化和性能回归。 - 是否存在压测、容量评估、DBA 评审和可验证的豁免记录。 - 监控是否覆盖连接池、慢查询分布、代理层和重试放大。 - 应急预案是否定义限流、熔"
+    },
+    {
+      "path": "wiki/sources/left-ear-research-capsule.md",
+      "title": "《左耳听风》研究胶囊",
+      "type": "来源",
+      "sources": [
+        "left-ear-research-capsule.md"
+      ],
+      "wikilinks": [
+        "合成慢-sql-事故",
+        "直接触发与系统根因",
+        "系统性故障学习审查",
+        "不以归责替代治理",
+        "左耳听风"
+      ],
+      "characters": 934,
+      "sha256": "8d39501cc6f0d58d1f85c714c4b53b6f332fdc75ab01084f02842ca2b91104e9",
+      "excerpt": "本文件是研究者自写的结构化摘要与合成案例，不包含《左耳听风》专栏原文摘录。其用途是验证 LLM Wiki 能否将安全、可公开的研究输入编译为可追溯、可编辑、可关联的知识页面。 此前研究使用第三方公开专栏镜像作为受控代理语料。固定快照包含 119 个 Markdown 文件和 162 张图片，但这不能证明已完成对纸质书的逐章分析。该镜像未发现可供本研究依赖的再分发许可，因此本研究不复制、不上传其中的正文。 本页及其派生页面中的事故内容均属"
+    }
+  ],
+  "relations": [
+    {
+      "from": "合成慢 SQL 事故",
+      "fromPath": "wiki/cases/合成慢-sql-事故.md",
+      "to": "直接触发与系统根因"
+    },
+    {
+      "from": "合成慢 SQL 事故",
+      "fromPath": "wiki/cases/合成慢-sql-事故.md",
+      "to": "系统性故障学习审查"
+    },
+    {
+      "from": "知识索引",
+      "fromPath": "wiki/index.md",
+      "to": "sources/left-ear-research-capsule"
+    },
+    {
+      "from": "知识索引",
+      "fromPath": "wiki/index.md",
+      "to": "entities/左耳听风"
+    },
+    {
+      "from": "知识索引",
+      "fromPath": "wiki/index.md",
+      "to": "cases/合成慢-sql-事故"
+    },
+    {
+      "from": "知识索引",
+      "fromPath": "wiki/index.md",
+      "to": "concepts/直接触发与系统根因"
+    },
+    {
+      "from": "知识索引",
+      "fromPath": "wiki/index.md",
+      "to": "methods/系统性故障学习审查"
+    },
+    {
+      "from": "知识索引",
+      "fromPath": "wiki/index.md",
+      "to": "principles/不以归责替代治理"
+    },
+    {
+      "from": "《左耳听风》研究胶囊",
+      "fromPath": "wiki/sources/left-ear-research-capsule.md",
+      "to": "合成慢-sql-事故"
+    },
+    {
+      "from": "《左耳听风》研究胶囊",
+      "fromPath": "wiki/sources/left-ear-research-capsule.md",
+      "to": "直接触发与系统根因"
+    },
+    {
+      "from": "《左耳听风》研究胶囊",
+      "fromPath": "wiki/sources/left-ear-research-capsule.md",
+      "to": "系统性故障学习审查"
+    },
+    {
+      "from": "《左耳听风》研究胶囊",
+      "fromPath": "wiki/sources/left-ear-research-capsule.md",
+      "to": "不以归责替代治理"
+    },
+    {
+      "from": "《左耳听风》研究胶囊",
+      "fromPath": "wiki/sources/left-ear-research-capsule.md",
+      "to": "左耳听风"
+    }
+  ],
+  "reviews": [
+    {
+      "type": "suggestion",
+      "title": "合成慢 SQL 事故的时间线与整改证据",
+      "description": "当前来源只提供约 27 分钟后确认异常这一观察，缺少发布、告警、止损、恢复和复发验证的精确记录；如需将案例用于更严格的演练，应补充可核验的时间线和整改证据。"
+    },
+    {
+      "type": "suggestion",
+      "title": "重试放大系数的定义与观测方法",
+      "description": "来源将“重试放大系数”列为关键监控缺口，但未定义其计算口径、采样范围或告警阈值；补充该概念有助于验证重试是否扩大下游压力并支持整改验收。\n\n\n\n\n---REVIEW: contradiction | 系统性根因与待验证系统条件的证据边界---\n生成页面将连接池耗尽、重试放大、监控缺口等内容表述为共同构成系统性根因，但来源仅将其列为需要继续检查的系统条件；需要人工决定哪些可升级为已证实根因，哪些必须保留为假设或证据缺口。\nOPTIONS: Create Page | Skip\nPAGES: wiki/cases/合成慢-sql-事故.md, wiki/concepts/直接触发与系统根因.md, wiki/sources/left-ear-research-capsule.md"
+    }
+  ],
+  "activity": [
+    {
+      "title": "left-ear-research-capsule.md",
+      "status": "done",
+      "detail": "8 files written, 2 review item(s)",
+      "filesWritten": [
+        "wiki/sources/left-ear-research-capsule.md",
+        "wiki/entities/左耳听风.md",
+        "wiki/cases/合成慢-sql-事故.md",
+        "wiki/concepts/直接触发与系统根因.md",
+        "wiki/methods/系统性故障学习审查.md",
+        "wiki/principles/不以归责替代治理.md",
+        "wiki/index.md",
+        "wiki/log.md"
+      ]
+    }
+  ],
+  "lint": {
+    "total": 5,
+    "byType": {
+      "no-outlinks": 4,
+      "orphan": 1
+    }
+  },
+  "error": null,
+  "boundaries": [
+    "本次是上游 JavaScript 摄取核心的真实执行，不是 Tauri 桌面壳验收。",
+    "使用 Codex CLI 真实模型调用；没有启用向量 Embedding、Web 搜索、MCP 或本地 API。",
+    "输入是研究者自写/合成胶囊，不是 119 篇第三方专栏全文。",
+    "生成 Wiki 是模型派生理解，仍需人工核验，不能当成新的事实来源。"
+  ]
+}

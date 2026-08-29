@@ -1,0 +1,16 @@
+[
+  {
+    "id": "msg_1788022341350_1_1ptqhq",
+    "role": "user",
+    "content": "慢 SQL 为什么只是触发因素，而不是充分根因？请只根据本项目 Wiki 回答，并指出依据页面。",
+    "timestamp": 1788022341350,
+    "conversationId": "conv_1788022333139_cdq19f"
+  },
+  {
+    "id": "msg_1788022341939_2_we529o",
+    "role": "assistant",
+    "content": "Error: Backend Agent LLM is not configured or the selected Chat model is unavailable. Check Settings > Models and try again.",
+    "timestamp": 1788022341939,
+    "conversationId": "conv_1788022333139_cdq19f"
+  }
+]

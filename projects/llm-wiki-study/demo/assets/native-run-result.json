@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "runId": "left-ear-native-codex-2026-08-30",
+  "status": "passed_with_recovered_attempt",
+  "upstream": {
+    "version": "v0.6.11",
+    "commit": "e8082119649e6a8e1cf85eaf289adcabfdf39d4e"
+  },
+  "runtime": {
+    "platform": "Windows",
+    "surface": "Tauri desktop client",
+    "codexCliVersion": "0.150.1",
+    "model": "gpt-5.4-mini",
+    "localCliIsolation": true,
+    "sourceBuild": true
+  },
+  "input": {
+    "path": "raw/sources/left-ear-research-capsule.md",
+    "bytes": 4389,
+    "sha256": "95c8a358af782a1cbdaca348f826ca0ea6e6f18b33a216bcff68989d3a16a9d2",
+    "containsThirdPartyArticleBodies": false,
+    "description": "Researcher-authored structure capsule plus a synthetic slow-SQL incident."
+  },
+  "ingest": {
+    "attempts": 2,
+    "firstAttempt": {
+      "status": "failed",
+      "reason": "Codex CLI emitted an empty agent_message after consuming its response budget."
+    },
+    "secondAttempt": {
+      "status": "passed",
+      "filesWritten": 9,
+      "reviewItems": 2
+    },
+    "wikiFilesAfterRun": 10,
+    "generatedBreakdown": {
+      "entities": 2,
+      "concepts": 3,
+      "queries": 1,
+      "sources": 1,
+      "indexAndLog": 2
+    }
+  },
+  "graph": {
+    "pages": 9,
+    "visiblePages": 6,
+    "hiddenStructuralPages": 3,
+    "links": 11
+  },
+  "review": {
+    "total": 2,
+    "pending": 1,
+    "autoResolvedByRules": 1
+  },
+  "chat": {
+    "status": "passed_after_configuration_isolation",
+    "retrievalMode": "standard",
+    "agentMode": "standard",
+    "query": "慢 SQL",
+    "references": 5,
+    "tokenHits": 4,
+    "vectorHits": 0,
+    "graphHits": 2,
+    "generator": "Codex CLI",
+    "configurationBoundary": "All 33 unrelated user skills were disabled with the original Skills UI so the offline wiki-search fallback could run."
+  },
+  "generatedFiles": [
+    {
+      "path": "wiki/entities/左耳听风.md",
+      "bytes": 1013,
+      "sha256": "2147f78e359b75aee070894e958783ea41ce10a440417aac7759da7076bd7660"
+    },
+    {
+      "path": "wiki/entities/第三方公开专栏镜像.md",
+      "bytes": 1073,
+      "sha256": "d4438b86a84c22565e25081882fdf44adb7945f541ea5a6fffb1e2e86f8e5858"
+    },
+    {
+      "path": "wiki/concepts/触发因素不等于充分根因.md",
+      "bytes": 1515,
+      "sha256": "05a44c4e3033f0973d890aad54e53f993e5366f59016229090dca80055d93a79"
+    },
+    {
+      "path": "wiki/concepts/系统性故障学习审查.md",
+      "bytes": 1570,
+      "sha256": "d62b8a945c9d828adcbc0e60ac94a025a57002d10aef14489c1d643cbf2c9120"
+    },
+    {
+      "path": "wiki/concepts/不以归责替代治理.md",
+      "bytes": 1376,
+      "sha256": "9e62a3a4dd47ae7d09ca24390230c4f9942dbe6398bd48e5443e8adc02c47a09"
+    },
+    {
+      "path": "wiki/queries/第三方公开专栏镜像是否允许再分发.md",
+      "bytes": 1122,
+      "sha256": "8753fac00b03fe0d20d1b5641ea9495f04d74d3af772691c77d82d09b58a90b2"
+    },
+    {
+      "path": "wiki/log.md",
+      "bytes": 283,
+      "sha256": "21b92272cb6d601dbfa28450916f0678123c2d8f7f564b0695966047f59eb55a"
+    },
+    {
+      "path": "wiki/index.md",
+      "bytes": 587,
+      "sha256": "a857c28340d9b3108ef8a2204b937deb60fd3e746358f441d4e4c5179c56bf5e"
+    },
+    {
+      "path": "wiki/sources/left-ear-research-capsule.md",
+      "bytes": 10738,
+      "sha256": "9cfc85d8feabaab11355ff810f358d4fb608e5e840811ea013195e36b86addd2"
+    }
+  ],
+  "evidence": [
+    "native-project-configured.png",
+    "native-ingest-complete.png",
+    "native-wiki-left-ear.png",
+    "native-search-slow-sql.png",
+    "native-knowledge-graph.png",
+    "native-review-queue.png",
+    "native-chat-rag-codex-answer.png",
+    "native-ingest-first-failure.png"
+  ]
+}

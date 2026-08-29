@@ -1,0 +1,16 @@
+[
+  {
+    "id": "msg_1788022490060_5_n08d7v",
+    "role": "user",
+    "content": "慢 SQL",
+    "timestamp": 1788022490060,
+    "conversationId": "conv_1788022489600_sphsx4"
+  },
+  {
+    "id": "msg_1788022490620_6_0vual4",
+    "role": "assistant",
+    "content": "Error: Backend Agent LLM is not configured or the selected Chat model is unavailable. Check Settings > Models and try again.",
+    "timestamp": 1788022490620,
+    "conversationId": "conv_1788022489600_sphsx4"
+  }
+]

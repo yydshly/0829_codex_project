@@ -1,0 +1,110 @@
+{
+  "id": "zuoer-tingfeng-controlled-demo",
+  "title": "《左耳听风》同题对照",
+  "subtitle": "同一份资料、同一个问题，比较直接模型、普通 RAG 与 LLM Wiki。",
+  "source": {
+    "displayName": "左耳听风专栏代理语料",
+    "attributedAuthor": "陈皓",
+    "kind": "第三方公开专栏镜像的受控代理语料",
+    "corpusCommit": "f2a1a74c146545a4405dd23ffe96248283a1e20a",
+    "articleFiles": 119,
+    "imageFiles": 162,
+    "approxCharacters": 852621,
+    "priorStudyDate": "2026-08-28",
+    "boundary": "不是纸质书全文，也不能外推为对《左耳听风：传奇程序员练级攻略》的逐章分析。第三方正文不进入本研究仓库。"
+  },
+  "priorStudy": {
+    "candidateUnits": 247,
+    "frameworks": 39,
+    "principles": 108,
+    "cases": 50,
+    "counterExamples": 30,
+    "terms": 20,
+    "formalSkill": "系统性故障学习审查",
+    "syntheticRegression": "19 / 19",
+    "boundary": "这些数字是此前 Cangjie 受控研究的真实结果，只用于证明样例语料已有可审计理解，不是 LLM Wiki 的实际生成数量。",
+    "publicUrl": "https://github.com/yydshly/0827_githubcode_study/tree/main/studies/cangjie-skill/experiments/zuoer-tingfeng/column-proxy"
+  },
+  "scenario": {
+    "label": "SAME QUESTION / 同一问题",
+    "question": "一次慢 SQL 导致线上故障，根因就是 SQL 写得慢吗？整改应该做到什么程度？",
+    "evidenceBasis": "此前受控研究中的慢 SQL 连续追因案例与“系统性故障学习审查”方法。"
+  },
+  "modes": [
+    {
+      "id": "model",
+      "number": "01",
+      "label": "直接模型调用",
+      "short": "只问模型",
+      "status": "无检索 · 无持久知识",
+      "input": "模型只获得当前问题；若没有附带资料，它主要依赖参数记忆和提示中的有限上下文。",
+      "process": [
+        { "label": "INPUT", "title": "问题进入上下文", "detail": "只有当前提问，没有自动访问 119 篇代理语料。" },
+        { "label": "GENERATE", "title": "模型直接推理", "detail": "根据通用的软件工程知识组织一次回答。" },
+        { "label": "RETURN", "title": "生成当前答案", "detail": "回答可以合理，但无法证明哪些判断来自《左耳听风》样例。" }
+      ],
+      "answerLabel": "可能回答 / 演示",
+      "answer": "慢 SQL 可能只是直接诱因。还应检查索引、查询计划、监控告警、容量和发布流程，并为整改设置负责人和期限。",
+      "artifacts": ["当前回答", "当前上下文"],
+      "evidenceState": "没有自动来源定位；回答中的观点可能来自模型通用知识。",
+      "after": "对话结束后，不会自然留下可编辑的案例页、方法页或关系图。",
+      "verdict": "最快，适合一次性讨论；不适合证明回答是否来自指定资料。"
+    },
+    {
+      "id": "rag",
+      "number": "02",
+      "label": "普通 RAG",
+      "short": "先找原文片段",
+      "status": "查询时召回 · 原文可追溯",
+      "input": "119 篇文章预先切块并建立关键词或向量索引；提问时搜索与慢 SQL、故障处理和复盘相关的片段。",
+      "process": [
+        { "label": "INDEX", "title": "文章切块与向量化", "detail": "保存原始片段和索引，不预先建立完整知识页面。" },
+        { "label": "RETRIEVE", "title": "查询时召回片段", "detail": "找到故障改进、报警、监控和发布检查等相关上下文。" },
+        { "label": "GENERATE", "title": "模型基于片段回答", "detail": "答案可引用原始文章，但主要结构仍在本次回答中临时形成。" }
+      ],
+      "answerLabel": "基于召回的回答 / 演示",
+      "answer": "不能只停在“SQL 很慢”。样例会继续追问：为什么报警晚了 27 分钟、为什么只发邮件、为什么定位耗时、为什么缺少 Nginx 指标，以及上线前为何缺少性能测试和 DBA 评审。整改应覆盖这些系统条件。",
+      "artifacts": ["原始分块", "关键词 / 向量索引", "带来源的当前回答"],
+      "evidenceState": "能够回到命中的原文片段；跨文章的方法关系通常要在每次查询中重新组织。",
+      "after": "索引继续存在，但这次形成的“连续追因方法”不一定成为可编辑、可复用的知识页面。",
+      "verdict": "适合可靠文档问答；比直接模型更可追溯，但长期知识结构较弱。"
+    },
+    {
+      "id": "wiki",
+      "number": "03",
+      "label": "LLM Wiki",
+      "short": "先编译成知识",
+      "status": "摄取时编译 · 查询时混合检索",
+      "input": "同样的 119 篇文章先经过知识分析，示例性映射为来源、案例、概念、原则和方法页面，再建立关键词、向量与图谱检索。",
+      "process": [
+        { "label": "COMPILE", "title": "从资料提取知识结构", "detail": "识别慢 SQL 案例、直接诱因、系统性根因、无责复盘和整改闭环等概念。" },
+        { "label": "PERSIST", "title": "写入可编辑 Wiki", "detail": "案例页链接方法、原则和原始来源，关系可由人继续修正。" },
+        { "label": "RETRIEVE", "title": "关键词 × 向量 × 图谱", "detail": "查询同时召回慢 SQL 案例、故障学习方法及相邻的证据和边界页面。" },
+        { "label": "ACT", "title": "回答并继续行动", "detail": "Agent 可据此生成复盘检查表、Review 任务或新的研究缺口。" }
+      ],
+      "answerLabel": "基于持久知识层的回答 / 演示",
+      "answer": "慢 SQL 是直接触发，不是充分根因。应沿技术机制、工程控制、协作流程和组织条件继续追因；整改必须说明改变了哪种风险机制，并包含负责人、期限、验收证据、复查日期和复发验证。回答同时关联案例页、方法页、原则页和原始来源。",
+      "artifacts": ["来源页", "慢 SQL 案例页", "故障学习方法页", "原则 / 边界页", "关系图", "当前回答"],
+      "evidenceState": "可以沿 Wiki 页面回到 sources[]，再回到原始资料；Wiki 本身仍是模型生成的派生视图。",
+      "after": "回答结束后，案例、方法、边界和关系仍保留，下一次问题可以直接复用并继续修订。",
+      "verdict": "适合长期研究记忆和多 Agent 复用；摄取更贵，也必须防止生成页面失真。"
+    }
+  ],
+  "wikiMapping": {
+    "label": "ILLUSTRATIVE WIKI MAP / 示例映射",
+    "boundary": "以下页面和关系根据既有受控研究结果设计，用于展示 LLM Wiki 的组织方式；尚未由 LLM Wiki 对该语料真实生成。",
+    "nodes": [
+      { "type": "source", "label": "来源", "title": "故障处理：故障改进", "path": "raw/sources/18-fault-improvement.md" },
+      { "type": "case", "label": "案例", "title": "慢 SQL 故障连续追因", "path": "wiki/cases/slow-sql-incident.md" },
+      { "type": "concept", "label": "概念", "title": "直接诱因 ≠ 系统根因", "path": "wiki/concepts/trigger-vs-root-cause.md" },
+      { "type": "method", "label": "方法", "title": "系统性故障学习审查", "path": "wiki/methods/incident-learning-audit.md" },
+      { "type": "boundary", "label": "边界", "title": "不以归责替代治理", "path": "wiki/boundaries/no-blame-as-root-cause.md" }
+    ],
+    "relations": [
+      "来源 → 支持案例",
+      "案例 → 暴露概念",
+      "概念 → 进入方法",
+      "方法 → 引用边界"
+    ]
+  }
+}

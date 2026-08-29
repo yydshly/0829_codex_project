@@ -1,0 +1,16 @@
+[
+  {
+    "id": "msg_1788022389745_3_8n1bbg",
+    "role": "user",
+    "content": "研究胶囊中的慢 SQL 事故链是什么？请只按原始来源回答，并标出依据。",
+    "timestamp": 1788022389745,
+    "conversationId": "conv_1788022389133_gbr0pu"
+  },
+  {
+    "id": "msg_1788022390339_4_vhwlf1",
+    "role": "assistant",
+    "content": "Error: Backend Agent LLM is not configured or the selected Chat model is unavailable. Check Settings > Models and try again.",
+    "timestamp": 1788022390339,
+    "conversationId": "conv_1788022389133_gbr0pu"
+  }
+]

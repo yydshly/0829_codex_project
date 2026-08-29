@@ -1,0 +1,186 @@
+{
+  "audit_date": "2026-08-30",
+  "upstream": "https://github.com/nashsu/llm_wiki",
+  "version": "v0.6.11",
+  "commit": "e8082119649e6a8e1cf85eaf289adcabfdf39d4e",
+  "source_files": 390,
+  "test_files": 142,
+  "checks": {
+    "passed": 14,
+    "total": 14
+  },
+  "results": [
+    {
+      "capability": "knowledge-compile",
+      "label": "Two-stage analysis and Wiki generation",
+      "path": "src/lib/ingest.ts",
+      "needles": [
+        "Step 1/2",
+        "structured analysis",
+        "You are a wiki maintainer"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "multiformat",
+      "label": "Native parser dependencies",
+      "path": "src-tauri/Cargo.toml",
+      "needles": [
+        "pdfium-render",
+        "docx-rs",
+        "calamine",
+        "epub",
+        "mobi"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "multimodal",
+      "label": "PDF image extraction and visual captioning",
+      "path": "src/lib/ingest.ts",
+      "needles": [
+        "extractAndSaveSourceImages",
+        "vision-model-generated factual caption"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "incremental",
+      "label": "Persistent ingest queue",
+      "path": "src/lib/ingest-queue.ts",
+      "needles": [
+        "autoIngest",
+        "processing",
+        "retry"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "traceability",
+      "label": "Source-linked page frontmatter",
+      "path": "src/lib/ingest.ts",
+      "needles": [
+        "frontmatter `sources` field",
+        "add cross-references"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "hybrid-search",
+      "label": "Keyword/vector reciprocal-rank fusion",
+      "path": "src-tauri/src/commands/search.rs",
+      "needles": [
+        "RRF_K",
+        "apply_rrf_scores",
+        "vector_hits"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "graph-retrieval",
+      "label": "Graph expansion in project search",
+      "path": "src-tauri/src/commands/search.rs",
+      "needles": [
+        "blend_graph_results",
+        "graph_result_quota",
+        "graph_hits"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "knowledge-graph",
+      "label": "Four-signal relevance model",
+      "path": "src/lib/graph-relevance.ts",
+      "needles": [
+        "directLink: 3.0",
+        "sourceOverlap: 4.0",
+        "commonNeighbor: 1.5",
+        "typeAffinity: 1.0"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "knowledge-graph",
+      "label": "Louvain community detection",
+      "path": "src/lib/wiki-graph-analysis.ts",
+      "needles": [
+        "graphology-communities-louvain",
+        "detectCommunities",
+        "cohesion"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "deep-research",
+      "label": "Deep Research synthesis into a Wiki page",
+      "path": "src/lib/deep-research.ts",
+      "needles": [
+        "collectResearchSources",
+        "buildResearchPageContent",
+        "embedPage"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "agent-runtime",
+      "label": "Built-in Agent tool registry",
+      "path": "src-tauri/src/agent/tools.rs",
+      "needles": [
+        "wiki.search",
+        "source.search",
+        "graph.search",
+        "workspace.write_file",
+        "shell.exec"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "agent-skills",
+      "label": "Local SKILL.md discovery",
+      "path": "src-tauri/src/agent/skills.rs",
+      "needles": [
+        "SKILL.md",
+        "load_project_skills"
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "local-api",
+      "label": "Token-aware local API",
+      "path": "src-tauri/src/api_server.rs",
+      "needles": [
+        "const PORT: u16 = 19828",
+        "const API_PREFIX: &str = \"/api/v1\"",
+        "Bearer "
+      ],
+      "passed": true,
+      "missing": []
+    },
+    {
+      "capability": "mcp",
+      "label": "MCP tools for external Agents",
+      "path": "mcp-server/src/index.ts",
+      "needles": [
+        "llm_wiki_search",
+        "llm_wiki_chat",
+        "llm_wiki_graph",
+        "llm_wiki_rescan_sources"
+      ],
+      "passed": true,
+      "missing": []
+    }
+  ],
+  "interpretation": "Source-verified means the implementation marker exists in the pinned checkout; it does not prove real-model output quality."
+}

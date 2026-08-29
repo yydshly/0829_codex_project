@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="以源码证据展示 LLM Wiki 的资料摄取、知识编译、混合检索、图谱、Deep Research、Agent 与 MCP 能力。">
+    <meta name="theme-color" content="#f4f6f2">
+    <meta property="og:title" content="LLM Wiki 能力与知识编译研究">
+    <meta property="og:description" content="它不是一次性文档问答，而是一条资料 → 持久 Wiki → 混合检索 → Agent 的知识编译流水线。">
+    <title>LLM Wiki 能力地图 · 0829 Codex Research Lab</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles.css">
+    <script>
+      (() => {
+        const saved = localStorage.getItem("llm-wiki-study-theme");
+        const preferred = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = saved || preferred;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <div class="reading-progress" aria-hidden="true"><span></span></div>
+
+    <header class="site-header">
+      <a class="brand" href="../../../" aria-label="返回 0829 Codex Research Lab">
+        <span class="brand-grid" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </span>
+        <span class="brand-copy"><strong>RESEARCH / LLM WIKI</strong><small>知识编译能力地图</small></span>
+      </a>
+      <nav class="section-nav" aria-label="页面章节">
+        <a href="#positioning">核心定位</a>
+        <a href="#pipeline">工作流</a>
+        <a href="#original-ui">原库界面</a>
+        <a href="#native-run">原生实测</a>
+        <a href="#left-ear-demo">左耳样例</a>
+        <a href="#codex-run">Codex 实测</a>
+        <a href="#capabilities">能力矩阵</a>
+        <a href="#boundaries">研究边界</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="切换为深色主题" title="切换主题">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.1 15.4A8.5 8.5 0 0 1 8.6 3.9 8.5 8.5 0 1 0 20.1 15.4Z"/></svg>
+        </button>
+        <a class="source-button" href="https://github.com/nashsu/llm_wiki/tree/e8082119649e6a8e1cf85eaf289adcabfdf39d4e" target="_blank" rel="noreferrer">查看固定源码 <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="positioning" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span>SOURCE-LED CAPABILITY AUDIT</span><time datetime="2026-08-29">2026.08.29</time></p>
+          <h1 id="hero-title">把散落资料，<br>编译成一座<br><em>持续生长的 Wiki。</em></h1>
+          <p class="hero-lead">LLM Wiki 的核心不是“上传文件后聊天”，而是在资料进入时就抽取实体、概念、矛盾和关系，写成<strong>可编辑、可追溯、可被 Agent 调用</strong>的持久知识层。</p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#left-ear-demo">看《左耳听风》样例 <span aria-hidden="true">↓</span></a>
+            <span class="audit-note"><i aria-hidden="true"></i> 14 / 14 源码检查通过</span>
+          </div>
+        </div>
+
+        <div class="compiler-board" aria-label="LLM Wiki 将原始资料编译为持久 Wiki，再通过检索和 Agent 使用">
+          <div class="board-head">
+            <span>KNOWLEDGE COMPILER</span>
+            <span class="board-status"><i aria-hidden="true"></i> PINNED v0.6.11</span>
+          </div>
+          <div class="compiler-stage stage-raw">
+            <span class="stage-index">01 / RAW</span>
+            <strong>原始资料</strong>
+            <small>PDF · Office · Web · Media</small>
+          </div>
+          <div class="flow-line line-a" aria-hidden="true"><i></i></div>
+          <div class="compiler-stage stage-analyze">
+            <span class="stage-index">02 / ANALYZE</span>
+            <strong>实体 · 概念 · 冲突</strong>
+            <small>两阶段 LLM 摄取</small>
+          </div>
+          <div class="flow-line line-b" aria-hidden="true"><i></i></div>
+          <div class="wiki-core">
+            <img src="./assets/llm-wiki-logo.jpg" alt="LLM Wiki 方格标志" width="128" height="128">
+            <strong>PERSISTENT WIKI</strong>
+            <span>Markdown + sources[] + [[links]]</span>
+          </div>
+          <div class="flow-line line-c" aria-hidden="true"><i></i></div>
+          <div class="compiler-stage stage-retrieve">
+            <span class="stage-index">03 / RETRIEVE</span>
+            <strong>关键词 × 向量 × 图谱</strong>
+            <small>RRF + graph expansion</small>
+          </div>
+          <div class="compiler-stage stage-agent">
+            <span class="stage-index">04 / ACT</span>
+            <strong>Agent · MCP · Research</strong>
+            <small>查询、生成、继续研究</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="proof-strip" aria-label="源码审计摘要">
+        <div><strong>v0.6.11</strong><span>固定上游版本</span></div>
+        <div><strong>390</strong><span>TS / TSX / Rust 文件</span></div>
+        <div><strong>142</strong><span>测试文件</span></div>
+        <div><strong>9</strong><span>MCP 工具</span></div>
+        <p><span>证据等级</span> 12 组能力由源码确认；《左耳听风》安全胶囊已由 Codex 真实摄取，检索、桌面壳与全量质量仍分开标注。</p>
+      </section>
+
+      <section class="comparison-section" aria-labelledby="difference-title">
+        <div class="section-label">CORE DIFFERENCE / 核心差异</div>
+        <div class="comparison-copy">
+          <h2 id="difference-title">RAG 每次回答。<br><em>Wiki 持续积累。</em></h2>
+          <p>普通 RAG 在提问时检索原文片段，再临时拼接答案。LLM Wiki 把摄取成本前置：先把资料编译成稳定页面、关系和来源记录，查询时再联合 Wiki、原始资料、向量与图谱。</p>
+        </div>
+        <div class="comparison-grid">
+          <article>
+            <p>TRADITIONAL RAG</p>
+            <strong>问题 → 找片段 → 临时回答</strong>
+            <span>下一次问题重新发现关系；主要产物留在聊天里。</span>
+          </article>
+          <article class="highlighted">
+            <p>LLM WIKI</p>
+            <strong>资料 → 编译 Wiki → 持续查询</strong>
+            <span>知识页面、来源、链接和人工修正可以长期存在。</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="pipeline-section" id="pipeline" aria-labelledby="pipeline-title">
+        <div class="section-heading">
+          <p class="section-label">INGEST → QUERY / 工作流</p>
+          <h2 id="pipeline-title">一次资料进入，<br>经过五个明确阶段。</h2>
+          <p>这条链路说明它为什么更像“知识编译器”，也标出后续研究最值得验证的位置。</p>
+        </div>
+        <ol class="pipeline-list">
+          <li>
+            <span>01</span>
+            <div><strong>解析来源</strong><small>保存原始资料，提取正文、结构和图片。</small></div>
+            <code>raw/sources/</code>
+          </li>
+          <li>
+            <span>02</span>
+            <div><strong>结构分析</strong><small>识别实体、概念、论证、矛盾与页面建议。</small></div>
+            <code>analysis</code>
+          </li>
+          <li>
+            <span>03</span>
+            <div><strong>生成与合并</strong><small>创建来源摘要和主题页，添加 sources[] 与双链。</small></div>
+            <code>wiki/**/*.md</code>
+          </li>
+          <li>
+            <span>04</span>
+            <div><strong>建立检索层</strong><small>关键词评分、可选向量、图谱关系与聚类。</small></div>
+            <code>LanceDB + Graph</code>
+          </li>
+          <li>
+            <span>05</span>
+            <div><strong>查询、审核、研究</strong><small>引用回答、Lint、Review、Deep Research 与 Agent 输出。</small></div>
+            <code>Chat / API / MCP</code>
+          </li>
+        </ol>
+      </section>
+
+      <section class="original-ui-section" id="original-ui" aria-labelledby="original-ui-title">
+        <div class="original-ui-heading">
+          <div>
+            <p class="section-label">UPSTREAM PRODUCT UI / 原库界面</p>
+            <h2 id="original-ui-title">有专门界面。<br><em>它本身就是<br>桌面知识工作台。</em></h2>
+          </div>
+          <p>我们现在看到的是研究网页；原库则是基于 Tauri 的桌面应用。下面使用固定版本随仓库提供的官方截图，直接展示用户能看到和操作的产品表面。</p>
+        </div>
+
+        <div class="original-ui-boundary" role="note">
+          <span>OFFICIAL SCREENSHOTS · v0.6.11</span>
+          <p id="original-ui-boundary">读取上游界面证据…</p>
+          <a href="https://github.com/nashsu/llm_wiki/tree/e8082119649e6a8e1cf85eaf289adcabfdf39d4e/assets" target="_blank" rel="noreferrer">查看固定截图目录 ↗</a>
+        </div>
+
+        <div class="original-ui-console" id="original-ui-console" aria-busy="true">
+          <div class="original-ui-tabs" role="tablist" aria-label="选择原库产品界面">
+            <button type="button" role="tab" id="original-ui-tab-workspace" aria-controls="original-ui-panel" aria-selected="true" data-original-ui="workspace"><span>01</span>桌面工作区</button>
+            <button type="button" role="tab" id="original-ui-tab-research" aria-controls="original-ui-panel" aria-selected="false" tabindex="-1" data-original-ui="research"><span>02</span>Deep Research</button>
+            <button type="button" role="tab" id="original-ui-tab-chat" aria-controls="original-ui-panel" aria-selected="false" tabindex="-1" data-original-ui="chat"><span>03</span>AI Chat</button>
+            <button type="button" role="tab" id="original-ui-tab-graph" aria-controls="original-ui-panel" aria-selected="false" tabindex="-1" data-original-ui="graph"><span>04</span>知识图谱</button>
+            <button type="button" role="tab" id="original-ui-tab-clipper" aria-controls="original-ui-panel" aria-selected="false" tabindex="-1" data-original-ui="clipper"><span>05</span>网页剪藏</button>
+            <button type="button" role="tab" id="original-ui-tab-obsidian" aria-controls="original-ui-panel" aria-selected="false" tabindex="-1" data-original-ui="obsidian"><span>06</span>Obsidian 兼容</button>
+          </div>
+
+          <div class="original-ui-panel" id="original-ui-panel" role="tabpanel" aria-labelledby="original-ui-tab-workspace">
+            <figure class="original-ui-figure">
+              <div class="original-ui-image-frame">
+                <span>UPSTREAM UI · <b id="original-ui-image-label">DESKTOP WORKSPACE</b></span>
+                <img id="original-ui-image" src="./assets/original-ui/overview.jpg" alt="LLM Wiki 原生桌面应用总览：左侧知识树、中间知识图谱、右侧页面内容" width="3128" height="1840" decoding="async">
+              </div>
+              <figcaption>原图保留在研究子项目中，并与固定上游提交逐文件对应。</figcaption>
+            </figure>
+
+            <aside class="original-ui-copy" aria-live="polite">
+              <header>
+                <span id="original-ui-number">01 / DESKTOP WORKSPACE</span>
+                <h3 id="original-ui-surface-title">原库本身是一款带完整界面的桌面应用</h3>
+              </header>
+              <p id="original-ui-summary">正在载入界面说明。</p>
+              <dl>
+                <div><dt>你能操作</dt><dd id="original-ui-operation">—</dd></div>
+                <div><dt>留下什么</dt><dd id="original-ui-outcome">—</dd></div>
+              </dl>
+              <ul id="original-ui-capabilities" aria-label="该界面对应的能力"></ul>
+              <a id="original-ui-source" href="https://github.com/nashsu/llm_wiki/blob/e8082119649e6a8e1cf85eaf289adcabfdf39d4e/assets/overview.jpg" target="_blank" rel="noreferrer">打开固定版本原图 ↗</a>
+            </aside>
+          </div>
+        </div>
+
+        <div class="original-ui-error" id="original-ui-error" hidden role="alert">
+          <strong>界面资料暂时没有载入。</strong>
+          <button type="button" id="original-ui-retry">重新加载</button>
+        </div>
+
+        <div class="surface-map" aria-label="LLM Wiki 产品表面与能力关系">
+          <article><span>01 / DESKTOP</span><strong>桌面主工作台</strong><p>项目、Sources、Wiki、搜索、编辑、Review、Lint 与图谱的统一操作入口。</p></article>
+          <article><span>02 / INTELLIGENCE</span><strong>AI 使用界面</strong><p>Chat、Deep Research 与图谱洞察消费同一份持久知识层。</p></article>
+          <article><span>03 / INGRESS</span><strong>外部资料入口</strong><p>Chrome Clipper 把网页送进项目；多格式摄取负责后续解析和编译。</p></article>
+          <article><span>04 / AUTOMATION</span><strong>非可视接口</strong><p>本地 API 与 MCP 面向脚本和 Agent；它们是自动化入口，不必拥有独立页面。</p></article>
+        </div>
+      </section>
+
+      <section class="native-run-section" id="native-run" aria-labelledby="native-run-title">
+        <div class="native-run-heading">
+          <div>
+            <p class="section-label">LOCAL NATIVE RUN / 原生客户端实测</p>
+            <h2 id="native-run-title">不是界面推测。<br><em>《左耳听风》已经在<br>原生端跑通。</em></h2>
+          </div>
+          <p>我们从固定源码构建并启动 Windows Tauri 客户端，在原库自己的界面中创建隔离项目、导入安全研究胶囊，再查看生成 Wiki、Review、知识图谱与带引用问答。下列画面均来自这次本机运行。</p>
+        </div>
+
+        <div class="native-run-boundary" role="note">
+          <span>ACTUAL WINDOW · v0.6.11</span>
+          <p><strong>这组是本机原生应用实拍，不是官方宣传图，也不是研究网页仿制。</strong>输入只有研究者自写结构与合成慢 SQL 事故，不含 119 篇第三方专栏正文；上游业务代码没有为演示而修改。</p>
+          <a href="./assets/native-run-result.json">机器可读运行结果 ↓</a>
+        </div>
+
+        <div class="native-run-proof">
+          <article class="native-run-status">
+            <div>
+              <span class="native-run-pass"><i aria-hidden="true"></i> SOURCE BUILD PASS</span>
+              <small>Windows · Tauri desktop client</small>
+            </div>
+            <dl>
+              <div><dt>上游</dt><dd>v0.6.11</dd></div>
+              <div><dt>生成器</dt><dd>Codex CLI 0.150.1</dd></div>
+              <div><dt>模型</dt><dd>gpt-5.4-mini</dd></div>
+              <div><dt>隔离</dt><dd>本地 CLI / 只读</dd></div>
+            </dl>
+          </article>
+
+          <div class="native-run-flow" aria-label="本次原生实测的数据流">
+            <article><span>01 / INPUT</span><strong>4,389 B</strong><p>安全研究胶囊</p></article>
+            <article><span>02 / COMPILE</span><strong>9 files</strong><p>2 个 Review</p></article>
+            <article><span>03 / GRAPH</span><strong>9 pages</strong><p>11 条连接</p></article>
+            <article><span>04 / RAG</span><strong>5 refs</strong><p>Codex 回答</p></article>
+          </div>
+        </div>
+
+        <div class="native-run-gallery" aria-label="本机原生客户端运行截图">
+          <figure class="native-run-shot native-run-shot-primary">
+            <div class="native-run-image-frame">
+              <span>07 / HYBRID RETRIEVAL → CODEX</span>
+              <img src="./assets/native-run/native-chat-rag-codex-answer.png" alt="LLM Wiki 原生客户端使用混合检索回答慢 SQL 问题，界面显示 5 条结果、4 个关键词命中、2 个图谱命中及 5 条引用" width="1200" height="900" decoding="async">
+            </div>
+            <figcaption><strong>问答不是直接把问题扔给模型。</strong>原库先用本地 Wiki 做混合检索，再把证据交给 Codex 生成答案，最后把 5 个 References 返回界面。</figcaption>
+          </figure>
+
+          <figure class="native-run-shot">
+            <div class="native-run-image-frame">
+              <span>03 / PERSISTENT WIKI</span>
+              <img src="./assets/native-run/native-wiki-left-ear.png" alt="LLM Wiki 原生客户端显示自动生成的左耳听风实体页面、来源字段和双向链接" width="1200" height="900" decoding="async">
+            </div>
+            <figcaption>摄取不是只做向量：它写出人可以阅读、编辑和追溯的 Markdown Wiki。</figcaption>
+          </figure>
+
+          <figure class="native-run-shot">
+            <div class="native-run-image-frame">
+              <span>05 / KNOWLEDGE GRAPH</span>
+              <img src="./assets/native-run/native-knowledge-graph.png" alt="LLM Wiki 原生客户端知识图谱，显示 9 个页面、11 条链接及实体、概念和来源节点" width="1200" height="900" decoding="async">
+            </div>
+            <figcaption>9 个页面形成 11 条连接；概念、实体、来源和查询不再是孤立文本块。</figcaption>
+          </figure>
+
+          <figure class="native-run-shot">
+            <div class="native-run-image-frame">
+              <span>06 / REVIEW QUEUE</span>
+              <img src="./assets/native-run/native-review-queue.png" alt="LLM Wiki 原生客户端 Review 队列，显示一条待处理来源边界问题和一条规则自动解决项" width="1200" height="900" decoding="async">
+            </div>
+            <figcaption>2 个 Review 中 1 个由规则自动解决，1 个保留为来源与研究合成边界的人工判断。</figcaption>
+          </figure>
+
+          <figure class="native-run-shot">
+            <div class="native-run-image-frame">
+              <span>04 / SEARCH</span>
+              <img src="./assets/native-run/native-search-slow-sql.png" alt="LLM Wiki 原生客户端搜索慢 SQL，返回 8 个 Wiki 页面结果" width="1200" height="900" decoding="async">
+            </div>
+            <figcaption>“慢 SQL”可从生成后的知识层中检出 8 个页面，而不是只命中一段原始资料。</figcaption>
+          </figure>
+        </div>
+
+        <div class="native-run-meaning" aria-label="LLM Wiki、RAG 与 Codex 在本次运行中的分工">
+          <article><span>LLM WIKI / 工作台</span><h3>负责把资料变成可维护知识</h3><p>管理原文、生成 Wiki、保留来源、建立双链、暴露 Review，并为搜索和 Agent 提供同一知识资产。</p></article>
+          <article><span>RAG / 检索机制</span><h3>负责在提问时选证据</h3><p>本次命中 4 个关键词结果与 2 个图谱结果；它是产品内部的一段查询链路，不等于整个产品。</p></article>
+          <article><span>CODEX / 推理生成器</span><h3>负责理解、组织与表达</h3><p>Codex 参与摄取时的知识编译，也在问答末端依据已检索页面生成回答；它本身不替代持久知识层。</p></article>
+        </div>
+
+        <section class="knowledge-flywheel" id="knowledge-flywheel" aria-labelledby="knowledge-flywheel-title">
+          <header class="knowledge-flywheel-head">
+            <div>
+              <span>PERSONAL KNOWLEDGE COMPOUNDING / 个人知识复利</span>
+              <h3 id="knowledge-flywheel-title">沉淀的不只是一批资料，<br><em>还有你解决问题的方法。</em></h3>
+            </div>
+            <p>它把“我知道什么”和“我通常怎样做”分别保存在知识资产与 Skill 中。模型可以更换，Markdown、来源、关系和方法仍然留下。</p>
+          </header>
+
+          <ol class="knowledge-flywheel-stages" aria-label="个人知识与能力沉淀的六个阶段">
+            <li><span>01 / COLLECT</span><strong>来源</strong><p>原始文件、网页和媒体保留在 <code>raw/sources</code>，知道证据从哪里来。</p></li>
+            <li><span>02 / COMPILE</span><strong>知识</strong><p>模型提取实体、概念、案例和方法，写成可读、可改的 Markdown Wiki。</p></li>
+            <li><span>03 / CONNECT</span><strong>关系</strong><p>双链、共同来源和页面类型形成图谱，暴露社群、桥接点与知识缺口。</p></li>
+            <li><span>04 / RETRIEVE</span><strong>使用</strong><p>RAG 与 Agent 查询 Wiki、原始来源和图谱，把相关证据交给当前模型。</p></li>
+            <li><span>05 / CORRECT</span><strong>修订</strong><p>人通过编辑器、Review 或 Obsidian 修正内容；Agent 只能在授权范围内回写。</p></li>
+            <li><span>06 / REUSE</span><strong>能力</strong><p>把成熟的检查表、判断边界和工作步骤写成 Skill，下一批资料继续复用。</p></li>
+          </ol>
+
+          <div class="knowledge-assets" aria-label="知识资产与能力资产的区别">
+            <article>
+              <span>KNOWLEDGE ASSET / 知识资产</span>
+              <h4>我知道什么，证据在哪里</h4>
+              <p>原始来源、Wiki 页面、<code>sources[]</code>、双链、图谱、索引与 Review。</p>
+            </article>
+            <article>
+              <span>CAPABILITY ASSET / 能力资产</span>
+              <h4>我通常如何分析和行动</h4>
+              <p>可复用 Skill、审查清单、输出模板、工具选择规则和需要人工确认的边界。</p>
+            </article>
+            <aside>
+              <span>IMPORTANT BOUNDARY</span>
+              <strong>这是模型之外的长期记忆，<br>不是把资料训练进模型参数。</strong>
+              <p>每次使用时再检索相关知识并加载适用 Skill，因此内容可以修订、迁移、删除，模型也可以替换。</p>
+            </aside>
+          </div>
+        </section>
+
+        <details class="native-run-recovery">
+          <summary>真实失败与恢复也被保留 <span>展开查看边界</span></summary>
+          <div>
+            <img src="./assets/native-run/native-ingest-first-failure.png" alt="第一次原生摄取因 Codex 返回空 agent message 而失败的界面" width="1200" height="900" decoding="async">
+            <p>第一次 Codex 摄取返回空 <code>agent_message</code>，自动第二次尝试才写出 9 个文件。Chat 还需要在原库设置中禁用 33 个与本项目无关的自动发现 Skills，并把 Retrieval / Agent 都设为 Standard，才能走本地 Wiki 检索后备链路。这说明能力真实存在，但当前 Codex CLI 的开箱配置仍有整合摩擦。</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="sample-section" id="left-ear-demo" aria-labelledby="sample-title">
+        <div class="sample-heading">
+          <div>
+            <p class="section-label">CONTROLLED SAMPLE / 受控样例</p>
+            <h2 id="sample-title">还是那份《左耳听风》，<br><em>三种方式会留下什么？</em></h2>
+          </div>
+          <p>我们复用此前 119 篇专栏代理语料的研究结果，用同一个慢 SQL 故障问题，演示直接模型、普通 RAG 和 LLM Wiki 的处理差异。</p>
+        </div>
+
+        <div class="sample-boundary" role="note">
+          <span>证据边界</span>
+          <p><strong>这一组“三模式对照”仍是结构说明，不冒充真实生成。</strong>紧随其后的 Codex 实测只处理研究者自写/合成胶囊，并单独展示真实页面、调用与质量问题。</p>
+          <a href="https://github.com/yydshly/0827_githubcode_study/tree/main/studies/cangjie-skill/experiments/zuoer-tingfeng/column-proxy" target="_blank" rel="noreferrer">查看此前研究 ↗</a>
+        </div>
+
+        <div class="sample-console" id="sample-console" aria-busy="true">
+          <aside class="sample-source-card" aria-labelledby="sample-source-title">
+            <div class="sample-card-head">
+              <span>SOURCE / 01</span>
+              <i aria-hidden="true"></i>
+            </div>
+            <h3 id="sample-source-title">左耳听风专栏代理语料</h3>
+            <p id="sample-source-kind">读取样例证据…</p>
+            <dl class="sample-stats">
+              <div><dt>文章</dt><dd id="sample-articles">—</dd></div>
+              <div><dt>约字符</dt><dd id="sample-characters">—</dd></div>
+              <div><dt>既有候选</dt><dd id="sample-candidates">—</dd></div>
+              <div><dt>正式 Skill</dt><dd id="sample-skills">—</dd></div>
+            </dl>
+            <div class="sample-prior-proof">
+              <span>此前真实产物</span>
+              <strong id="sample-skill-name">—</strong>
+              <small id="sample-regression">—</small>
+            </div>
+            <div class="sample-question">
+              <span id="sample-question-label">SAME QUESTION / 同一问题</span>
+              <blockquote id="sample-question">一次慢 SQL 导致线上故障，根因就是 SQL 写得慢吗？整改应该做到什么程度？</blockquote>
+            </div>
+            <p class="sample-source-foot" id="sample-source-boundary">第三方正文不进入当前研究仓库。</p>
+          </aside>
+
+          <div class="sample-workbench">
+            <div class="sample-tabs" role="tablist" aria-label="选择处理方式">
+              <button type="button" role="tab" id="sample-tab-model" aria-controls="sample-mode-panel" aria-selected="false" tabindex="-1" data-sample-mode="model"><span>01</span>直接模型</button>
+              <button type="button" role="tab" id="sample-tab-rag" aria-controls="sample-mode-panel" aria-selected="false" tabindex="-1" data-sample-mode="rag"><span>02</span>普通 RAG</button>
+              <button type="button" role="tab" id="sample-tab-wiki" aria-controls="sample-mode-panel" aria-selected="true" data-sample-mode="wiki"><span>03</span>LLM Wiki</button>
+            </div>
+
+            <div class="sample-mode-panel" id="sample-mode-panel" role="tabpanel" aria-labelledby="sample-tab-wiki">
+              <header class="sample-mode-head">
+                <div>
+                  <span id="sample-mode-number">03 / KNOWLEDGE COMPILER</span>
+                  <h3 id="sample-mode-title">LLM Wiki</h3>
+                </div>
+                <strong id="sample-mode-status">读取样例数据…</strong>
+              </header>
+              <p class="sample-mode-input" id="sample-mode-input">正在载入同题处理路径。</p>
+
+              <ol class="sample-process" id="sample-process" aria-label="处理步骤"></ol>
+
+              <div class="sample-result-grid">
+                <article class="sample-answer">
+                  <span id="sample-answer-label">示例回答</span>
+                  <p id="sample-answer">—</p>
+                </article>
+                <aside class="sample-after">
+                  <div><span>证据状态</span><p id="sample-evidence-state">—</p></div>
+                  <div><span>对话之后</span><p id="sample-after">—</p></div>
+                </aside>
+              </div>
+
+              <div class="sample-artifacts">
+                <span>留下的产物</span>
+                <ul id="sample-artifacts"></ul>
+              </div>
+
+              <div class="sample-verdict">
+                <span>适用判断</span>
+                <strong id="sample-verdict">—</strong>
+              </div>
+
+              <section class="wiki-map" id="sample-wiki-map" aria-labelledby="wiki-map-title">
+                <div class="wiki-map-head">
+                  <div><span>ILLUSTRATIVE WIKI MAP</span><h4 id="wiki-map-title">回答之前，知识已经有了位置。</h4></div>
+                  <p id="wiki-map-boundary">示例映射，不是真实摄取产物。</p>
+                </div>
+                <div class="wiki-node-list" id="wiki-node-list"></div>
+                <div class="wiki-relations" id="wiki-relations" aria-label="页面关系"></div>
+              </section>
+            </div>
+
+            <div class="sample-error" id="sample-error" hidden role="alert">
+              <strong>样例数据读取失败。</strong>
+              <button type="button" id="sample-retry">重新加载</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="real-run-section" id="codex-run" aria-labelledby="real-run-title">
+        <div class="real-run-heading">
+          <div>
+            <p class="section-label">REAL CODEX INGEST / 真实摄取</p>
+            <h2 id="real-run-title">这次不是示意。<br><em>Codex 真的把资料编译成了 Wiki。</em></h2>
+          </div>
+          <p>我们把研究者自写的来源边界、合成慢 SQL 事故和故障学习方法交给固定上游的 <code>autoIngest</code>。Codex 负责理解，上游代码负责 FILE / REVIEW 解析、路径约束、写盘、索引、日志与缓存。</p>
+        </div>
+
+        <div class="real-run-boundary" role="note">
+          <span>SAFE INPUT</span>
+          <p><strong>输入不是 119 篇第三方专栏正文。</strong>本次只使用 1 份、1,655 字符的研究者自写/合成胶囊；未启用云 Embedding、Web 搜索、MCP 或本地 API。</p>
+          <a href="./assets/codex-ingest-result.json">打开机器可读结果 ↗</a>
+        </div>
+
+        <div class="real-run-console" id="real-run-console" aria-busy="true">
+          <header class="real-status-line">
+            <div>
+              <span>RUN / LEFT-EAR-CODEX-AUTO-INGEST-V1</span>
+              <strong id="real-run-status">读取真实运行证据…</strong>
+            </div>
+            <code id="real-run-engine">Codex CLI → autoIngest</code>
+          </header>
+
+          <dl class="real-metrics" aria-label="真实摄取指标">
+            <div><dt>总耗时</dt><dd id="real-elapsed">—</dd></div>
+            <div><dt>Codex 调用</dt><dd id="real-calls">—</dd></div>
+            <div><dt>Wiki 页面</dt><dd id="real-pages">—</dd></div>
+            <div><dt>主题页面</dt><dd id="real-thematic">—</dd></div>
+            <div><dt>Wikilink</dt><dd id="real-relations">—</dd></div>
+            <div><dt>Review</dt><dd id="real-reviews">—</dd></div>
+          </dl>
+
+          <section class="real-call-section" aria-labelledby="real-call-title">
+            <div class="real-subhead">
+              <span>MODEL CALLS / 模型阶段</span>
+              <h3 id="real-call-title">摄取成本发生在查询之前。</h3>
+            </div>
+            <ol class="real-call-list" id="real-call-list"></ol>
+          </section>
+
+          <section class="real-pages-section" aria-labelledby="real-pages-title">
+            <div class="real-subhead">
+              <span>GENERATED WIKI / 真实产物</span>
+              <h3 id="real-pages-title">选择一个页面，检查它留下的内容与关系。</h3>
+            </div>
+            <div class="real-page-browser">
+              <div class="real-page-list" id="real-page-list" aria-label="真实生成页面"></div>
+              <article class="real-page-detail" id="real-page-detail" aria-live="polite">
+                <div class="real-page-detail-head">
+                  <span id="real-page-type">—</span>
+                  <code id="real-page-path">—</code>
+                </div>
+                <h4 id="real-page-title">正在读取生成页面…</h4>
+                <p id="real-page-excerpt">—</p>
+                <dl>
+                  <div><dt>来源</dt><dd id="real-page-sources">—</dd></div>
+                  <div><dt>链接到</dt><dd id="real-page-links">—</dd></div>
+                  <div><dt>内容哈希</dt><dd><code id="real-page-sha">—</code></dd></div>
+                </dl>
+              </article>
+            </div>
+          </section>
+
+          <section class="real-quality-section" aria-labelledby="real-quality-title">
+            <div class="real-subhead">
+              <span>QUALITY READOUT / 质量读数</span>
+              <h3 id="real-quality-title">真实运行也暴露了必须人工接手的位置。</h3>
+            </div>
+            <div class="real-quality-grid" id="real-quality-grid"></div>
+          </section>
+        </div>
+
+        <div class="real-run-error" id="real-run-error" hidden role="alert">
+          <strong>真实运行证据读取失败。</strong>
+          <button type="button" id="real-run-retry">重新加载</button>
+        </div>
+
+        <section class="meaning-section" aria-labelledby="meaning-title">
+          <div class="meaning-copy">
+            <p class="section-label">CAPABILITY &amp; MEANING / 能力与意义</p>
+            <h2 id="meaning-title">它真正提供的，<br>是人与 Agent 共用的知识层。</h2>
+            <p>原始文档本来就能被机器读取；LLM Wiki 的新增价值，是把其中的案例、概念、方法、边界和来源编译成<strong>人能审阅修改、机器能检索关联、Agent 能持续复用</strong>的半结构化知识。</p>
+          </div>
+          <div class="meaning-grid">
+            <article><span>01 / UNDERSTAND</span><strong>理解并拆成知识单元</strong><p>不只切块，而是形成来源页、主题页、关系和待确认问题。</p></article>
+            <article><span>02 / PERSIST</span><strong>让理解离开聊天仍然存在</strong><p>结果保留为 Markdown、sources 与 wikilink，可以继续编辑和重建索引。</p></article>
+            <article><span>03 / SHARE</span><strong>人机共享一种表示</strong><p>人阅读页面和图谱，程序通过搜索、API 与 MCP 使用同一知识层。</p></article>
+            <article><span>04 / GOVERN</span><strong>把不确定性送回审核</strong><p>Lint 处理结构问题，Review 暴露证据缺口、矛盾和需要人工判断的过度推断。</p></article>
+          </div>
+        </section>
+
+        <section class="use-case-section" aria-labelledby="use-case-title">
+          <div class="real-subhead">
+            <span>WHEN TO USE / 使用场景</span>
+            <h3 id="use-case-title">资料需要长期生长时，它才真正划算。</h3>
+          </div>
+          <div class="use-case-columns">
+            <div>
+              <strong>适合</strong>
+              <ul>
+                <li>论文、技术专栏、源码说明与研究日志的长期专题研究</li>
+                <li>故障案例、SOP、设计决策与经验方法的组织记忆</li>
+                <li>同一知识需要被人、Codex、Claude Code 或其他 Agent 反复使用</li>
+                <li>要求 Markdown 可迁移、来源可追溯、模型理解可人工修订</li>
+              </ul>
+            </div>
+            <div class="use-case-caution">
+              <strong>不宜直接使用</strong>
+              <ul>
+                <li>只问一次、没有长期沉淀价值的问题</li>
+                <li>要求毫秒级实时回答，却不能接受前置摄取成本</li>
+                <li>要求零误差的事实数据库，但没有人工审核和原文核验</li>
+                <li>敏感资料必须完全离线，而模型或 Embedding 仍配置为云服务</li>
+                <li>需要成熟的企业权限、多人协作和超大规模吞吐，却没有二次开发</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="capabilities-section" id="capabilities" aria-labelledby="capabilities-title">
+        <div class="capability-head">
+          <div>
+            <p class="section-label">CAPABILITY MATRIX / 能力矩阵</p>
+            <h2 id="capabilities-title">选择一项能力，<br>查看机制与源码证据。</h2>
+          </div>
+          <div class="evidence-legend" aria-label="证据状态说明">
+            <span><i class="verified-dot" aria-hidden="true"></i> 源码确认</span>
+            <span><i class="pending-dot" aria-hidden="true"></i> 运行待验证</span>
+          </div>
+        </div>
+
+        <div class="filter-bar" aria-label="按能力类别筛选">
+          <span>FILTER</span>
+          <div id="category-filters" role="toolbar" aria-label="能力类别">
+            <button type="button" class="filter-skeleton" disabled>读取能力数据…</button>
+          </div>
+          <label class="search-control" for="capability-search">
+            <span class="sr-only">搜索能力</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="6.5"></circle>
+              <path d="m16 16 4 4"></path>
+            </svg>
+            <input id="capability-search" type="search" autocomplete="off" placeholder="搜索能力或原理">
+          </label>
+          <output id="result-count" aria-live="polite">—</output>
+        </div>
+
+        <div class="capability-layout">
+          <div class="capability-grid" id="capability-grid" aria-busy="true">
+            <article class="loading-card"><span></span><span></span><span></span></article>
+            <article class="loading-card"><span></span><span></span><span></span></article>
+            <article class="loading-card"><span></span><span></span><span></span></article>
+          </div>
+
+          <aside class="detail-panel" id="detail-panel" aria-live="polite" aria-labelledby="detail-title">
+            <p class="detail-kicker">SELECTED CAPABILITY</p>
+            <h3 id="detail-title">正在读取能力证据…</h3>
+            <p id="detail-summary">固定版本的能力数据将从本地 JSON 载入。</p>
+            <div class="detail-block">
+              <span>实现机制</span>
+              <p id="detail-mechanism">—</p>
+            </div>
+            <div class="detail-block">
+              <span>可见产物</span>
+              <ul id="detail-outputs"><li>—</li></ul>
+            </div>
+            <div class="detail-block evidence-block">
+              <span>源码证据</span>
+              <div id="detail-evidence"></div>
+            </div>
+            <div class="pending-note">
+              <span>下一步实测</span>
+              <p id="detail-pending">—</p>
+            </div>
+          </aside>
+        </div>
+        <div class="empty-state" id="empty-state" hidden>
+          <strong>当前筛选没有匹配的能力条目。</strong>
+          <button type="button" id="reset-filter">显示全部能力</button>
+        </div>
+        <div class="error-state" id="error-state" hidden role="alert">
+          <strong>能力数据加载失败。</strong>
+          <span>请通过本地 HTTP 服务打开页面，并确认 assets/capabilities.json 存在。</span>
+          <button type="button" id="retry-load">重新加载</button>
+        </div>
+      </section>
+
+      <section class="boundaries-section" id="boundaries" aria-labelledby="boundaries-title">
+        <div class="section-heading compact">
+          <p class="section-label">RESEARCH BOUNDARY / 研究边界</p>
+          <h2 id="boundaries-title">能力很完整，<br>可信度仍要分层。</h2>
+          <p>源码与本机实测回答了“有没有、能不能跑”；长期质量和规模仍需在真正采用时重新验证。</p>
+        </div>
+        <div class="boundary-grid">
+          <article>
+            <span>01 / TRUTH</span>
+            <strong>Wiki 不是事实源</strong>
+            <p>它是 LLM 编译出的派生视图。关键结论仍应回到原始资料，最好进一步做到 claim 级引用。</p>
+          </article>
+          <article>
+            <span>02 / PRIVACY</span>
+            <strong>本地应用 ≠ 全本地推理</strong>
+            <p>若配置云模型、Embedding 或搜索服务，内容仍会发送到对应提供商；敏感资料需单独设计 Local-only 路径。</p>
+          </article>
+          <article>
+            <span>03 / SCALE</span>
+            <strong>个人桌面 ≠ 企业平台</strong>
+            <p>当前适合个人与小规模研究；并行摄取、权限、协作、审计和超大语料仍是扩展方向。</p>
+          </article>
+        </div>
+        <div class="next-study">
+          <div>
+            <span>PAUSED / REVISIT TRIGGERS</span>
+            <strong>研究已阶段性收口。</strong>
+          </div>
+          <ol>
+            <li><span>01</span> 已完成：源码、原生客户端与安全中文样例闭环</li>
+            <li><span>02</span> 长期专题知识库需求出现时，验证重复摄取与人工维护成本</li>
+            <li><span>03</span> 多 Agent 共用知识需求出现时，重启 API / MCP 验证</li>
+            <li><span>04</span> 上游重大更新时，对 CLI、Skills、PDF / 网页和召回质量复审</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="evidence-section" aria-labelledby="evidence-title">
+        <div>
+          <p class="section-label">PINNED EVIDENCE / 固定证据</p>
+          <h2 id="evidence-title">研究对象不会悄悄变化。</h2>
+        </div>
+        <dl>
+          <div><dt>上游</dt><dd><a href="https://github.com/nashsu/llm_wiki" target="_blank" rel="noreferrer">nashsu/llm_wiki ↗</a></dd></div>
+          <div><dt>版本</dt><dd>v0.6.11</dd></div>
+          <div><dt>提交</dt><dd><code>e8082119649e</code></dd></div>
+          <div><dt>许可证</dt><dd>GPL-3.0</dd></div>
+          <div><dt>审计</dt><dd><a href="./assets/audit-results.json">14 / 14 检查</a></dd></div>
+          <div><dt>实测</dt><dd><a href="./assets/codex-ingest-result.json">Codex 摄取通过</a></dd></div>
+        </dl>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><span>0829 CODEX RESEARCH LAB</span><strong>LLM Wiki 能力与知识编译研究</strong></div>
+      <p>第二阶段：Codex 真实摄取与能力意义验证 · 2026-08-29</p>
+      <a href="#main">回到顶部 ↑</a>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "url": "http://127.0.0.1:8765/projects/llm-wiki-study/",
+  "viewports": {
+    "desktop_light": {
+      "size": "1440x960",
+      "overflow": false
+    },
+    "desktop_dark": {
+      "size": "1440x960",
+      "overflow": false
+    },
+    "tablet_light": {
+      "size": "768x1024",
+      "overflow": false
+    },
+    "mobile_dark": {
+      "size": "390x844",
+      "overflow": false
+    }
+  },
+  "interactions": {
+    "category_filter": "pass",
+    "search_empty_reset": "pass",
+    "detail_and_fixed_source_link": "pass",
+    "url_hash_replay": "pass",
+    "keyboard_filter_navigation": "pass",
+    "focus_visible": "pass",
+    "theme_round_trip": "pass"
+  },
+  "console_errors": [],
+  "page_errors": [],
+  "original_ui_interactions": {
+    "official_ui_provenance": "pass",
+    "six_surface_mapping": "pass",
+    "ui_image_and_copy_sync": "pass",
+    "fixed_image_source_link": "pass",
+    "original_ui_keyboard_tabs": "pass",
+    "active_tab_scroll_visibility": "pass"
+  },
+  "native_run": {
+    "native_source_build": "pass",
+    "native_ingest_wiki_graph_review": "pass",
+    "native_rag_codex_answer": "pass",
+    "native_provenance_boundary": "pass",
+    "native_failure_recovery_disclosed": "pass"
+  },
+  "sample_interactions": {
+    "same_question_three_modes": "pass",
+    "model_mode": "pass",
+    "rag_mode": "pass",
+    "wiki_mapping": "pass",
+    "sample_keyboard_tabs": "pass",
+    "sample_evidence_boundary": "pass"
+  },
+  "real_run_interactions": {
+    "real_codex_metrics": "pass",
+    "real_page_browser": "pass",
+    "real_page_keyboard_navigation": "pass",
+    "real_quality_findings": "pass",
+    "capability_meaning_and_use_cases": "pass"
+  },
+  "research_index": "pass",
+  "reduced_motion": "pass"
+}

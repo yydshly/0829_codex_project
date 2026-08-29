@@ -1,0 +1,76 @@
+[
+  {
+    "id": "msg_1788022765113_11_1e4kq2",
+    "role": "user",
+    "content": "慢 SQL",
+    "timestamp": 1788022765113,
+    "conversationId": "conv_1788022764703_wuga94"
+  },
+  {
+    "id": "msg_1788022784638_12_26lfmv",
+    "role": "assistant",
+    "content": "在当前 LLM Wiki 里，`慢 SQL` 被定位为一种**现象/性能问题**，也是**合成事故的直接触发因素**，但**不是充分根因**。\n\n依据现有页面：\n- [left-ear-research-capsule.md](/E:/0829_codex_project/projects/llm-wiki-study/experiments/native-client/workspace/left-ear-codex-demo/wiki/sources/left-ear-research-capsule.md) 里把 `慢 SQL` 归为“现象/性能问题”，并标注为“合成事故的直接触发因素”。\n- [触发因素不等于充分根因](/E:/0829_codex_project/projects/llm-wiki-study/experiments/native-client/workspace/left-ear-codex-demo/wiki/concepts/触发因素不等于充分根因.md) 明确说明：慢 SQL 往往只是“第一块多米诺骨牌倒下了”，不能单独解释为什么会演化成系统性故障。\n- [不以归责替代治理](/E:/0829_codex_project/projects/llm-wiki-study/experiments/native-client/workspace/left-ear-codex-demo/wiki/concepts/不以归责替代治理.md) 也强调，复盘不能只停在“优化 SQL、加强责任心”，否则治理没有闭环。\n\n如果你是想问这个词在 wiki 里的**定义**，可以直接概括为：\n`慢 SQL = 一类性能退化现象，常见于故障链条中的直接触发点，但通常不是完整根因。`\n\n如果你要，我可以继续把这几篇内容整理成一个更完整的“慢 SQL”条目说明。",
+    "timestamp": 1788022784638,
+    "conversationId": "conv_1788022764703_wuga94",
+    "references": [
+      {
+        "title": "Source: left-ear-research-capsule.md",
+        "path": "wiki/sources/left-ear-research-capsule.md",
+        "kind": "wiki",
+        "snippet": "...| 否 | | DBA | 角色/岗位 | 发布评审与治理流程中的参与方 | 否 | | 连接池 | 系统组件 | 故障扩散链中的关键资源瓶颈 | 否 | | 慢 SQL | 现象/性能问题 | 合成事故的直接触发因素 | 否 | | 限流 / 熔断 / 降级 / 回滚 | 机制/控制手段 | 应急与隔离手段 | 否 | | 性..."
+      },
+      {
+        "title": "触发因素不等于充分根因",
+        "path": "wiki/concepts/触发因素不等于充分根因.md",
+        "kind": "wiki",
+        "snippet": "...-capsule.md\"] created: 2026-08-30 updated: 2026-08-30 --- # 触发因素不等于充分根因  ## 定义  慢 SQL、单条错误查询、一次异常发布，常常只是事故的直接触发因素。   它们说明“第一块多米诺骨牌倒下了”，但不能单独解释为什么局部问题会演化为系统性故障。  ## 为..."
+      },
+      {
+        "title": "不以归责替代治理",
+        "path": "wiki/concepts/不以归责替代治理.md",
+        "kind": "wiki",
+        "snippet": "...，但不能把追责本身当成整改完成。   如果系统条件没有改变，下一次事故仍然会被其他查询、其他服务或其他触发点再次激活。  ## 核心判断  当复盘只落在“优化 SQL、加强责任心”时，通常意味着治理没有闭环。   真正的治理需要明确：  - 哪个风险机制被改变了。 - 谁负责。 - 什么时候完成。 - 用什么证据验收。 - ..."
+      },
+      {
+        "title": "《左耳听风》",
+        "path": "wiki/entities/左耳听风.md",
+        "kind": "wiki",
+        "source": "Graph",
+        "snippet": "Graph neighbor of Source: left-ear-research-capsule.md, 不以归责替代治理, 系统性故障学习审查, 触发因素不等于充分根因",
+        "graphRelations": [
+          "Source: left-ear-research-capsule.md",
+          "不以归责替代治理",
+          "系统性故障学习审查",
+          "触发因素不等于充分根因"
+        ]
+      },
+      {
+        "title": "第三方公开专栏镜像是否允许再分发",
+        "path": "wiki/queries/第三方公开专栏镜像是否允许再分发.md",
+        "kind": "wiki",
+        "source": "Graph",
+        "snippet": "Graph neighbor of Source: left-ear-research-capsule.md, 系统性故障学习审查",
+        "graphRelations": [
+          "Source: left-ear-research-capsule.md",
+          "系统性故障学习审查"
+        ]
+      }
+    ],
+    "agentSteps": [
+      {
+        "id": "backend-0-wiki.search-started",
+        "type": "tool_call",
+        "tool": "wiki_search",
+        "message": "慢 SQL",
+        "status": "running"
+      },
+      {
+        "id": "backend-1-wiki.search-completed",
+        "type": "tool_result",
+        "tool": "wiki_search",
+        "message": "5 result(s), mode=hybrid, tokenHits=4, vectorHits=0, graphHits=2",
+        "status": "success"
+      }
+    ]
+  }
+]
