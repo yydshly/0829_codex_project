@@ -1,7 +1,7 @@
 {
   "id": "githubdaily-capability-map",
-  "title": "GitHubDaily 开源项目精选与内容索引研究",
-  "summary": "GitHubDaily 如何通过人工精选、中文介绍、社区投稿与年度归档发现和传播开源项目；它适合哪些场景、可如何扩展、对我们的研究体系有什么价值？",
+  "title": "GitHubDaily 项目信息库说明",
+  "summary": "GitHubDaily 是一份人工整理的 GitHub 项目清单。它保存项目名称、链接、中文简介、分类和年度记录，但不保存项目源代码；本项目分析清单中是否有值得保留的优秀项目，以及它对研究选题的参考价值。",
   "status": "completed",
   "path": "projects/githubdaily-capability-map",
   "source_url": "https://github.com/GitHubDaily/GitHubDaily",

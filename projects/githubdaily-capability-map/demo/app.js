@@ -24,8 +24,8 @@ const steps = [
     number: "04",
     type: "STORAGE / 存入清单",
     title: "按分类和年份保存到 Markdown 清单",
-    description: "GitHub 仓库保存项目索引和年度归档，社交渠道负责传播。这里保存的是记录，不是每个项目的源代码。",
-    evidence: "README 的分类内容、年度归档和平台入口。",
+    description: "GitHub 仓库按分类和年份保存项目记录。这里保存的是名称、链接和简介，不是每个项目的源代码。",
+    evidence: "README 的分类内容和年度归档。",
   },
 ];
 

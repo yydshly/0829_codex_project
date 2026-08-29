@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-- 项目：GitHubDaily 开源项目精选与内容索引研究
+- 项目：GitHubDaily 项目信息库说明
 - 内部阶段：Stage 9 / Engineering and delivery closure
 - 规范地址：`http://127.0.0.1:8000/projects/githubdaily-capability-map/`
 - 验收日期：2026-08-29
@@ -15,15 +15,15 @@
 
 | 表面 / 状态 | 证据 | 结果 |
 | --- | --- | --- |
-| 1440 × 960 / 深色 | `notes/evidence/desktop-dark.png` | 首屏“开源项目精选与传播档案”、三行标题、流程图与导航通过；无横向溢出 |
+| 1440 × 960 / 深色 | `notes/evidence/desktop-dark.png` | 首屏“人工整理的 GitHub 项目清单”、三行标题、信息清单图与导航通过；无横向溢出 |
 | 768 × 1024 / 浅色 | `notes/evidence/tablet-light.png` | 原理步骤、边界提示、对比度与布局通过；无横向溢出 |
-| 390 × 844 / 深色 | `notes/evidence/mobile-dark.png` | 首屏、标题语义行、按钮和精选流程图通过；无横向溢出 |
+| 390 × 844 / 深色 | `notes/evidence/mobile-dark.png` | 首屏、标题语义行、按钮和信息清单图通过；无横向溢出 |
 | 保存内容 / 深色 | `notes/evidence/capability-dark.png`、`capability-mobile-dark.png` | “保存了什么 / 没保存什么”在桌面和手机均清晰；章节跳转不被固定页头遮挡 |
 | 收录质量 / 三表面 | `collection-dark.png`、`collection-tablet-light.png`、`collection-mobile-dark.png` | 统计、保留判断和筛选边界在桌面深色、平板浅色和手机深色下清晰 |
-| 本质定位 / 三表面 | `positioning-dark.png`、`positioning-tablet-light.png`、`positioning-mobile-dark.png` | “开源项目精选与传播档案”、GitHub 检索 / GitHubDaily / Research Lab 三方差异在桌面、平板和手机均清晰 |
+| 本质定位 / 三表面 | `positioning-dark.png`、`positioning-tablet-light.png`、`positioning-mobile-dark.png` | “人工整理的 GitHub 项目清单”、GitHub 检索 / GitHubDaily / Research Lab 三方差异在桌面、平板和手机均清晰 |
 | 优秀库样本 / 深色 | `collection-samples-dark.png`、`collection-samples-mobile-dark.png` | 5 个样本的名称、用途、采用、许可证和活跃标签无截断 |
 | 分层保留建议 / 深色 | `retention-plan-dark.png`、`retention-plan-mobile-dark.png` | “全量留信息、重点留文档、少量留代码”在桌面和手机均保持完整层级 |
-| 对我们的价值 / 深色 | `notes/evidence/meaning-dark.png`、`meaning-mobile-dark.png` | “扩展研究雷达”与“核心资产来自独立验证”的判断层级清楚 |
+| 对我们的价值 / 深色 | `notes/evidence/meaning-dark.png`、`meaning-mobile-dark.png` | “它提供线索，不能替我们判断”与“核心资产来自独立验证”的判断层级清楚 |
 | Research Lab 主索引 | 项目卡片与在线演示链接 | 状态、标题和目标 URL 通过 |
 | 收录质量锚点 | 点击桌面“收录质量”导航 | URL 滚动、`aria-current` 和固定页头留白通过 |
 | 原理步骤 | 点击第四步；键盘 ArrowRight 切换第二步 | 内容与 `aria-selected` 同步 |
@@ -34,6 +34,16 @@
 | 运行错误 | console / pageerror / error overlay | 0 个错误 |
 
 ## 视觉校准记录
+
+### Revision 7：外部 README 与公开仓库内容对齐
+
+- 观察：根 README、子项目 README 与 Web 首屏使用“开源项目精选与传播档案”，用户无法直接看懂仓库里实际保存什么。
+- 原因：描述从 GitHubDaily 的品牌和分发活动出发，而不是从公开仓库可见的 Markdown 项目清单出发。
+- 最小干预：保留视觉结构、统计、优秀样本、场景和扩展分析；将项目标题、摘要、Open Graph、首屏、流程图与本质定位统一为“人工整理的 GitHub 项目清单”。
+- 并发边界：根 README 与 catalog 同时包含其他子项目的未完成修改；本轮只改 GitHubDaily 对应行和元数据，不覆盖或提交其他项目内容。
+- 相邻检查：桌面深色、平板浅色、390px 深色的标题换行和定位卡；主题往返、章节锚点、键盘焦点、reduced-motion、根索引和内容断言。
+- 结果：5 秒内可判断它保存名称、链接、中文简介、分类和年份，不保存项目源代码；三视口无横向溢出，控制台与页面错误均为 0。
+- 决策：`pass`。
 
 ### Revision 6：纠正研究问题与 GitHubDaily 定位
 

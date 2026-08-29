@@ -1,30 +1,30 @@
-# GitHubDaily 开源项目精选与内容索引研究：交付契约
+# GitHubDaily 项目信息库说明：交付契约
 
 ```text
-Entry mode: Revision-led（第 6 版：恢复能力、原理、场景、扩展与意义的原始研究问题）
-Request revision: 6
-Target user and context: 希望利用 GitHubDaily 发现开源项目、观察趋势并建立持续研究体系的中文用户
-Desired first impression: GitHubDaily 是长期维护的开源项目精选、中文内容传播与历史索引；它能扩展候选发现，但不会替代独立技术验证
+Entry mode: Revision-led（第 7 版：纠正外部 README 与 Web 的抽象定位）
+Request revision: 7
+Target user and context: 想直接理解 GitHubDaily 公开仓库保存了什么、是否值得保留的中文用户
+Desired first impression: GitHubDaily 就是一份人工整理的 GitHub 项目清单；它保存项目信息，不保存项目源代码
 Visual ambition: Editorial
 Experience architecture: Editorial Flow
 Visual constraints: 延续 Research Lab 深色编辑气质；高对比排版；绿色信号色；不依赖图片、3D 或高成本视觉
-Information constraints: 使用大白话；准确说明人工精选、社区投稿、中文传播和年度归档；用并列对比解释 GitHub 搜索、GitHubDaily 与 Research Lab；事实、样本、判断和建议明确区分
+Information constraints: 使用大白话；优先描述公开仓库中实际保存的名称、链接、中文简介、分类和年份；社区投稿只作为信息来源，不把仓库包装成传播系统；事实、样本、判断和建议明确区分
 Operation constraints: 零依赖静态 HTML/CSS/JS；键盘可操作；核心信息不依赖 JavaScript 才可见
 State constraints: 明/暗主题；原理步骤选择；场景角色选择；滚动章节状态；reduced-motion
 Environment constraints: GitHub Pages 子路径；桌面、平板、390px 手机；现代浏览器
-Primary journey: 大白话结论 → 能力与边界 → 本质定位与三方对比 → 收录结构与优秀样本 → 运作原理 → 使用场景 → 扩展方向 → 对我们的意义 → 风险与来源
+Primary journey: 大白话结论 → 保存内容与缺失内容 → 本质定位与三方对比 → 收录结构与优秀样本 → 收集方式 → 使用场景 → 扩展方向 → 对我们的意义 → 风险与来源
 User-defined phases: 总结能力、原理、使用场景、扩展方向和个人意义；以 Web 方式展示
 Required artifacts: 项目 README、project.json、静态 demo、设计契约、浏览器验收记录、主索引和 Pages 构建接入
 Autonomy authorization: 用户已直接要求新建和展示；范围内可逆实现无需二次确认
 User-decision boundary: 无未决产品方向；不引入后端、登录、真实接口或外部依赖
-Observable completion criteria: 页面明确出现“开源项目精选与传播档案”；说明人工精选、中文介绍、社区投稿和年度归档的机制；并列说明 GitHub 检索、GitHubDaily 和 Research Lab 的侧重点；“对我们”的章节说明它可扩展研究雷达但不能替代独立验证；canonical URL 可访问；交互可用；无横向溢出；桌面/平板/390px、明暗主题、键盘和 reduced-motion 有证据；仓库校验通过
+Observable completion criteria: 根 README、子项目 README、项目元数据和 Web 首屏统一写明“人工整理的 GitHub 项目清单”；说明它保存名称、链接、中文简介、分类和年份但不保存项目源代码；保留收录质量、优秀样本、场景、扩展和研究价值分析；canonical URL 可访问；交互可用；无横向溢出；桌面/平板/390px、明暗主题、键盘和 reduced-motion 有证据；仓库校验通过
 ```
 
 ## 设计方向
 
 | 决策 | 选择 | 可观察约束 | 验收标准 |
 | --- | --- | --- | --- |
-| 信息层级 | 一句大白话结论主导，证据和细节逐层展开 | 首屏说明“精选与传播档案”及其能力边界 | 5 秒扫描可判断它帮助发现与理解项目，但不镜像代码 |
+| 信息层级 | 一句大白话结论主导，证据和细节逐层展开 | 首屏直接说明“人工整理的项目清单”及其保存边界 | 5 秒扫描可判断它保存信息、不保存代码 |
 | 字体角色 | 大号紧凑标题、舒展正文、等宽标签 | 角色不只依赖颜色区分 | 窄屏无截断，正文保持舒适行长 |
 | 色彩 | 中性深浅主题 + 绿色信号色 + 琥珀风险色 | 信号色只用于关键状态和操作 | 两个主题均保持层级与可读性 |
 | 材质与深度 | 细边框、网格、少量高光，无重拟物 | 内容块边界清晰但不过度卡片化 | 阅读路径连续，不形成卡片噪声 |
@@ -107,16 +107,35 @@ Next executable action: 无；第 5 版修订范围关闭。
 New authority required: 无；用户已直接指出当前事实定位错误。
 ```
 
+## 第 7 版修订说明
+
+```text
+Current stage: Stage 9 / Engineering and delivery closure
+User phase: 修正外部 README 与仓库实际内容不匹配的问题
+Coverage item: 项目标题、摘要、首屏结论、本质定位和对外索引
+User goal: 不再使用“人工精选、中文传播、研究体系”等堆叠概念，直接说明这个仓库就是人工整理的项目信息清单
+Browser environment: 规范地址 http://127.0.0.1:8000/projects/githubdaily-capability-map/；Google Chrome 151；桌面、平板、390px 手机；明暗主题
+Observed evidence: 根 README、子项目 README 和 Web 首屏均使用“长期维护的开源项目精选与传播档案”，用户无法由这句话直接判断仓库里实际保存什么；浏览器首屏还把“精选与传播”作为最大视觉焦点。
+Problem category: 对外描述与仓库内容不匹配 / 文案抽象 / 首屏焦点错误
+Root cause: 描述从 GitHubDaily 品牌和分发活动出发，而不是从公开仓库可见的 Markdown 项目清单、链接、中文简介、分类和年度记录出发。
+Minimal intervention: 保留布局、主题、交互、统计、样本、场景与扩展分析；统一项目标题和摘要，将首屏、流程图与本质定位改回“人工整理的 GitHub 项目清单 / 项目信息而非代码”。
+Adjacent regression surfaces: 根 README 与 catalog 的并发修改、子项目 README、Open Graph 元数据、桌面/平板/手机标题换行、明暗主题、浏览器内容断言与 GitHub Pages 构建。
+Observed result: 根 README、子项目 README、catalog、project.json、Web 元数据与首屏已统一为“人工整理的 GitHub 项目清单”；首屏直接列出名称、链接、中文简介、分类和年份，并明确不保存项目源代码。桌面、平板、390px、明暗主题、内容断言、章节交互、键盘与 reduced-motion 均通过。
+Decision: pass
+Next executable action: 无；第 7 版修订范围关闭。
+New authority required: 无；用户已明确指出描述不匹配且难以理解。
+```
+
 ## 覆盖清单
 
 | 用户阶段 | 要求或产物 | 表面 / 状态 | 证据 | 阶段 | 状态 | 下一动作 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 新建第一个子项目 | 目录、元数据和主索引 | 仓库 | 文件与校验输出 | 0/9 | pass | 元数据、根索引与 Pages 构建通过 |
-| 总结和说明 | 大白话结论、保存项、缺失项、我们的价值和备份分层 | 页面内容 | DOM 与截图 | 2/3 | pass | 内容断言和五张专项截图通过 |
+| 总结和说明 | 大白话结论、保存项、缺失项、我们的价值和备份分层 | 页面内容 | DOM 与截图 | 2/3 | pass | 首屏和本质定位统一为人工整理的项目清单 |
 | 总结和说明 | 收录结构、优秀样本、保留价值与质量局限 | 页面内容 | 数据解析、项目核验、DOM 与截图 | 0/3/7 | pass | 统计、5 个样本、分层保留建议和专项截图通过 |
-| 总结和说明 | 个人/团队整理笔记定位、新库状态与三方能力对比 | 页面内容 | DOM 与桌面/平板/手机截图 | 2/3/7 | pass | 新库现状、起步价值与未来研究方法通过 |
+| 总结和说明 | 项目清单定位与 GitHub 检索 / Research Lab 对比 | 页面内容 | DOM 与桌面/平板/手机截图 | 2/3/7 | pass | 去除“精选与传播档案”包装并完成重测 |
 | Web 展示 | 收集步骤和场景切换 | 鼠标/键盘 | 浏览器交互 | 4/5 | pass | 点击、方向键与 ARIA 状态通过 |
-| Web 展示 | 明暗主题 | 两个主题 | 浏览器截图 | 6/7 | pass | 新库状态文案在深浅主题通过 |
-| Web 展示 | 响应式 | 1440/768/390px | 浏览器截图 | 7 | pass | 新库状态卡与意义标题在三视口无溢出 |
+| Web 展示 | 明暗主题 | 两个主题 | 浏览器截图 | 6/7 | pass | 新首屏与定位文案在深浅主题通过 |
+| Web 展示 | 响应式 | 1440/768/390px | 浏览器截图 | 7 | pass | 新标题在三视口无溢出 |
 | Web 展示 | 可访问性与动效 | 键盘/reduced-motion | 浏览器观察 | 7/8 | pass | 相邻锚点、焦点与 reduced-motion 重测通过 |
-| Web 展示 | 可复现交付 | 构建与 canonical URL | 构建、校验、运行记录 | 1/9 | pass | 构建、仓库校验、脚本语法与 200 响应通过 |
+| Web 展示 | 可复现交付 | 构建与 canonical URL | 构建、校验、运行记录 | 1/9 | pass | 构建、校验、外部 README 与 Pages 发布通过 |
