@@ -95,7 +95,7 @@
 | 补充理解总结 | 一屏讲清能力归属、生产链、首尾帧理解、场景、局限与价值 | 案例总结区、桌面/平板/手机 | 内容审计、DOM 与截图 | 3/7/9 | pass | 3 类归属、8 步链路、5 项发现、适合/不适合、5 项扩展与 4 点价值全部进入页面 |
 | 完整案例复盘 | 文档汇总目标、过程、最终产物、关键发现、边界、扩展与复用建议 | README、案例文档、交付索引 | 文件、链接、数据一致性 | 3/9 | pass | 新增案例复盘，README/研究报告/准备指南与 10 项交付索引同步 |
 | 完成态回归 | 新区不破坏准备台、主题、键盘、错误态和媒体降级 | 10 surfaces 与全工程 | 浏览器矩阵、审计、构建、SHA | 5–9 | pass | 10/10 surfaces、48/48 审计、锚点直达、桌面/平板/手机及媒体降级通过 |
-| GitHub 交付 | 仅提交 Vox Director 案例相关改动并推送当前远端 | Git main / origin | staged 范围、commit、push、远端 ref | 9 | continue | 排除无关脏改动后提交并推送 |
+| GitHub 交付 | 仅提交 Vox Director 案例相关改动并推送当前远端 | Git main / origin | staged 范围、commit、push、远端 ref | 9 | pass | 案例提交 `f118f11` 已推送至 `origin/main`；未纳入 `projects/llm-wiki-study/upstream` 的本地脏状态 |
 
 ## Refinement ledger
 
@@ -130,4 +130,5 @@
 - Revision 15 baseline：发布态声音卡默认播放 `Microsoft Kangkang` 本机系统 TTS；用户实听后明确反馈音色机械、与敦煌纪录片气质不符。受影响范围是默认旁白、混音、声音版、来源说明、下载与声音浏览器证据；静音粗剪、六段用户视频、关键帧、环境声与其余研究内容保持通过。
 - Revision 15 final：实时 Edge voice list 将 `Yunjian` 标为 Passion/Sports/Novel，不符合克制目标，因此选择 Professional/Reliable 的 `zh-CN-YunyangNeural`；三段以 −6% 语速、−8 Hz 音高生成并落在各自 beat 内。v2 默认声音版为 30.000 秒、720×1280/30fps H.264、48kHz 双声道 AAC，混音约 −17.6 LUFS、峰值 −1.2 dB；页面和 JSON 显示在线 TTS、文本发送边界、v1 替换原因及四项下载，Kangkang v1 全部保留。46/46 审计、9/9 browser surfaces、56/56 coverage、35 个发布文件与根级构建通过。
 - Revision 16 baseline：canonical URL 已默认加载声音试听 V2，上一轮 9/9 browser surfaces 证明成片可播放并有音轨；但页面仍将其标为“可替换声音试听”，没有“案例已完成”入口，也没有把整个案例形成的能力归属、端到端生产链、首/尾帧经验、局限和复用价值集中呈现。Git 工作区还包含本案例全过程产物以及一个与本项目无关的 `projects/llm-wiki-study/upstream` 脏 submodule；远端为 `origin`，当前分支为 `main`。
+- Revision 16 final：网页已以最终 V2 为完成案例默认结果，并集中呈现 3 类能力归属、8 步生产链、5 项关键发现、适用边界、5 项扩展和 4 点价值；案例复盘、README、研究报告、准备指南、数据与 10 项交付索引一致。48/48 工程审计、10/10 browser surfaces、61/61 coverage、35 个发布文件和根仓库 10 项目校验全部通过；主案例提交 `f118f11` 已推送至 `origin/main`，且未包含无关的 `projects/llm-wiki-study/upstream` 本地改动。
 - Evidence：`notes/evidence/browser-validation.json`、`notes/evidence/browser/*.png`、`notes/evidence/audit-results.json`。
