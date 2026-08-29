@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-- 项目：GitHubDaily 项目信息库说明
+- 项目：GitHubDaily 开源项目精选与内容索引研究
 - 内部阶段：Stage 9 / Engineering and delivery closure
 - 规范地址：`http://127.0.0.1:8000/projects/githubdaily-capability-map/`
 - 验收日期：2026-08-29
@@ -15,15 +15,15 @@
 
 | 表面 / 状态 | 证据 | 结果 |
 | --- | --- | --- |
-| 1440 × 960 / 深色 | `notes/evidence/desktop-dark.png` | 首屏大白话结论、三行标题、信息清单图与导航通过；无横向溢出 |
+| 1440 × 960 / 深色 | `notes/evidence/desktop-dark.png` | 首屏“开源项目精选与传播档案”、三行标题、流程图与导航通过；无横向溢出 |
 | 768 × 1024 / 浅色 | `notes/evidence/tablet-light.png` | 原理步骤、边界提示、对比度与布局通过；无横向溢出 |
-| 390 × 844 / 深色 | `notes/evidence/mobile-dark.png` | 首屏、标题语义行、按钮和项目清单图通过；无横向溢出 |
+| 390 × 844 / 深色 | `notes/evidence/mobile-dark.png` | 首屏、标题语义行、按钮和精选流程图通过；无横向溢出 |
 | 保存内容 / 深色 | `notes/evidence/capability-dark.png`、`capability-mobile-dark.png` | “保存了什么 / 没保存什么”在桌面和手机均清晰；章节跳转不被固定页头遮挡 |
 | 收录质量 / 三表面 | `collection-dark.png`、`collection-tablet-light.png`、`collection-mobile-dark.png` | 统计、保留判断和筛选边界在桌面深色、平板浅色和手机深色下清晰 |
-| 本质定位 / 三表面 | `positioning-dark.png`、`positioning-tablet-light.png`、`positioning-mobile-dark.png` | “个人 / 团队项目笔记”、三方差异及“新的 Research Lab / 从第一个项目起步”在桌面、平板和手机均清晰 |
+| 本质定位 / 三表面 | `positioning-dark.png`、`positioning-tablet-light.png`、`positioning-mobile-dark.png` | “开源项目精选与传播档案”、GitHub 检索 / GitHubDaily / Research Lab 三方差异在桌面、平板和手机均清晰 |
 | 优秀库样本 / 深色 | `collection-samples-dark.png`、`collection-samples-mobile-dark.png` | 5 个样本的名称、用途、采用、许可证和活跃标签无截断 |
 | 分层保留建议 / 深色 | `retention-plan-dark.png`、`retention-plan-mobile-dark.png` | “全量留信息、重点留文档、少量留代码”在桌面和手机均保持完整层级 |
-| 对我们的价值 / 深色 | `notes/evidence/meaning-dark.png`、`meaning-mobile-dark.png` | “本 Research Lab 是新库，目前只有第一个子项目”及“核心资产逐步建设”的判断层级清楚 |
+| 对我们的价值 / 深色 | `notes/evidence/meaning-dark.png`、`meaning-mobile-dark.png` | “扩展研究雷达”与“核心资产来自独立验证”的判断层级清楚 |
 | Research Lab 主索引 | 项目卡片与在线演示链接 | 状态、标题和目标 URL 通过 |
 | 收录质量锚点 | 点击桌面“收录质量”导航 | URL 滚动、`aria-current` 和固定页头留白通过 |
 | 原理步骤 | 点击第四步；键盘 ArrowRight 切换第二步 | 内容与 `aria-selected` 同步 |
@@ -34,6 +34,16 @@
 | 运行错误 | console / pageerror / error overlay | 0 个错误 |
 
 ## 视觉校准记录
+
+### Revision 6：纠正研究问题与 GitHubDaily 定位
+
+- 观察：第 5 版把原始的“能力、原理、场景、扩展、意义”研究问题收窄成“是不是备份库”，又把 GitHubDaily 简化为“个人/团队项目笔记”。
+- 事实：GitHubDaily 官方定位是持续分享高质量、有趣实用的开源技术教程、开发者工具、编程网站和技术资讯；公开仓库包含年度清单、文章、资源与社区投稿入口。
+- 原因：连续修订时把“不是代码备份”和“具有编辑偏好”两个边界条件误写成了项目的主定位。
+- 最小干预：保留已经验证的统计、样本、能力边界和交互结构；重写标题、研究问题、首屏、本质定位、三方对比和意义章节，并同步元数据、主索引与浏览器断言。
+- 相邻检查：桌面深色、平板浅色、390px 深色；导航、主题、键盘、reduced-motion、根索引和 canonical URL。
+- 结果：页面恢复完整研究范围，将 GitHubDaily 定位为开源项目精选、中文内容传播与历史索引；“不是代码镜像/不是权威选型”回到边界说明；移除过时的“Research Lab 只有第一个项目”现状描述。
+- 决策：`pass`。
 
 ### Revision 5：纠正当前 Research Lab 的新库状态
 

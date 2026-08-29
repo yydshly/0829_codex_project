@@ -3,8 +3,8 @@
   "projects": [
     {
       "id": "githubdaily-capability-map",
-      "title": "GitHubDaily 项目信息库说明",
-      "summary": "GitHubDaily 本质上是一份公开的个人/团队项目整理笔记；它能为刚起步、目前只有第一个子项目的 Research Lab 提供什么？",
+      "title": "GitHubDaily 开源项目精选与内容索引研究",
+      "summary": "GitHubDaily 如何通过人工精选、中文介绍、社区投稿与年度归档发现和传播开源项目；它适合哪些场景、可如何扩展、对我们的研究体系有什么价值？",
       "status": "completed",
       "path": "projects/githubdaily-capability-map",
       "source_url": "https://github.com/GitHubDaily/GitHubDaily",
@@ -31,6 +31,24 @@
         "archived",
         "golang",
         "video-aggregation"
+      ],
+      "created": "2026-08-29",
+      "updated": "2026-08-29"
+    },
+    {
+      "id": "rachel-digital-human-production-study",
+      "title": "Rachel Digital Human Production 采用价值研究",
+      "summary": "该 Skill 是否提供独立数字人能力；审计确认它只是 MiniMax 与 HeyGen 的固定流程封装，且与既有研究高度重复，因此归档。",
+      "status": "archived",
+      "path": "projects/rachel-digital-human-production-study",
+      "source_url": "https://github.com/Jingyi-Wu-Richael/rachel-digital-human-production",
+      "demo_url": "",
+      "tags": [
+        "agent-skill",
+        "ai-video",
+        "digital-human",
+        "research",
+        "workflow"
       ],
       "created": "2026-08-29",
       "updated": "2026-08-29"

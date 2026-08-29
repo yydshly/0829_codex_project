@@ -11,13 +11,14 @@
 
 项目状态统一使用：`planned`（计划中）、`active`（进行中）、`paused`（暂停）、`completed`（已完成）、`archived`（已归档）。
 
-当前第一个子项目是 [GitHubDaily 项目信息库说明](projects/githubdaily-capability-map/)：研究对象为 [GitHubDaily/GitHubDaily](https://github.com/GitHubDaily/GitHubDaily)，研究结果通过 [GitHub Pages Web 演示](https://yydshly.github.io/0829_codex_project/projects/githubdaily-capability-map/) 展示。
+当前研究以 GitHubDaily 的开源项目发现与内容索引为起点，并将候选项目逐步转化为可复现、可比较、可展示的独立研究记录。
 
 <!-- PROJECTS:START -->
 | 子项目 | 研究问题 | 状态 | 在线展示 | 最近更新 |
 | --- | --- | --- | --- | --- |
-| [GitHubDaily 项目信息库说明](projects/githubdaily-capability-map/) | GitHubDaily 本质上是一份公开的个人/团队项目整理笔记；它能为刚起步、目前只有第一个子项目的 Research Lab 提供什么？ | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/githubdaily-capability-map/) | 2026-08-29 |
+| [GitHubDaily 开源项目精选与内容索引研究](projects/githubdaily-capability-map/) | GitHubDaily 如何通过人工精选、中文介绍、社区投稿与年度归档发现和传播开源项目；它适合哪些场景、可如何扩展、对我们的研究体系有什么价值？ | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/githubdaily-capability-map/) | 2026-08-29 |
 | [GoFilm 来源机制简析](projects/gofilm-source-summary/) | 简要归档 GoFilm 的第三方影视采集 API、主附源聚合与部署机制；核心问题已在 Moovie 研究中覆盖，后续按需参考。 | 已归档 | — | 2026-08-29 |
+| [Rachel Digital Human Production 采用价值研究](projects/rachel-digital-human-production-study/) | 该 Skill 是否提供独立数字人能力；审计确认它只是 MiniMax 与 HeyGen 的固定流程封装，且与既有研究高度重复，因此归档。 | 已归档 | — | 2026-08-29 |
 <!-- PROJECTS:END -->
 
 项目索引数据保存在 [`projects/catalog.json`](projects/catalog.json)，上表由脚本自动维护。

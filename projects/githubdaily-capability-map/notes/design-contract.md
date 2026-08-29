@@ -1,30 +1,30 @@
-# GitHubDaily 项目信息库说明：交付契约
+# GitHubDaily 开源项目精选与内容索引研究：交付契约
 
 ```text
-Entry mode: Revision-led（第 5 版：纠正“当前 Research Lab 是新库”的事实定位）
-Request revision: 5
-Target user and context: 正在用 GitHubDaily 作为第一个子项目、逐步建立新 Research Lab 的中文用户
-Desired first impression: GitHubDaily 是可供新库参考的外部整理笔记；当前 Research Lab 只有第一个子项目，深度研究是未来逐项积累的方法，不是已经存在的大量资产
+Entry mode: Revision-led（第 6 版：恢复能力、原理、场景、扩展与意义的原始研究问题）
+Request revision: 6
+Target user and context: 希望利用 GitHubDaily 发现开源项目、观察趋势并建立持续研究体系的中文用户
+Desired first impression: GitHubDaily 是长期维护的开源项目精选、中文内容传播与历史索引；它能扩展候选发现，但不会替代独立技术验证
 Visual ambition: Editorial
 Experience architecture: Editorial Flow
 Visual constraints: 延续 Research Lab 深色编辑气质；高对比排版；绿色信号色；不依赖图片、3D 或高成本视觉
-Information constraints: 使用大白话；明确“个人理解视角，不是权威数据库”；用并列对比解释 GitHub 搜索、GitHubDaily 与 Research Lab；事实、样本、判断和建议明确区分
+Information constraints: 使用大白话；准确说明人工精选、社区投稿、中文传播和年度归档；用并列对比解释 GitHub 搜索、GitHubDaily 与 Research Lab；事实、样本、判断和建议明确区分
 Operation constraints: 零依赖静态 HTML/CSS/JS；键盘可操作；核心信息不依赖 JavaScript 才可见
 State constraints: 明/暗主题；原理步骤选择；场景角色选择；滚动章节状态；reduced-motion
 Environment constraints: GitHub Pages 子路径；桌面、平板、390px 手机；现代浏览器
-Primary journey: 大白话结论 → 保存了什么 / 没保存什么 → 本质定位与三方对比 → 收录结构与优秀样本 → 怎么收集 → 可以怎么用 → 对新库的起步价值 → 真正备份怎么做 → 风险与来源
-User-defined phases: 新建第一个子项目；总结和说明该库能力；以 Web 方式展示
+Primary journey: 大白话结论 → 能力与边界 → 本质定位与三方对比 → 收录结构与优秀样本 → 运作原理 → 使用场景 → 扩展方向 → 对我们的意义 → 风险与来源
+User-defined phases: 总结能力、原理、使用场景、扩展方向和个人意义；以 Web 方式展示
 Required artifacts: 项目 README、project.json、静态 demo、设计契约、浏览器验收记录、主索引和 Pages 构建接入
 Autonomy authorization: 用户已直接要求新建和展示；范围内可逆实现无需二次确认
 User-decision boundary: 无未决产品方向；不引入后端、登录、真实接口或外部依赖
-Observable completion criteria: 页面明确出现“公开维护的个人/团队项目整理笔记”；明确当前 Research Lab 是新库且只有第一个子项目；并列说明 GitHub 检索、GitHubDaily 和新 Research Lab 的侧重点；“对我们”的章节说明它可作为起步线索与结构参考，但不能替代后续深度研究；canonical URL 可访问；交互可用；无横向溢出；桌面/平板/390px、明暗主题、键盘和 reduced-motion 有证据；仓库校验通过
+Observable completion criteria: 页面明确出现“开源项目精选与传播档案”；说明人工精选、中文介绍、社区投稿和年度归档的机制；并列说明 GitHub 检索、GitHubDaily 和 Research Lab 的侧重点；“对我们”的章节说明它可扩展研究雷达但不能替代独立验证；canonical URL 可访问；交互可用；无横向溢出；桌面/平板/390px、明暗主题、键盘和 reduced-motion 有证据；仓库校验通过
 ```
 
 ## 设计方向
 
 | 决策 | 选择 | 可观察约束 | 验收标准 |
 | --- | --- | --- | --- |
-| 信息层级 | 一句大白话结论主导，证据和细节逐层展开 | 首屏只讲“项目清单”及其备份边界 | 5 秒扫描可判断它备份信息、不备份代码 |
+| 信息层级 | 一句大白话结论主导，证据和细节逐层展开 | 首屏说明“精选与传播档案”及其能力边界 | 5 秒扫描可判断它帮助发现与理解项目，但不镜像代码 |
 | 字体角色 | 大号紧凑标题、舒展正文、等宽标签 | 角色不只依赖颜色区分 | 窄屏无截断，正文保持舒适行长 |
 | 色彩 | 中性深浅主题 + 绿色信号色 + 琥珀风险色 | 信号色只用于关键状态和操作 | 两个主题均保持层级与可读性 |
 | 材质与深度 | 细边框、网格、少量高光，无重拟物 | 内容块边界清晰但不过度卡片化 | 阅读路径连续，不形成卡片噪声 |

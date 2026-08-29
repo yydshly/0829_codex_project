@@ -1,4 +1,4 @@
-"""Browser acceptance checks for the GitHubDaily information-index explainer."""
+"""Browser acceptance checks for the GitHubDaily curation research page."""
 
 from __future__ import annotations
 
@@ -27,19 +27,18 @@ def assert_no_horizontal_overflow(page: Page, surface: str) -> None:
 
 
 def assert_key_content(page: Page) -> None:
-    assert "GitHubDaily 项目信息库说明" in page.title()
-    assert page.locator("h1").inner_text() == "它就是一个\n人工整理的 GitHub\n项目清单。"
+    assert "GitHubDaily 开源项目精选与内容索引研究" in page.title()
+    assert page.locator("h1").inner_text() == "它是一套长期维护的\nGitHub 开源项目\n精选与传播档案。"
     assert page.get_by_role("heading", name="它保存的， 是项目信息。").count() == 1
     assert page.get_by_role("heading", name="有保留价值， 但必须筛选。").count() == 1
-    assert page.get_by_role("heading", name="它提供起点， 研究由我们积累。").count() == 1
-    assert "它备份的是项目信息，不是项目源代码。" in page.locator("main").inner_text()
+    assert page.get_by_role("heading", name="它扩展研究雷达， 判断仍由我们完成。").count() == 1
+    assert "它传播的是项目内容与线索，不是项目源代码镜像。" in page.locator("main").inner_text()
     assert "可以把它叫“信息备份”，但不能把它叫“GitHub 仓库备份”。" in page.locator("main").inner_text()
     assert page.locator("#collection .sample-card").count() == 5
     assert page.locator("#collection .positioning-grid article").count() == 3
-    assert "公开维护的\n个人 / 团队项目笔记。" in page.locator("#collection").inner_text()
-    assert "目前只有 GitHubDaily 这一个子项目" in page.locator("#meaning").inner_text()
-    assert "从第一个项目起步" in page.locator("#collection").inner_text()
-    assert "核心资产：逐步建设" in page.locator("#meaning").inner_text()
+    assert "长期维护的\n开源项目精选与传播档案。" in page.locator("#collection").inner_text()
+    assert "重验证与沉淀" in page.locator("#collection").inner_text()
+    assert "核心资产：独立验证" in page.locator("#meaning").inner_text()
     assert "1,523" in page.locator("#collection").inner_text()
     assert "全量保留索引" in page.locator("#collection").inner_text()
     assert page.locator(".section-nav a").count() == 6
@@ -176,8 +175,11 @@ def main() -> None:
         index_page.on("console", lambda message: console_errors.append(message.text) if message.type == "error" else None)
         index_page.on("pageerror", lambda error: page_errors.append(str(error)))
         index_page.goto("http://127.0.0.1:8000/", wait_until="networkidle")
-        assert index_page.get_by_role("heading", name="GitHubDaily 项目信息库说明").count() == 1
-        demo_link = index_page.get_by_role("link", name="在线演示 ↗")
+        githubdaily_card = index_page.locator(".project-card").filter(
+            has_text="GitHubDaily 开源项目精选与内容索引研究"
+        )
+        assert githubdaily_card.count() == 1
+        demo_link = githubdaily_card.get_by_role("link", name="在线演示 ↗")
         assert demo_link.count() == 1
         assert demo_link.get_attribute("href") == "https://yydshly.github.io/0829_codex_project/projects/githubdaily-capability-map/"
         results["research_index"] = "pass"

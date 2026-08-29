@@ -1,0 +1,18 @@
+{
+  "id": "rachel-digital-human-production-study",
+  "title": "Rachel Digital Human Production 采用价值研究",
+  "summary": "该 Skill 是否提供独立数字人能力；审计确认它只是 MiniMax 与 HeyGen 的固定流程封装，且与既有研究高度重复，因此归档。",
+  "status": "archived",
+  "path": "projects/rachel-digital-human-production-study",
+  "source_url": "https://github.com/Jingyi-Wu-Richael/rachel-digital-human-production",
+  "demo_url": "",
+  "tags": [
+    "agent-skill",
+    "ai-video",
+    "digital-human",
+    "research",
+    "workflow"
+  ],
+  "created": "2026-08-29",
+  "updated": "2026-08-29"
+}
