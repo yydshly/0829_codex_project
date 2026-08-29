@@ -75,6 +75,12 @@ async function inspect(browser, config) {
     caseOwners: document.querySelectorAll("#case-study .case-owner").length,
     caseChainSteps: document.querySelectorAll("#case-study .case-chain li").length,
     caseLearnings: document.querySelectorAll("#case-study .case-insight").length,
+    caseCurrentThemes: document.querySelectorAll("#case-study .case-current-theme").length,
+    caseThemeBeats: document.querySelectorAll("#case-study .case-theme-arc li").length,
+    caseThemeOptions: document.querySelectorAll("#case-study .case-theme-option").length,
+    caseThemeChangeCards: document.querySelectorAll("#case-study .case-theme-change-card").length,
+    caseThemeReplaceItems: document.querySelectorAll("#case-study .case-theme-change-card[data-change='replace'] li").length,
+    caseThemeKeepItems: document.querySelectorAll("#case-study .case-theme-change-card[data-change='keep'] li").length,
     caseFitCards: document.querySelectorAll("#case-study .case-fit-card").length,
     caseExtensions: document.querySelectorAll("#case-study .case-extension-list li").length,
     caseMeaning: document.querySelectorAll("#case-study .case-meaning-list li").length,
@@ -115,6 +121,8 @@ async function inspect(browser, config) {
     assert(basic.soundPreviewVideos === 1, `${config.name}: 30-second sound preview missing`);
     assert(basic.caseStudyVideos === 1 && basic.caseStatus === "completed", `${config.name}: completed-case final video or status missing`);
     assert(basic.caseOwners === 3 && basic.caseChainSteps === 8 && basic.caseLearnings === 5, `${config.name}: completed-case ownership, workflow, or learnings incomplete`);
+    assert(basic.caseCurrentThemes === 1 && basic.caseThemeBeats === 3 && basic.caseThemeOptions === 10, `${config.name}: current theme or replaceable theme map incomplete`);
+    assert(basic.caseThemeChangeCards === 2 && basic.caseThemeReplaceItems === 5 && basic.caseThemeKeepItems === 6, `${config.name}: theme replacement/reuse guidance incomplete`);
     assert(basic.caseFitCards === 2 && basic.caseExtensions === 5 && basic.caseMeaning === 4, `${config.name}: completed-case scenarios, extensions, or meaning incomplete`);
   } else {
     assert(basic.prepBeats === 3 && basic.prepShots === 3, `${config.name}: default 15s structure missing`);
@@ -294,6 +302,7 @@ async function inspect(browser, config) {
     assert(demoPack.rough_cut?.reference_video.endsWith("dunhuang-rough-cut-v1.mp4") && demoPack.rough_cut?.audio_status.includes("silent-placeholder-track") && demoPack.rough_cut?.shot_order.length === 6, "Dunhuang demonstration: rough-cut handoff metadata missing");
     assert(demoPack.rough_cut?.sound_preview?.reference_video.endsWith("dunhuang-sound-preview-v2.mp4") && demoPack.rough_cut?.sound_preview?.voice.includes("Microsoft Yunyang Neural") && demoPack.rough_cut?.sound_preview?.voice_source.includes("online neural TTS") && demoPack.rough_cut?.sound_preview?.previous_version?.voice.includes("Microsoft Kangkang") && demoPack.rough_cut?.sound_preview?.narration_cues.length === 3, "Dunhuang demonstration: sound-preview handoff metadata missing");
     assert(demoPack.case_closure?.status === "completed" && demoPack.case_closure?.final_video.endsWith("dunhuang-sound-preview-v2.mp4") && demoPack.case_closure?.deliverables.length === 10, "Dunhuang demonstration: completed-case handoff metadata missing");
+    assert(demoPack.case_closure?.theme_reuse?.current?.arc.length === 3 && demoPack.case_closure?.theme_reuse?.alternatives.length === 10 && demoPack.case_closure?.theme_reuse?.replace_when_switching.length === 5 && demoPack.case_closure?.theme_reuse?.keep_across_themes.length === 6, "Dunhuang demonstration: theme reuse handoff metadata missing");
     assert(interaction.dunhuangMissingRequired.length === 0, "Dunhuang demonstration: image-to-video dispatch still has missing inputs");
     await page.locator("#prep-tab-shots").click();
     if (config.name === "desktop-dunhuang-demonstration") {
@@ -325,6 +334,9 @@ async function inspect(browser, config) {
         window.scrollTo({ top: Math.max(0, absoluteTop - 92), behavior: "instant" });
       });
       await completedCase.screenshot({ path: path.join(evidenceDir, "mobile-dunhuang-completed-case.png") });
+      const themeReuse = page.locator("#case-study [data-case-evidence='theme-reuse']");
+      await themeReuse.scrollIntoViewIfNeeded();
+      await themeReuse.screenshot({ path: path.join(evidenceDir, "mobile-theme-reuse.png") });
     }
   }
   if (config.interactions) {
@@ -520,7 +532,7 @@ async function inspectVideoFallbackState(browser) {
   assert(result.fallbackCount === 6 && result.fallbackText.includes("关键帧和完整提示词仍可使用"), "video fallback: per-video recovery messages missing");
   assert(result.roughCutFallbackCount === 1 && result.roughCutFallbackText.includes("旁白时间稿"), "video fallback: rough-cut recovery message missing");
   assert(result.soundPreviewFallbackCount === 1 && result.soundPreviewFallbackText.includes("声音分轨"), "video fallback: sound-preview recovery message missing");
-  assert(result.completedCaseFallbackCount === 1 && result.completedCaseFallbackText.includes("案例结论") && result.completedCaseText.includes("先分清：谁完成了什么"), "video fallback: completed-case summary or recovery message missing");
+  assert(result.completedCaseFallbackCount === 1 && result.completedCaseFallbackText.includes("案例结论") && result.completedCaseText.includes("当前是敦煌") && result.completedCaseText.includes("三星堆") && result.completedCaseText.includes("先分清：谁完成了什么"), "video fallback: completed-case summary, theme reuse, or recovery message missing");
   assert(result.keyframeStillVisible && result.dispatchStillAvailable, "video fallback: base workflow disappeared");
   assert(result.scrollWidth <= result.innerWidth + 1, "video fallback: horizontal overflow");
   assert(pageErrors.length === 0, `video fallback: page errors ${pageErrors.join(" | ")}`);

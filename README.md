@@ -25,7 +25,7 @@
 | [Rachel Digital Human Production 采用价值研究](projects/rachel-digital-human-production-study/) | [打开源库](https://github.com/Jingyi-Wu-Richael/rachel-digital-human-production) | 该 Skill 是否提供独立数字人能力；审计确认它只是 MiniMax 与 HeyGen 的固定流程封装，且与既有研究高度重复，因此归档。 | 已归档 | — | 2026-08-29 |
 | [Screenshot-to-Code 视觉 Agent 能力研究](projects/screenshot-to-code-agent-study/) | [打开源库](https://github.com/abi/screenshot-to-code) | 确认 screenshot-to-code 通过多模态模型、代码工具和浏览器反馈实现视觉前端复刻；Agent 闭环值得研究，但该能力对当前日常流程低频且重叠，因此不安装、不集成、不产品化。 | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/screenshot-to-code-agent-study/) | 2026-08-29 |
 | [Toonflow 能力与复用边界总结](projects/toonflow-capability-summary/) | [打开源库](https://github.com/HBAI-Ltd/Toonflow-app) | Toonflow 是与 AIComicBuilder 高度重合的 AI 短剧生产工作台；本项目保存其 Agent、Skill、模型 API 与复用边界，当前不重复部署，待连续短剧生产需求出现时重新评估。 | 已归档 | — | 2026-08-29 |
-| [Vox Director 端到端视频能力研究](projects/vox-director-study/) | [打开源库](https://github.com/Alisa0808/vox-director) | Vox Director 的导演编排能力研究，以及从敦煌 30 秒脚本、关键帧、外部视频、质检、粗剪到声音成片的完整案例。 | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/vox-director-study/) | 2026-08-30 |
+| [Vox Director 端到端视频能力研究](projects/vox-director-study/) | [打开源库](https://github.com/Alisa0808/vox-director) | Vox Director 的导演编排能力研究，以及从敦煌 30 秒脚本、关键帧、外部视频、质检、粗剪到声音成片的完整案例。 | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/vox-director-study/?demo=dunhuang#case-study) | 2026-08-30 |
 <!-- PROJECTS:END -->
 
 项目索引数据保存在 [`projects/catalog.json`](projects/catalog.json)，上表由脚本自动维护。

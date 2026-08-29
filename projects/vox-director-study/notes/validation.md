@@ -14,7 +14,7 @@
 
 `python projects/vox-director-study/tests/audit.py`
 
-- 48/48 项契约检查通过，0 失败。
+- 50/50 项契约检查通过，0 失败。
 - 读取 47 个上游文件、18 个 Python 文件、10 个 Markdown 文件。
 - 使用 `ffprobe` 检查 4 个 MP4：均包含 H.264 视频与 AAC 音频，总时长约 210.9 秒。
 - 解析 4 份 `beats.json`，确认主题、画幅、beats、shots、关键帧与片段 URL 数量。
@@ -57,7 +57,7 @@
 | mobile-prep-error-state | 390×844 | dark | 前期数据失败时原研究内容仍可用 | pass |
 | mobile-video-fallback | 390×844 | light | 本地 MP4 请求失败时显示说明，关键帧和复制任务仍可用 | pass |
 
-最终结果：10/10 surfaces 通过；0 console error、0 page error、0 非预期 failed request、0 页面级横向溢出。桌面、平板和手机均显示“案例已完成”和最终 V2；完成区实际解码 30 秒、720×1280 视频及音轨，下载名和案例文档链接正确。3 类能力归属、8 步生产链、5 项关键发现、适合/不适合、5 项扩展与 4 点价值均通过 DOM 断言，`#case-study` 直达位置不被粘性导航遮挡。主动拦截单镜头、粗剪和全部 final MP4 时，完成案例仍保留总结与独立恢复说明；关键帧、任务卡、旁白稿和声音分轨入口仍可用。机器证据见 `notes/evidence/browser-validation.json`，完成案例桌面/平板/手机截图见 `notes/evidence/browser/dunhuang-completed-case.png`、`notes/evidence/browser/tablet-light-completed-case.png` 与 `notes/evidence/browser/mobile-dunhuang-completed-case.png`。
+最终结果：10/10 surfaces 通过；0 console error、0 page error、0 非预期 failed request、0 页面级横向溢出。桌面、平板和手机均显示“案例已完成”和最终 V2；完成区实际解码 30 秒、720×1280 视频及音轨，下载名和案例文档链接正确。当前敦煌主题、3 段叙事、10 类可替换主题、5 项重做内容和 6 项复用骨架均通过数据与 DOM 断言；3 类能力归属、8 步生产链、5 项关键发现、适合/不适合、5 项工程扩展与 4 点价值继续通过。`#case-study` 直达位置不被粘性导航遮挡；主动拦截单镜头、粗剪和全部 final MP4 时，主题说明、案例总结与独立恢复说明仍可读，关键帧、任务卡、旁白稿和声音分轨入口仍可用。机器证据见 `notes/evidence/browser-validation.json`，主题桌面与手机证据见 `notes/evidence/browser/dunhuang-completed-case.png` 与 `notes/evidence/browser/mobile-theme-reuse.png`。
 
 根级 `validate_repository.py` 对 10 个研究记录校验通过；`build_site.py` 构建 5 个有 Web 演示的项目，Vox Director 发布目录共 35 个文件。
 
@@ -81,6 +81,7 @@
 16. Revision 14：在粗剪卡之后增加独立的声音试听卡，以 9:16 声音版播放器和 4 个下载动作为核心；来源行分别标出本机系统 TTS、Codex / Research Lab 程序化环境声和 FFmpeg 混音。1440px 为双栏，390px 为单栏；自动滚动使用与粘性导航一致的偏移，手机标题和按钮完整可见，声音媒体失败不影响静音粗剪和分轨入口。
 17. Revision 15：保留声音卡版式，只替换默认媒体和必要说明；v2 状态、Yunyang Neural、在线服务边界、语速/音高和 v1 替换原因在桌面与 390px 手机均完整可读。四个下载按钮保持原层级，未因新增版本说明产生溢出或遮挡。
 18. Revision 16：准备台之后新增完成案例区。首块使用深色双栏成片舞台，桌面让 9:16 播放器和完成指标并列，手机折为视频在前、结论在后；随后用来源三栏、8 步链路、关键发现、场景边界、扩展清单和黄色价值总结形成单一阅读路径。1440/768/390px 均无溢出，`#case-study` 锚点使用现有双重顶部偏移避免粘性导航遮挡，媒体失败时不隐藏文字结论。
+19. Revision 17：在最终成片之后增加主题复用区。深色当前主题主卡同时呈现规格、视觉方向、核心表达和三段叙事；十个替换方向使用桌面三栏、平板两栏、手机单栏，末尾用红/绿双卡区分“需要重做”与“可以复用”。桌面、768px 浅色和平板、390px 深色/reduced-motion 与媒体失败路径均通过，新增 `mobile-theme-reuse.png` 保留窄屏完整阅读证据。
 
 ## 边界与未执行项
 
@@ -94,4 +95,4 @@
 
 ## 完成判定
 
-设计契约共 61 个 coverage 项，61/61 全部通过；最终 V2、完成案例区、详细复盘、README/研究报告/准备指南、10 项交付索引、48/48 工程审计和 10/10 浏览器矩阵均已完成。主案例提交 `f118f11` 已推送至 `origin/main`；无关的 `projects/llm-wiki-study/upstream` 本地脏状态未被纳入提交。不再有产品内容、页面实现或远端交付缺口。
+设计契约共 65 个 coverage 项：64 项已通过；外部 README 直达、当前主题解释、10 类可替换主题、5 项重做内容、6 项复用骨架、50/50 工程审计和 10/10 浏览器矩阵均已完成。仅 Revision 17 的远端交付在本次提交推送成功前保持 `continue`；无关的 `projects/llm-wiki-study/upstream` 本地脏状态不会纳入提交。

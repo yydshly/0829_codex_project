@@ -201,6 +201,87 @@
         "title": "敦煌：沙漠中的世界十字路口",
         "subtitle": "从仓库研究到 30 秒可播放成片的完整验证",
         "summary": "本案例证明，vox-director 的核心价值不是替代视频模型，而是把主题研究、beats、shots、关键帧、外部生成、人工复核、确定性剪辑和声音交付组织成可追溯的导演工作流。",
+        "theme_reuse": {
+          "current": {
+            "label": "当前完成主题",
+            "title": "敦煌：沙漠中的世界十字路口",
+            "format": "30 秒 · 9:16 竖屏 · 3 Beats / 6 Shots",
+            "style": "东方文化纪录片 × 纸艺拼贴 × 电影感视觉诗",
+            "concept": "不是把敦煌做成旅游宣传片，而是用沙漠、路线、商旅、乐舞、洞窟与经卷，讲清它为何成为文明相遇并留下证据的地方。",
+            "arc": [
+              "沙漠中的门",
+              "文明在这里相遇",
+              "时间被留下"
+            ]
+          },
+          "alternatives": [
+            {
+              "category": "文明考古",
+              "title": "三星堆：青铜文明苏醒",
+              "description": "用器物、祭祀空间与考古发现建立神秘而可考证的三段叙事。"
+            },
+            {
+              "category": "东方神话",
+              "title": "山海经：异兽图谱",
+              "description": "把异兽、地理与古籍想象组织成风格统一的视觉世界观短片。"
+            },
+            {
+              "category": "博物馆",
+              "title": "故宫：文物的一夜",
+              "description": "用一件件馆藏连接朝代、工艺与人的生活，而不是简单陈列藏品。"
+            },
+            {
+              "category": "艺术入境",
+              "title": "宋画：山水进入现实",
+              "description": "从画卷局部出发，让构图、留白与四时变化形成可控的画面转场。"
+            },
+            {
+              "category": "路线叙事",
+              "title": "海上丝路：港口与风物",
+              "description": "沿航线拆解货物、港口、人物与文化交换，复用敦煌案例的地图结构。"
+            },
+            {
+              "category": "非遗工艺",
+              "title": "一件漆器如何诞生",
+              "description": "按材料、手艺与成品三个阶段，把复杂工序讲成清晰的视觉过程。"
+            },
+            {
+              "category": "城市形象",
+              "title": "一座城的时间剖面",
+              "description": "以地标、街巷与人物日常连接城市过去、现在与未来。"
+            },
+            {
+              "category": "品牌故事",
+              "title": "从原料到代表作",
+              "description": "把品牌价值转成材料、制作与使用场景，适合珠宝、服装和香氛。"
+            },
+            {
+              "category": "科技科普",
+              "title": "一枚芯片如何工作",
+              "description": "把抽象原理拆成输入、运算与应用三个可视化层次。"
+            },
+            {
+              "category": "可持续议题",
+              "title": "一件物品的生命周期",
+              "description": "从资源、生产到回收，形成具有因果关系的公共议题短片。"
+            }
+          ],
+          "replace_when_switching": [
+            "核心观点、受众与需要核实的事实",
+            "3 个 Beats 的标题、旁白和叙事弧",
+            "6 个 Shots 的画面任务、运动与时长分配",
+            "关键帧、首尾帧、视觉风格和完整生成提示",
+            "旁白音色、环境声、字幕标题与最终包装"
+          ],
+          "keep_across_themes": [
+            "30 秒 / 3 Beats / 6 Shots 的基础模板",
+            "镜头编号、文件命名、版本历史和审批状态",
+            "首帧或首尾帧的模型交接格式",
+            "首中尾帧人工质检与失败重做机制",
+            "FFmpeg 统一画幅、粗剪、字幕、混音和导出",
+            "原库 / Codex / 外部模型的来源归属与交付索引"
+          ]
+        },
         "final_video": "assets/dunhuang/final/dunhuang-sound-preview-v2.mp4",
         "final_download_name": "dunhuang-crossroads-final-v2.mp4",
         "case_document": "notes/dunhuang-case-study.md",

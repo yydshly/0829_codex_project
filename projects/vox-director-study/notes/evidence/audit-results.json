@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-08-29",
   "summary": {
-    "contract_checks": 48,
+    "contract_checks": 50,
     "contract_failures": 0,
     "boundary_observations": 5,
     "videos_inspected": 4,
@@ -104,7 +104,7 @@
     {
       "id": "preproduction-data-synced",
       "pass": true,
-      "evidence": "edc1f94030ef46e356829c2953dcde4992bf703ea9141f5124b56f328cae6d31"
+      "evidence": "661a11667b04c4f54c7b3ef1f8cc7a8e888f6441754fcb305f0c1e8ecb8e87d8"
     },
     {
       "id": "preproduction-samples",
@@ -255,6 +255,16 @@
       "id": "dunhuang-completed-case-contract",
       "pass": true,
       "evidence": "completed status / final V2 / 3 owners / 8 workflow steps / 5 learnings / 4 meaning points"
+    },
+    {
+      "id": "dunhuang-theme-reuse-contract",
+      "pass": true,
+      "evidence": "current Dunhuang theme / 3-beat arc / 10 alternatives / 5 replace items / 6 reusable workflow items"
+    },
+    {
+      "id": "dunhuang-external-readme-link",
+      "pass": true,
+      "evidence": "root README demo URL links directly to the completed case; project README explains current and replaceable themes"
     },
     {
       "id": "dunhuang-case-study-deliverables",

@@ -65,6 +65,7 @@ DUNHUANG_V1_SOUND_FILES = [
 DUNHUANG_DISPATCH_GUIDE = PROJECT / "notes" / "dunhuang-video-dispatch.md"
 DUNHUANG_EDIT_LIST = PROJECT / "notes" / "dunhuang-edit-decision-list.md"
 DUNHUANG_CASE_STUDY = PROJECT / "notes" / "dunhuang-case-study.md"
+ROOT_README = PROJECT.parents[1] / "README.md"
 EVIDENCE_PATH = PROJECT / "notes" / "evidence" / "audit-results.json"
 EXPECTED_COMMIT = "668ec3946fe0139bc985313b15c1a300fca42f94"
 
@@ -210,6 +211,7 @@ def main() -> None:
     demo_index_source = (PROJECT / "demo" / "index.html").read_text(encoding="utf-8")
     demo_app_source = (PROJECT / "demo" / "app.js").read_text(encoding="utf-8")
     readme_source = (PROJECT / "README.md").read_text(encoding="utf-8")
+    root_readme_source = ROOT_README.read_text(encoding="utf-8")
 
     checks = [
         check("fixed-upstream-commit", commit == EXPECTED_COMMIT, commit),
@@ -258,6 +260,8 @@ def main() -> None:
         check("dunhuang-sound-mix-level", dunhuang_mix_loudness is not None and -18.0 <= dunhuang_mix_loudness <= -16.0 and dunhuang_mix_max_volume is not None and dunhuang_mix_max_volume <= -1.0, f"mix loudness {dunhuang_mix_loudness} LUFS / max {dunhuang_mix_max_volume} dB"),
         check("dunhuang-sound-cue-fit", all(cue.get("start_seconds", 0) + cue.get("source_duration_seconds", 0) < boundary for cue, boundary in zip(dunhuang_demo.get("rough_cut", {}).get("sound_preview", {}).get("narration_cues", []), (10, 20, 30), strict=True)) and "online neural TTS" in dunhuang_demo.get("rough_cut", {}).get("sound_preview", {}).get("voice_source", "") and "Yunyang" in dunhuang_demo.get("rough_cut", {}).get("sound_preview", {}).get("voice", "") and "no external samples" in dunhuang_demo.get("rough_cut", {}).get("sound_preview", {}).get("ambient_source", ""), "three narration cues fit their beat windows; Yunyang neural TTS and procedural no-sample provenance recorded"),
         check("dunhuang-completed-case-contract", dunhuang_demo.get("case_closure", {}).get("status") == "completed" and dunhuang_demo.get("case_closure", {}).get("final_video") == "assets/dunhuang/final/dunhuang-sound-preview-v2.mp4" and len(dunhuang_demo.get("case_closure", {}).get("ownership", [])) == 3 and len(dunhuang_demo.get("case_closure", {}).get("production_chain", [])) == 8 and len(dunhuang_demo.get("case_closure", {}).get("key_learnings", [])) >= 5 and len(dunhuang_demo.get("case_closure", {}).get("meaning", [])) >= 4, "completed status / final V2 / 3 owners / 8 workflow steps / 5 learnings / 4 meaning points"),
+        check("dunhuang-theme-reuse-contract", dunhuang_demo.get("case_closure", {}).get("theme_reuse", {}).get("current", {}).get("title") == "敦煌：沙漠中的世界十字路口" and len(dunhuang_demo.get("case_closure", {}).get("theme_reuse", {}).get("current", {}).get("arc", [])) == 3 and len(dunhuang_demo.get("case_closure", {}).get("theme_reuse", {}).get("alternatives", [])) >= 8 and len(dunhuang_demo.get("case_closure", {}).get("theme_reuse", {}).get("replace_when_switching", [])) == 5 and len(dunhuang_demo.get("case_closure", {}).get("theme_reuse", {}).get("keep_across_themes", [])) == 6, "current Dunhuang theme / 3-beat arc / 10 alternatives / 5 replace items / 6 reusable workflow items"),
+        check("dunhuang-external-readme-link", "[打开演示](https://yydshly.github.io/0829_codex_project/projects/vox-director-study/?demo=dunhuang#case-study)" in root_readme_source and "当前主题与可替换主题" in readme_source, "root README demo URL links directly to the completed case; project README explains current and replaceable themes"),
         check("dunhuang-case-study-deliverables", DUNHUANG_CASE_STUDY.is_file() and all(term in case_study for term in ("能力归属", "完整生产链", "只有首帧", "首尾帧", "适合", "对我们的意义", "建议扩展顺序", "发布边界")) and all((PROJECT / path).is_file() for path in dunhuang_demo.get("case_closure", {}).get("deliverables", [])), "case document covers ownership, workflow, frame routing, scenarios, meaning, extensions, boundaries; all indexed deliverables exist"),
         check("capability-provenance-contract", all(term in demo_index_source for term in ("原库真实能力", "Codex · Research Lab 新增", "用户外部模型产物")) and all(term in demo_app_source for term in ("Codex 图片模型关键帧", "用户外部模型产物 · 非原库生成", "Codex / Research Lab 首中尾帧检查")) and "先分清：原库能力与本研究实现" in readme_source, "three source layers are explicit in the prep overview, every Dunhuang shot, and README"),
     ]

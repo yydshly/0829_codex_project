@@ -3,7 +3,7 @@
 ## 目标锁定
 
 - Entry mode：revision-led；在现有敦煌声音试听上修复不符合纪录片气质的旁白音色。
-- Request revision：16（将敦煌示范收口为已完成案例：最终 V2 成片作为网页默认结果，补充完整案例结论、可复用理解、能力边界与产物索引，并提交到远端 GitHub）。
+- Request revision：17（核对并修正外部 README 的完成案例入口；在网页中明确当前敦煌主题、可替换主题、替换内容与保持不变的生产骨架，并再次提交远端 GitHub）。
 - Target user and context：已有其他图片/视频模型、但缺少统一前期结构与交接格式的中文创作者。
 - Desired first impression：先看懂样例如何被拆成 beats 与 shots，再把任一样例转成可交给其他模型的前期包。
 - Visual ambition：Editorial。
@@ -13,12 +13,12 @@
 - Operation constraints：零前端依赖、静态部署；新增样例选择、生成路线、主题、画幅与时长输入，以及前期包预览、复制和 JSON 下载；敦煌镜头须把关键帧、参数、完整运动提示与负向提示聚合为一张直接投喂卡，支持逐镜头复制与复制全部；30 秒粗剪须能在准备台直接播放和下载；键盘可达。
 - State constraints：默认展示 B-roll 与唐代样例；普通前期台默认读取 15 秒货币样例；`?demo=dunhuang` 必须载入敦煌 30 秒预案并清晰标记为研究示范；全部 6 个 shot 分别显示当前视频、规格与人工复核，准备台顶部另显示一个六镜头合成粗剪；切换样例或路线后镜头表、资产清单与模型交接单同步更新；复制成功与失败均有就地反馈；任一单镜头或粗剪视频加载失败时，文字、关键帧、提示词与下载/恢复说明仍可理解。
 - Environment constraints：Windows、Python 3.10+；GitHub Pages 由现有 `scripts/build_site.py` 发布；不要求 Atlas Cloud 密钥才能浏览演示。
-- Primary journey：用户打开敦煌示范，先看到“案例已完成”的最终交付结论，可播放/下载 30 秒 V2 成片，再用一屏案例总结看懂原库能力、Codex 补充、用户外部模型产物、完整生产链、关键发现、适用场景、局限和对我们的价值；需要复盘时可进入详细文档与现有准备台。
+- Primary journey：用户从根仓库 README 的演示链接直接进入敦煌完成案例，先看懂当前主题是什么，再看到主题可以替换成哪些代表性方向、替换时需要改什么、哪些经过验证的生产骨架可以保持不变；随后继续查看最终成片、能力归属和完整案例复盘。
 - User-defined phases：整理样例；建立模型无关的前期准备；让准备包可以驱动其他模型；用敦煌主题进行一次完整示范；保留原研究结论与边界。
-- Required artifacts：既有 Revision 15 全部产物；网页最终案例区、默认 V2 成片播放器与下载、案例完成状态、能力归属/生产链/关键发现/适用边界/价值总结、详细案例复盘文档、README 与交付索引、数据与浏览器/工程证据、干净且范围准确的 Git 提交、远端 GitHub 推送结果。
+- Required artifacts：既有 Revision 16 全部产物；根 README 与项目索引的完成案例专属 URL、网页主题扩展区、结构化主题数据、README/案例文档同步说明、浏览器与工程证据、干净且范围准确的 Git 提交、远端 GitHub 推送结果。
 - Autonomy authorization：用户明确确认案例已经完成，要求把视频和补充理解接入网页、全面汇总必要信息并提交远端 GitHub；允许修改本项目页面/数据/文档/测试，创建提交并推送当前仓库远端。
 - User-decision boundary：允许将既有三段非敏感旁白文本发送给 Microsoft Edge 在线神经网络 TTS，优先使用适合纪录片的沉稳普通话男声；保留 v1、静音版、环境声和所有原片。不冒充真人录音，不声称该服务或音色已经取得正式商用授权，不公开发布；正式配音授权、音乐授权、字幕样式与最终响度仍需发布前确认。
-- Observable completion criteria：专属 URL 明确显示“案例已完成”和最终 V2，视频实际播放且失败时总结仍可读；总结同时覆盖库能力、项目补充、用户产物、端到端流程、首/尾帧理解、使用场景、局限、扩展方向和对我们的意义，且不混淆归属；详细复盘列出最终规格、版本、目录和复用方法；桌面/平板/手机、明暗主题、键盘、错误态与媒体降级通过；审计、站点构建、Git 范围检查通过，提交成功推送至当前 GitHub 远端且不包含其他项目的未提交改动。
+- Observable completion criteria：根 README 和目录数据都直接链接 `?demo=dunhuang#case-study`；网页用非技术语言说明当前主题《敦煌：沙漠中的世界十字路口》、至少 8 类可替换主题、换主题要替换的 5 类内容与保持不变的 6 类流程；桌面/平板/手机和明暗主题下层级清晰、无横向溢出，现有完成案例与媒体降级不回退；审计、站点构建、Git 范围检查通过，提交成功推送至当前 GitHub 远端且不包含其他项目的未提交改动。
 
 ## 设计方向
 
@@ -94,8 +94,12 @@
 | 最终成片接入 | V2 成片成为已完成案例的默认播放器与下载结果 | 桌面/手机、light/dark、media-failure | 播放元数据、音轨、DOM、下载与降级 | 3/5–8 | pass | 完成态默认播放器实际解码 30 秒 V2 和音轨；下载与独立失败说明通过 |
 | 补充理解总结 | 一屏讲清能力归属、生产链、首尾帧理解、场景、局限与价值 | 案例总结区、桌面/平板/手机 | 内容审计、DOM 与截图 | 3/7/9 | pass | 3 类归属、8 步链路、5 项发现、适合/不适合、5 项扩展与 4 点价值全部进入页面 |
 | 完整案例复盘 | 文档汇总目标、过程、最终产物、关键发现、边界、扩展与复用建议 | README、案例文档、交付索引 | 文件、链接、数据一致性 | 3/9 | pass | 新增案例复盘，README/研究报告/准备指南与 10 项交付索引同步 |
-| 完成态回归 | 新区不破坏准备台、主题、键盘、错误态和媒体降级 | 10 surfaces 与全工程 | 浏览器矩阵、审计、构建、SHA | 5–9 | pass | 10/10 surfaces、48/48 审计、锚点直达、桌面/平板/手机及媒体降级通过 |
+| 完成态回归 | 新区不破坏准备台、主题、键盘、错误态和媒体降级 | 10 surfaces 与全工程 | 浏览器矩阵、审计、构建、SHA | 5–9 | pass | 10/10 surfaces、50/50 审计、锚点直达、桌面/平板/手机及媒体降级通过 |
 | GitHub 交付 | 仅提交 Vox Director 案例相关改动并推送当前远端 | Git main / origin | staged 范围、commit、push、远端 ref | 9 | pass | 案例提交 `f118f11` 已推送至 `origin/main`；未纳入 `projects/llm-wiki-study/upstream` 的本地脏状态 |
+| 外部 README 直达 | 根 README 和项目目录的演示入口直接打开敦煌完成案例 | 根 README、catalog、项目 README | 链接文本、URL 与本地/远端目标一致 | 3/9 | pass | 根 README、catalog、project.json 和项目 README 统一为 `?demo=dunhuang#case-study`；审计显式断言 |
+| 当前主题解释 | 用非技术语言讲清当前主题名称、内容、结构与风格 | 完成案例主题区，桌面/手机、light/dark | DOM 文本、布局与截图 | 3/7 | pass | 当前主题主卡显示标题、30 秒规格、视觉方向、核心表达和 3 段叙事 |
+| 可替换主题地图 | 展示不少于 8 类代表性主题，并说明替换项与固定生产骨架 | 完成案例主题区，桌面/平板/手机 | 数据契约、DOM 数量、截图、无溢出 | 3/7/9 | pass | 10 类主题、5 项重做内容和 6 项复用骨架进入数据与 DOM；桌面/平板/手机及媒体降级通过 |
+| Revision 17 远端交付 | 新增主题说明与入口修正通过回归并推送当前远端 | 站点、测试、Git main / origin | audit、browser、build、commit、push | 7–9 | continue | 实现后执行回归、范围检查、提交与推送 |
 
 ## Refinement ledger
 
@@ -131,4 +135,5 @@
 - Revision 15 final：实时 Edge voice list 将 `Yunjian` 标为 Passion/Sports/Novel，不符合克制目标，因此选择 Professional/Reliable 的 `zh-CN-YunyangNeural`；三段以 −6% 语速、−8 Hz 音高生成并落在各自 beat 内。v2 默认声音版为 30.000 秒、720×1280/30fps H.264、48kHz 双声道 AAC，混音约 −17.6 LUFS、峰值 −1.2 dB；页面和 JSON 显示在线 TTS、文本发送边界、v1 替换原因及四项下载，Kangkang v1 全部保留。46/46 审计、9/9 browser surfaces、56/56 coverage、35 个发布文件与根级构建通过。
 - Revision 16 baseline：canonical URL 已默认加载声音试听 V2，上一轮 9/9 browser surfaces 证明成片可播放并有音轨；但页面仍将其标为“可替换声音试听”，没有“案例已完成”入口，也没有把整个案例形成的能力归属、端到端生产链、首/尾帧经验、局限和复用价值集中呈现。Git 工作区还包含本案例全过程产物以及一个与本项目无关的 `projects/llm-wiki-study/upstream` 脏 submodule；远端为 `origin`，当前分支为 `main`。
 - Revision 16 final：网页已以最终 V2 为完成案例默认结果，并集中呈现 3 类能力归属、8 步生产链、5 项关键发现、适用边界、5 项扩展和 4 点价值；案例复盘、README、研究报告、准备指南、数据与 10 项交付索引一致。48/48 工程审计、10/10 browser surfaces、61/61 coverage、35 个发布文件和根仓库 10 项目校验全部通过；主案例提交 `f118f11` 已推送至 `origin/main`，且未包含无关的 `projects/llm-wiki-study/upstream` 本地改动。
+- Revision 17 baseline：项目 README 已有“打开完成案例”的专属链接，但根 README 与 `projects/catalog.json` 仍只指向项目首页，外部用户不能一步进入完成案例；网页已有“适合/不适合”和工程扩展优先级，却没有回答“当前主题是什么、可以换成哪些主题、换什么、什么保持不变”。受影响范围仅为外部入口、完成案例信息区、结构化数据、对应文档与回归证据；最终 V2、准备台、六镜头和声音链路保持既有通过状态。
 - Evidence：`notes/evidence/browser-validation.json`、`notes/evidence/browser/*.png`、`notes/evidence/audit-results.json`。

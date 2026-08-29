@@ -646,6 +646,87 @@ function renderCaseStudy(source, adapted) {
   final.append(media, copy);
   content.append(final);
 
+  const themeReuse = closure.theme_reuse;
+  if (themeReuse) {
+    const themes = document.createElement("section");
+    const current = document.createElement("article");
+    const currentIntro = document.createElement("div");
+    const currentLabel = document.createElement("b");
+    const currentTitle = document.createElement("h4");
+    const currentFormat = document.createElement("strong");
+    const currentStyle = document.createElement("p");
+    const currentConcept = document.createElement("p");
+    const arc = document.createElement("ol");
+    const optionGrid = document.createElement("div");
+    const switchGrid = document.createElement("div");
+
+    themes.className = "case-block";
+    themes.dataset.caseEvidence = "theme-reuse";
+    current.className = "case-current-theme";
+    currentIntro.className = "case-current-theme-copy";
+    currentLabel.textContent = themeReuse.current.label;
+    currentTitle.textContent = themeReuse.current.title;
+    currentFormat.textContent = themeReuse.current.format;
+    currentStyle.textContent = themeReuse.current.style;
+    currentConcept.textContent = themeReuse.current.concept;
+    currentStyle.className = "case-current-theme-style";
+    currentConcept.className = "case-current-theme-concept";
+    currentIntro.append(currentLabel, currentTitle, currentFormat, currentStyle, currentConcept);
+
+    arc.className = "case-theme-arc";
+    arc.setAttribute("aria-label", "当前主题三段叙事");
+    themeReuse.current.arc.forEach((item, index) => {
+      const li = document.createElement("li");
+      const number = document.createElement("span");
+      const label = document.createElement("strong");
+      number.textContent = `BEAT ${String(index + 1).padStart(2, "0")}`;
+      label.textContent = item;
+      li.append(number, label);
+      arc.append(li);
+    });
+    current.append(currentIntro, arc);
+
+    optionGrid.className = "case-theme-options";
+    optionGrid.setAttribute("aria-label", "可替换主题示例");
+    themeReuse.alternatives.forEach((item, index) => {
+      const article = document.createElement("article");
+      const meta = document.createElement("span");
+      const heading = document.createElement("h4");
+      const detail = document.createElement("p");
+      article.className = "case-theme-option";
+      meta.textContent = `${String(index + 1).padStart(2, "0")} / ${item.category}`;
+      heading.textContent = item.title;
+      detail.textContent = item.description;
+      article.append(meta, heading, detail);
+      optionGrid.append(article);
+    });
+
+    [["replace", "换主题时，需要重新制作", themeReuse.replace_when_switching], ["keep", "这些生产骨架，可以继续复用", themeReuse.keep_across_themes]].forEach(([kind, headingText, items]) => {
+      const article = document.createElement("article");
+      const heading = document.createElement("h4");
+      const list = document.createElement("ul");
+      article.className = "case-theme-change-card";
+      article.dataset.change = kind;
+      heading.textContent = headingText;
+      items.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        list.append(li);
+      });
+      article.append(heading, list);
+      switchGrid.append(article);
+    });
+    switchGrid.className = "case-theme-switch";
+
+    themes.append(
+      caseBlockHeader("THEMES / 01", "当前是敦煌；流程可以换主题", "不是把标题替换一下就结束：内容层需要重做，已经验证的镜头协议、版本、质检和后期骨架可以保留。"),
+      current,
+      optionGrid,
+      switchGrid
+    );
+    content.append(themes);
+  }
+
   const ownership = document.createElement("section");
   const ownershipGrid = document.createElement("div");
   ownership.className = "case-block";
@@ -664,7 +745,7 @@ function renderCaseStudy(source, adapted) {
     article.append(number, heading, detail);
     ownershipGrid.append(article);
   });
-  ownership.append(caseBlockHeader("OWNERSHIP / 01", "先分清：谁完成了什么", "原库、Codex 和用户外部模型分别承担不同层，不能把本研究成片误写成上游仓库的直接生成结果。"), ownershipGrid);
+  ownership.append(caseBlockHeader("OWNERSHIP / 02", "先分清：谁完成了什么", "原库、Codex 和用户外部模型分别承担不同层，不能把本研究成片误写成上游仓库的直接生成结果。"), ownershipGrid);
   content.append(ownership);
 
   const chain = document.createElement("section");
@@ -681,7 +762,7 @@ function renderCaseStudy(source, adapted) {
     li.append(number, label);
     chainList.append(li);
   });
-  chain.append(caseBlockHeader("WORKFLOW / 02", "一支片真正需要的完整链路", "从固定证据到最终交付，生成模型只是其中一环；拆镜头、质检、版本和确定性后期同样属于核心生产资产。"), chainList);
+  chain.append(caseBlockHeader("WORKFLOW / 03", "一支片真正需要的完整链路", "从固定证据到最终交付，生成模型只是其中一环；拆镜头、质检、版本和确定性后期同样属于核心生产资产。"), chainList);
   content.append(chain);
 
   const learnings = document.createElement("section");
@@ -699,7 +780,7 @@ function renderCaseStudy(source, adapted) {
     article.append(heading, detail);
     learningGrid.append(article);
   });
-  learnings.append(caseBlockHeader("LEARNINGS / 03", "经过实操后，我们补充确认了什么", "这些结论来自首帧、尾帧、重做、版本管理、粗剪和声音交付，不是仅靠阅读 README 得出的推测。"), learningGrid);
+  learnings.append(caseBlockHeader("LEARNINGS / 04", "经过实操后，我们补充确认了什么", "这些结论来自首帧、尾帧、重做、版本管理、粗剪和声音交付，不是仅靠阅读 README 得出的推测。"), learningGrid);
   content.append(learnings);
 
   const fit = document.createElement("section");
@@ -721,7 +802,7 @@ function renderCaseStudy(source, adapted) {
     article.append(heading, list);
     fitGrid.append(article);
   });
-  fit.append(caseBlockHeader("SCENARIOS / 04", "这个方法最适合用在哪里", "它擅长可拆镜头、可逐段放行、可统一包装的内容；对连续表演和精密口型仍需更强的专用能力。"), fitGrid);
+  fit.append(caseBlockHeader("SCENARIOS / 05", "这个方法最适合用在哪里", "它擅长可拆镜头、可逐段放行、可统一包装的内容；对连续表演和精密口型仍需更强的专用能力。"), fitGrid);
   content.append(fit);
 
   const extensions = document.createElement("section");
@@ -733,7 +814,7 @@ function renderCaseStudy(source, adapted) {
     li.textContent = item;
     extensionList.append(li);
   });
-  extensions.append(caseBlockHeader("NEXT / 05", "可扩展方向：先稳定，再自动化", "P0 解决 provider、状态和恢复；P1 提升质检与交付；P2 再做多模型路由和可积累评测。"), extensionList);
+  extensions.append(caseBlockHeader("NEXT / 06", "工程可扩展方向：先稳定，再自动化", "这里说的是制作系统能力，不是内容主题：P0 解决 provider、状态和恢复；P1 提升质检与交付；P2 再做多模型路由和可积累评测。"), extensionList);
   content.append(extensions);
 
   const meaning = document.createElement("section");

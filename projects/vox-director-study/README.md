@@ -9,7 +9,7 @@
 - 研究对象：[Alisa0808/vox-director](https://github.com/Alisa0808/vox-director)
 - 固定上游提交：`668ec3946fe0139bc985313b15c1a300fca42f94`
 - 上游获取方式：[`upstream/`](upstream/) Git submodule
-- Web 演示：[GitHub Pages 在线页面](https://yydshly.github.io/0829_codex_project/projects/vox-director-study/)
+- Web 演示：[直接打开敦煌完成案例](https://yydshly.github.io/0829_codex_project/projects/vox-director-study/?demo=dunhuang#case-study)
 - 完整报告：[notes/research-report.md](notes/research-report.md)
 
 ## 一句话结论
@@ -28,6 +28,12 @@
 - 结果：30.000 秒、720×1280、30fps、H.264、48kHz 双声道 AAC；6/6 当前镜头通过，2 个失败 v1 与替换原因保留。
 
 案例验证后的核心认识：只有首帧可以锁定起点，但不能保证尾部不漂移；需要明确落点时应使用真正不同的首尾帧，同时继续检查中间运动。Prompt、版本、人工质检、失败恢复、确定性剪辑、声音和文字层共同构成可生产的交付，而不是附属步骤。
+
+### 当前主题与可替换主题
+
+当前完成主题是《敦煌：沙漠中的世界十字路口》：30 秒、9:16、3 beats / 6 shots，采用“东方文化纪录片 × 纸艺拼贴 × 电影感视觉诗”，沿“沙漠中的门 → 文明在这里相遇 → 时间被留下”完成三段叙事。
+
+这套流程不是敦煌专用模板。网页现已列出十个代表性替换方向：三星堆、山海经、故宫文物、宋画入境、海上丝路、非遗工艺、城市形象、品牌故事、科技科普和可持续议题。换主题时需要重做观点与事实、beats 与旁白、shots、关键帧与提示词、声音与包装；30 秒三段式模板、镜头编号、版本审批、首帧/首尾帧交接、首中尾帧质检、FFmpeg 后期和来源归属仍可复用。
 
 ## 没有它的视频模型，也能使用
 
@@ -81,7 +87,7 @@ python -m http.server 8765 --directory .site
 - 0 个上游测试路径；
 - Provider 接口存在，但只有 Atlas Cloud 一个实现。
 
-自动审计执行 48 项本地研究、前期包、敦煌关键帧、视频版本、粗剪、声音、完成案例与交付文件契约检查；另记录 5 项上游工程边界。真实浏览器矩阵覆盖 10 个桌面、平板、手机、主题、键盘、错误与媒体降级 surface。机器可读证据见 [audit-results.json](notes/evidence/audit-results.json) 和 [browser-validation.json](notes/evidence/browser-validation.json)。
+自动审计执行 50 项本地研究、前期包、敦煌关键帧、视频版本、粗剪、声音、完成案例、主题复用与外部入口契约检查；另记录 5 项上游工程边界。真实浏览器矩阵覆盖 10 个桌面、平板、手机、主题、键盘、错误与媒体降级 surface。机器可读证据见 [audit-results.json](notes/evidence/audit-results.json) 和 [browser-validation.json](notes/evidence/browser-validation.json)。
 
 ## 适合与不适合
 
@@ -150,6 +156,7 @@ node projects/vox-director-study/tests/browser_acceptance.cjs
 
 ### 2026-08-30
 
+- 根 README、项目目录和项目 README 的演示入口统一直达敦煌完成案例；完成案例新增当前主题、10 类可替换主题、5 项重做内容和 6 项可复用生产骨架。
 - 将敦煌示范收口为完成案例，最终 V2 成片成为专属页面的默认结果。
 - 新增网页完成案例区，集中呈现能力归属、8 步生产链、5 项关键发现、适合/不适合边界、扩展优先级和对我们的意义。
 - 新增 `notes/dunhuang-case-study.md`，完整记录首帧与首尾帧差异、版本与质检经验、最终规格、交付目录、复现方式和发布边界。
