@@ -1,0 +1,17 @@
+{
+  "id": "githubdaily-capability-map",
+  "title": "GitHubDaily 项目信息库说明",
+  "summary": "GitHubDaily 本质上是一份公开的个人/团队项目整理笔记；它能为刚起步、目前只有第一个子项目的 Research Lab 提供什么？",
+  "status": "completed",
+  "path": "projects/githubdaily-capability-map",
+  "source_url": "https://github.com/GitHubDaily/GitHubDaily",
+  "demo_url": "https://yydshly.github.io/0829_codex_project/projects/githubdaily-capability-map/",
+  "tags": [
+    "github",
+    "open-source",
+    "research",
+    "web"
+  ],
+  "created": "2026-08-29",
+  "updated": "2026-08-29"
+}

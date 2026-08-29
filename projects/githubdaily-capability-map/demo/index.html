@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="用大白话说明 GitHubDaily 为什么本质上是公开的个人/团队项目整理笔记，以及它能为刚起步的 Research Lab 提供什么。">
+    <meta name="theme-color" content="#0b0d0c">
+    <meta property="og:title" content="GitHubDaily 项目信息库说明">
+    <meta property="og:description" content="它是公开维护的项目整理笔记：重广度和中文摘要，不等于权威数据库或代码备份。">
+    <title>GitHubDaily 项目信息库说明 · 0829 Codex Research Lab</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles.css">
+    <script>
+      (() => {
+        const saved = localStorage.getItem("ghd-theme");
+        const preferred = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        document.documentElement.dataset.theme = saved || preferred;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <div class="page-progress" aria-hidden="true"><span></span></div>
+
+    <header class="site-header">
+      <a class="brand" href="../../../" aria-label="返回 0829 Codex Research Lab">
+        <span class="brand-mark">08</span>
+        <span class="brand-copy"><strong>RESEARCH / 001</strong><small>GitHubDaily 项目信息库说明</small></span>
+      </a>
+      <nav class="section-nav" aria-label="页面章节">
+        <a href="#capability">保存内容</a>
+        <a href="#collection">收录质量</a>
+        <a href="#mechanism">收集方式</a>
+        <a href="#scenarios">怎么用</a>
+        <a href="#extensions">怎么扩展</a>
+        <a href="#meaning">对我们</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="切换为浅色主题" title="切换主题">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.1 15.4A8.5 8.5 0 0 1 8.6 3.9 8.5 8.5 0 1 0 20.1 15.4Z"/></svg>
+        </button>
+        <a class="source-button" href="https://github.com/GitHubDaily/GitHubDaily" target="_blank" rel="noreferrer">查看源库 <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span>PLAIN-LANGUAGE SUMMARY</span><time datetime="2026-08-29">2026.08.29</time></p>
+          <h1 id="hero-title"><span class="hero-line">它就是一个</span><span class="hero-line">人工整理的 GitHub</span><em class="hero-line">项目清单。</em></h1>
+          <p class="hero-lead">它保存项目名称、链接、中文简介和分类，方便以后查找和回顾。<strong>它备份的是项目信息，不是项目源代码。</strong></p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#capability">看它保存了什么 <span aria-hidden="true">↓</span></a>
+            <span class="read-time">约 7 分钟读完</span>
+          </div>
+        </div>
+
+        <div class="signal-map" aria-label="GitHubDaily 的四个简单步骤：找项目、挑选、写简介、存入清单">
+          <div class="signal-map-head"><span>这个库做了什么</span><span class="live-dot">公开内容</span></div>
+          <div class="signal-stage stage-source"><span>01</span><strong>找项目</strong><small>GitHub / 投稿</small></div>
+          <div class="signal-line line-one" aria-hidden="true"></div>
+          <div class="signal-stage stage-curate"><span>02</span><strong>人工挑选</strong><small>判断 / 筛选</small></div>
+          <div class="signal-line line-two" aria-hidden="true"></div>
+          <div class="signal-stage stage-compress"><span>03</span><strong>写简介</strong><small>中文说明 / 分类</small></div>
+          <div class="signal-line line-three" aria-hidden="true"></div>
+          <div class="signal-stage stage-distribute"><span>04</span><strong>存清单</strong><small>Markdown / 年份</small></div>
+          <div class="signal-core" aria-hidden="true"><span>索引</span><small>不是<br>源代码</small></div>
+        </div>
+      </section>
+
+      <section class="evidence-bar" aria-label="GitHubDaily 关键公开事实">
+        <div><strong>2015</strong><span>开始运营</span></div>
+        <div><strong>10,000+</strong><span>历史分享项目</span></div>
+        <div><strong>2018—2025</strong><span>年度归档可见</span></div>
+        <div><strong>Markdown</strong><span>公开内容载体</span></div>
+        <p><span class="fact-tag">事实</span> 数字来自仓库 README；它们描述内容规模，不等于项目质量认证。</p>
+      </section>
+
+      <section class="content-section" id="capability" data-section="capability" aria-labelledby="capability-title">
+        <div class="section-index" aria-hidden="true">01</div>
+        <div class="section-intro">
+          <p class="section-kicker">CONTENTS / 保存内容</p>
+          <h2 id="capability-title">它保存的，<br>是项目信息。</h2>
+          <p>最准确的叫法是“项目资料索引”或“信息快照”。它记录项目线索，但不复制上游仓库本身。</p>
+        </div>
+        <div class="capability-content">
+          <div class="truth-grid">
+            <article class="truth-card positive">
+              <p class="card-label"><span aria-hidden="true">+</span> 保存了什么</p>
+              <ul>
+                <li><strong>项目名称</strong><span>知道这个项目曾经存在、叫什么。</span></li>
+                <li><strong>GitHub 链接</strong><span>可以继续跳转到原始仓库查看。</span></li>
+                <li><strong>中文简介</strong><span>快速知道它大致解决什么问题。</span></li>
+                <li><strong>类别与年份</strong><span>可以按主题回看历史项目。</span></li>
+                <li><strong>投稿线索</strong><span>Issue 中可能还有说明和截图。</span></li>
+              </ul>
+            </article>
+            <article class="truth-card negative">
+              <p class="card-label"><span aria-hidden="true">−</span> 没有保存什么</p>
+              <ul>
+                <li><strong>项目源代码</strong><span>链接指向上游，并没有复制代码。</span></li>
+                <li><strong>Release 安装包</strong><span>上游删除后，这里通常无法恢复。</span></li>
+                <li><strong>完整文档快照</strong><span>README 和文档不会被完整归档。</span></li>
+                <li><strong>Issue 与提交历史</strong><span>项目过程信息仍留在原仓库。</span></li>
+                <li><strong>长期可用保证</strong><span>链接可能失效，项目也可能停更。</span></li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="capability-spectrum" aria-label="GitHubDaily 对我们的用途强弱图">
+            <div class="spectrum-head"><h3>对我们的实际用途</h3><span>越靠上越适合</span></div>
+            <div class="spectrum-row"><span>信息来源</span><div><i style="--score: 94%"></i></div><strong>很适合</strong></div>
+            <div class="spectrum-row"><span>历史快照</span><div><i style="--score: 84%"></i></div><strong>适合</strong></div>
+            <div class="spectrum-row"><span>研究清单</span><div><i style="--score: 78%"></i></div><strong>适合</strong></div>
+            <div class="spectrum-row"><span>文档备份</span><div><i style="--score: 20%"></i></div><strong>很有限</strong></div>
+            <div class="spectrum-row"><span>代码备份</span><div><i style="--score: 0%"></i></div><strong>不具备</strong></div>
+            <p><span class="fact-tag">一句话</span> 可以把它叫“信息备份”，但不能把它叫“GitHub 仓库备份”。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section collection-section" id="collection" data-section="collection" aria-labelledby="collection-title">
+        <div class="section-index" aria-hidden="true">02</div>
+        <div class="section-intro">
+          <p class="section-kicker">COLLECTION REVIEW / 收录质量</p>
+          <h2 id="collection-title">有保留价值，<br>但必须筛选。</h2>
+          <p>这不是一份“全是精品”的白名单。不过它确实收到了不少优秀项目，中文摘要和历史上下文本身也很难重新补齐。</p>
+        </div>
+        <div class="collection-content">
+          <div class="quality-verdict">
+            <article class="verdict-keep">
+              <p class="card-label"><span aria-hidden="true">+</span> 为什么值得保留</p>
+              <h3>它保存了大量项目线索和中文解释。</h3>
+              <p>即使未来项目改名、迁移或消失，我们仍能知道它曾经解决什么问题、何时被关注。这种历史语境比单独保存一个 Star 更有价值。</p>
+            </article>
+            <article class="verdict-filter">
+              <p class="card-label"><span aria-hidden="true">!</span> 为什么必须筛选</p>
+              <h3>收录不等于经过工程质量审查。</h3>
+              <p>条目没有统一记录维护状态、许可证、安全风险和替代方案；主题也明显偏向 AI，所以不能直接把整份清单当作选型结果。</p>
+            </article>
+          </div>
+
+          <div class="positioning-block">
+            <div class="positioning-summary">
+              <div><p class="panel-type">ESSENTIAL POSITION / 本质定位</p><h3>公开维护的<br>个人 / 团队项目笔记。</h3></div>
+              <p>维护者根据自己的兴趣、经验和判断挑选项目，再用自己的理解写中文简介并分类归档。它体现的是编辑者视角，不是 GitHub 全量数据，也不是权威质量结论。</p>
+            </div>
+            <div class="positioning-grid" aria-label="GitHub 检索、GitHubDaily 和新 Research Lab 的侧重点对比">
+              <article>
+                <span>01 / REAL-TIME</span><h4>GitHub 检索</h4><strong>重实时发现</strong>
+                <p>按关键词、语言、Star、更新时间和许可证查找当前项目，覆盖更全、更新更快。</p>
+              </article>
+              <article>
+                <span>02 / CURATED</span><h4>GitHubDaily</h4><strong>重广度整理</strong>
+                <p>别人替你挑项目、写中文摘要并保存年度清单，但选择会带有个人偏好。</p>
+              </article>
+              <article class="positioning-us">
+                <span>03 / NEW LAB</span><h4>新的 Research Lab</h4><strong>从第一个项目起步</strong>
+                <p>当前只有本项目；未来再逐个验证能力、原理、许可、风险、适用场景和采用价值。</p>
+              </article>
+            </div>
+            <p class="positioning-note"><span class="inference-tag">当前状态</span> 这里不是两套成熟资料库之间的比较：GitHubDaily 可以给新库提供候选和分类参考；本库则从少量项目开始，把分析过程与判断逐项沉淀。</p>
+          </div>
+
+          <div class="collection-stats" aria-label="2025 GitHubDaily 收录结构抽样统计">
+            <div><strong>1,523</strong><span>2025 条目</span><small>Markdown 表格解析</small></div>
+            <div><strong>1,488</strong><span>唯一 GitHub 地址</span><small>存在少量重复收录</small></div>
+            <div><strong>40.2%</strong><span>AI 工具</span><small>612 条，主题明显集中</small></div>
+            <div><strong>34</strong><span>编程语言 / 库</span><small>只占全部条目的 2.2%</small></div>
+          </div>
+
+          <div class="sample-block">
+            <div class="sample-head">
+              <div><p class="panel-type">VERIFIED SAMPLE / 代表样本</p><h3>确实收到过<br>优秀的库。</h3></div>
+              <p>以下不是排名，而是从“编程语言 / 库”分类中抽取的 5 个例子。判断同时参考当前活跃度、公开许可证、文档和采用信号；Star 只是一项辅助指标。</p>
+            </div>
+            <div class="sample-grid">
+              <a class="sample-card" href="https://github.com/jlowin/fastmcp" target="_blank" rel="noreferrer">
+                <span class="sample-number">01</span><strong>FastMCP</strong>
+                <p>快速构建 MCP 服务与客户端的 Python 框架，项目已迁移到 PrefectHQ，仍持续维护。</p>
+                <div class="sample-meta"><span>27.4k ★</span><span>Apache-2.0</span><span>近 7 天活跃</span></div>
+              </a>
+              <a class="sample-card" href="https://github.com/microsoft/fluentui-system-icons" target="_blank" rel="noreferrer">
+                <span class="sample-number">02</span><strong>Fluent UI System Icons</strong>
+                <p>微软维护的跨平台图标库，覆盖 Web、Android、iOS、Flutter 等使用方式。</p>
+                <div class="sample-meta"><span>10.8k ★</span><span>MIT</span><span>近 7 天活跃</span></div>
+              </a>
+              <a class="sample-card" href="https://github.com/Vanilagy/mediabunny" target="_blank" rel="noreferrer">
+                <span class="sample-number">03</span><strong>MediaBunny</strong>
+                <p>面向浏览器的 TypeScript 音视频工具库，提供读取、写入和转换能力。</p>
+                <div class="sample-meta"><span>7.1k ★</span><span>MPL-2.0</span><span>近 7 天活跃</span></div>
+              </a>
+              <a class="sample-card" href="https://github.com/ggerganov/ggwave" target="_blank" rel="noreferrer">
+                <span class="sample-number">04</span><strong>ggwave</strong>
+                <p>用声音在设备间传输少量数据的 C/C++ 库，技术方向独特且实现完整。</p>
+                <div class="sample-meta"><span>7.8k ★</span><span>MIT</span><span>2026 年活跃</span></div>
+              </a>
+              <a class="sample-card sample-wide" href="https://github.com/zh-lx/pinyin-pro" target="_blank" rel="noreferrer">
+                <span class="sample-number">05</span><strong>pinyin-pro</strong>
+                <p>面向中文场景的高性能 JavaScript 拼音转换库，功能边界清楚、许可证宽松、仍在持续更新。</p>
+                <div class="sample-meta"><span>4.7k ★</span><span>MIT</span><span>近 7 天活跃</span></div>
+              </a>
+            </div>
+            <p class="sample-note"><span class="fact-tag">核验口径</span> 统计与项目状态观察日期均为 2026-08-29；仓库状态会继续变化，这里只证明“清单中确实存在优秀样本”，不代表对 1,523 条记录做了逐项审计。</p>
+          </div>
+
+          <div class="retention-plan">
+            <div><p class="panel-type">OUR RETENTION PLAN / 我们怎么留</p><h3>全量留信息，重点留文档，少量留代码。</h3></div>
+            <ol>
+              <li><span>01</span><p><strong>全量保留索引</strong>保存 1,488 个唯一地址、中文简介、分类、年份和首次发现时间。</p></li>
+              <li><span>02</span><p><strong>重点保留文档</strong>只为优秀、中文特色或容易失传的项目保存 README 与关键说明。</p></li>
+              <li><span>03</span><p><strong>少量镜像代码</strong>只有真正依赖或准备深入研究的项目，才做 Git 镜像并固定 commit。</p></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section mechanism-section" id="mechanism" data-section="mechanism" aria-labelledby="mechanism-title">
+        <div class="section-index" aria-hidden="true">03</div>
+        <div class="section-intro">
+          <p class="section-kicker">PROCESS / 收集方式</p>
+          <h2 id="mechanism-title">它就是这样<br>收集信息的。</h2>
+          <p>没有神秘算法：找到项目或接收投稿，人工决定是否收录，写一段中文简介，再放进 Markdown 清单。</p>
+        </div>
+        <div class="mechanism-workbench">
+          <div class="step-tabs" role="tablist" aria-label="GitHubDaily 工作步骤">
+            <button type="button" role="tab" id="step-tab-1" aria-controls="step-panel" aria-selected="true" data-step="0"><span>01</span><strong>找到项目</strong><small>来源在哪里</small></button>
+            <button type="button" role="tab" id="step-tab-2" aria-controls="step-panel" aria-selected="false" data-step="1" tabindex="-1"><span>02</span><strong>人工挑选</strong><small>是否放进清单</small></button>
+            <button type="button" role="tab" id="step-tab-3" aria-controls="step-panel" aria-selected="false" data-step="2" tabindex="-1"><span>03</span><strong>写中文简介</strong><small>说明是做什么的</small></button>
+            <button type="button" role="tab" id="step-tab-4" aria-controls="step-panel" aria-selected="false" data-step="3" tabindex="-1"><span>04</span><strong>存入清单</strong><small>按分类和年份保存</small></button>
+          </div>
+          <article class="step-panel" id="step-panel" role="tabpanel" aria-labelledby="step-tab-1" tabindex="0">
+            <div class="panel-number" id="step-number">01</div>
+             <p class="panel-type" id="step-type">SOURCE / 信息来源</p>
+             <h3 id="step-title">从 GitHub 和社区投稿中找到项目</h3>
+            <p id="step-description">维护者主动发现项目；开发者也可以通过 Issue 提交项目名、地址、100 字以内简介和最多 6 张截图。</p>
+            <div class="panel-evidence"><span>公开证据</span><p id="step-evidence">README 的自荐入口与 .github/issue_template.md。</p></div>
+          </article>
+        </div>
+        <aside class="mechanism-note">
+          <span class="inference-tag">边界</span>
+          <p>`.gitignore` 排除了 <code>scripts</code> 与 <code>GHDScripts</code>，所以内部自动化可能存在；但它没有作为这个公开仓库的可复用能力发布。</p>
+        </aside>
+      </section>
+
+      <section class="content-section" id="scenarios" data-section="scenarios" aria-labelledby="scenarios-title">
+        <div class="section-index" aria-hidden="true">04</div>
+        <div class="section-intro">
+          <p class="section-kicker">USAGE / 怎么用</p>
+          <h2 id="scenarios-title">这份清单，<br>可以怎么用？</h2>
+          <p>它适合帮助你找到项目，不适合替你判断项目是否安全、好用或仍在维护。</p>
+        </div>
+        <div class="scenario-browser">
+          <div class="audience-tabs" role="tablist" aria-label="选择使用者角色">
+            <button type="button" role="tab" aria-selected="true" aria-controls="audience-panel" id="audience-tab-developer" data-audience="developer">开发者</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="audience-panel" id="audience-tab-product" data-audience="product" tabindex="-1">产品研究</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="audience-panel" id="audience-tab-creator" data-audience="creator" tabindex="-1">内容创作</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="audience-panel" id="audience-tab-maintainer" data-audience="maintainer" tabindex="-1">开源作者</button>
+          </div>
+          <article class="audience-panel" id="audience-panel" role="tabpanel" aria-labelledby="audience-tab-developer" tabindex="0">
+            <div class="audience-label"><span id="audience-number">01</span><p id="audience-role">DEVELOPER</p></div>
+            <div>
+              <p class="panel-type">最适合</p>
+              <h3 id="audience-title">工具发现与第一轮技术雷达</h3>
+              <p id="audience-summary">当你知道问题，却不知道现成项目名称时，用分类和中文摘要快速建立候选清单。</p>
+            </div>
+            <div class="audience-guidance">
+              <div><span>正确动作</span><p id="audience-do">选出 3—5 个候选，再检查提交活跃度、文档、测试、许可证和安全性。</p></div>
+              <div><span>不要这样用</span><p id="audience-dont">不要因为被收录或 Star 多，就直接引入生产环境。</p></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section" id="extensions" data-section="extensions" aria-labelledby="extensions-title">
+        <div class="section-index" aria-hidden="true">05</div>
+        <div class="section-intro">
+          <p class="section-kicker">EXTENSIONS / 怎么扩展</p>
+          <h2 id="extensions-title">如果要更好用，<br>可以这样改。</h2>
+          <p>当前内容主要是 Markdown。我们可以在它上面增加查询、检查和备份能力。</p>
+        </div>
+        <div class="roadmap" aria-label="GitHubDaily 可扩展路线">
+          <article>
+            <span class="roadmap-level">改造 01</span><strong>整理成数据库</strong>
+            <h3>Markdown → JSON / SQLite</h3>
+            <p>把项目名、链接、中文简介、分类和年份整理成固定字段，方便搜索和导出。</p>
+            <ul><li>全文搜索</li><li>标签筛选</li><li>信息快照</li></ul>
+          </article>
+          <article>
+            <span class="roadmap-level">改造 02</span><strong>检查是否还有效</strong>
+            <h3>定期检查链接与活跃度</h3>
+            <p>补充最后提交、Release、许可证和链接状态，标出已经删除或长期停更的项目。</p>
+            <ul><li>失效链接</li><li>维护状态</li><li>许可提示</li></ul>
+          </article>
+          <article>
+            <span class="roadmap-level">改造 03</span><strong>按我们的方向筛选</strong>
+            <h3>建立自己的项目标签</h3>
+            <p>按技术栈、操作系统、是否本地运行和许可证等条件，留下真正相关的项目。</p>
+            <ul><li>技术标签</li><li>相似项目</li><li>研究队列</li></ul>
+          </article>
+          <article class="roadmap-focus">
+            <span class="roadmap-level">改造 04</span><strong>接给 Codex 查询</strong>
+            <h3>用自然语言查这份清单</h3>
+            <p>直接询问“找出支持 Windows、本地运行、许可证宽松且最近仍活跃的 OCR 工具”，再进入代码级评估。</p>
+            <ul><li>自然语言查询</li><li>代码分析</li><li>选型报告</li></ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section meaning-section" id="meaning" data-section="meaning" aria-labelledby="meaning-title">
+        <div class="section-index" aria-hidden="true">06</div>
+        <div class="section-intro">
+          <p class="section-kicker">VALUE / 对我们的实际意义</p>
+          <h2 id="meaning-title">它提供起点，<br>研究由我们积累。</h2>
+          <p>本 Research Lab 是新库，目前只有 GitHubDaily 这一个子项目。它能提供第一批外部线索、中文摘要和分类参考；真正的核心资产，要靠后续一个个子项目的验证与记录逐步形成。</p>
+        </div>
+        <div class="meaning-grid">
+          <div class="value-stack">
+            <div><span>01</span><p><strong>外部线索：有用</strong>不知道准确关键词时，可以补充第一批候选项目。</p></div>
+            <div><span>02</span><p><strong>中文简介：有用</strong>帮助快速知道一个陌生项目大概在解决什么问题。</p></div>
+            <div><span>03</span><p><strong>分类参考：可借鉴</strong>可以参考它如何按主题整理项目，再建立适合新库的研究分类。</p></div>
+            <div><span>04</span><p><strong>选型结论：不提供</strong>是否优秀、安全、合规和适用，仍需我们重新验证。</p></div>
+            <div><span>05</span><p><strong>核心资产：逐步建设</strong>未来每个子项目的证据、判断和可复现结果，才会形成这个新库自己的价值。</p></div>
+          </div>
+          <div class="weekly-loop">
+            <p class="panel-type">如果目标真的是“备份”</p>
+            <h3>需要分三层来做。</h3>
+            <ol>
+              <li><span>01</span><p><strong>信息备份：</strong>定期把名称、链接、简介、分类和年份保存成 JSON 快照。</p></li>
+              <li><span>02</span><p><strong>文档备份：</strong>只对我们关注的项目保存 README、关键文档和必要截图。</p></li>
+              <li><span>03</span><p><strong>代码备份：</strong>只对真正依赖的项目做 Git 镜像或固定到具体 commit。</p></li>
+            </ol>
+            <p class="weekly-result"><span>区别</span> 这份清单告诉我们“曾经有什么”；代码镜像才保证“以后还能用”。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="boundary-section" id="boundaries" aria-labelledby="boundaries-title">
+        <div>
+          <p class="section-kicker">BOUNDARIES / 使用时注意</p>
+          <h2 id="boundaries-title">清单里有，<br>不代表可以直接用。</h2>
+        </div>
+        <div class="boundary-list">
+          <article>
+            <span class="warning-icon" aria-hidden="true">!</span>
+            <div><h3>安全边界</h3><p>当前 README 中存在其描述涉及凭证窃取或破解能力的项目。这足以说明：进入清单不等于通过安全审查。</p></div>
+          </article>
+          <article>
+            <span class="warning-icon" aria-hidden="true">§</span>
+            <div><h3>许可边界</h3><p>GitHubDaily 的整理内容声明为 CC BY-NC-ND 4.0；每个被收录项目还有自己的许可证。商业复用、改编和代码集成必须分开判断。</p></div>
+          </article>
+          <article>
+            <span class="warning-icon" aria-hidden="true">↻</span>
+            <div><h3>时效边界</h3><p>2026 年仍有新投稿 Issue，但主索引继续以 2025 年复盘命名。使用时要重新验证链接、维护状态和最新版本。</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="sources" aria-labelledby="sources-title">
+        <div><p class="section-kicker">SOURCES / 来源</p><h2 id="sources-title">观察依据</h2></div>
+        <ol>
+          <li><span>01</span><a href="https://github.com/GitHubDaily/GitHubDaily" target="_blank" rel="noreferrer"><strong>仓库主页与 README</strong><small>宗旨、规模、分类、2025 清单统计、年度归档与声明 ↗</small></a></li>
+          <li><span>02</span><a href="https://github.com/GitHubDaily/GitHubDaily/blob/master/.github/issue_template.md" target="_blank" rel="noreferrer"><strong>项目投稿模板</strong><small>项目名、地址、100 字简介和截图要求 ↗</small></a></li>
+          <li><span>03</span><a href="https://github.com/GitHubDaily/GitHubDaily/issues" target="_blank" rel="noreferrer"><strong>开放 Issues</strong><small>2026 年持续出现的社区自荐 ↗</small></a></li>
+          <li><span>04</span><a href="https://github.com/GitHubDaily/GitHubDaily/blob/master/.gitignore" target="_blank" rel="noreferrer"><strong>公开目录与 .gitignore</strong><small>可见内容结构及未公开脚本线索 ↗</small></a></li>
+        </ol>
+        <p class="source-note"><span class="fact-tag">研究说明</span> 1,523 条记录与分类占比由 2025 README 的 Markdown 表格解析；5 个样本的 Star、许可证、归档状态和最近提交于 2026-08-29 在各项目 GitHub 页面核验。样本用于证明“有优秀项目”，不是全量质量审计。</p>
+      </section>
+    </main>
+
+    <footer>
+      <a href="../../../">0829 CODEX RESEARCH LAB</a>
+      <span>PROJECT 001 · GITHUBDAILY INFORMATION INDEX</span>
+      <a href="https://github.com/yydshly/0829_codex_project/tree/main/projects/githubdaily-capability-map" target="_blank" rel="noreferrer">研究记录 ↗</a>
+    </footer>
+
+    <noscript><div class="noscript">页面内容仍可阅读；启用 JavaScript 后可切换主题、原理步骤和使用者场景。</div></noscript>
+    <script src="./app.js" defer></script>
+  </body>
+</html>

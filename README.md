@@ -11,10 +11,12 @@
 
 项目状态统一使用：`planned`（计划中）、`active`（进行中）、`paused`（暂停）、`completed`（已完成）、`archived`（已归档）。
 
+当前第一个子项目是 [GitHubDaily 项目信息库说明](projects/githubdaily-capability-map/)：研究对象为 [GitHubDaily/GitHubDaily](https://github.com/GitHubDaily/GitHubDaily)，研究结果通过 [GitHub Pages Web 演示](https://yydshly.github.io/0829_codex_project/projects/githubdaily-capability-map/) 展示。
+
 <!-- PROJECTS:START -->
 | 子项目 | 研究问题 | 状态 | 在线展示 | 最近更新 |
 | --- | --- | --- | --- | --- |
-| 暂无项目 | 使用下方命令创建第一个研究项目 | — | — | — |
+| [GitHubDaily 项目信息库说明](projects/githubdaily-capability-map/) | GitHubDaily 本质上是一份公开的个人/团队项目整理笔记；它能为刚起步、目前只有第一个子项目的 Research Lab 提供什么？ | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/githubdaily-capability-map/) | 2026-08-29 |
 <!-- PROJECTS:END -->
 
 项目索引数据保存在 [`projects/catalog.json`](projects/catalog.json)，上表由脚本自动维护。
