@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-08-29",
+  "summary": {
+    "checks": 12,
+    "failures": 0
+  },
+  "checks": [
+    {
+      "id": "required-artifacts",
+      "pass": true,
+      "evidence": "README.md, project.json, data/source-audit.json, notes/research-report.md, notes/design-contract.md, demo/index.html, demo/styles.css, demo/app.js, demo/favicon.svg, scripts/audit_source.py, tests/browser_acceptance.py"
+    },
+    {
+      "id": "project-completed",
+      "pass": true,
+      "evidence": "completed"
+    },
+    {
+      "id": "demo-registered",
+      "pass": true,
+      "evidence": "https://yydshly.github.io/0829_codex_project/projects/screenshot-to-code-agent-study/"
+    },
+    {
+      "id": "fixed-source-commit",
+      "pass": true,
+      "evidence": "d026163f586dfa8c5c10d28c36edd59a9d3b0e88"
+    },
+    {
+      "id": "source-audit-shape",
+      "pass": true,
+      "evidence": "9 tools / 6 stacks / 8 observations"
+    },
+    {
+      "id": "documentation-drift-recorded",
+      "pass": true,
+      "evidence": "tool-step and model-list drift"
+    },
+    {
+      "id": "research-topics-covered",
+      "pass": true,
+      "evidence": "能力, 实现原理, 价值, 使用场景, 可扩展场景, 对我们的意义"
+    },
+    {
+      "id": "demo-sections",
+      "pass": true,
+      "evidence": "capability, mechanism, value, scenarios, extensions, meaning, evidence"
+    },
+    {
+      "id": "static-core-content",
+      "pass": true,
+      "evidence": "9 scenario cards / 5 agent steps / core conclusion in HTML"
+    },
+    {
+      "id": "theme-and-motion-contract",
+      "pass": true,
+      "evidence": "light/dark persistence and reduced-motion CSS"
+    },
+    {
+      "id": "keyboard-tab-contract",
+      "pass": true,
+      "evidence": "ARIA tabs with arrow-key navigation"
+    },
+    {
+      "id": "coverage-contract",
+      "pass": true,
+      "evidence": "full delivery coverage is recorded"
+    }
+  ]
+}

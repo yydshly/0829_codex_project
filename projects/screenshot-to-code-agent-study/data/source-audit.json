@@ -1,0 +1,229 @@
+{
+  "generated_at": "2026-08-29T12:50:42.830945+00:00",
+  "upstream": {
+    "url": "https://github.com/abi/screenshot-to-code",
+    "commit": "d026163f586dfa8c5c10d28c36edd59a9d3b0e88",
+    "commit_date": "2026-07-30T15:17:49+00:00",
+    "commit_subject": "Batch image editing and background removal tools in parallel",
+    "license": "MIT License"
+  },
+  "repository": {
+    "file_count": 316,
+    "file_types": {
+      ".cjs": 1,
+      ".css": 1,
+      ".example": 2,
+      ".html": 3,
+      ".ini": 1,
+      ".js": 3,
+      ".json": 9,
+      ".lock": 1,
+      ".md": 20,
+      ".png": 11,
+      ".py": 135,
+      ".sh": 1,
+      ".toml": 1,
+      ".ts": 43,
+      ".tsx": 73,
+      ".yaml": 2,
+      ".yml": 2,
+      "[none]": 7
+    },
+    "python_files": 135,
+    "tsx_files": 73,
+    "test_files": 52,
+    "provider_adapters": [
+      "OpenAI",
+      "Anthropic",
+      "Gemini"
+    ],
+    "input_modes": [
+      "image",
+      "video",
+      "text"
+    ],
+    "output_stacks": [
+      "html_css",
+      "html_tailwind",
+      "react_tailwind",
+      "bootstrap",
+      "ionic_tailwind",
+      "vue_tailwind"
+    ],
+    "agent_tools": [
+      "create_file",
+      "edit_file",
+      "edit_images",
+      "extract_assets",
+      "generate_images",
+      "remove_backgrounds",
+      "retrieve_option",
+      "save_assets",
+      "screenshot_preview"
+    ]
+  },
+  "observations": [
+    {
+      "id": "external-model-orchestrator",
+      "finding": "核心能力来自外部多模态模型，仓库负责 provider 适配、prompt、工具和运行闭环，而不是训练专用截图模型。",
+      "evidence": [
+        {
+          "file": "backend/agent/providers/factory.py",
+          "line": 15,
+          "excerpt": "from llm import ANTHROPIC_MODELS, GEMINI_MODELS, OPENAI_MODELS, Llm"
+        },
+        {
+          "file": "backend/agent/providers/factory.py",
+          "line": 15,
+          "excerpt": "from llm import ANTHROPIC_MODELS, GEMINI_MODELS, OPENAI_MODELS, Llm"
+        },
+        {
+          "file": "backend/agent/providers/factory.py",
+          "line": 15,
+          "excerpt": "from llm import ANTHROPIC_MODELS, GEMINI_MODELS, OPENAI_MODELS, Llm"
+        }
+      ]
+    },
+    {
+      "id": "single-file-contract",
+      "finding": "主输出契约是可立即预览的单个 index.html，而不是标准多文件生产工程。",
+      "evidence": [
+        {
+          "file": "backend/prompts/system_prompt.py",
+          "line": 14,
+          "excerpt": "- The main file is a single HTML file. Use path \"index.html\" unless told otherwise."
+        }
+      ]
+    },
+    {
+      "id": "agent-tool-loop",
+      "finding": "模型通过 create/edit/image/asset/preview 等工具迭代文件状态，当前代码最多运行 30 个 agent step。",
+      "evidence": [
+        {
+          "file": "backend/agent/engine.py",
+          "line": 219,
+          "excerpt": "max_steps = 30"
+        },
+        {
+          "file": "backend/agent/engine.py",
+          "line": 325,
+          "excerpt": "await session.append_tool_results(turn, executed_tool_calls)"
+        }
+      ]
+    },
+    {
+      "id": "visual-feedback-loop",
+      "finding": "生成后的 HTML 会在桌面和手机视口渲染成截图，作为模型继续修正的视觉反馈。",
+      "evidence": [
+        {
+          "file": "backend/prompts/system_prompt.py",
+          "line": 19,
+          "excerpt": "- When available, always call screenshot_preview once after create_file or after edit_file changes to see the full-page desktop and mobile renderings of your current HTML and verify they match the requested design. If you spot visual problems (broken layout, overlapping elements, wrong spacing or colors), fix them with edit_file."
+        },
+        {
+          "file": "backend/preview_screenshot/base.py",
+          "line": 6,
+          "excerpt": "\"desktop\": (1280, 832),"
+        },
+        {
+          "file": "backend/preview_screenshot/base.py",
+          "line": 7,
+          "excerpt": "\"mobile\": (342, 684),"
+        }
+      ]
+    },
+    {
+      "id": "asset-crop-pipeline",
+      "finding": "Gemini 返回归一化边界框，后端用 Pillow 裁剪原始像素，从而复用真实 logo、照片和图标。",
+      "evidence": [
+        {
+          "file": "backend/asset_extraction.py",
+          "line": 18,
+          "excerpt": "ASSET_EXTRACTION_GEMINI_MODEL = \"gemini-3.6-flash\""
+        },
+        {
+          "file": "backend/asset_extraction.py",
+          "line": 52,
+          "excerpt": "box_2d: list[float] | None = Field("
+        },
+        {
+          "file": "backend/asset_extraction.py",
+          "line": 336,
+          "excerpt": "cropped = image.crop((left, top, right, bottom))"
+        }
+      ]
+    },
+    {
+      "id": "parallel-variants",
+      "finding": "同一请求可并行运行多个模型变体，再由用户比较候选。",
+      "evidence": [
+        {
+          "file": "backend/routes/generate_code.py",
+          "line": 602,
+          "excerpt": "results = await asyncio.gather(*tasks, return_exceptions=True)"
+        }
+      ]
+    },
+    {
+      "id": "figma-boundary",
+      "finding": "所谓 Figma 支持实际是截图或导出画板输入；当前源码明确拒绝直接 Figma URL 导入。",
+      "evidence": [
+        {
+          "file": "frontend/src/components/unified-input/tabs/UrlTab.tsx",
+          "line": 65,
+          "excerpt": "\"Direct Figma import is not supported. Take a screenshot of your design or export the artboards as images, then use the Upload tab.\","
+        }
+      ]
+    },
+    {
+      "id": "small-manual-eval-baseline",
+      "finding": "仓库提供评测脚本和评分界面，但公开基础说明仍是 16 张截图与人工 1–4 分。",
+      "evidence": [
+        {
+          "file": "Evaluation.md",
+          "line": 3,
+          "excerpt": "Evaluation dataset consists of 16 screenshots. A Python script for running screenshot-to-code on the dataset and a UI for rating outputs is included. With this set up, we can compare and evaluate various models and prompts."
+        },
+        {
+          "file": "Evaluation.md",
+          "line": 16,
+          "excerpt": "- Rate each output on a scale of 1-4"
+        }
+      ]
+    }
+  ],
+  "documentation_drift": [
+    {
+      "id": "tool-step-doc-drift",
+      "finding": "设计文档写最多 20 轮，当前 engine 实现为 30 step。",
+      "documentation": {
+        "file": "design-docs/agent-tool-calling-flow.md",
+        "line": 46,
+        "excerpt": "- Maximum 20 tool turns; raises if exceeded."
+      },
+      "implementation": {
+        "file": "backend/agent/engine.py",
+        "line": 219,
+        "excerpt": "max_steps = 30"
+      }
+    },
+    {
+      "id": "model-list-drift",
+      "finding": "README 的默认 OpenAI 型号与当前模型选择代码不完全一致，说明模型清单是易变配置，不能作为稳定能力边界。",
+      "documentation": {
+        "file": "README.md",
+        "line": 21,
+        "excerpt": "- GPT-5.5 and GPT-5.4 Mini"
+      },
+      "implementation": {
+        "file": "backend/routes/model_choice_sets.py",
+        "line": 21,
+        "excerpt": "Llm.GPT_5_6_SOL_MAX,"
+      }
+    }
+  ],
+  "scope_boundary": {
+    "live_generation_executed": false,
+    "reason": "Static architecture audit only; live quality depends on paid and changing OpenAI, Anthropic, Gemini, Replicate, and ScreenshotOne services."
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "generated_at": "2026-08-29",
+  "url": "http://127.0.0.1:8000/projects/screenshot-to-code-agent-study/",
+  "browser": "Google Chrome",
+  "matrix": {
+    "desktop-dark-hero": {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "dark",
+      "reduced_motion": "no-preference",
+      "horizontal_overflow": false,
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": [],
+      "interaction": {},
+      "screenshot": "desktop-dark-hero.png"
+    },
+    "desktop-light-agent": {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "light",
+      "reduced_motion": "no-preference",
+      "horizontal_overflow": false,
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": [],
+      "interaction": {
+        "selected_step": 3,
+        "filtered_scenarios": 3,
+        "theme_round_trip": true,
+        "visible_focus": true
+      },
+      "screenshot": "desktop-light-agent.png"
+    },
+    "tablet-light-scenarios": {
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "theme": "light",
+      "reduced_motion": "no-preference",
+      "horizontal_overflow": false,
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": [],
+      "interaction": {},
+      "screenshot": "tablet-light-scenarios.png"
+    },
+    "mobile-dark-meaning": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "reduced_motion": "reduce",
+      "horizontal_overflow": false,
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": [],
+      "interaction": {},
+      "screenshot": "mobile-dark-meaning.png"
+    }
+  },
+  "summary": {
+    "surfaces": 4,
+    "failures": 0
+  }
+}

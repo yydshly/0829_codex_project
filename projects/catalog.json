@@ -92,6 +92,23 @@
       "updated": "2026-08-29"
     },
     {
+      "id": "screenshot-to-code-agent-study",
+      "title": "Screenshot-to-Code 视觉 Agent 能力研究",
+      "summary": "确认 screenshot-to-code 通过多模态模型、代码工具和浏览器反馈实现视觉前端复刻；Agent 闭环值得研究，但该能力对当前日常流程低频且重叠，因此不安装、不集成、不产品化。",
+      "status": "completed",
+      "path": "projects/screenshot-to-code-agent-study",
+      "source_url": "https://github.com/abi/screenshot-to-code",
+      "demo_url": "https://yydshly.github.io/0829_codex_project/projects/screenshot-to-code-agent-study/",
+      "tags": [
+        "agent",
+        "frontend",
+        "multimodal",
+        "research"
+      ],
+      "created": "2026-08-29",
+      "updated": "2026-08-29"
+    },
+    {
       "id": "toonflow-capability-summary",
       "title": "Toonflow 能力与复用边界总结",
       "summary": "Toonflow 是与 AIComicBuilder 高度重合的 AI 短剧生产工作台；本项目保存其 Agent、Skill、模型 API 与复用边界，当前不重复部署，待连续短剧生产需求出现时重新评估。",
