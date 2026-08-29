@@ -17,6 +17,23 @@
       ],
       "created": "2026-08-29",
       "updated": "2026-08-29"
+    },
+    {
+      "id": "gofilm-source-summary",
+      "title": "GoFilm 来源机制简析",
+      "summary": "简要归档 GoFilm 的第三方影视采集 API、主附源聚合与部署机制；核心问题已在 Moovie 研究中覆盖，后续按需参考。",
+      "status": "archived",
+      "path": "projects/gofilm-source-summary",
+      "source_url": "https://github.com/ProudMuBai/GoFilm",
+      "demo_url": "",
+      "tags": [
+        "applecms",
+        "archived",
+        "golang",
+        "video-aggregation"
+      ],
+      "created": "2026-08-29",
+      "updated": "2026-08-29"
     }
   ]
 }

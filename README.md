@@ -17,6 +17,7 @@
 | 子项目 | 研究问题 | 状态 | 在线展示 | 最近更新 |
 | --- | --- | --- | --- | --- |
 | [GitHubDaily 项目信息库说明](projects/githubdaily-capability-map/) | GitHubDaily 本质上是一份公开的个人/团队项目整理笔记；它能为刚起步、目前只有第一个子项目的 Research Lab 提供什么？ | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/githubdaily-capability-map/) | 2026-08-29 |
+| [GoFilm 来源机制简析](projects/gofilm-source-summary/) | 简要归档 GoFilm 的第三方影视采集 API、主附源聚合与部署机制；核心问题已在 Moovie 研究中覆盖，后续按需参考。 | 已归档 | — | 2026-08-29 |
 <!-- PROJECTS:END -->
 
 项目索引数据保存在 [`projects/catalog.json`](projects/catalog.json)，上表由脚本自动维护。
