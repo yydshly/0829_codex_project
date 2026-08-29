@@ -99,7 +99,7 @@
 | 外部 README 直达 | 根 README 和项目目录的演示入口直接打开敦煌完成案例 | 根 README、catalog、项目 README | 链接文本、URL 与本地/远端目标一致 | 3/9 | pass | 根 README、catalog、project.json 和项目 README 统一为 `?demo=dunhuang#case-study`；审计显式断言 |
 | 当前主题解释 | 用非技术语言讲清当前主题名称、内容、结构与风格 | 完成案例主题区，桌面/手机、light/dark | DOM 文本、布局与截图 | 3/7 | pass | 当前主题主卡显示标题、30 秒规格、视觉方向、核心表达和 3 段叙事 |
 | 可替换主题地图 | 展示不少于 8 类代表性主题，并说明替换项与固定生产骨架 | 完成案例主题区，桌面/平板/手机 | 数据契约、DOM 数量、截图、无溢出 | 3/7/9 | pass | 10 类主题、5 项重做内容和 6 项复用骨架进入数据与 DOM；桌面/平板/手机及媒体降级通过 |
-| Revision 17 远端交付 | 新增主题说明与入口修正通过回归并推送当前远端 | 站点、测试、Git main / origin | audit、browser、build、commit、push | 7–9 | continue | 实现后执行回归、范围检查、提交与推送 |
+| Revision 17 远端交付 | 新增主题说明与入口修正通过回归并推送当前远端 | 站点、测试、Git main / origin | audit、browser、build、commit、push | 7–9 | pass | 功能提交 `100cca7` 已推送至 `origin/main`；未纳入无关 submodule 状态 |
 
 ## Refinement ledger
 
@@ -136,4 +136,5 @@
 - Revision 16 baseline：canonical URL 已默认加载声音试听 V2，上一轮 9/9 browser surfaces 证明成片可播放并有音轨；但页面仍将其标为“可替换声音试听”，没有“案例已完成”入口，也没有把整个案例形成的能力归属、端到端生产链、首/尾帧经验、局限和复用价值集中呈现。Git 工作区还包含本案例全过程产物以及一个与本项目无关的 `projects/llm-wiki-study/upstream` 脏 submodule；远端为 `origin`，当前分支为 `main`。
 - Revision 16 final：网页已以最终 V2 为完成案例默认结果，并集中呈现 3 类能力归属、8 步生产链、5 项关键发现、适用边界、5 项扩展和 4 点价值；案例复盘、README、研究报告、准备指南、数据与 10 项交付索引一致。48/48 工程审计、10/10 browser surfaces、61/61 coverage、35 个发布文件和根仓库 10 项目校验全部通过；主案例提交 `f118f11` 已推送至 `origin/main`，且未包含无关的 `projects/llm-wiki-study/upstream` 本地改动。
 - Revision 17 baseline：项目 README 已有“打开完成案例”的专属链接，但根 README 与 `projects/catalog.json` 仍只指向项目首页，外部用户不能一步进入完成案例；网页已有“适合/不适合”和工程扩展优先级，却没有回答“当前主题是什么、可以换成哪些主题、换什么、什么保持不变”。受影响范围仅为外部入口、完成案例信息区、结构化数据、对应文档与回归证据；最终 V2、准备台、六镜头和声音链路保持既有通过状态。
+- Revision 17 final：根 README、catalog、project.json 与项目 README 的在线演示入口统一直达 `?demo=dunhuang#case-study`；完成案例新增当前敦煌主题、3 段叙事、10 类可替换主题、5 项重做内容和 6 项可复用生产骨架，并明确区分内容主题扩展与工程能力扩展。50/50 工程审计、10/10 browser surfaces、65/65 coverage、根仓库 10 项目校验和本地发布构建全部通过；功能提交 `100cca7` 已推送至 `origin/main`，未包含 `projects/llm-wiki-study/upstream` 的本地脏状态。
 - Evidence：`notes/evidence/browser-validation.json`、`notes/evidence/browser/*.png`、`notes/evidence/audit-results.json`。
