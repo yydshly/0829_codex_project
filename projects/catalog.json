@@ -52,6 +52,24 @@
       ],
       "created": "2026-08-29",
       "updated": "2026-08-29"
+    },
+    {
+      "id": "toonflow-capability-summary",
+      "title": "Toonflow 能力与复用边界总结",
+      "summary": "Toonflow 是与 AIComicBuilder 高度重合的 AI 短剧生产工作台；本项目保存其 Agent、Skill、模型 API 与复用边界，当前不重复部署，待连续短剧生产需求出现时重新评估。",
+      "status": "archived",
+      "path": "projects/toonflow-capability-summary",
+      "source_url": "https://github.com/HBAI-Ltd/Toonflow-app",
+      "demo_url": "",
+      "tags": [
+        "agent",
+        "ai-video",
+        "archived",
+        "novel-adaptation",
+        "workflow"
+      ],
+      "created": "2026-08-29",
+      "updated": "2026-08-29"
     }
   ]
 }

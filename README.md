@@ -19,6 +19,7 @@
 | [GitHubDaily 项目信息库说明](projects/githubdaily-capability-map/) | GitHubDaily 是一份人工整理的 GitHub 项目清单。它保存项目名称、链接、中文简介、分类和年度记录，但不保存项目源代码；本项目分析清单中是否有值得保留的优秀项目，以及它对研究选题的参考价值。 | 已完成 | [打开演示](https://yydshly.github.io/0829_codex_project/projects/githubdaily-capability-map/) | 2026-08-29 |
 | [GoFilm 来源机制简析](projects/gofilm-source-summary/) | 简要归档 GoFilm 的第三方影视采集 API、主附源聚合与部署机制；核心问题已在 Moovie 研究中覆盖，后续按需参考。 | 已归档 | — | 2026-08-29 |
 | [Rachel Digital Human Production 采用价值研究](projects/rachel-digital-human-production-study/) | 该 Skill 是否提供独立数字人能力；审计确认它只是 MiniMax 与 HeyGen 的固定流程封装，且与既有研究高度重复，因此归档。 | 已归档 | — | 2026-08-29 |
+| [Toonflow 能力与复用边界总结](projects/toonflow-capability-summary/) | Toonflow 是与 AIComicBuilder 高度重合的 AI 短剧生产工作台；本项目保存其 Agent、Skill、模型 API 与复用边界，当前不重复部署，待连续短剧生产需求出现时重新评估。 | 已归档 | — | 2026-08-29 |
 <!-- PROJECTS:END -->
 
 项目索引数据保存在 [`projects/catalog.json`](projects/catalog.json)，上表由脚本自动维护。
