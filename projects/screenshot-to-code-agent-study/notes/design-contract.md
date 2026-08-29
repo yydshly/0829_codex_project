@@ -45,7 +45,7 @@ Coverage record: 见下表
 | Web 展示 | 可访问性与动效 | 键盘 / reduced-motion | 焦点路径、媒体查询 | 7/8 | pass | 方向键、可见焦点与 reduced-motion 通过 |
 | 可复现交付 | 审计、构建、canonical URL | 本地与 Pages 路径 | JSON、命令输出 | 1/9 | pass | 本地 canonical URL、构建和校验通过 |
 | 整理并提交 | 最终采用结论一致 | README / 报告 / Demo / 索引 | 文本检索、浏览器截图、审计 | 0/3/7/9 | pass | 12 项审计、仓库校验、构建及四表面浏览器验收通过 |
-| 整理并提交 | 独立 Git 提交与远端同步 | origin/main | staged diff、commit、push 结果 | 9 | continue | 仅暂存本研究相关内容并推送 |
+| 整理并提交 | 独立 Git 提交与远端同步 | origin/main | staged diff、commit、push 结果 | 9 | pass | 主研究提交 `a9fd8cd` 已推送，其他工作区改动未暂存 |
 
 ## 最终验收记录
 
@@ -61,7 +61,7 @@ Root cause: 初版研究偏重技术可行性，低估了截图输入低频、�
 Minimal intervention: 不改变页面结构和视觉系统，只统一结论、采用评分与路线，并将测试断言更新为新的稳定语义。
 Adjacent regression surfaces: 桌面 dark 首屏、桌面 light Agent、平板 light 场景、手机 dark + reduced-motion 意义章节。
 Observed result: 12 项项目审计、9 项目仓库校验、Pages 构建和 4 个浏览器表面全部通过；新标题、采用结论和四步重新评估路径可见。
-Decision: continue（等待独立 Git 提交与 origin/main 推送证据）
-Next executable action: 仅暂存本研究相关文件，检查 staged diff 后提交并推送
+Decision: pass
+Next executable action: 无；本次范围关闭
 New authority required: 无
 ```
