@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-08-30",
+  "provider": "MiniMax",
+  "model": "speech-2.8-hd",
+  "voice_id": "Chinese (Mandarin)_Gentleman",
+  "configured_speed": 0.98,
+  "emotion": "calm",
+  "loudness_filter_target_lufs": -15,
+  "true_peak_target_dbtp": -1.5,
+  "duration_seconds": 30.0,
+  "shots": [
+    {
+      "id": "01",
+      "raw_duration_seconds": 6.768,
+      "fitted_duration_seconds": 6.0,
+      "tempo": 1.128,
+      "narration": "任务真正让人忙乱，不是因为多，而是散落在消息、文档和脑子里。"
+    },
+    {
+      "id": "02",
+      "raw_duration_seconds": 4.752,
+      "fitted_duration_seconds": 6.0,
+      "tempo": 1.0,
+      "narration": "Agent 的第一步不是回答，而是把任务收进同一个入口。"
+    },
+    {
+      "id": "03",
+      "raw_duration_seconds": 4.644,
+      "fitted_duration_seconds": 6.0,
+      "tempo": 1.0,
+      "narration": "接着识别依赖、优先级，找出真正卡住进度的阻塞点。"
+    },
+    {
+      "id": "04",
+      "raw_duration_seconds": 4.536,
+      "fitted_duration_seconds": 6.0,
+      "tempo": 1.0,
+      "narration": "然后把混乱重排成一条可以执行、可以检查的工作流。"
+    },
+    {
+      "id": "05",
+      "raw_duration_seconds": 5.868,
+      "fitted_duration_seconds": 6.0,
+      "tempo": 0.978,
+      "narration": "价值不在多说一句，而在下一步真的被推进，并留下可复查的结果。"
+    }
+  ]
+}

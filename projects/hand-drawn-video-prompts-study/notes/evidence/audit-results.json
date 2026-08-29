@@ -1,11 +1,13 @@
 {
-  "generated_at": "2026-08-29",
+  "generated_at": "2026-08-30",
   "target_background": "#F8F6EF",
   "summary": {
     "demo_contract_checks": 28,
     "demo_contract_failures": 0,
     "news_provenance_checks": 8,
     "news_provenance_failures": 0,
+    "i2v_checks": 11,
+    "i2v_failures": 0,
     "upstream_drift_observations": 4,
     "png_assets_inspected": 4,
     "video_assets_inspected": 2,
@@ -210,6 +212,63 @@
       "evidence": "H.264/AAC, 1080x1920, 20fps, approximately 41.02s"
     }
   ],
+  "i2v_checks": [
+    {
+      "id": "i2v-artifacts-present",
+      "pass": true,
+      "evidence": "external MP4, input frame and reusable prompt are project assets"
+    },
+    {
+      "id": "i2v-prompt-boundaries",
+      "pass": true,
+      "evidence": "single-shot duration, locked camera and negative boundaries are retained"
+    },
+    {
+      "id": "i2v-storyboard-contract",
+      "pass": true,
+      "evidence": "5 shots × 6 seconds with explicit FIRST/LAST assets and states"
+    },
+    {
+      "id": "i2v-storyboard-status-truth",
+      "pass": true,
+      "evidence": "5/5 paired-frame videos; one separate historical single-image experiment"
+    },
+    {
+      "id": "i2v-storyboard-keyframes",
+      "pass": true,
+      "evidence": "10/10 FIRST/LAST portrait frames exist and conform to 9:16"
+    },
+    {
+      "id": "i2v-storyboard-prompt-contract",
+      "pass": true,
+      "evidence": "5 motion prompts retain duration, camera lock and negative boundaries"
+    },
+    {
+      "id": "i2v-storyboard-demo-sync",
+      "pass": true,
+      "evidence": "canonical storyboard and browser asset are byte-identical"
+    },
+    {
+      "id": "i2v-storyboard-audio-timeline",
+      "pass": true,
+      "evidence": "30-second MiniMax Gentleman/calm/0.98 voiceover and five fixed SRT cues"
+    },
+    {
+      "id": "i2v-paired-video-media-contract",
+      "pass": true,
+      "evidence": "5/5 normalized shots are silent H.264/yuv420p, 1080x1920, 24fps and 6 seconds"
+    },
+    {
+      "id": "i2v-final-video-media-contract",
+      "pass": true,
+      "evidence": "30-second H.264/AAC final uses five paired videos, MiniMax voiceover and two-line burn-in subtitles"
+    },
+    {
+      "id": "i2v-video-media-contract",
+      "pass": true,
+      "evidence": "H.264/AAC, 496x864, 24fps, approximately 6.08s"
+    }
+  ],
   "documentation_drift": [
     {
       "id": "visual-group-count",
@@ -305,11 +364,14 @@
           "codec_type": "video",
           "width": 540,
           "height": 960,
+          "pix_fmt": "yuv420p",
           "r_frame_rate": "20/1"
         },
         {
           "codec_name": "aac",
           "codec_type": "audio",
+          "sample_rate": "44100",
+          "channels": 2,
           "r_frame_rate": "0/0"
         }
       ],
@@ -328,11 +390,14 @@
           "codec_type": "video",
           "width": 540,
           "height": 960,
+          "pix_fmt": "yuv420p",
           "r_frame_rate": "20/1"
         },
         {
           "codec_name": "aac",
           "codec_type": "audio",
+          "sample_rate": "44100",
+          "channels": 2,
           "r_frame_rate": "0/0"
         }
       ],
@@ -459,11 +524,14 @@
         "codec_type": "video",
         "width": 1080,
         "height": 1920,
+        "pix_fmt": "yuv420p",
         "r_frame_rate": "20/1"
       },
       {
         "codec_name": "aac",
         "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 1,
         "r_frame_rate": "0/0"
       }
     ],
@@ -471,5 +539,46 @@
       "duration": "41.020996",
       "size": "3940412"
     }
+  },
+  "i2v_video": {
+    "file": "i2v-agent-workflow.mp4",
+    "status": "inspected",
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 496,
+        "height": 864,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "32000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "6.080000",
+      "size": "2156296"
+    }
+  },
+  "i2v_input_frame": {
+    "file": "i2v-agent-workflow-complete-frame.png",
+    "width": 941,
+    "height": 1672,
+    "aspect_ratio": 0.562799,
+    "aspect_error_percent_vs_9_16": 0.0532,
+    "top_band_sample_count": 560,
+    "top_band_mean_rgb": [
+      247.96,
+      243.08,
+      226.44
+    ],
+    "exact_f8f6ef_fraction": 0.0,
+    "mean_rgb_distance_from_f8f6ef": 19.16
   }
 }

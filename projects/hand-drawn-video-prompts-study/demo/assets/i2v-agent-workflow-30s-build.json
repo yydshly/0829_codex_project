@@ -1,0 +1,68 @@
+{
+  "built_at": "2026-08-30T03:06:31.1245964+08:00",
+  "delivery": "five paired-frame I2V shots assembled with deterministic local post-production",
+  "video_model_used_for_shots": true,
+  "external_platform_model": "unknown / supplied files",
+  "local_post_production": "FFmpeg trim, normalize, concatenate, MiniMax voiceover, hard subtitles",
+  "historical_single_image_video_excluded": true,
+  "shot_count": 5,
+  "shot_duration_seconds": 6,
+  "duration_seconds": 30.0,
+  "dimensions": "1080x1920",
+  "frame_rate": "24fps",
+  "video_codec": "H.264 / yuv420p",
+  "audio": "MiniMax voiceover / AAC mono 48kHz",
+  "audio_model": "speech-2.8-hd",
+  "audio_voice_id": "Chinese (Mandarin)_Gentleman",
+  "audio_speed": 0.98,
+  "audio_emotion": "calm",
+  "subtitles": "five-cue SRT delivery file; two-line ASS burned into final video",
+  "source_audio_policy": "archived with source files; excluded from normalized shots and final mix",
+  "sources": [
+    {
+      "shot": "01",
+      "archived_source": "media/i2v-agent-workflow-paired-sources/i2v-agent-workflow-shot-01.mp4",
+      "source_sha256": "1c519bc716132e04e11cf42a4e3f8dd1475df7c7d37e9b5796b7090c8502d8b8",
+      "source_duration_seconds": 6.583,
+      "source_dimensions": "768x1344",
+      "normalized_asset": "assets/i2v-agent-workflow-shot-01.mp4",
+      "normalized_duration_seconds": 6.0
+    },
+    {
+      "shot": "02",
+      "archived_source": "media/i2v-agent-workflow-paired-sources/i2v-agent-workflow-shot-02.mp4",
+      "source_sha256": "ca7ff2e7c6987b3138ee79a31d45347ce95d0f193bdb3a4fad6645118c0e464e",
+      "source_duration_seconds": 6.583,
+      "source_dimensions": "768x1344",
+      "normalized_asset": "assets/i2v-agent-workflow-shot-02.mp4",
+      "normalized_duration_seconds": 6.0
+    },
+    {
+      "shot": "03",
+      "archived_source": "media/i2v-agent-workflow-paired-sources/i2v-agent-workflow-shot-03.mp4",
+      "source_sha256": "c595f91ae4c248080b6b9ef8ce1a81be44ff761f8d27d0986baf80cca844b10f",
+      "source_duration_seconds": 6.583,
+      "source_dimensions": "768x1344",
+      "normalized_asset": "assets/i2v-agent-workflow-shot-03.mp4",
+      "normalized_duration_seconds": 6.0
+    },
+    {
+      "shot": "04",
+      "archived_source": "media/i2v-agent-workflow-paired-sources/i2v-agent-workflow-shot-04.mp4",
+      "source_sha256": "db88c80ce2035e2e4aec07e9c2b9532488f99dd8df489a715354a195cc4add9d",
+      "source_duration_seconds": 6.583,
+      "source_dimensions": "768x1344",
+      "normalized_asset": "assets/i2v-agent-workflow-shot-04.mp4",
+      "normalized_duration_seconds": 6.0
+    },
+    {
+      "shot": "05",
+      "archived_source": "media/i2v-agent-workflow-paired-sources/i2v-agent-workflow-shot-05.mp4",
+      "source_sha256": "abd41c16ffeedaa437a2ef9515065507ae93f93d1616dbda0d91a11014cfb584",
+      "source_duration_seconds": 6.583,
+      "source_dimensions": "768x1344",
+      "normalized_asset": "assets/i2v-agent-workflow-shot-05.mp4",
+      "normalized_duration_seconds": 6.0
+    }
+  ]
+}

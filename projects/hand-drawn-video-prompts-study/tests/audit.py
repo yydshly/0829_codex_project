@@ -31,6 +31,37 @@ GENERATED_FRAMES = [
 FINAL_VIDEO = PROJECT / "demo" / "assets" / "news-case-final.mp4"
 FINAL_SUBTITLES = PROJECT / "media" / "news-case.srt"
 FINAL_VOICEOVER = PROJECT / "media" / "news-case-voiceover.m4a"
+I2V_VIDEO = PROJECT / "demo" / "assets" / "i2v-agent-workflow.mp4"
+I2V_INPUT_FRAME = (
+    PROJECT / "demo" / "assets" / "i2v-agent-workflow-complete-frame.png"
+)
+I2V_PROMPT = PROJECT / "demo" / "assets" / "i2v-agent-workflow-prompt.txt"
+I2V_STORYBOARD = PROJECT / "data" / "i2v-agent-workflow-storyboard.json"
+I2V_STORYBOARD_DEMO = (
+    PROJECT / "demo" / "assets" / "i2v-agent-workflow-storyboard.json"
+)
+I2V_PROMPT_PACK = (
+    PROJECT / "demo" / "assets" / "i2v-agent-workflow-30s-prompts.txt"
+)
+I2V_VOICEOVER = PROJECT / "media" / "i2v-agent-workflow-voiceover.m4a"
+I2V_SUBTITLES = PROJECT / "media" / "i2v-agent-workflow.srt"
+I2V_AUDIO_METADATA = (
+    PROJECT / "demo" / "assets" / "i2v-agent-workflow-audio-build.json"
+)
+I2V_BURN_SUBTITLES = PROJECT / "media" / "i2v-agent-workflow.ass"
+I2V_PAIRED_VIDEOS = [
+    PROJECT / "demo" / "assets" / f"i2v-agent-workflow-shot-{shot_id}.mp4"
+    for shot_id in ("01", "02", "03", "04", "05")
+]
+I2V_FINAL_VIDEO = PROJECT / "demo" / "assets" / "i2v-agent-workflow-30s-final.mp4"
+I2V_FINAL_METADATA = (
+    PROJECT / "demo" / "assets" / "i2v-agent-workflow-30s-build.json"
+)
+I2V_STORY_FRAMES = [
+    PROJECT / "demo" / "assets" / f"i2v-agent-workflow-shot-{shot_id}-{kind}.png"
+    for shot_id in ("01", "02", "03", "04", "05")
+    for kind in ("first", "last")
+]
 
 
 def run(*args: str) -> str:
@@ -288,7 +319,7 @@ def inspect_video(path: Path) -> dict[str, object]:
             "-v",
             "error",
             "-show_entries",
-            "format=duration,size:stream=codec_type,codec_name,width,height,r_frame_rate",
+            "format=duration,size:stream=codec_type,codec_name,pix_fmt,width,height,r_frame_rate,sample_rate,channels",
             "-of",
             "json",
             str(path),
@@ -297,6 +328,218 @@ def inspect_video(path: Path) -> dict[str, object]:
     )
     data = json.loads(output)
     return {"file": path.name, "status": "inspected", **data}
+
+
+def audit_i2v() -> list[dict[str, object]]:
+    prompt = I2V_PROMPT.read_text(encoding="utf-8") if I2V_PROMPT.is_file() else ""
+    storyboard = (
+        json.loads(I2V_STORYBOARD.read_text(encoding="utf-8"))
+        if I2V_STORYBOARD.is_file()
+        else {}
+    )
+    shots = storyboard.get("shots", []) if isinstance(storyboard, dict) else []
+    voiceover = inspect_video(I2V_VOICEOVER) if I2V_VOICEOVER.is_file() else {}
+    voiceover_format = voiceover.get("format", {})
+    voiceover_duration = (
+        float(voiceover_format.get("duration", 0))
+        if isinstance(voiceover_format, dict)
+        else 0
+    )
+    audio_metadata = (
+        json.loads(I2V_AUDIO_METADATA.read_text(encoding="utf-8"))
+        if I2V_AUDIO_METADATA.is_file()
+        else {}
+    )
+    paired_video_results = [
+        inspect_video(path) for path in I2V_PAIRED_VIDEOS if path.is_file()
+    ]
+    paired_media_ok = len(paired_video_results) == 5
+    for result in paired_video_results:
+        streams = result.get("streams", [])
+        video = next(
+            (
+                stream
+                for stream in streams
+                if isinstance(stream, dict) and stream.get("codec_type") == "video"
+            ),
+            {},
+        )
+        audio = next(
+            (
+                stream
+                for stream in streams
+                if isinstance(stream, dict) and stream.get("codec_type") == "audio"
+            ),
+            None,
+        )
+        media_format = result.get("format", {})
+        duration = (
+            float(media_format.get("duration", 0))
+            if isinstance(media_format, dict)
+            else 0
+        )
+        paired_media_ok = paired_media_ok and (
+            video.get("codec_name") == "h264"
+            and video.get("pix_fmt") == "yuv420p"
+            and video.get("width") == 1080
+            and video.get("height") == 1920
+            and video.get("r_frame_rate") == "24/1"
+            and 5.95 <= duration <= 6.05
+            and audio is None
+        )
+    final_result = inspect_video(I2V_FINAL_VIDEO) if I2V_FINAL_VIDEO.is_file() else {}
+    final_streams = final_result.get("streams", [])
+    final_video_stream = next(
+        (
+            stream
+            for stream in final_streams
+            if isinstance(stream, dict) and stream.get("codec_type") == "video"
+        ),
+        {},
+    )
+    final_audio_stream = next(
+        (
+            stream
+            for stream in final_streams
+            if isinstance(stream, dict) and stream.get("codec_type") == "audio"
+        ),
+        {},
+    )
+    final_format = final_result.get("format", {})
+    i2v_final_duration = (
+        float(final_format.get("duration", 0))
+        if isinstance(final_format, dict)
+        else 0
+    )
+    prompt_contract_ok = isinstance(shots, list) and all(
+        isinstance(shot, dict)
+        and all(
+            fragment in str(shot.get("video_prompt", "")).lower()
+            for fragment in (
+                "use the supplied first frame as the exact start",
+                "supplied last frame as the exact end",
+                "6-second vertical 9:16",
+                "locked flat frontal camera",
+                "settle precisely into the last frame",
+                "interpolate only",
+                "no camera drift",
+                "no audio",
+            )
+        )
+        for shot in shots
+    )
+    return [
+        {
+            "id": "i2v-artifacts-present",
+            "pass": I2V_VIDEO.is_file()
+            and I2V_INPUT_FRAME.is_file()
+            and I2V_PROMPT.is_file(),
+            "evidence": "external MP4, input frame and reusable prompt are project assets",
+        },
+        {
+            "id": "i2v-prompt-boundaries",
+            "pass": all(
+                fragment in prompt.lower()
+                for fragment in (
+                    "6-second vertical 9:16",
+                    "locked flat frontal camera",
+                    "no camera drift",
+                    "no audio",
+                )
+            ),
+            "evidence": "single-shot duration, locked camera and negative boundaries are retained",
+        },
+        {
+            "id": "i2v-storyboard-contract",
+            "pass": isinstance(shots, list)
+            and len(shots) == 5
+            and storyboard.get("total_duration_seconds") == 30
+            and all(
+                isinstance(shot, dict)
+                and shot.get("duration_seconds") == 6
+                and shot.get("frame_mode") == "first_last"
+                and str(shot.get("first_frame_asset", "")).endswith("-first.png")
+                and str(shot.get("last_frame_asset", "")).endswith("-last.png")
+                and str(shot.get("start_state", "")).strip()
+                and str(shot.get("end_state", "")).strip()
+                for shot in shots
+            ),
+            "evidence": "5 shots × 6 seconds with explicit FIRST/LAST assets and states",
+        },
+        {
+            "id": "i2v-storyboard-status-truth",
+            "pass": isinstance(shots, list)
+            and all(
+                isinstance(shot, dict)
+                and shot.get("status") == "paired_video_ready"
+                and str(shot.get("video_asset", "")).endswith(f"shot-{shot.get('id')}.mp4")
+                for shot in shots
+            )
+            and sum(
+                isinstance(shot, dict)
+                and bool(shot.get("historical_single_image_video_asset"))
+                for shot in shots
+            )
+            == 1
+            and isinstance(storyboard.get("status"), dict)
+            and storyboard["status"].get("paired_videos_ready") == 5
+            and storyboard["status"].get("paired_videos_pending") == 0,
+            "evidence": "5/5 paired-frame videos; one separate historical single-image experiment",
+        },
+        {
+            "id": "i2v-storyboard-keyframes",
+            "pass": all(path.is_file() for path in I2V_STORY_FRAMES)
+            and all(
+                inspect_png(path)["aspect_error_percent_vs_9_16"] < 0.2
+                for path in I2V_STORY_FRAMES
+            ),
+            "evidence": "10/10 FIRST/LAST portrait frames exist and conform to 9:16",
+        },
+        {
+            "id": "i2v-storyboard-prompt-contract",
+            "pass": prompt_contract_ok and I2V_PROMPT_PACK.is_file(),
+            "evidence": "5 motion prompts retain duration, camera lock and negative boundaries",
+        },
+        {
+            "id": "i2v-storyboard-demo-sync",
+            "pass": I2V_STORYBOARD.is_file()
+            and I2V_STORYBOARD_DEMO.is_file()
+            and I2V_STORYBOARD.read_bytes() == I2V_STORYBOARD_DEMO.read_bytes(),
+            "evidence": "canonical storyboard and browser asset are byte-identical",
+        },
+        {
+            "id": "i2v-storyboard-audio-timeline",
+            "pass": I2V_VOICEOVER.is_file()
+            and 29.95 <= voiceover_duration <= 30.05
+            and I2V_SUBTITLES.is_file()
+            and I2V_SUBTITLES.read_text(encoding="utf-8").count(" --> ") == 5
+            and audio_metadata.get("voice_id") == "Chinese (Mandarin)_Gentleman"
+            and audio_metadata.get("configured_speed") == 0.98
+            and audio_metadata.get("emotion") == "calm",
+            "evidence": "30-second MiniMax Gentleman/calm/0.98 voiceover and five fixed SRT cues",
+        },
+        {
+            "id": "i2v-paired-video-media-contract",
+            "pass": paired_media_ok,
+            "evidence": "5/5 normalized shots are silent H.264/yuv420p, 1080x1920, 24fps and 6 seconds",
+        },
+        {
+            "id": "i2v-final-video-media-contract",
+            "pass": I2V_FINAL_VIDEO.is_file()
+            and I2V_FINAL_METADATA.is_file()
+            and I2V_BURN_SUBTITLES.is_file()
+            and final_video_stream.get("codec_name") == "h264"
+            and final_video_stream.get("pix_fmt") == "yuv420p"
+            and final_video_stream.get("width") == 1080
+            and final_video_stream.get("height") == 1920
+            and final_video_stream.get("r_frame_rate") == "24/1"
+            and final_audio_stream.get("codec_name") == "aac"
+            and final_audio_stream.get("sample_rate") == "48000"
+            and final_audio_stream.get("channels") == 1
+            and 29.95 <= i2v_final_duration <= 30.05,
+            "evidence": "30-second H.264/AAC final uses five paired videos, MiniMax voiceover and two-line burn-in subtitles",
+        },
+    ]
 
 
 def main() -> None:
@@ -322,6 +565,7 @@ def main() -> None:
 
     demo_checks = audit_demo(case)
     news_checks = audit_news(case)
+    i2v_checks = audit_i2v()
     files = [path for path in UPSTREAM.rglob("*") if path.is_file() and ".git" not in path.parts]
     suffixes = Counter(path.suffix or "[none]" for path in files)
     code_suffixes = {".py", ".js", ".ts", ".tsx", ".sh", ".ps1", ".go", ".rs"}
@@ -365,6 +609,8 @@ def main() -> None:
     ]
     generated_frame_results = [inspect_png(path) for path in GENERATED_FRAMES]
     final_video_result = inspect_video(FINAL_VIDEO)
+    i2v_video_result = inspect_video(I2V_VIDEO)
+    i2v_input_frame_result = inspect_png(I2V_INPUT_FRAME)
     final_streams = final_video_result.get("streams", [])
     video_stream = next(
         (
@@ -396,16 +642,52 @@ def main() -> None:
             "evidence": "H.264/AAC, 1080x1920, 20fps, approximately 41.02s",
         }
     )
+    i2v_streams = i2v_video_result.get("streams", [])
+    i2v_video_stream = next(
+        (
+            stream
+            for stream in i2v_streams
+            if isinstance(stream, dict) and stream.get("codec_type") == "video"
+        ),
+        {},
+    )
+    i2v_audio_stream = next(
+        (
+            stream
+            for stream in i2v_streams
+            if isinstance(stream, dict) and stream.get("codec_type") == "audio"
+        ),
+        {},
+    )
+    i2v_format = i2v_video_result.get("format", {})
+    i2v_duration = (
+        float(i2v_format.get("duration", 0)) if isinstance(i2v_format, dict) else 0
+    )
+    i2v_checks.append(
+        {
+            "id": "i2v-video-media-contract",
+            "pass": i2v_video_stream.get("codec_name") == "h264"
+            and i2v_video_stream.get("width") == 496
+            and i2v_video_stream.get("height") == 864
+            and i2v_video_stream.get("r_frame_rate") == "24/1"
+            and i2v_audio_stream.get("codec_name") == "aac"
+            and 5.9 <= i2v_duration <= 6.3,
+            "evidence": "H.264/AAC, 496x864, 24fps, approximately 6.08s",
+        }
+    )
     failed = [check for check in demo_checks if not check["pass"]]
     failed_news = [check for check in news_checks if not check["pass"]]
+    failed_i2v = [check for check in i2v_checks if not check["pass"]]
     report = {
-        "generated_at": "2026-08-29",
+        "generated_at": "2026-08-30",
         "target_background": "#F8F6EF",
         "summary": {
             "demo_contract_checks": len(demo_checks),
             "demo_contract_failures": len(failed),
             "news_provenance_checks": len(news_checks),
             "news_provenance_failures": len(failed_news),
+            "i2v_checks": len(i2v_checks),
+            "i2v_failures": len(failed_i2v),
             "upstream_drift_observations": sum(item["observed"] for item in drift),
             "png_assets_inspected": len(png_results),
             "video_assets_inspected": len(video_results),
@@ -415,11 +697,14 @@ def main() -> None:
         "repository": repo_facts,
         "demo_checks": demo_checks,
         "news_checks": news_checks,
+        "i2v_checks": i2v_checks,
         "documentation_drift": drift,
         "png_assets": png_results,
         "video_assets": video_results,
         "generated_frames": generated_frame_results,
         "final_video": final_video_result,
+        "i2v_video": i2v_video_result,
+        "i2v_input_frame": i2v_input_frame_result,
     }
     EVIDENCE_PATH.parent.mkdir(parents=True, exist_ok=True)
     EVIDENCE_PATH.write_text(
@@ -427,7 +712,7 @@ def main() -> None:
     )
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
     print(f"evidence: {EVIDENCE_PATH.relative_to(PROJECT)}")
-    if failed or failed_news:
+    if failed or failed_news or failed_i2v:
         raise SystemExit(1)
 
 

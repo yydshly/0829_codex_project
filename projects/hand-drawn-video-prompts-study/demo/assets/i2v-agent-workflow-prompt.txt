@@ -1,0 +1,12 @@
+AI Agent 整理任务｜单图图生视频 Prompt
+
+推荐设置：9:16，6 秒，低到中运动强度，Static / Locked camera，关闭自动字幕。
+
+Create a 6-second vertical 9:16 tactile paper stop-motion micro-animation from the supplied completed illustration. Keep a locked flat frontal camera and preserve the exact composition, Q-version creator, cobalt-blue assistant machine, warm-white paper texture, thick imperfect black crayon linework, and sunflower-yellow, tomato-red, sage-green palette.
+
+The scattered blank task cards make small staggered paper-cutout hops along the existing arrows. Two cards feed one at a time into the blue machine; its side roller turns, its antenna blinks twice, and the machine makes one restrained paper bounce. The yellow checklist ribbon unrolls slightly. The three yellow step cards settle from bottom to top. The tomato-red bottleneck marker pulses once and slides slightly aside. The creator blinks once and gently tilts her head. Finish by settling all paper pieces and holding the composition.
+
+Use rigid flat paper cutouts and charming low-frame-rate handmade motion. No camera drift, zoom, orbit, parallax, scene change, lip sync, face morphing, body deformation, extra limbs, new characters, new objects, object replacement, readable text, letters, digits, logos, watermark, photorealism, 3D, or glossy lighting. No audio.
+
+Negative prompt:
+camera movement, camera drift, zoom, dolly, pan, orbit, parallax, scene transition, background change, face morphing, identity change, body deformation, extra fingers, extra limbs, new character, new object, object replacement, liquid motion, melting, realistic physics, photorealism, 3D render, glossy lighting, gradient background, colored background, readable text, letters, digits, logo, watermark, subtitles, audio

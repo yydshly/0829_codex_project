@@ -1,0 +1,57 @@
+AI AGENT 整理任务｜30 秒首尾帧图生视频生产包
+画幅：9:16 竖屏
+结构：5 镜头 × 6 秒
+当前状态：5/5 首帧就绪，5/5 尾帧就绪，5/5 新首尾帧视频完成，0/5 待生成
+历史边界：既有 i2v-agent-workflow.mp4 是镜头 04 的单图实验，不是新首尾帧合同的结果。
+
+统一使用方式
+1. 选择“首尾帧/起止帧图生视频”，不要选择单图首帧或全能文生视频。
+2. FIRST 上传为首帧，LAST 上传为尾帧；不要颠倒。
+3. 每条时长设为 6 秒，竖屏 9:16，关闭自动配乐、自动字幕、智能扩写和预设运镜。
+4. 创意度使用低到中，提示词遵循与主体保持使用高；只粘贴对应镜头 Prompt。
+5. 输出依次命名为 i2v-agent-workflow-shot-01.mp4 至 shot-05.mp4。
+
+SHOT 01｜任务洪水
+FIRST：i2v-agent-workflow-shot-01-first.png
+LAST：i2v-agent-workflow-shot-01-last.png
+首帧状态：同一人物与蓝色时间锚点固定；画面只有右上方一张空白任务卡，没有红色路径。
+尾帧状态：同一人物保持原位；七张空白任务卡环绕人物，红色混乱路径完整出现。
+旁白：任务真正让人忙乱，不是因为多，而是散落在消息、文档和脑子里。
+PROMPT:
+Use the supplied FIRST frame as the exact start and the supplied LAST frame as the exact end. Create a 6-second vertical 9:16 tactile low-frame-rate paper stop-motion transition with a locked flat frontal camera. Preserve the creator, face, pose, scale, blue circular time anchor, warm-white paper, crayon linework, and palette exactly. 0.0–0.8s: hold the FIRST frame. 0.8–4.5s: six additional rigid blank paper cards enter one by one from the outer edges and make staggered handmade hops around the fixed creator; draw the tomato-red paths in short crayon increments behind the cards. 4.5–5.4s: the seven cards complete one restrained clockwise tightening motion while the blue circle pulses once. 5.4–6.0s: settle precisely into the LAST frame. Interpolate only the incoming cards and red paths; do not invent any change that is absent from the two supplied frames. No camera drift, pan, tilt, zoom, parallax, depth rotation, face morphing, body deformation, card fusion, readable text, letters, digits, logos, watermark, photorealism, or 3D. No audio.
+
+SHOT 02｜统一收集
+FIRST：i2v-agent-workflow-shot-02-first.png
+LAST：i2v-agent-workflow-shot-02-last.png
+首帧状态：人物、漏斗、机器和黄色托盘固定；多组空白任务卡悬浮在漏斗上方，人物手中仍有一张卡。
+尾帧状态：漏斗上方清空，人物双手为空；五张空白任务卡整齐叠放在黄色托盘中。
+旁白：Agent 的第一步不是回答，而是把任务收进同一个入口。
+PROMPT:
+Use the supplied FIRST frame as the exact start and the supplied LAST frame as the exact end. Create a 6-second vertical 9:16 tactile low-frame-rate paper stop-motion transition with a locked flat frontal camera. Preserve the creator, funnel, assistant machine, faces, scale, yellow tray, warm-white paper, crayon linework, and palette exactly. 0.0–0.7s: hold the FIRST frame. 0.7–4.2s: the blank cards hop into the cobalt-blue funnel in three staggered groups; the card in the creator’s hands leaves her hands and joins the final group; keep every card rigid and separate. 4.2–5.4s: the cards emerge only as the neat five-card blank stack building inside the existing yellow tray from bottom to top; the machine antenna blinks once. 5.4–6.0s: settle precisely into the LAST frame with empty space above the funnel and the creator’s hands empty. Interpolate only card travel, the creator’s small hand release, and the antenna blink; do not add checklist output or any state absent from the frames. No camera drift, pan, tilt, zoom, parallax, depth rotation, object fusion, face morphing, body deformation, readable text, letters, digits, logos, watermark, photorealism, or 3D. No audio.
+
+SHOT 03｜识别阻塞
+FIRST：i2v-agent-workflow-shot-03-first.png
+LAST：i2v-agent-workflow-shot-03-last.png
+首帧状态：放大镜对准最左侧任务卡，红色 X 在依赖链右侧但尚未被聚焦，黄色绕行箭头不存在。
+尾帧状态：放大镜移动并对准红色 X，黄色绕行箭头完整出现。
+旁白：接着识别依赖、优先级，找出真正卡住进度的阻塞点。
+PROMPT:
+Use the supplied FIRST frame as the exact start and the supplied LAST frame as the exact end. Create a 6-second vertical 9:16 tactile low-frame-rate paper stop-motion transition with a locked flat frontal camera. Preserve the creator, pointing pose, assistant machine, dependency cards, connector line, faces, scale, warm-white paper, crayon linework, and palette exactly. 0.0–0.8s: hold the FIRST frame with the magnifying lens surrounding the leftmost card. 0.8–3.2s: move the rigid blue magnifying lens and attached arm rightward in two small paper-cutout steps until it surrounds the tomato-red X. 3.2–4.4s: pulse the red X twice without changing its symbol or position; blink the machine antenna once. 4.4–5.4s: draw the sunflower-yellow bypass arrow in three handmade increments exactly where it appears in the LAST frame. 5.4–6.0s: settle precisely into the LAST frame. Interpolate only lens position, rigid arm joints, marker pulse, antenna blink, and the appearing yellow arrow. No camera drift, pan, tilt, zoom, parallax, depth rotation, card morphing, face morphing, body deformation, readable text, letters, digits, logos, watermark, photorealism, or 3D. No audio.
+
+SHOT 04｜编排流程
+FIRST：i2v-agent-workflow-shot-04-first.png
+LAST：i2v-agent-workflow-shot-04-last.png
+首帧状态：人物与机器固定；左侧六张任务卡仍然散乱，右侧红色 X 表示阻塞，机器只露出短黄色输出片。
+尾帧状态：左侧任务卡全部进入机器；黄色清单与三步工作流完全展开，红色 X 翻转为绿色通过标记。
+旁白：然后把混乱重排成一条可以执行、可以检查的工作流。
+PROMPT:
+Use the supplied FIRST frame as the exact start and the supplied LAST frame as the exact end. Create a 6-second vertical 9:16 tactile low-frame-rate paper stop-motion transition with a locked flat frontal camera. Preserve the creator, thoughtful pose, assistant machine, faces, scale, warm-white paper, crayon linework, and palette exactly. 0.0–0.6s: hold the FIRST frame. 0.6–2.7s: feed the six rigid blank cards into the machine one by one along their existing curved paths; the cards disappear only through the left input slot. 2.7–4.4s: unroll the sunflower-yellow checklist from the right output and reveal the three yellow workflow step cards from bottom to top with their fixed upward arrows. 4.4–5.3s: flip the rigid tomato-red X paper token once around its vertical axis, revealing the sage-green check token shown in the LAST frame; do not liquid-morph the symbol. 5.3–6.0s: settle precisely into the LAST frame with a clean left side and complete yellow workflow. Interpolate only card travel, checklist extension, workflow-step appearance, antenna blink, and the rigid token flip. No camera drift, pan, tilt, zoom, parallax, depth rotation, face morphing, body deformation, new characters, readable text, letters, digits, logos, watermark, photorealism, or 3D. No audio.
+
+SHOT 05｜执行闭环
+FIRST：i2v-agent-workflow-shot-05-first.png
+LAST：i2v-agent-workflow-shot-05-last.png
+首帧状态：人物握住抬起的蓝色拉杆；机器只露出短黄色输出片，绿色结果托盘为空。
+尾帧状态：拉杆已触发；黄色流程带向上展开，五张勾选卡沿流程移动，其中一张进入绿色结果托盘。
+旁白：价值不在多说一句，而在下一步真的被推进，并留下可复查的结果。
+PROMPT:
+Use the supplied FIRST frame as the exact start and the supplied LAST frame as the exact end. Create a 6-second vertical 9:16 tactile low-frame-rate paper stop-motion transition with a locked flat frontal camera. Preserve the creator, assistant machine, faces, scale, green tray, warm-white paper, crayon linework, and palette exactly. 0.0–0.8s: hold the FIRST frame with the lever raised, short yellow tab visible, and result tray empty. 0.8–1.8s: the creator pulls the rigid cobalt-blue lever down once; blink the machine antenna at the end of the pull. 1.8–4.6s: extend the sunflower-yellow workflow ribbon upward in four short paper steps and reveal the checked cards on the ribbon one by one, preserving each bold check symbol. 4.6–5.4s: drop the lowest checked card cleanly into the existing sage-green tray with one tiny rigid-paper bounce. 5.4–6.0s: settle precisely into the LAST frame. Interpolate only the lever rotation, small hand movement, antenna blink, ribbon extension, checked-card travel, and tray landing. No camera drift, pan, tilt, zoom, parallax, depth rotation, ribbon liquid morphing, extra cards, face morphing, body deformation, readable text, letters, digits, logos, watermark, photorealism, or 3D. No audio.

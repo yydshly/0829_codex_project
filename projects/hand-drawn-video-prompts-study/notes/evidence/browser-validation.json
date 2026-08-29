@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T11:53:25.466Z",
+  "generatedAt": "2026-08-29T19:56:04.580Z",
   "canonicalUrl": "http://127.0.0.1:8000/projects/hand-drawn-video-prompts-study/",
   "playwrightVersion": "1.62.1",
   "checks": [
@@ -13,7 +13,7 @@
       "reducedMotion": "no-preference",
       "theme": "light",
       "horizontalOverflow": false,
-      "imagesLoaded": 5,
+      "imagesLoaded": 16,
       "consoleErrors": [],
       "pageErrors": [],
       "failedRequests": [],
@@ -30,7 +30,7 @@
       "reducedMotion": "no-preference",
       "theme": "dark",
       "horizontalOverflow": false,
-      "imagesLoaded": 5,
+      "imagesLoaded": 16,
       "consoleErrors": [],
       "pageErrors": [],
       "failedRequests": [],
@@ -47,12 +47,97 @@
       "reducedMotion": "no-preference",
       "theme": "light",
       "horizontalOverflow": false,
-      "imagesLoaded": 5,
+      "imagesLoaded": 16,
       "consoleErrors": [],
       "pageErrors": [],
       "failedRequests": [],
       "interactionJourney": "not repeated",
       "screenshot": "browser/desktop-light-final-film.png"
+    },
+    {
+      "name": "desktop-light-i2v",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "theme": "light",
+      "horizontalOverflow": false,
+      "imagesLoaded": 16,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interactionJourney": "not repeated",
+      "screenshot": "browser/desktop-light-i2v.png"
+    },
+    {
+      "name": "desktop-light-i2v-board",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "theme": "light",
+      "horizontalOverflow": false,
+      "imagesLoaded": 16,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interactionJourney": "not repeated",
+      "screenshot": "browser/desktop-light-i2v-board.png"
+    },
+    {
+      "name": "desktop-light-project-summary",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "colorScheme": "light",
+      "reducedMotion": "no-preference",
+      "theme": "light",
+      "horizontalOverflow": false,
+      "imagesLoaded": 16,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interactionJourney": "not repeated",
+      "screenshot": "browser/desktop-light-project-summary.png"
+    },
+    {
+      "name": "mobile-dark-i2v-board",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "colorScheme": "dark",
+      "reducedMotion": "no-preference",
+      "theme": "dark",
+      "horizontalOverflow": false,
+      "imagesLoaded": 16,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interactionJourney": "not repeated",
+      "screenshot": "browser/mobile-dark-i2v-board.png"
+    },
+    {
+      "name": "mobile-dark-project-summary",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "colorScheme": "dark",
+      "reducedMotion": "no-preference",
+      "theme": "dark",
+      "horizontalOverflow": false,
+      "imagesLoaded": 16,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "interactionJourney": "not repeated",
+      "screenshot": "browser/mobile-dark-project-summary.png"
     },
     {
       "name": "desktop-light-news-proof",
@@ -64,7 +149,7 @@
       "reducedMotion": "no-preference",
       "theme": "light",
       "horizontalOverflow": false,
-      "imagesLoaded": 5,
+      "imagesLoaded": 16,
       "consoleErrors": [],
       "pageErrors": [],
       "failedRequests": [],
@@ -81,7 +166,7 @@
       "reducedMotion": "no-preference",
       "theme": "light",
       "horizontalOverflow": false,
-      "imagesLoaded": 5,
+      "imagesLoaded": 16,
       "consoleErrors": [],
       "pageErrors": [],
       "failedRequests": [],
@@ -98,7 +183,7 @@
       "reducedMotion": "reduce",
       "theme": "dark",
       "horizontalOverflow": false,
-      "imagesLoaded": 5,
+      "imagesLoaded": 16,
       "consoleErrors": [],
       "pageErrors": [],
       "failedRequests": [],
@@ -113,11 +198,11 @@
     {
       "name": "media-error-fallback",
       "status": "pass",
-      "recovery": "direct MP4/SRT links and method boundary remain available"
+      "recovery": "direct MP4/SRT/prompt links, input frame and method boundary remain available"
     }
   ],
   "summary": {
-    "pass": 8,
+    "pass": 13,
     "fail": 0
   }
 }

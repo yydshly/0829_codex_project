@@ -1,0 +1,18 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,Microsoft YaHei,44,&H00FFFFFF,&H00FFFFFF,&H00181914,&H70000000,-1,0,0,0,100,100,0,0,1,3,0,2,72,72,92,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:06.00,Caption,,0,0,0,,任务真正让人忙乱，不是因为多，\N而是散落在消息、文档和脑子里。
+Dialogue: 0,0:00:06.00,0:00:12.00,Caption,,0,0,0,,Agent 的第一步不是回答，\N而是把任务收进同一个入口。
+Dialogue: 0,0:00:12.00,0:00:18.00,Caption,,0,0,0,,接着识别依赖、优先级，\N找出真正卡住进度的阻塞点。
+Dialogue: 0,0:00:18.00,0:00:24.00,Caption,,0,0,0,,然后把混乱重排成一条\N可以执行、可以检查的工作流。
+Dialogue: 0,0:00:24.00,0:00:30.00,Caption,,0,0,0,,价值不在多说一句，而在下一步真的被推进，\N并留下可复查的结果。

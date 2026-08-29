@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="用最新地月激光通信热点，实战演示 Hand-Drawn Video Prompts 如何把新闻编译成手绘短视频生产包。"
+      content="研究 Hand-Drawn Video Prompts 如何把文案编译成手绘视频生产合同，并用新闻代码运动、单图 I2V 与五镜头首尾帧 I2V 三条路线完成验证。"
     />
-    <title>热点新闻实战｜Hand-Drawn Video Prompts</title>
+    <title>从 Prompt Skill 到 30 秒成片｜Hand-Drawn Video Prompts 实战研究</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
     <script src="app.js" defer></script>
@@ -21,8 +21,9 @@
       </a>
       <nav class="site-nav" aria-label="页面导航">
         <a href="#demo">热点实战</a>
-        <a href="#final-film">完整成片</a>
-        <a href="#news-proof">来源事实</a>
+        <a href="#final-film">成片对比</a>
+        <a href="#i2v-production-board">I2V 完整案例</a>
+        <a href="#project-summary">当前结论</a>
         <a href="#architecture">工作原理</a>
         <a href="#decision">价值与扩展</a>
       </nav>
@@ -35,31 +36,31 @@
     <main id="main">
       <section class="hero section-shell" id="overview" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="signal-dot"></span>2026-08-28 最新科技热点 · 双信源核验</p>
-          <h1 id="hero-title">一条地月新闻，<br /><span>被编译成 7 个镜头。</span></h1>
+          <p class="eyebrow"><span class="signal-dot"></span>Current research delivery · 2026-08-30</p>
+          <h1 id="hero-title">从一段文案，<br /><span>到可交付手绘视频。</span></h1>
           <p class="hero-lede">
-            用“我国首次在轨验证地月双向高速激光通信”做实战：从权威报道到 41 秒口播，再到七镜头 Prompt、七张实生成关键帧、中文配音、字幕和可播放参考成片。
+            这个库本质是 Prompt Skill，不是生图或视频模型。我们用热点新闻代码运动、单图图生视频、五镜头首尾帧图生视频三条路线，把它从“提示词方法”验证到 30 秒可播放成片。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#final-film">直接观看完整成片 <span aria-hidden="true">↓</span></a>
+            <a class="button button-primary" href="#i2v-production-board">观看 30 秒最终成片 <span aria-hidden="true">↓</span></a>
             <a class="button button-secondary" href="https://github.com/kaomei/hand-drawn-video-prompts">查看上游仓库 <span aria-hidden="true">↗</span></a>
           </div>
           <dl class="metric-row" aria-label="研究摘要">
-            <div><dt>7</dt><dd>热点镜头</dd></div>
-            <div><dt>41s</dt><dd>估算口播</dd></div>
-            <div><dt id="audit-count">28/28</dt><dd>Prompt 检查</dd></div>
-            <div><dt>7</dt><dd>实生成关键帧</dd></div>
+            <div><dt>3</dt><dd>已验证路线</dd></div>
+            <div><dt>5/5</dt><dd>视频模型镜头</dd></div>
+            <div><dt>30s</dt><dd>最终成片</dd></div>
+            <div><dt>11/11</dt><dd>I2V 审计</dd></div>
           </dl>
         </div>
         <figure class="hero-art paper-frame generated-hero">
           <span class="tape tape-left" aria-hidden="true"></span>
           <div class="generated-image-wrap">
-            <img src="assets/news-shot-02-generated.png" alt="按万里穿针镜头提示词实生成的手绘关键帧：地面望远镜以蓝色光束穿过月球旁的针孔" width="941" height="1672" />
-            <span class="deterministic-title">万里穿针</span>
+            <img src="assets/i2v-agent-workflow-shot-04-last.png" alt="首尾帧图生视频案例尾帧：人物与蓝色 AI 机器旁出现完成的黄色工作流和绿色完成标记" width="941" height="1672" />
+            <span class="deterministic-title">从任务到行动</span>
           </div>
           <figcaption>
-            <span>本案例实生成关键帧</span>
-            <strong>模型画底图 · 代码叠加准确中文</strong>
+            <span>最终案例 / Shot 04 LAST</span>
+            <strong>10 张首尾帧 · 5 条 I2V · 30 秒交付</strong>
           </figcaption>
         </figure>
       </section>
@@ -151,7 +152,7 @@
             <figure class="final-film-player case-film-player">
               <span class="tape tape-left" aria-hidden="true"></span>
               <div class="film-card-heading"><span>本项目 / 可复现</span><strong>地月激光通信热点案例</strong></div>
-              <video controls preload="metadata" playsinline poster="assets/news-case-poster.jpg" aria-label="地月激光通信七镜头完整参考成片">
+              <video controls preload="none" playsinline poster="assets/news-case-poster.jpg" aria-label="地月激光通信七镜头完整参考成片">
                 <source src="assets/news-case-final.mp4" type="video/mp4" />
                 当前浏览器无法播放 MP4；你仍可使用上方下载链接查看完整成片。
               </video>
@@ -170,22 +171,155 @@
             </div>
           </div>
 
+          <div class="i2v-experiment" id="i2v-experiment" aria-labelledby="i2v-experiment-title">
+            <div class="i2v-experiment-heading">
+              <div>
+                <p class="eyebrow">Real image-to-video test · 6.08s</p>
+                <h3 id="i2v-experiment-title">真正用到视频模型：<br />动作更自然，<br class="i2v-mobile-break" />构图更不听话。</h3>
+              </div>
+              <div class="i2v-heading-note">
+                <span class="i2v-real-badge">✓ VIDEO MODEL USED</span>
+                <p>新主题“AI Agent 整理任务”使用完成构图作为单图输入，由用户在外部平台生成。模型与平台参数没有随文件提供，因此这里只陈述可验证的媒体结果。</p>
+              </div>
+            </div>
+
+            <div class="i2v-experiment-grid">
+              <figure class="final-film-player i2v-output-player">
+                <span class="tape tape-left" aria-hidden="true"></span>
+                <div class="film-card-heading"><span>输出 / 真实图生视频</span><strong>卡片进入机器 → 清单展开</strong></div>
+                <video controls preload="none" playsinline poster="assets/i2v-agent-workflow-poster.jpg" aria-label="AI Agent 把散乱任务整理成清单的六秒图生视频实验">
+                  <source src="assets/i2v-agent-workflow.mp4" type="video/mp4" />
+                  当前浏览器无法播放这条图生视频；仍可使用右侧下载链接查看原始 MP4。
+                </video>
+                <figcaption><span>外部平台生成</span><strong>语义动作连续 · 原始文件直接接入</strong></figcaption>
+              </figure>
+
+              <div class="i2v-inspector">
+                <div class="i2v-input-summary">
+                  <figure class="i2v-input-frame">
+                    <img src="assets/i2v-agent-workflow-complete-frame.png" alt="图生视频输入完成图：人物观察蓝色 AI 机器把散乱卡片整理成黄色清单" width="941" height="1672" loading="lazy" />
+                    <figcaption>输入 / 完成构图局部预览</figcaption>
+                  </figure>
+                  <div>
+                    <p class="panel-kicker">可观察结论</p>
+                    <h4>它解决了“物体真的动起来”，<br />但没有锁住原画每个像素。</h4>
+                    <p>六秒内完成了卡片吸入、阻塞消失和清单展开，动作与“整理任务”的谓词一致；同时机器比例、人物姿态、箭头和卡片数量被重新设计，说明单图首帧更像强参考，而不是不可修改的版式合同。</p>
+                  </div>
+                </div>
+
+                <dl class="i2v-specs" aria-label="图生视频文件参数">
+                  <div><dt>时长</dt><dd>6.08 秒 / 单镜头</dd></div>
+                  <div><dt>尺寸</dt><dd>496 × 864 / 竖屏</dd></div>
+                  <div><dt>编码</dt><dd>H.264 · 24fps</dd></div>
+                  <div><dt>音轨</dt><dd>AAC · 双声道</dd></div>
+                </dl>
+
+                <div class="i2v-actions">
+                  <a class="button button-primary" href="assets/i2v-agent-workflow.mp4" download>下载生成视频 <span aria-hidden="true">↓</span></a>
+                  <a class="button button-secondary" href="assets/i2v-agent-workflow-prompt.txt" download>下载实际 Prompt</a>
+                </div>
+
+                <details class="i2v-prompt-details">
+                  <summary>查看这次使用的单图运动提示词</summary>
+                  <pre>Create a 6-second vertical 9:16 tactile paper stop-motion micro-animation from the supplied completed illustration. Keep a locked flat frontal camera. The scattered blank task cards make staggered paper-cutout hops along the arrows. Two cards feed into the blue machine; its roller turns and antenna blinks. The yellow checklist unrolls, the step cards settle from bottom to top, and the red bottleneck marker clears. Preserve the hand-drawn crayon style. No camera drift, zoom, face morphing, new characters, readable text, logos, watermark, photorealism, or 3D. No audio.</pre>
+                </details>
+
+                <p class="i2v-boundary"><strong>如何进入完整成片：</strong>这 6 秒是一个镜头，不是总片长。拆成 5 个同类镜头即可组成约 30 秒视频，再由 MiniMax TTS、字幕和后期声音完成最终交付。</p>
+              </div>
+            </div>
+
+            <div class="i2v-production-board" id="i2v-production-board" aria-labelledby="i2v-production-board-title">
+              <div class="i2v-board-heading">
+                <div>
+                  <p class="eyebrow">30-second production board</p>
+                  <h4 id="i2v-production-board-title">不是拉长 6 秒，<br />而是用 5 个镜头<br class="i2v-board-mobile-break" />讲清完整流程。</h4>
+                </div>
+                <div class="i2v-board-status" aria-label="三十秒案例生产状态">
+                  <span><strong>10/10</strong> 首帧 + 尾帧</span>
+                  <span><strong>5/5</strong> 状态匹配 Prompt</span>
+                  <span class="ready"><strong>5/5</strong> 新首尾帧视频</span>
+                  <span><strong>1</strong> 历史单图实验</span>
+                  <span><strong>30s</strong> MiniMax 温润男声</span>
+                  <span><strong>5</strong> SRT 字幕格</span>
+                </div>
+              </div>
+
+              <div class="i2v-final-delivery" aria-labelledby="i2v-final-delivery-title">
+                <figure class="i2v-final-player">
+                  <video controls playsinline preload="none" poster="assets/i2v-agent-workflow-30s-poster.jpg" aria-label="AI Agent 整理任务五镜头三十秒首尾帧图生视频完整成片">
+                    <source src="assets/i2v-agent-workflow-30s-final.mp4" type="video/mp4" />
+                    浏览器无法播放时，请使用右侧的 MP4 下载入口。
+                  </video>
+                  <figcaption><strong>30 秒完整成片</strong><span>5 条首尾帧 I2V · MiniMax 温润男声 · 两行硬字幕</span></figcaption>
+                </figure>
+                <div class="i2v-final-copy">
+                  <p class="eyebrow">Paired-frame final delivery</p>
+                  <h5 id="i2v-final-delivery-title">这次不是图片拼接：<br />五段中间运动来自视频模型。</h5>
+                  <p>01–05 均使用各自 FIRST / LAST 和状态匹配 Prompt 在外部生成。项目只负责核验首尾、裁成每段 6 秒、统一为 1080×1920 / 24fps，并替换平台音轨为 30 秒 MiniMax 温润男声与准确字幕。</p>
+                  <dl class="i2v-final-facts">
+                    <div><dt>视频</dt><dd>H.264 · YUV420P · 24fps</dd></div>
+                    <div><dt>音频</dt><dd>温润男声 · calm · 0.98 · AAC mono</dd></div>
+                    <div><dt>边界</dt><dd>外部模型未知；历史单图实验另列</dd></div>
+                  </dl>
+                </div>
+              </div>
+
+              <section class="project-summary" id="project-summary" aria-labelledby="project-summary-title">
+                <div class="project-summary-heading">
+                  <div>
+                    <p class="eyebrow">Current verified conclusion</p>
+                    <h5 id="project-summary-title">最终效果不是“一个 Skill 自动生成视频”，<br />而是四层能力协作完成。</h5>
+                  </div>
+                  <p><strong>库负责把文案编译成生产合同。</strong>图像模型提供风格与关键帧，视频模型生成每段中间运动，MiniMax 生成旁白，代码负责核验、裁切、字幕、响度和最终组装。拆开以后，质量问题和优化方向才可定位。</p>
+                </div>
+
+                <ol class="project-pipeline" aria-label="最终成片四层生产链路">
+                  <li><span>01 / Prompt Skill</span><strong>文案 → 分镜合同</strong><p>确定视觉隐喻、镜头职责、FIRST/LAST 状态、运动约束与禁用项。</p></li>
+                  <li><span>02 / Generation</span><strong>关键帧 → 中间运动</strong><p>10 张配对帧约束 5 条视频模型输出；真正的对象运动发生在这一层。</p></li>
+                  <li><span>03 / MiniMax TTS</span><strong>文字 → 30 秒旁白</strong><p><code>speech-2.8-hd</code> 温润男声，逐镜拟合 6 秒并统一响度。</p></li>
+                  <li><span>04 / Deterministic code</span><strong>素材 → 可交付 MP4</strong><p>FFmpeg 标准化、拼接、AAC 音轨与两行硬字幕，结果可重复构建。</p></li>
+                </ol>
+
+                <div class="project-verdict-grid">
+                  <article><span>能力结论</span><strong>它是“视频 Prompt 编译器”</strong><p>价值不在替代模型，而在稳定地产出可生成、可核验、可交接的镜头合同。</p></article>
+                  <article><span>对你的价值</span><strong>降低试错与沟通成本</strong><p>同一结构可复用于热点解读、知识解释、产品流程与品牌短片，并保留事实边界。</p></article>
+                  <article><span>当前上限</span><strong>模型质量仍由上游决定</strong><p>角色漂移、内部动作、画面重绘和成本不能只靠 Prompt 消除；具体外部模型与种子本次未知。</p></article>
+                  <article><span>优先扩展</span><strong>从单案例走向生产系统</strong><p>补模型登记、角色参考、自动评分、音色模板和一键回传组装，比继续堆长 Prompt 更有价值。</p></article>
+                </div>
+              </section>
+
+              <div class="i2v-board-actions">
+                <a class="button button-primary" href="assets/i2v-agent-workflow-30s-final.mp4" download>下载 30 秒完整成片</a>
+                <a class="button button-primary" href="assets/i2v-agent-workflow-30s-prompts.txt" download>下载 5 镜头首尾帧 Prompt</a>
+                <a class="button button-secondary" href="assets/i2v-agent-workflow-voiceover.m4a" download>下载 30 秒温润男声旁白</a>
+                <a class="button button-secondary" href="assets/i2v-agent-workflow.srt" download>下载 SRT 字幕</a>
+                <a class="button button-secondary" href="assets/i2v-agent-workflow-storyboard.json" download>下载结构化分镜 JSON</a>
+              </div>
+
+              <div class="i2v-shot-board" id="i2v-shot-board" aria-live="polite">
+                <p class="i2v-board-loading">正在读取 5 镜头生产包……</p>
+              </div>
+
+              <p class="i2v-production-boundary is-complete"><strong>当前可诚实交付：</strong>10 张首尾帧、5 条状态匹配 Prompt、5 条新首尾帧视频和 30 秒完整成片均已完成。上方镜头 04 的既有 MP4 继续作为历史单图实验保留，不计入本次 5/5，也没有被混入最终成片。</p>
+            </div>
+          </div>
+
           <div class="quality-diagnosis" aria-labelledby="quality-diagnosis-title">
             <div class="quality-diagnosis-heading">
-              <p class="eyebrow">Why the reference feels better</p>
-              <h3 id="quality-diagnosis-title">差距主要不在 Prompt，<br />而在生成链路的最后一公里。</h3>
-              <p>Skill 负责把文案编译成分镜、隐喻和约束；它不会自动提供角色一致性、对象拆层、真实局部运动或镜头调度。上游样片把这些能力交给了图生视频与后期，我们此前只用了整图和代码切片。</p>
+              <p class="eyebrow">Three verified production routes</p>
+              <h3 id="quality-diagnosis-title">现在能看清：<br />不是一条路线，<br />而是三种生产档位。</h3>
+              <p>Skill 始终只负责中间层。新闻案例验证低成本、可复现的代码运动；单图 I2V 验证自然对象动作；最终首尾帧 I2V 用 10 张状态帧约束 5 段模型运动，再由确定性后期完成交付。</p>
             </div>
             <div class="quality-gap-grid">
-              <article><span>01</span><strong>对象级运动</strong><p>上游让奖杯、人物、放大镜、机器依次出现；我们只有完成态 PNG，没有独立人物与道具图层。</p></article>
-              <article><span>02</span><strong>动作贴合谓词</strong><p>“观察、称重、推动”都有对应动作；代码滑入只能表达出现，不能表达人物真正操作物体。</p></article>
-              <article><span>03</span><strong>跨镜头一致性</strong><p>上游重复使用同一分析师角色；我们的七张图独立生成，人物、线条密度与造型会轻微漂移。</p></article>
-              <article><span>04</span><strong>时间线密度</strong><p>旧版约 1.15 秒完成整图，随后长时间静止；本轮按每镜头语义边界把装配铺到约 2.75–3.75 秒。</p></article>
+              <article><span>01 / 基线</span><strong>关键帧 + 代码运动</strong><p>成本低、节奏和文字最可控；适合信息解释，但整图切片不能让人物真正操作物体。</p></article>
+              <article><span>02 / 探索</span><strong>单图图生视频</strong><p>动作更自然，输入更简单；模型会重画机器比例、人物姿态和卡片数量，版式约束较弱。</p></article>
+              <article><span>03 / 当前最佳</span><strong>首尾帧图生视频</strong><p>每镜头有精确起点、终点和状态匹配 Prompt；本项目已完成 5/5，并组装为 30 秒成片。</p></article>
+              <article><span>04 / 交付层</span><strong>确定性后期</strong><p>模型负责中间运动，代码负责 6 秒裁切、规格统一、旁白、字幕和响度，避免事实文字漂移。</p></article>
             </div>
             <div class="quality-paths">
-              <div><span>已完成 / 代码层</span><strong>语义区域纸片装配</strong><p>每镜头按月球、光束、人物或装置所在区域设置切分边界，改善节奏并避免机械等分；仍不等于对象真的动起来。</p></div>
-              <div><span>下一档 / 资产层</span><strong>透明语义图层</strong><p>人物、望远镜、光束、箭头分别输出透明 PNG，再由代码按语义运动，可重复且可控。</p></div>
-              <div><span>接近上游 / 模型层</span><strong>首尾帧图生视频</strong><p>空白首帧 + 完成末帧交给视频模型生成对象装配，最后再用代码叠加准确文字、字幕和声音。</p></div>
+              <div><span>已闭环 / 当前成果</span><strong>从文案到 30 秒成片</strong><p>分镜、配对帧、五条外部 I2V、MiniMax 旁白、字幕和最终 MP4 已全部交付，不再停留在 Prompt 演示。</p></div>
+              <div><span>仍需补证 / 评测层</span><strong>模型、种子、成本与失败率</strong><p>下载文件没有携带这些信息，因此本研究不做模型归因或性价比排名；下一轮应在生成时自动登记。</p></div>
+              <div><span>下一步 / 质量层</span><strong>角色参考 + 自动评分 + 声音设计</strong><p>锁人物和道具参考，按首尾偏差与动作语义打分，再加入环境声、转场与配乐，比继续堆长 Prompt 更能接近成熟样片。</p></div>
             </div>
           </div>
         </div>
@@ -299,7 +433,7 @@
                 <div><dt>帧率</dt><dd>20 fps</dd></div>
               </dl>
             </div>
-            <video controls preload="metadata" poster="assets/shot-01.webp">
+            <video controls preload="none" poster="assets/shot-01.webp">
               <source src="assets/demo-722.mp4" type="video/mp4" />
               当前浏览器无法播放 MP4；核心研究内容不依赖视频。
             </video>
@@ -428,7 +562,7 @@
         <a href="https://github.com/kaomei/hand-drawn-video-prompts">上游仓库 ↗</a>
         <a href="../../">Research Lab</a>
       </div>
-      <p>上游代码与媒体按 MIT License 使用并保留许可副本。本次案例调用图像模型生成 7 张无文字关键帧，并用 FFmpeg、中文 TTS 与确定性字幕制作 41 秒参考成片；未调用 Flow 或其他视频生成模型。</p>
+      <p>上游代码与媒体按 MIT License 使用并保留许可副本。41 秒新闻案例由 7 张生成关键帧、FFmpeg、MiniMax TTS 与确定性字幕完成，没有调用视频模型；新增的 6.08 秒 AI Agent 实验则接入了用户在外部平台生成的真实图生视频结果。</p>
     </footer>
   </body>
 </html>

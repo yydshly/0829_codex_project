@@ -27,6 +27,7 @@ const elements = {
   newsHeadline: document.querySelector("#news-headline"),
   newsWhy: document.querySelector("#news-why"),
   ttsProviderLabel: document.querySelector("#tts-provider-label"),
+  i2vShotBoard: document.querySelector("#i2v-shot-board"),
 };
 
 function currentShot() {
@@ -217,9 +218,132 @@ async function loadBuildMetadata() {
   }
 }
 
+function buildI2vShotCard(shot) {
+  const card = document.createElement("article");
+  const isReady = shot.status === "paired_video_ready" && Boolean(shot.video_asset);
+  card.className = `i2v-shot-card ${isReady ? "is-ready" : "is-pending"}${shot.historical_single_image_video_asset ? " has-history" : ""}`;
+  card.dataset.shotId = shot.id;
+
+  const framePair = document.createElement("div");
+  framePair.className = "i2v-frame-pair";
+  const buildFrame = (kind, src, stateText) => {
+    const figure = document.createElement("figure");
+    figure.className = "i2v-paired-frame";
+    const label = document.createElement("span");
+    label.className = "i2v-frame-label";
+    label.textContent = kind;
+    const image = document.createElement("img");
+    image.src = src;
+    image.alt = `${shot.title}镜头${kind === "FIRST" ? "首帧" : "尾帧"}：${stateText}`;
+    image.width = 941;
+    image.height = 1672;
+    image.loading = "lazy";
+    const download = document.createElement("a");
+    download.href = src;
+    download.download = "";
+    download.className = "i2v-frame-download";
+    download.title = `下载 ${shot.title} ${kind} 图片`;
+    download.append(image);
+    figure.append(download, label);
+    return figure;
+  };
+  framePair.append(
+    buildFrame("FIRST", shot.first_frame_asset, shot.start_state),
+    buildFrame("LAST", shot.last_frame_asset, shot.end_state)
+  );
+
+  const meta = document.createElement("div");
+  meta.className = "i2v-shot-meta";
+  const number = document.createElement("span");
+  number.textContent = `SHOT ${shot.id} · ${shot.duration_seconds}s`;
+  const title = document.createElement("h5");
+  title.textContent = shot.title;
+  const keyword = document.createElement("strong");
+  keyword.textContent = shot.keyword;
+  const narration = document.createElement("p");
+  narration.textContent = shot.narration;
+  const status = document.createElement("em");
+  status.textContent = isReady ? "首尾帧视频已接入 · 6 秒" : "首尾帧就绪 · 新视频待生成";
+  const startState = document.createElement("p");
+  startState.className = "i2v-state-line";
+  startState.innerHTML = `<b>FIRST</b>${shot.start_state}`;
+  const endState = document.createElement("p");
+  endState.className = "i2v-state-line";
+  endState.innerHTML = `<b>LAST</b>${shot.end_state}`;
+  meta.append(number, title, keyword, narration, status, startState, endState);
+
+  const contract = document.createElement("div");
+  contract.className = "i2v-shot-contract";
+
+  if (isReady) {
+    const clipDetails = document.createElement("details");
+    clipDetails.className = "i2v-shot-clip";
+    const clipSummary = document.createElement("summary");
+    clipSummary.textContent = "播放本镜头实际视频";
+    const video = document.createElement("video");
+    video.controls = true;
+    video.playsInline = true;
+    video.preload = "none";
+    video.poster = shot.first_frame_asset;
+    video.setAttribute("aria-label", `${shot.title}六秒首尾帧图生视频`);
+    const source = document.createElement("source");
+    source.src = shot.video_asset;
+    source.type = "video/mp4";
+    video.append(source);
+    const clipDownload = document.createElement("a");
+    clipDownload.href = shot.video_asset;
+    clipDownload.download = "";
+    clipDownload.className = "i2v-clip-download";
+    clipDownload.textContent = `下载 ${shot.video_asset.split("/").pop()}`;
+    clipDetails.append(clipSummary, video, clipDownload);
+    contract.append(clipDetails);
+  }
+
+  const details = document.createElement("details");
+  const summary = document.createElement("summary");
+  summary.textContent = "查看首尾状态匹配 Prompt";
+  const prompt = document.createElement("pre");
+  prompt.textContent = shot.video_prompt;
+  details.append(summary, prompt);
+
+  const delivery = document.createElement("code");
+  delivery.textContent = shot.expected_video_asset.split("/").pop();
+  delivery.className = "i2v-shot-delivery";
+  contract.append(details, delivery);
+
+  if (shot.historical_single_image_video_asset) {
+    const history = document.createElement("a");
+    history.href = shot.historical_single_image_video_asset;
+    history.className = "i2v-history-link";
+    history.textContent = "播放历史单图实验（不计入本次 5/5）↗";
+    contract.append(history);
+  }
+
+  card.append(framePair, meta, contract);
+  return card;
+}
+
+async function loadI2vStoryboard() {
+  if (!elements.i2vShotBoard) return;
+  try {
+    const response = await fetch("assets/i2v-agent-workflow-storyboard.json");
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const storyboard = await response.json();
+    const fragment = document.createDocumentFragment();
+    storyboard.shots.forEach((shot) => fragment.append(buildI2vShotCard(shot)));
+    elements.i2vShotBoard.replaceChildren(fragment);
+  } catch (error) {
+    const message = document.createElement("p");
+    message.className = "i2v-board-error";
+    message.textContent = `30 秒分镜读取失败：${error.message}。下载链接仍可直接使用。`;
+    elements.i2vShotBoard.replaceChildren(message);
+  }
+}
+
 elements.shotRail.addEventListener("keydown", handleShotKeys);
 elements.copyButton.addEventListener("click", copyOutput);
 setupOutputTabs();
 setupTheme();
 loadDemo();
 loadBuildMetadata();
+loadI2vStoryboard();

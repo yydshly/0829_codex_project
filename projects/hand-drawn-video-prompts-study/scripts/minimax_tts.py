@@ -23,6 +23,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model", default="speech-2.8-hd")
     parser.add_argument("--voice-id", default="Chinese (Mandarin)_News_Anchor")
     parser.add_argument("--speed", type=float, default=1.08)
+    parser.add_argument(
+        "--emotion",
+        choices=("happy", "sad", "angry", "fearful", "disgusted", "surprised", "calm", "fluent", "whipser"),
+        default=None,
+    )
     parser.add_argument("--attempts", type=int, default=3)
     return parser.parse_args()
 
@@ -121,6 +126,8 @@ def main() -> None:
         },
         "subtitle_enable": False,
     }
+    if args.emotion:
+        payload["voice_setting"]["emotion"] = args.emotion
     minimum_ms = expected_minimum_ms(args.text, args.speed)
     last_error: Exception | None = None
 
