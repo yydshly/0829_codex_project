@@ -1,0 +1,53 @@
+# Operating systems and editors
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.local
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# JavaScript / TypeScript
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+.next/
+.nuxt/
+.svelte-kit/
+dist/
+build/
+coverage/
+
+# Temporary and generated files
+.site/
+.cache/
+tmp/
+temp/
+*.log
+
+# Research data and model artifacts (track small samples explicitly if needed)
+data/raw/
+data/private/
+artifacts/
+checkpoints/
+*.ckpt
+*.onnx
+*.safetensors

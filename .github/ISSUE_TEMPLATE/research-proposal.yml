@@ -1,0 +1,43 @@
+name: 研究提案
+description: 提出一个新的研究问题或子项目
+title: "[Research]: "
+labels: [research]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请先定义可验证的问题。实现细节可以在范围明确后继续补充。
+  - type: textarea
+    id: question
+    attributes:
+      label: 研究问题
+      description: 希望回答什么问题？什么证据会推翻当前判断？
+      placeholder: 在给定约束下，方案 A 是否比基线 B 更稳定地完成任务 C？
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: 范围与约束
+      description: 包括研究对象、明确不做的内容、时间或资源限制。
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: 验证方法
+      description: 准备如何收集证据、设置对照和衡量结果？
+    validations:
+      required: true
+  - type: textarea
+    id: outputs
+    attributes:
+      label: 预期产物
+      placeholder: 研究记录、测试代码、数据、演示页面……
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: 风险、数据与许可
+      description: 是否涉及外部服务、敏感数据、付费资源或第三方许可？

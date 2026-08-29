@@ -1,0 +1,12 @@
+{
+  "id": "{{id}}",
+  "title": "{{title}}",
+  "summary": "{{summary}}",
+  "status": "planned",
+  "path": "projects/{{id}}",
+  "source_url": "{{source_url}}",
+  "demo_url": "",
+  "tags": {{tags}},
+  "created": "{{date}}",
+  "updated": "{{date}}"
+}
